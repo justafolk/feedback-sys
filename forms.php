@@ -15,21 +15,37 @@
     <div class="container my-5">
         <div class="middle" style="align-items: center; text-align:center;">
             <img src="./logo.png" alt="" style="width: 100px">
-            <h4 class="h4">Feedback-sys</h4>
         </div>
 
         <form action="">
             <!-- checkbox for personal details -->
 
-            <hr>
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 border-bottom  ">
+                <h3 class="h2">Network Administration (R18CP5405)</h3>
+
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <div class="btn-group me-2">
+                        <button type="button" class="btn btn-md btn-dark ">Export</button>
+                    </div>
+                    <button type="button" class="btn btn-md btn-outline dropdown-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" aria-hidden="true">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                        This week
+                    </button>
+                </div>
+            </div>
             <div class="form-group my-1">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                <input class="form-check-input" type="checkbox" name="personalcheck"  id="personalcheck" checked>
                 <label class="form-check-label" for="defaultCheck1">
                     Personal details
                 </label>
             </div>
 
-            <div class="card">
+            <div class="card" id="personal" >
                 <div class="card-body">
                     <div class="row">
 
@@ -99,10 +115,63 @@
                     </div>
                 </div>
             </div>
+            <?php
+                
+            ?>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">1. Did you find the course to be helpful in all matters?</h5>
+                    <!-- 5 radio buttons ranging from 5 to 1 -->
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                        <label class="form-check-label" for="exampleRadios1">
+                            5
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                        <label class="form-check-label" for="exampleRadios2">
+                            4
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3">
+                        <label class="form-check-label" for="exampleRadios3">
+                            3
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios4" value="option4">
+                        <label class="form-check-label" for="exampleRadios4">
+                            2
+                        </label></div>  
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios5" value="option5">
+                        <label class="form-check-label" for="exampleRadios5">
+                            1
+                        </label>
+                    </div>
+
+                </div>
+            </div>
+            <?php ?>
         </form>
 
 
     </div>
+    <script>
+        // if personal details is checked, show the form
+        document.getElementById("personalcheck").addEventListener("click", function() {
+            if (this.checked) {
+                document.getElementById("personal").style.display = "block";
+            } else {
+                document.getElementById("personal").style.display = "none";
+            }
+        });
+
+        // if add questions is clicked, add the form card
+        
+    </script>
 </body>
 
 </html>
