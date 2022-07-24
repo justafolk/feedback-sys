@@ -93,7 +93,7 @@
             <img src="./assets/img/logo.png" alt="" style="width: 100px">
         </div>
 
-        <form action="" method="post">
+        <form action="./create_form.php" method="post">
             <!-- checkbox for personal details -->
 
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 border-bottom  ">
@@ -131,7 +131,7 @@
                 <div class="card-body">
                     <div class="row">
 
-                        <textarea name="" id="textarea" class="" style="background-color: transparent; color: #515151;; border:0px; outline:none" placeholder="Important: Please fill in the details of the student who is taking the course.
+                        <textarea name="instructions" id="textarea instructions" class="instructions" style="background-color: transparent; color: #515151;; border:0px; outline:none" placeholder="Important: Please fill in the details of the student who is taking the course.
         - Please fill in the details of the student who is taking the course."></textarea>
 
 
@@ -271,7 +271,7 @@
         };
     </script>
     <script>
-        var index = 1;
+        var index = 0;
         $(document).ready(function() {
             $("#shortans").click(function() {
                 index++;

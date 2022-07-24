@@ -1,12 +1,30 @@
 - Feedback Sys
     - [ ] Add Form    
-        - [ ] Add Question
-            - [ ] Add Short Ques
-            - [ ] Add Long Ques
-            - [ ] Add MCQ Ques
-                - [ ] Add Options
-            - [ ] Add bulk Ques
-            - [ ] Instructions text area
+        - [x] Add Question
+            - [x ] Add Short Ques
+            - [ x] Add Long Ques
+            - [ x] Add MCQ Ques
+                - [ x] Add Options
+            - [x ] Add bulk Ques
+            - [x ] Instructions text area
             - [ ] Database Design 
     - [ ] View Form
     - [ ] View Responses 
+
+- form
+    - form_id
+    - Form author
+    - date
+    - instructions
+    - status
+    - 
+- form_ques
+    - ques
+    - json of options / slider titles
+    - form id
+
+- form_responses
+    - student_id
+    - form_id
+    - filldate
+    - json of response

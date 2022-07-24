@@ -9,8 +9,8 @@ if ($_GET["type"] == "sliderans") {
                 <h5 class="card-title"> <input type="text" value="<?php echo $id ?>. " name="main-question main-question<?php echo $id ?>" class="main-question" id="main-question<?php echo $id ?>"> </h5>
                 <input type="hidden" name="slidercount<?php echo $id ?>" id="slidercount<?php echo $id ?>" value="1">
                 <div class="sliders<?php echo $id ?>">
-                    <input type="text" style="border: 0px; outline:none; background-color:transparent" placeholder="Enter Range Question key" name="slider-title slider-title<?php echo $id ?>" id="
-                slider-title<?php echo $id ?>" class="form-label slider-title">
+                    <input type="text" style="border: 0px; outline:none; background-color:transparent" placeholder="Enter Range Question key" name="slider-title slider-title<?php echo $id ?>-1" id="
+                slider-title<?php echo $id ?>-1" class="form-label slider-title">
                     <ul>
                         <li style="text-align:left; align-items:left;">Very Bad </li>
                         <li style="padding-left:4%;text-align:left; align-items:left;">Bad</li>
@@ -53,7 +53,7 @@ if ($_GET["type"] == "sliderans") {
             <div class="card-body">
                 <h5 class="card-title"> <input type="text" value="<?php echo $id ?>. " name="main-question main-question<?php echo $id ?>" class="main-question" id="main-question<?php echo $id ?>"> </h5>
                 <!-- 5 radio buttons ranging from 5 to 1 -->
-                <textarea type="text" name="shortans<?php echo $id ?>" class="form-control" placeholder="Enter Answer in Long" id="shortans<?php echo $id ?>"></textarea>
+                <textarea type="text" name="longans<?php echo $id ?>" class="form-control" placeholder="Enter Answer in Long" id="ans<?php echo $id ?>"></textarea>
             </div>
 
         </div>
@@ -118,9 +118,9 @@ if ($_GET["type"] == "sliderans") {
     </div>
 
 
-<?php } elseif ($_GET["type"] == "slider") { ?>
-    <input type="text" style="border: 0px; outline:none; background-color:transparent" placeholder="Enter Range Question key" name="slider-title slider-title<?php echo $id ?>" id="
-                slider-title<?php echo $id ?>" class="form-label slider-title">
+<?php } elseif ($_GET["type"] == "slider") {  $optioncount = $_GET["optioncount"]; ?>
+    <input type="text" style="border: 0px; outline:none; background-color:transparent" placeholder="Enter Range Question key" name="slider-title slider-title<?php echo $id ?>-<?php echo $optioncount ?>" id="
+                slider-title<?php echo $id ?>-<?php echo $optioncount ?>" class="form-label slider-title">
     <ul>
         <li style="text-align:left; align-items:left;">Very Bad </li>
         <li style="padding-left:4%;text-align:left; align-items:left;">Bad</li>
@@ -130,6 +130,6 @@ if ($_GET["type"] == "sliderans") {
     </ul>
 
     <div class="range">
-        <input type="range" class="form-range" id="slider-<?php echo $id ?>-1" name="slider-<?php echo $id ?>-1" min="1" max="100" />
+        <input type="range" class="form-range" id="slider-<?php echo $id ?>-<?php echo $optioncount ?>" name="slider-<?php echo $id ?>-<?php echo $optioncount ?>" min="1" max="100" />
     </div>
 <?php } ?>
