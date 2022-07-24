@@ -29,6 +29,8 @@
 
         .main-question:focus {
             border-bottom: 2px solid #ccc;
+            font-size: .999rem;
+            
         }
     </style>
 </head>

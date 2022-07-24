@@ -18,17 +18,17 @@ if(isset($_POST['login'])){
         if($row['role'] == 'Admin'){
             $_SESSION['uname'] = $uname;
             $_SESSION['role'] = 'Admin';
-            header("Location: roles/admin/index.php");
+            header("Location: ./Feedback/adminkit-3.1.0/static/index.php");
         }
         else if($row['role'] == 'Faculty'){
             $_SESSION['uname'] = $uname;
             $_SESSION['role'] = 'Faculty';
-            header("Location: roles/faculty/index.php");
+            header("Location: ./Feedback/adminkit-3.1.0/static/index.php");
         }
         else{
             $_SESSION['uname'] = $uname;
             $_SESSION['role'] = 'Student';
-            header("Location: roles/student/index.php");
+            header("Location: ./Feedback/adminkit-3.1.0/static/index.php");
         }
     }else{
         echo "<script>alert('Invalid username or password');</script>";
