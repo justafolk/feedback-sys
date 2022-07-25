@@ -22,40 +22,49 @@
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
 	<style>
-
-input[type=checkbox] {
-                            opacity: 0;
-                            width: 100%;
-                            height: 0px;
-                            background-color: blue;
-                            position: relative;
-                            z-index: 1;
+		   group {
+                            display: flex;
                         }
+		input[type=checkbox] {
+			opacity: 0;
+			width: 100%;
+			height: 0px;
+			background-color: green;
+			position: relative;
+			z-index: 1;
+		}
 
-                        .input-container {
-                            width: 75px;
-                            height: 42px;
-                        }
+		.input-container {
+			width: 75px;
+			height: 42px;
+		}
 
-                        .input-container label {
-                            position: absolute;
-                            top: 0;
-                            left: 0;
-                            font-family: arial;
-                            color: #737373;
-                            width: 76px;
-                            line-height: 42px;
-                            text-align: center;
-                            position: relative;
-                        }
+		.input-container label {
+			position: absolute;
+			top: 0;
+			left: 0;
+			font-family: arial;
+			color: #737373;
+			width: 76px;
+			line-height: 42px;
+			text-align: center;
+			position: relative;
+		}
 
-                        input:checked+label {
-                            background-color: #303b49;
-                            top: 0;
-                            left: 0;
-                            z-index: 2;
-                            color: white;
-                        }
+		input:checked+label {
+			background-color: green;
+			top: 0;
+			left: 0;
+			z-index: 2;
+			color: white;
+		}
+		input:not(:checked)+label {
+			background-color: red;
+			top: 0;
+			left: 0;
+			z-index: 2;
+			color: white;
+		}
 	</style>
 </head>
 <style>
@@ -95,13 +104,13 @@ input[type=checkbox] {
 
 					<li class="sidebar-item active">
 						<a class="sidebar-link" href="pages-sign-in.html">
-						<i class="align-middle" data-feather="user"></i> <span class="align-middle">Create Feedback Survey</span>
+							<i class="align-middle" data-feather="user"></i> <span class="align-middle">Create Feedback Survey</span>
 						</a>
 					</li>
 
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="pages-sign-in.html">
-						<i class="align-middle" data-feather="log-out"></i> <span class="align-middle">Log out</span>
+							<i class="align-middle" data-feather="log-out"></i> <span class="align-middle">Log out</span>
 						</a>
 					</li>
 
@@ -257,14 +266,14 @@ input[type=checkbox] {
 							</a>
 
 							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-								<img src="<?php echo "https://ui-avatars.com/api/?name=".$_SESSION["name"] ?>" class="avatar img-fluid rounded me-1" alt="<?php echo $_SESSION["name"] ?>" /> <span class="text-dark"><?php  echo $_SESSION["name"] ?></span>
+								<img src="<?php echo "https://ui-avatars.com/api/?name=" . $_SESSION["name"] ?>" class="avatar img-fluid rounded me-1" alt="<?php echo $_SESSION["name"] ?>" /> <span class="text-dark"><?php echo $_SESSION["name"] ?></span>
 							</a>
 							<div class="dropdown-menu dropdown-menu-end">
 								<a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
 								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="pie-chart"></i> Analytics</a>
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="index.html"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
-								
+
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="#">Log out</a>
 							</div>
@@ -285,11 +294,11 @@ input[type=checkbox] {
 										<select class="form-control" id="course-title" name="course-title">
 											<option value="">Select Course</option>
 											<?php
-												$sql = "SELECT * FROM courses";
-												$result = mysqli_query($conn, $sql);
-												while($row = mysqli_fetch_assoc($result)){
-													echo "<option value='".$row["course_id"]."'>".$row["course_title"]."</option>";
-												}
+											$sql = "SELECT * FROM courses";
+											$result = mysqli_query($conn, $sql);
+											while ($row = mysqli_fetch_assoc($result)) {
+												echo "<option value='" . $row["course_id"] . "'>" . $row["course_title"] . "</option>";
+											}
 											?>
 										</select>
 									</div>
@@ -309,11 +318,11 @@ input[type=checkbox] {
 										<select class="form-control" id="course-group" name="course-group">
 											<option value="">Select Student Group</option>
 											<?php
-												$sql = "SELECT * FROM groups";
-												$result = mysqli_query($conn, $sql);
-												while($row = mysqli_fetch_assoc($result)){
-													echo "<option value='".$row["group_id"]."'>".$row["group_id"]."</option>";
-												}
+											$sql = "SELECT * FROM groups";
+											$result = mysqli_query($conn, $sql);
+											while ($row = mysqli_fetch_assoc($result)) {
+												echo "<option value='" . $row["group_id"] . "'>" . $row["group_id"] . "</option>";
+											}
 											?>
 
 										</select>
@@ -325,6 +334,54 @@ input[type=checkbox] {
 										<label for="">Select Date</label>
 										<input type="date" class="form-control" name="date">
 									</div>
+									<div class="form-group">
+										<label for="session_title">Session Title</label>
+										<input type="text" class="form-control" id="session_title" aria-describedby="emailHelp" placeholder="Enter Title" name="session_title">
+									</div>
+									<br>
+									<div class="form-group">
+										<label for="sessiondate">Date</label>
+										<input type="date" class="form-control" id="sessionsdate" name="sessiondate" placeholder="Enter date" name="due_date">
+									</div>
+
+
+									<br>
+									<label for="exampleInputPassword1">Check Rolls who were absent for the session:</label>
+									<div class="form-group atrangi">
+										<?php
+
+
+										$a = " <group>                                                    <div class=\"input-container\"/>
+                                                    <input type=\"checkbox\" name=\"194076\" id=\"194076\">
+                                                                
+                                                    <label for=\"194076\">194076</label>
+                                                            </div>";
+										
+										$count = 67;
+										while ($count > 0) {
+											echo "<group>";
+
+											for ($i = 0; $i < 15; $i++) {
+
+												$row["enrollid"] = $count;
+
+												$count -= 1;
+												if ($row['enrollid'] == 0) {
+													continue;
+												}
+
+												array_push($rolls, $row['enrollid']);
+												echo  "<div class=\"input-container\"/>
+                                                            <input type=\"checkbox\" name=\"{$row['enrollid']}\" id=\"{$row['enrollid']}\">
+                                                            <label for=\"{$row['enrollid']}\">{$row['enrollid']}</label>
+                                                            </div>";
+											}
+											echo "</group>";
+										}
+
+										?>
+
+									</div>
 
 								</form>
 							</div>
@@ -335,7 +392,7 @@ input[type=checkbox] {
 					<div class="row">
 
 
-						
+
 
 					</div>
 
