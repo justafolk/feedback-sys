@@ -17,30 +17,97 @@
 	<title>AdminKit Demo - Bootstrap 5 Admin Template</title>
 
 	<link href="css/app.css" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 
+	<style>
+		@font-face {
+			font-family: "San Francisco";
+			font-weight: 400;
+			src: url("https://raw.githubusercontent.com/sahibjotsaggu/San-Francisco-Pro-Fonts/master/SF-Pro-Display-Semibold.otf")
+		}
 
-	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+		body {
 
-</head>
-<style>
-        .eventClass a {
-            background-color: #dda919 !important;
-            color: #FFF !important;
-        }
-    </style>
+			font-family: "San Francisco" !important;
+			font-size: .875rem;
+		}
+
+		.main-question {
+			border: 0px;
+			padding: 0px;
+			outline: none;
+		}
+
+		.main-question:focus {
+			border-bottom: 2px solid #ccc;
+			font-size: .999rem;
+
+		}
+
+		.slider-title:focus {
+			border-bottom: 2px solid #ccc !important;
+			font-size: .999rem;
+
+		}
+
+		.slider-list {
+			width: 100%;
+			display: table;
+			table-layout: fixed;
+			/* optional, for equal spacing */
+			border-collapse: collapse;
+		}
+
+		.slider-listi {
+			display: table-cell;
+			text-align: center;
+			vertical-align: middle;
+		}
+	</style>
+	<script type="text/javascript">
+		function addOption(id) {
+			var optioncount = document.getElementById("optioncount" + id).value;
+			optioncount++;
+			document.getElementById("optioncount" + id).value = optioncount;
+			$.get("./genform.php", {
+				'id': id,
+				'optioncount': optioncount,
+				'type': "option"
+			}, function(data) {
+				console.log(data);
+				$(".options" + id).append(data);
+			})
+
+		}
+
+		function addSlider(id) {
+			var optioncount = document.getElementById("slidercount" + id).value;
+			optioncount++;
+			document.getElementById("slidercount" + id).value = optioncount;
+			$.get("./genform.php", {
+				'id': id,
+				'optioncount': optioncount,
+				'type': "slider"
+			}, function(data) {
+				console.log(data);
+				$(".sliders" + id).append(data);
+			})
+
+		}
+	</script>
+
 <body>
 	<div class="wrapper">
 		<?php
-			#include 'sidebar.php';
+		#include 'sidebar.php';
 		?>
 		<nav id="sidebar" class="sidebar js-sidebar">
 			<div class="sidebar-content js-simplebar">
 				<a class="sidebar-brand" href="index.html">
-		<span class="align-middle">Feedback Portal</span>
-		</a>
+					<span class="align-middle">Feedback Portal</span>
+				</a>
 
 				<ul class="sidebar-nav">
 					<li class="sidebar-header">
@@ -49,20 +116,20 @@
 
 					<li class="sidebar-item active">
 						<a class="sidebar-link" href="index.php">
-			<i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
-			</a>
+							<i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+						</a>
 					</li>
 
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="pages-profile.html">
-			<i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
-			</a>
+							<i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
+						</a>
 					</li>
 
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="pages-sign-in.html">
-			<i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Sign In</span>
-			</a>
+							<i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Sign In</span>
+						</a>
 					</li>
 
 
@@ -71,15 +138,15 @@
 					</li>
 				</ul>
 			</div>
-    	</nav>
+		</nav>
 		<div class="main">
 			<nav class="navbar navbar-expand navbar-light navbar-bg">
 				<a class="sidebar-toggle js-sidebar-toggle">
-          <i class="hamburger align-self-center"></i>
-        </a>
-			<div>
-				<h1 class="h3 mb-0"><strong>Dashboard</strong></h1>
-			</div>
+					<i class="hamburger align-self-center"></i>
+				</a>
+				<div>
+					<h1 class="h3 mb-0"><strong>Feedback Survey </strong></h1>
+				</div>
 				<div class="navbar-collapse collapse">
 					<ul class="navbar-nav navbar-align">
 						<li class="nav-item dropdown">
@@ -216,12 +283,12 @@
 						</li>
 						<li class="nav-item dropdown">
 							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
-                <i class="align-middle" data-feather="settings"></i>
-              </a>
+								<i class="align-middle" data-feather="settings"></i>
+							</a>
 
 							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                <img src="img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span class="text-dark">Charles Hall</span>
-              </a>
+								<img src="img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span class="text-dark">Charles Hall</span>
+							</a>
 							<div class="dropdown-menu dropdown-menu-end">
 								<a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
 								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="pie-chart"></i> Analytics</a>
@@ -238,135 +305,262 @@
 
 			<main class="content">
 				<div class="container-fluid p-0">
-					<h1 class="h3 mb-3"><strong>Analytics</strong> Dashboard</h1>
-					<div class="row">
-						<div class="col-xl-12 d-flex">
-							<div class="w-100">
+
+					<div class="middle" style="align-items: center; text-align:center;">
+						<img src="/assets/img/logo.png" alt="" style="width: 100px">
+					</div>
+
+					<form action="./create_form.php" method="post">
+						<!-- checkbox for personal details -->
+
+						<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 border-bottom  ">
+							<div class="row">
+								<div class="col-md-12 my-1">
+									<h3 class="h2">
+										<input type="text" name="form-title" id="form-title" style="background-color: transparent; outline:none; border:0px" placeholder="Course Name (Course Code)">
+									</h3>
+								</div>
+								<div class="col-md-12">
+									<h6 class="h6">
+										<div class="blockquote-footer">Teacher Name</div>
+									</h6>
+								</div>
+							</div>
+
+
+							<div class="btn-toolbar mb-2 mb-md-0">
+								<div class="btn-group me-2">
+									<button type="button" class="btn btn-md btn-dark ">Export</button>
+								</div>
+								<button type="button" class="btn btn-md btn-outline dropdown-toggle">
+									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" aria-hidden="true">
+										<rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+										<line x1="16" y1="2" x2="16" y2="6"></line>
+										<line x1="8" y1="2" x2="8" y2="6"></line>
+										<line x1="3" y1="10" x2="21" y2="10"></line>
+									</svg>
+									This week
+								</button>
+							</div>
+
+						</div>
+						<div class="card " style="background-color: transparent; border:1px solid black">
+							<div class="card-body">
 								<div class="row">
-									<div class="col-sm-3">
-										<div class="card">
-											<div class="card-body">
-												<div class="row">
-													<div class="col mt-0">
-														<h5 class="card-title">Feedbacks</h5>
-													</div>
 
-													<div class="col-auto">
-														<div class="stat text-primary">
-															<i class="align-middle" data-feather="truck"></i>
-														</div>
-													</div>
-												</div>
-												<h1 class="mt-1 mb-3">2.382</h1>
-												<div class="mb-0">
-													<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -3.65% </span>
-													<span class="text-muted">Since last month</span>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-3">
-										<div class="card">
-											<div class="card-body">
-												<div class="row">
-													<div class="col mt-0">
-														<h5 class="card-title">Students</h5>
-													</div>
+									<textarea name="instructions" id="textarea instructions" class="instructions" style="background-color: transparent; color: #515151;; border:0px; outline:none" placeholder="Important: Please fill in the details of the student who is taking the course.
+        - Please fill in the details of the student who is taking the course."></textarea>
 
-													<div class="col-auto">
-														<div class="stat text-primary">
-															<i class="align-middle" data-feather="users"></i>
-														</div>
-													</div>
-												</div>
-												<h1 class="mt-1 mb-3">14.212</h1>
-												<div class="mb-0">
-													<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 5.25% </span>
-													<span class="text-muted">Since last week</span>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-3">
-										<div class="card">
-											<div class="card-body">
-												<div class="row">
-													<div class="col mt-0">
-														<h5 class="card-title">Subjects</h5>
-													</div>
 
-													<div class="col-auto">
-														<div class="stat text-primary">
-															<i class="align-middle" data-feather="dollar-sign"></i>
-														</div>
-													</div>
-												</div>
-												<h1 class="mt-1 mb-3">$21.300</h1>
-												<div class="mb-0">
-													<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 6.65% </span>
-													<span class="text-muted">Since last week</span>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-3">
-										<div class="card">
-											<div class="card-body">
-												<div class="row">
-													<div class="col mt-0">
-														<h5 class="card-title">Orders</h5>
-													</div>
-
-													<div class="col-auto">
-														<div class="stat text-primary">
-															<i class="align-middle" data-feather="shopping-cart"></i>
-														</div>
-													</div>
-												</div>
-												<h1 class="mt-1 mb-3">64</h1>
-												<div class="mb-0">
-													<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -2.25% </span>
-													<span class="text-muted">Since last week</span>
-												</div>
-											</div>
-										</div>
-									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-	
+						<div class="form-group my-1">
+							<input class="form-check-input" type="checkbox" name="personalcheck" id="personalcheck" checked>
+							<label class="form-check-label" for="defaultCheck1">
+								Personal details
+							</label>
+						</div>
 
-					<div class="row">
-						
-						
-						<div class="col-12 col-md-6 col-xxl-3 d-flex order-1 order-xxl-1">
-							<div class="card flex-fill">
-								<div class="card-header">
-									<h5 class="card-title mb-0">Calendar</h5>
+						<div class="card" id="personal">
+							<div class="card-body">
+								<div class="row">
+
+									<div class="col-6">
+										<div class="form-group">
+											<label for="firstName">First name</label>
+											<input type="text" class="form-control" id="firstName" placeholder="First name">
+										</div>
+										<br>
+										<div class="form-group">
+											<label for="email">Email ID</label>
+											<input type="email" class="form-control" id="email" placeholder="idk@cwit.com">
+										</div>
+
+									</div>
+									<div class="col-6">
+										<div class="form-group">
+											<label for="lastName">Last name</label>
+											<input type="text" class="form-control" id="lastName" placeholder="Last name">
+										</div>
+										<br>
+										<div class="form-group">
+											<label for="enroll">Enrollment number</label>
+											<input type="number" class="form-control" id="Enrollment Number" placeholder="194033">
+										</div>
+
+									</div>
 								</div>
-								<div class="card-body d-flex">
-									<div class="align-self-center w-100">
-										<div class="chart">
-											<div id="datetimepicker-dashboard"></div>
+
+							</div>
+						</div>
+
+						<div id="allquestions">
+
+						</div>
+						<br>
+
+
+						<div class="row" style="justify-content: center">
+							<div class="btn-group btn-group-lg mb-3" role="group" aria-label="Large button group">
+								<button style="width:100%" type="button" class="btn btn-secondary" id="shortans">
+									Add Short Answer Question</button>
+								<button class="btn btn-secondary" type="button" style="width:100%" id="longans">
+									Add Long Answer Question</button>
+								<button class="btn btn-secondary" type="button" style="width:100%" id="mcqans">
+									Add Multi Choice Question</button>
+
+								<button class="btn btn-secondary" type="button" style="width:100%" id="sliderans">
+									Add Slider Rating Question</button>
+								<button type="button" class="btn btn-secondary" style="height: 100%" data-bs-toggle="modal" data-bs-target="#exampleModal">
+									Add Bulk Questions
+								</button>
+
+								<!-- Modal -->
+								<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+									<div class="modal-dialog modal-dialog-centered">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLabel">Add Bulk Questions</h5>
+												<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+											</div>
+											<div class="modal-body">
+												<div class="row">
+
+													<div class="col-6">
+														<div class="form-group">
+															Select Question Type
+															<select name="formtype" class="form-control custom-select" id="formtype">
+																<option value="None">Select Question Type</option>
+																<option value="shortans">Short Answer</option>
+																<option value="longans">Long Answer</option>
+																<option value="mcqans">Multi Choice </option>
+																<option value="sliderans">Slider Rating </option>
+
+															</select>
+														</div>
+													</div>
+													<div class="col-6">
+														<div class="form-group">
+															<label for="quantity">Enter quantity of questions.</label>
+															<input type="number" name="quantity" class="form-control" id="quantity">
+														</div>
+													</div>
+
+													<div class="col-md-12 my-1">
+														<div class="form-group">
+															<label for="questions">(Optional) Enter questions separated by comma.</label>
+															<textarea name="questions" class="form-control" id="questions"></textarea>
+														</div>
+													</div>
+
+
+												</div>
+
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+												<button id="addform" type="button" class="btn btn-primary">Save changes</button>
+											</div>
 										</div>
 									</div>
+
 								</div>
 							</div>
 						</div>
-						<div class="col-12 col-lg-8 col-xxl-9 d-flex order-2 order-xxl-2">
 
-						<div class="calendar" id="calendar">
+						<br>
+						<input type="submit" class="btn  btn-dark" value="Save Form">
+						<button class="btn btn-light border">Discard</button>
+
+					</form>
 
 
-						</div>
-					</div>
-						
-					</div>
+				</div>
+				<script>
+					var textarea = document.getElementById("textarea");
+					var heightLimit = 200;
+
+					textarea.oninput = function() {
+						textarea.style.height = "";
+						textarea.style.height = Math.min(textarea.scrollHeight, heightLimit) + "px";
+					};
+				</script>
+				<script>
+					var index = 0;
+					$(document).ready(function() {
+						$("#shortans").click(function() {
+							index++;
+							$.get("./genform.php", {
+								'id': index,
+								'type': "shortans"
+							}, function(data) {
+								$("#allquestions").append(data);
+							})
+
+						});
+						$("#longans").click(function() {
+							index++;
+							$.get("./genform.php", {
+								'id': index,
+								'type': "longans"
+							}, function(data) {
+								$("#allquestions").append(data);
+							})
+
+						});
+						$("#mcqans").click(function() {
+							index++;
+							$.get("./genform.php", {
+								'id': index,
+								'type': "mcqans"
+							}, function(data) {
+								$("#allquestions").append(data);
+							})
+
+						});
+						$("#sliderans").click(function() {
+							index++;
+							$.get("./genform.php", {
+								'id': index,
+								'type': "sliderans"
+							}, function(data) {
+								$("#allquestions").append(data);
+							})
+
+						});
+						$("#addform").click(function() {
+							var formtype = $("#formtype").val();
+							var quantity = $("#quantity").val();
+							var questions = $("#questions").val();
+							for (let i = 0; i < quantity; i++) {
+								index++;
+								$.get("./genform.php", {
+									'id': index,
+									'type': formtype,
+									'questions': questions
+								}, function(data) {
+									$("#allquestions").append(data);
+								})
+							}
+
+
+						});
+					});
+				</script>
+				<script>
+					document.getElementById("personalcheck").addEventListener("click", function() {
+						if (this.checked) {
+							document.getElementById("personal").style.display = "block";
+						} else {
+							document.getElementById("personal").style.display = "none";
+						}
+					});
+				</script>
 
 			</main>
 
-		
+			
 		</div>
 	</div>
 
@@ -442,7 +636,7 @@
 			});
 		});
 	</script>
-	
+
 
 	<script>
 		document.addEventListener("DOMContentLoaded", function() {
@@ -464,16 +658,15 @@
 
 					function postSend() {
 						var xhr = new XMLHttpRequest();
-						xhr.open("GET", "datedetails.php/?date=" , true);
+						xhr.open("GET", "datedetails.php/?date=", true);
 						xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 						xhr.send(mydate);
 					}
 					postSend();
 
-					$.get("./calendar.php", 
-						{
+					$.get("./calendar.php", {
 							date: mydate
-						}, 
+						},
 						function(data, status) {
 							$("#calendar").html(data);
 						}
@@ -481,17 +674,16 @@
 
 				}
 
-				
+
 
 			});
 		});
-
 	</script>
 
 
 	<script type="text/babel">
-      
-		</script>
+
+	</script>
 
 
 
