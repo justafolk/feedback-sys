@@ -23,7 +23,10 @@ if(isset($_POST['login'])){
         else if($row['role'] == 'Faculty'){
             $_SESSION['uname'] = $uname;
             $_SESSION['role'] = 'Faculty';
-            header("Location: ./Feedback/adminkit-3.1.0/static/index.php");
+            $_SESSION["name"] = $row['name'];
+            $_SESSION["id"] = $row['id'];
+
+            header("Location: ./Feedback/adminkit-3.1.0/static/faculty_index.php");
         }
         else{
             $_SESSION['uname'] = $uname;
