@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 
@@ -111,3 +112,18 @@
 </body>
 
 </html>
+=======
+<?php 
+
+session_start();
+
+if($_SESSION['role'] != 'Admin'){
+   echo "<script>alert('Invalid Session, please login again');</script>";
+   echo "<script>window.location.href='index.php';</script>";
+}else{
+
+   echo "Admin index";
+}
+
+?>
+>>>>>>> 39c8ab0c6ec6e6b0206b7082cc5015921a07d7c5
