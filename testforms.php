@@ -13,7 +13,7 @@
         @font-face {
             font-family: "San Francisco";
             font-weight: 400;
-            src: url("https://raw.githubusercontent.com/sahibjotsaggu/San-Francisco-Pro-Fonts/master/SF-Pro-Display-Semibold.otf")
+            src: url("./assets/css/SF-Pro-Display-Semibold.otf")
         }
 
         body {

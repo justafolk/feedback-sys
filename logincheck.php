@@ -18,7 +18,9 @@ if(isset($_POST['login'])){
         if($row['role'] == 'Admin'){
             $_SESSION['uname'] = $uname;
             $_SESSION['role'] = 'Admin';
-            header("Location: ./Feedback/adminkit-3.1.0/static/index.php");
+            $_SESSION["name"] = $row['name'];
+            $_SESSION["id"] = $row['id'];
+            header("Location: ./roles/admin/index.php");
         }
         else if($row['role'] == 'Faculty'){
             $_SESSION['uname'] = $uname;
@@ -26,12 +28,14 @@ if(isset($_POST['login'])){
             $_SESSION["name"] = $row['name'];
             $_SESSION["id"] = $row['id'];
 
-            header("Location: ./Feedback/adminkit-3.1.0/static/faculty_index.php");
+            header("Location: ./roles/faculty/index.php");
         }
         else{
             $_SESSION['uname'] = $uname;
             $_SESSION['role'] = 'Student';
-            header("Location: ./Feedback/adminkit-3.1.0/static/index.php");
+            $_SESSION["name"] = $row['name'];
+            $_SESSION["id"] = $row['id'];
+            header("Location: ./roles/student/index.php");
         }
     }else{
         echo "<script>alert('Invalid username or password');</script>";

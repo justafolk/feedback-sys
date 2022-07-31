@@ -2,6 +2,7 @@
 
 $title = $_POST["form-title"];
 $instructions = $_POST["instructions"];
+$sliders_idk = array();
 foreach ($_POST as $key => $value) {
     if (strpos($key, "main-question") !== false) {
         $mainquestions[$key] = array($value) ;
@@ -15,6 +16,7 @@ foreach ($_POST as $key => $value) {
         $num = end($num);
         array_push($mainquestions["main-question_main-question".$num], $value);
         # code...
+        array_push($sliders_idk, $num);
     }
 
 }
@@ -55,10 +57,19 @@ if (!$result) {
 $formid = mysqli_insert_id($conn);
 echo $formid;
 foreach ($mainquestions as $key => $value) { 
-    $sql = "insert into form_ques (form_id, question_title, sub_content) values('$formid', '$value[0]', '".json_encode(array_slice($value, 1))."')";
+    if (in_array(explode("main-question",$key)[2], $sliders_idk)){
+    $sql = "insert into form_ques (form_id, question_title, sub_content, type) values('$formid', '$value[0]', '".json_encode(array_slice($value, 1))."', 'slider')";
+    }
+    elseif (count($value) > 1){
+        $sql = "insert into form_ques (form_id, question_title, sub_content, type) values('$formid', '$value[0]', '".json_encode(array_slice($value, 1))."', 'mcq')";
+
+    }
+    else{
+
+        $sql = "insert into form_ques (form_id, question_title, sub_content) values('$formid', '$value[0]', '".json_encode(array_slice($value, 1))."')";
+    }
     $result = mysqli_query($conn, $sql);
     if (!$result) {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
 }
-?>

@@ -2,133 +2,110 @@
 <html lang="en">
 
 <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
+	<meta name="author" content="AdminKit">
+	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="shortcut icon" href="img/icons/icon-48x48.png" />
+
+	<link rel="canonical" href="https://demo-basic.adminkit.io/" />
+
+	<title>CWIT-Feedback Portol</title>
+	
+	<link href="css/app.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
-
 <body>
-
   <main id="main" class="main">
     <section class="section">
       <div class="row">
         <div class="col-lg-6">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Pie Chart</h5>
-
-              <!-- Pie Chart -->
-              <div id="pieChart"></div>
-
+              <h5 class="card-title">Bar Chart</h5>
+              <div id="barChart" style="min-height: 400px;" class="echart"></div>
               <script>
                 document.addEventListener("DOMContentLoaded", () => {
-                  new ApexCharts(document.querySelector("#pieChart"), {
-                    series: [44, 55, 13, 43, 22],
-                    chart: {
-                      height: 350,
-                      type: 'pie',
-                      toolbar: {
-                        show: true
-                      }
+                  echarts.init(document.querySelector("#barChart")).setOption({
+                    xAxis: {
+                      type: 'category',
+                      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
                     },
-                    labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E']
-                  }).render();
+                    yAxis: {
+                      type: 'value'
+                    },
+                    series: [{
+                      data: [120, 200, 150, 80, 70, 110, 130],
+                      type: 'bar'
+                    }]
+                  });
                 });
               </script>
-              <!-- End Pie Chart -->
 
             </div>
           </div>
         </div>
+      </div>
+      <div class="row">
         <div class="col-lg-6">
           <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Polar Area Chart</h5>
-
-              <!-- Polar Area Chart -->
-              <div id="polarAreaChart"></div>
-
+            <div class="card-body d-flex">
+              <canvas id="barChart1" style="max-height: 800px;"></canvas>
               <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  new ApexCharts(document.querySelector("#polarAreaChart"), {
-                    series: [14, 23, 21, 17, 15, 10, 12, 17, 21],
-                    chart: {
-                      type: 'polarArea',
-                      height: 350,
-                      toolbar: {
-                        show: true
-                      }
-                    },
-                    stroke: {
-                      colors: ['#fff']
-                    },
-                    fill: {
-                      opacity: 0.8
-                    }
-                  }).render();
-                });
-              </script>
-              <!-- End Polar Area Chart -->
-
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-6">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Radial Bar Chart</h5>
-
-              <!-- Radial Bar Chart -->
-              <div id="radialBarChart"></div>
-
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  new ApexCharts(document.querySelector("#radialBarChart"), {
-                    series: [44, 55, 67, 83],
-                    chart: {
-                      height: 350,
-                      type: 'radialBar',
-                      toolbar: {
-                        show: true
-                      }
-                    },
-                    plotOptions: {
-                      radialBar: {
-                        dataLabels: {
-                          name: {
-                            fontSize: '22px',
-                          },
-                          value: {
-                            fontSize: '16px',
-                          },
-                          total: {
-                            show: true,
-                            label: 'Total',
-                            formatter: function(w) {
-                              return 249
-                            }
+                  document.addEventListener("DOMContentLoaded", () => {
+                  new Chart(document.querySelector('#barChart1'), {
+                      type: 'bar',
+                      data: {
+                      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                      datasets: [{
+                          label: 'Bar Chart',
+                          data: [65, 59, 80, 81, 56, 55, 40],
+                          backgroundColor: [
+                          'rgba(255, 99, 132, 0.2)',
+                          'rgba(255, 159, 64, 0.2)',
+                          'rgba(255, 205, 86, 0.2)',
+                          'rgba(75, 192, 192, 0.2)',
+                          'rgba(54, 162, 235, 0.2)',
+                          'rgba(153, 102, 255, 0.2)',
+                          'rgba(201, 203, 207, 0.2)'
+                          ],
+                          borderColor: [
+                          'rgb(255, 99, 132)',
+                          'rgb(255, 159, 64)',
+                          'rgb(255, 205, 86)',
+                          'rgb(75, 192, 192)',
+                          'rgb(54, 162, 235)',
+                          'rgb(153, 102, 255)',
+                          'rgb(201, 203, 207)'
+                          ],
+                          borderWidth: 1
+                      }]
+                      },
+                      options: {
+                      scales: {
+                          y: {
+                          beginAtZero: true
                           }
-                        }
                       }
-                    },
-                    labels: ['Apples', 'Oranges', 'Bananas', 'Berries'],
-                  }).render();
-                });
+                      }
+                  });
+                  });
               </script>
             </div>
           </div>
         </div>
-
       </div>
     </section>
 
-  </main><!-- End #main -->
+  </main>
 
-  <!-- ======= Footer ======= -->
-<!-- End Footer -->
-
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-  <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="assets/js/main.js"></script>
+	<script src="js/app.js"></script>
+  <script src="assets/vendor/echarts/echarts.min.js"></script>
 
 </body>
-
 </html>

@@ -1,0 +1,42 @@
+01 R18SC1701 Basic Mathematics
+02 R18SC1710 Engineering Mathematics
+03 R18SC1703 Basic Physics
+04 R18SC1706 Engineering Physics
+05 R18SC1707 English
+06 R18SC1708 Business Communication
+07 R18ME1210 Engineering Graphic Skills
+08 R18CP1401 Computer Fundamentals
+09 R18EX1415 Electronic Devices
+10 R18ME2203 Industrial Org.
+11 R18EE2310 Electrical Engineering
+12 R18ME2210 Workshop Practice
+13 R18EE2302 Marketing
+14 R18ME2208 Entrepreneurship Development
+15 R18SC1715 Aptitude Test Skills
+16 R18CP2401 Environmental Studies
+17 R18CP3401 Programming in
+18 R18CP3402 Operating Systems
+19 R18CP3403 Data Structures R18CP3401
+20 R18CP3404 Object Oriented Programming with
+21 R18CP3405 Microprocessors
+22 R18CP3406 Database Management Systems
+23 R18CP3407 Computer Networks
+24 R18CP3408 Software Engineering
+25 R18CP3409 Data Communication
+26 R18EX3415 Digital Techniques
+27 R18CP4401 Web Design
+28 R18CP4402 User Interface Programming
+29 R18CP4403 P. C. Maintenance
+30 R18CP4404 Linux Operating System R18CP3402
+31 R18CP4405 Project and Seminar 100 Credits
+32 R18CP4406 Industrial Training
+33 R18CP5401 Java Programming R18CP3404
+34 R18CP5402 Multimedia Techniques
+35 R18CP5403 PHP Programming
+36 R18CP5404 Mobile Computing
+37 R18CP5405 Python Programming
+38 R18CP5406 Computer Security R18CP3407
+39 R18CP5407 Advanced Java Programming
+40 R18CP5408 Advanced Computer Networks R18CP3407
+41 R18CP5409 Animation Techniques
+42 R18CP5410 Network Administration R18CP3407

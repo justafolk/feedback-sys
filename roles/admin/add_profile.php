@@ -23,7 +23,7 @@
 <body>
 	<div class="wrapper">
 		<?php
-			include 'sidebar.html';
+			include 'sidebar.php';
 		?>
 		<div class="main">
 			<nav class="navbar navbar-expand navbar-light navbar-bg">
@@ -33,10 +33,10 @@
 				<div>
 					<h1 class="h3 mb-0"><strong>New Profile</strong></h1>
 				</div>
-		<?php
-			include 'notification.php';
-		?>
-	</nav>
+				<?php
+					include 'notification.php';
+				?>
+			</nav>
 	<main class="d-flex w-100">
 		<div class="container d-flex flex-column">
 			<div class="row vh-100">

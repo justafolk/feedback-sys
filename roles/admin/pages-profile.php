@@ -23,7 +23,7 @@
 <body>
 	<div class="wrapper">
 		<?php
-			include 'sidebar.html';
+			include 'sidebar.php';
 		?>
 
 		<div class="main">

@@ -63,13 +63,13 @@
                     <i class="align-middle" data-feather="bar-chart-2"></i> <span>Feedbacks</span>
                 </a>
                 <ul id="charts-nav" class="" style="list-style-type:none;">
-                    <li class="sidebar-item">
-                    <a class="sidebar-link" href="dep_feedback2.php">
+                    <li class="sidebar-item active">
+                    <a class="sidebar-link active" href="dep_feedback.php">
                         <span class="align-middle">Computer Department</span>
                     </a>
                     </li>
-                    <li class="sidebar-item active">
-                    <a class="sidebar-link" href="electircal.php">
+                    <li>
+                    <a class="sidebar-link" href="electrical.php">
                         <span class="align-middle">Electrical Department</span>
                     </a>
                     </li>
@@ -93,11 +93,7 @@
                 </a>
                 </li>
                 
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="pages-blank.html">
-                    <i class="align-middle" data-feather="book"></i> <span class="align-middle">Blank</span>
-                    </a>
-                </li>
+                
 
                 <li class="sidebar-header">
                     Profiles
@@ -378,7 +374,6 @@
 								</div>				
 							</div>
                         </div>
-
                         <div id="list1">
                             <div class="row mt-3">
 								<div class="col-md-12 mb-3">
@@ -474,55 +469,108 @@
 												<h5 class="card-title mb-0">PHP - Feedback</h5>
 												<h6 class="card-title mb-0">26/03/2022</h6>
 											</div>
-											<!-- <button type="button" class="btn btn-primary" onclick="form()">View</button> -->
 											<button class="btn btn-primary" id="id4">View</button>
 										</div>
 										<div class="card-body d-flex">
-                                            <canvas id="barChart" style="max-height: 800px;"></canvas>
-                                            <script>
-                                                document.addEventListener("DOMContentLoaded", () => {
-                                                new Chart(document.querySelector('#barChart'), {
-                                                    type: 'bar',
-                                                    data: {
-                                                    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-                                                    datasets: [{
-                                                        label: 'Bar Chart',
-                                                        data: [65, 59, 80, 81, 56, 55, 40],
-                                                        backgroundColor: [
-                                                        'rgba(255, 99, 132, 0.2)',
-                                                        'rgba(255, 159, 64, 0.2)',
-                                                        'rgba(255, 205, 86, 0.2)',
-                                                        'rgba(75, 192, 192, 0.2)',
-                                                        'rgba(54, 162, 235, 0.2)',
-                                                        'rgba(153, 102, 255, 0.2)',
-                                                        'rgba(201, 203, 207, 0.2)'
-                                                        ],
-                                                        borderColor: [
-                                                        'rgb(255, 99, 132)',
-                                                        'rgb(255, 159, 64)',
-                                                        'rgb(255, 205, 86)',
-                                                        'rgb(75, 192, 192)',
-                                                        'rgb(54, 162, 235)',
-                                                        'rgb(153, 102, 255)',
-                                                        'rgb(201, 203, 207)'
-                                                        ],
-                                                        borderWidth: 1
-                                                    }]
-                                                    },
-                                                    options: {
-                                                    scales: {
-                                                        y: {
-                                                        beginAtZero: true
-                                                        }
-                                                    }
-                                                    }
-                                                });
-                                                });
-                                            </script>
+											<canvas id="barChart" style="max-height: 800px;"></canvas>
+											<script>
+												document.addEventListener("DOMContentLoaded", () => {
+												new Chart(document.querySelector('#barChart'), {
+													type: 'bar',
+													data: {
+													labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+													datasets: [{
+														label: 'Bar Chart',
+														data: [65, 59, 80, 81, 56, 55, 40],
+														backgroundColor: [
+														'rgba(255, 99, 132, 0.2)',
+														'rgba(255, 159, 64, 0.2)',
+														'rgba(255, 205, 86, 0.2)',
+														'rgba(75, 192, 192, 0.2)',
+														'rgba(54, 162, 235, 0.2)',
+														'rgba(153, 102, 255, 0.2)',
+														'rgba(201, 203, 207, 0.2)'
+														],
+														borderColor: [
+														'rgb(255, 99, 132)',
+														'rgb(255, 159, 64)',
+														'rgb(255, 205, 86)',
+														'rgb(75, 192, 192)',
+														'rgb(54, 162, 235)',
+														'rgb(153, 102, 255)',
+														'rgb(201, 203, 207)'
+														],
+														borderWidth: 1
+													}]
+													},
+													options: {
+													scales: {
+														y: {
+														beginAtZero: true
+														}
+													}
+													}
+												});
+												});
+											</script>
 										</div>
 									</div>
 								</div>
-								<div class="col-12 col-md-6 col-xxl-6 order-2 order-xxl-2">
+								<div class="col-12 col-md-12 col-xxl-6 order-1 order-xxl-1">
+									<div class="card flex-fill w-200">
+										<div class="card-header d-flex justify-content-between">
+											<div>
+												<h5 class="card-title mb-0">PHP - Feedback</h5>
+												<h6 class="card-title mb-0">26/03/2022</h6>
+											</div>
+											<button class="btn btn-primary" id="id4">View</button>
+										</div>
+										<div class="card-body d-flex">
+											<canvas id="barChart1" style="max-height: 800px;"></canvas>
+											<script>
+												document.addEventListener("DOMContentLoaded", () => {
+												new Chart(document.querySelector('#barChart1'), {
+													type: 'bar',
+													data: {
+													labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+													datasets: [{
+														label: 'Bar Chart',
+														data: [65, 59, 80, 81, 56, 55, 40],
+														backgroundColor: [
+														'rgba(255, 99, 132, 0.2)',
+														'rgba(255, 159, 64, 0.2)',
+														'rgba(255, 205, 86, 0.2)',
+														'rgba(75, 192, 192, 0.2)',
+														'rgba(54, 162, 235, 0.2)',
+														'rgba(153, 102, 255, 0.2)',
+														'rgba(201, 203, 207, 0.2)'
+														],
+														borderColor: [
+														'rgb(255, 99, 132)',
+														'rgb(255, 159, 64)',
+														'rgb(255, 205, 86)',
+														'rgb(75, 192, 192)',
+														'rgb(54, 162, 235)',
+														'rgb(153, 102, 255)',
+														'rgb(201, 203, 207)'
+														],
+														borderWidth: 1
+													}]
+													},
+													options: {
+													scales: {
+														y: {
+														beginAtZero: true
+														}
+													}
+													}
+												});
+												});
+											</script>
+										</div>
+									</div>
+								</div>
+								<!-- <div class="col-12 col-md-6 col-xxl-6 order-2 order-xxl-2">
 									<div class="card flex-fill w-100">
 										<div class="card-header d-flex justify-content-between">
 											<div>
@@ -531,28 +579,31 @@
 											</div>
 											<button class="btn btn-primary" id="id5">View</button>
 										</div>
-										<div class="card-body d-flex">
-                                            <div id="idk1" style="min-height: 400px;" class="echart"></div>
-                                            <script>
-                                            document.addEventListener("DOMContentLoaded", () => {
-                                                echarts.init(document.querySelector("#idk1")).setOption({
-                                                xAxis: {
-                                                    type: 'category',
-                                                    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-                                                },
-                                                yAxis: {
-                                                    type: 'value'
-                                                },
-                                                series: [{
-                                                    data: [120, 200, 150, 80, 70, 110, 130],
-                                                    type: 'bar'
-                                                }]
-                                                });
-                                            });
-                                            </script>
+										<div class="card">
+											<div class="card-body">
+											<div id="barChart1" style="min-height: 400px;" class="echart"></div>
+
+												<script>
+													document.addEventListener("DOMContentLoaded", () => {
+													echarts.init(document.querySelector("#barChart1")).setOption({
+														xAxis: {
+														type: 'category',
+														data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+														},
+														yAxis: {
+														type: 'value'
+														},
+														series: [{
+														data: [120, 200, 150, 80, 70, 110, 130],
+														type: 'bar'
+														}]
+													});
+													});
+												</script>
+											</div>
 										</div>
 									</div>
-								</div>
+								</div> -->
 							</div>
 						</div>
 
@@ -968,7 +1019,7 @@
 			?>
 		</div>
 	</div>
-    <script src="assets/vendor/chart.js/chart.min.js"></script>
+	<script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
 	<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
   	<script src="assets/js/main.js"></script>
 	<script src="js/app.js"></script>
@@ -1005,7 +1056,136 @@
 			document.getElementById("list").style.display = "block";
 		}
 	</script> -->
-    <script>
+    <!-- <script>
+        first1 = document.getElementById("home-tab");
+        second1 = document.getElementById("list-tab");
+        third1 = document.getElementById("list2-tab");
+        first = document.getElementById("home");
+        second = document.getElementById("profile");
+        profile1 = document.getElementById("profile1");
+        list = document.getElementById("list");
+        third = document.getElementById("list1");
+        const name = document.getElementById("name");
+        // let b = ["b1","b2","b3","b4","b5","b6","b7","b8","b9"];
+        // for (let i = 0; i < 3; i++) {
+        //     b[i] = document.getElementById(b[i]);
+        //     console.log(b[i]);
+        // } 
+        name.innerHTML = "First Year";
+
+        first.style.display = "block";
+        second.style.display = "none";
+        third.style.display = "none";
+        list.style.display = "none";
+        profile1.style.display = "none";
+
+        first.style.display = "block";
+        second.style.display = "none";
+        list.style.display = "none";
+        name.innerHTML = "First Year | Bar Graph";
+        b1.onclick = function() {
+            first.style.display = "block";
+            profile1.style.display = "none";
+            list.style.display = "none";
+            name.innerHTML = "First Year | Bar Graph";
+        }
+        b2.onclick = function() {
+            first.style.display = "none";
+            profile1.style.display = "block";
+            list.style.display = "none";
+            name.innerHTML = "First Year | Pie Graph";
+        }
+        b3.onclick = function() {
+            first.style.display = "none";
+            profile1.style.display = "none";
+            list.style.display = "block";
+            name.innerHTML = "First Year | List Form";
+        }
+        first1.onclick = function() {
+            first.style.display = "block";
+            second.style.display = "none";
+            third.style.display = "none";
+            profile1.style.display = "none";
+            list.style.display = "none";
+            name.innerHTML = "First Year | Bar Graph";
+            b1.onclick = function() {
+                first.style.display = "block";
+                profile1.style.display = "none";
+                list.style.display = "none";
+                name.innerHTML = "First Year | Bar Graph";
+            }
+            b2.onclick = function() {
+                first.style.display = "none";
+                profile1.style.display = "block";
+                list.style.display = "none";
+                name.innerHTML = "First Year | Pie Graph";
+            }
+            b3.onclick = function() {
+                first.style.display = "none";
+                profile1.style.display = "none";
+                list.style.display = "block";
+                name.innerHTML = "First Year | List Form";
+            }
+        }
+
+        second1.onclick = function() {
+            first.style.display = "none";
+            second.style.display = "block";
+            third.style.display = "none";
+
+            profile1.style.display = "none";
+            list.style.display = "none";
+            name.innerHTML = "Second Year | Bar Graph";
+            b4.onclick = function() {
+                second.style.display = "block";
+                profile1.style.display = "none";
+                list.style.display = "none";
+                name.innerHTML = "Second Year | Bar Graph";
+            }
+            b5.onclick = function() {
+                second.style.display = "none";
+                profile1.style.display = "block";
+                list.style.display = "none";
+                name.innerHTML = "Second Year | Pie Graph";
+            }
+            b6.onclick = function() {
+                second.style.display = "none";
+                profile1.style.display = "none";
+                list.style.display = "block";
+                name.innerHTML = "Second Year | List Form";
+            }
+        }
+        third1.onclick = function() {
+            first.style.display = "none";
+            second.style.display = "none";
+            third.style.display = "block";
+
+            profile1.style.display = "none";
+            list.style.display = "none";
+
+            name.innerHTML = "Third Year | Bar Graph";
+            b7.onclick = function() {
+                third.style.display = "block";
+                profile1.style.display = "none";
+                list.style.display = "none";
+                name.innerHTML = "Third Year | Bar Graph";
+            }
+            b8.onclick = function() {
+                third.style.display = "none";
+                profile1.style.display = "block";
+                list.style.display = "none";
+                name.innerHTML = "Third Year | Pie Graph";
+            }
+            b9.onclick = function() {
+                third.style.display = "none";
+                profile1.style.display = "none";
+                list.style.display = "block";
+                name.innerHTML = "Third Year | List Form";
+            }
+        }
+    </script> -->
+
+	<script>
         first1 = document.getElementById("home-tab");
         second1 = document.getElementById("list-tab");
         third1 = document.getElementById("list2-tab");
@@ -1172,6 +1352,7 @@
             second.style.display = "none";
         }
     </script>
+
 	<script>
         <?php
         for($i=1;$i<6;$i++){

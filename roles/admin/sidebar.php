@@ -1,3 +1,6 @@
+<?php
+session_start();2 
+?>
 <nav id="sidebar" class="sidebar js-sidebar">
     <div class="sidebar-content js-simplebar">
         <a class="sidebar-brand" href="index.html">
@@ -25,19 +28,39 @@
                 <i class="align-middle" data-feather="bar-chart-2"></i> <span>Feedbacks</span>
               </a>
               <ul id="charts-nav" class="collapse" style="list-style-type:none;">
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="civil_department.php">
+                    <span class="align-middle">Civil Dept. </span>
+                  </a>
+                </li>
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="mech_department_a.php">
+                    <span class="align-middle">Mechanical Dept. (Aided)</span>
+                  </a>
+                </li>
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="mech_department_u.php">
+                    <span class="align-middle">Mechanical Dept. (Un-Aided)</span>
+                  </a>
+                </li>
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="elec_department.php">
+                    <span class="align-middle">Electrical Dept.</span>
+                  </a>
+                </li>
                 <li>
                   <a class="sidebar-link" href="dep_feedback2.php">
-                    <span class="align-middle">Computer Department</span>
+                    <span class="align-middle">Computer Dept.</span>
+                  </a>
+                </li>
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="etc_department_a.php">
+                    <span class="align-middle">E&TC Dept. (Aided)</span>
                   </a>
                 </li>
                 <li>
-                  <a class="sidebar-link" href="electrical.php">
-                    <span class="align-middle">Electrical Department</span>
-                  </a>
-                </li>
-                <li>
-                  <a class="sidebar-link" href="dep_feedback.php">
-                    <span class="align-middle">Civil Department</span>
+                  <a class="sidebar-link" href="etc_department_u.php">
+                    <span class="align-middle">E&TC Dept. (Un-Aided)</span>
                   </a>
                 </li>
               </ul>
@@ -54,11 +77,58 @@
                 <i class="align-middle" data-feather="book"></i> <span class="align-middle">Student Info</span>
               </a>
             </li>
-            
+
+            <li class="sidebar-header">
+              Forms
+            </li>
+
             <li class="sidebar-item">
-                <a class="sidebar-link" href="pages-blank.html">
-                  <i class="align-middle" data-feather="book"></i> <span class="align-middle">Blank</span>
+                <a class="sidebar-link" href="create_form.php">
+                  <i class="align-middle" data-feather="user"></i> <span class="align-middle">Create Form</span>
                 </a>
+            </li>
+
+            <li class="sidebar-item">
+              <a class="sidebar-link" data-bs-target="#charts-nav1" data-bs-toggle="collapse" href="#">
+                <i class="align-middle" data-feather="bar-chart-2"></i> <span>View Form</span>
+              </a>
+              <ul id="charts-nav1" class="collapse" style="list-style-type:none;">
+                <li>
+                  <a class="sidebar-link" href="view_form.php">
+                    <span class="align-middle">Computer Dept.</span>
+                  </a>
+                </li>
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="view_form.php">
+                    <span class="align-middle">Civil Dept. </span>
+                  </a>
+                </li>
+                <!-- <li class="sidebar-item">
+                  <a class="sidebar-link" href="mech_department_a.php">
+                    <span class="align-middle">Mechanical Dept. (Aided)</span>
+                  </a>
+                </li>
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="mech_department_u.php">
+                    <span class="align-middle">Mechanical Dept. (Un-Aided)</span>
+                  </a>
+                </li> -->
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="view_form.php ">
+                    <span class="align-middle">Electrical Dept.</span>
+                  </a>
+                </li>
+                <!-- <li class="sidebar-item">
+                  <a class="sidebar-link" href="etc_department_a.php">
+                    <span class="align-middle">E&TC Dept. (Aided)</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="sidebar-link" href="etc_department_u.php">
+                    <span class="align-middle">E&TC Dept. (Un-Aided)</span>
+                  </a>
+                </li> -->
+              </ul>
             </li>
 
             <li class="sidebar-header">
