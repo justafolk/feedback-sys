@@ -1,5 +1,5 @@
 <?php
-session_start();2 
+session_start();  
 ?>
 <nav id="sidebar" class="sidebar js-sidebar">
     <div class="sidebar-content js-simplebar">
