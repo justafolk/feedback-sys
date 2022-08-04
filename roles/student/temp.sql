@@ -1,0 +1,1 @@
+insert into form_ques (form_id, question_title, sub_content, type) values ('1', '3. Teacher's effectiveness in terms of Technical content, Communication Skills and use of Teaching aids.', '[""]', 'slider');

@@ -56,7 +56,7 @@
     </style>
     <?php
     include 'imports/config.php';
-    $form_id = $_GET['form_id'];
+    $form_id = $_GET['id'];
     $sql = "SELECT * FROM form_ques WHERE form_id = '$form_id'";
     $result = mysqli_query($conn, $sql);
     ?>
@@ -68,7 +68,7 @@
             <img src="./assets/img/logo.png" alt="" style="width: 100px">
         </div>
 
-        <form action="./create_form.php" method="post">
+        <form action="./roles/student/submit_feedback.php" method="post">
             <!-- checkbox for personal details -->
 
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 border-bottom  ">
@@ -83,7 +83,14 @@
                                 exit();
                             }
                             $row_forms = mysqli_fetch_assoc($result_forms);
-                            echo $row_forms['course_name'];
+                            $ss = "select * from courses where course_code='$row_forms[course_name]'";
+                            $result_courses = mysqli_query($conn, $ss);
+                            if (!$result_courses) {
+                                printf("Error: %s\n", mysqli_error($conn));
+                                exit();
+                            }
+                            $row_courses = mysqli_fetch_assoc($result_courses);
+                            echo $row_courses['course_name']. " - " .$row_forms['course_name'];
                             ?>
                         </h3>
                     </div>
@@ -93,6 +100,7 @@
                         </h6>
                     </div>
                 </div>
+
 
 
                 <div class="btn-toolbar mb-2 mb-md-0">
@@ -165,7 +173,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">
                                         <?php echo $row["question_title"] ?> </h5>
-                                    <input type="hidden" name="slidercount<?php echo $id ?>" id="slidercount<?php echo $id ?>" value="1">
+                                   
                                     <ul>
                                         <li style="text-align:left; align-items:left;">Very Bad </li>
                                         <li style="padding-left:4%;text-align:left; align-items:left;">Bad</li>
@@ -184,18 +192,18 @@
 
 
                                             <div class="range">
-                                                <input type="range" class="form-range" id="slider-<?php echo $id ?>-1" name="slider-<?php echo $id ?>-1" min="1" max="100" />
+                                                <input type="range" class="form-range" id="slider-<?php echo $id ?>" name="slider-<?php echo $id ?>" min="1" max="100" />
                                             </div>
                                         </div>
                                     <?php } ?>
-                                    <button type="button" class="btn btn-sm btn-dark" name="addoptions<?php echo $id; ?>" onclick="addSlider(<?php echo $id ?>)" id="addoptions<?php echo $id; ?>">Add Another Slider</button>
-
+                                   
                                 </div>
 
                             </div>
                         </div>
                 <?php
                     }
+                    $id++;
                 }
 
                 ?>
@@ -203,8 +211,8 @@
             <br>
 
 
-
-            <input type="submit" class="btn  btn-dark" value="Save Form">
+                <input type="hidden" name="form_id" value="<?php echo $_GET["id"] ?>">
+            <input type="submit" class="btn  btn-dark" value="Submit">
             <button class="btn btn-light border">Discard</button>
 
         </form>

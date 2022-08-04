@@ -2,7 +2,8 @@
 <nav id="sidebar" class="sidebar js-sidebar">
   <div class="sidebar-content js-simplebar">
     <a class="sidebar-brand" href="index.html">
-      <span class="align-middle">Feedback Portal</span>
+      
+      <span class="align-middle"><img src="../../assets/img/logo.png" style="width:30px" alt="">CWIT FEEDBACK SYS</span>
     </a>
 
     <ul class="sidebar-nav">
