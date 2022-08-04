@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-$feedback_id = $_GET["f_id"];
+$feedback_id = $_GET["id"];
 session_start();
 ?>
 
@@ -55,30 +55,76 @@ session_start();
 				<div>
 					<h1 class="h3 mb-0"><strong>Feedback |
 							<?php
-							$dept_id = $_GET["dept_id"];
 							include "../../imports/config.php";
-							$sql = "SELECT * FROM departments WHERE dept_id = '$dept_id'";
+							$sql = "SELECT * FROM forms WHERE form_id = '$feedback_id'";
 							$result = mysqli_query($conn, $sql);
 							$row = mysqli_fetch_assoc($result);
-							echo $row['dept_name'];
+							echo $row['course_name'];
 							?></strong></h1>
 				</div>
 				<?php
 				include "notification.php";
+				$course_code = $row["course_name"];
+				$sql = "select * from courses where course_code = '$course_code'";
+				$resul = mysqli_query($conn, $sql);
+				$rowse = mysqli_fetch_assoc($resul);
 				?>
 			</nav>
 
 			<main class="content">
 				<div class="container-fluid p-0">
+					<div class="card border shadow-none" style="">
+						<div class="card-body" style="width: 100%; height:100%">
+
+							<div class="row">
+
+								<div class="col-md-6">
+
+									<h4><?php echo $rowse["course_name"] ?> : #<?php echo $row["course_name"] ?></h4>
+									<p>Rupali Shete</p>
+								</div>
+								<div class="col-md-6" style="text-align:right; ">
+									<h4>Last Updated <span style="color: green;">: <?php echo $row["ini_date"] ?></span></h4>
+									<!-- text input for tracking id -->
+
+								</div>
+							</div>
+						</div>
+					</div>
+					<?php
+
+					$i = 1;
+					$sql = "SELECT * FROM form_ques where form_id = '$feedback_id'";
+					$result = mysqli_query($conn, $sql);
+					$num_ques = mysqli_num_rows($result);
+
+					$sql = "select * from form_responses where form_id='$feedback_id'";
+					$resu = mysqli_query($conn, $sql);
+					$main_responses = array();
+					for ($i = 0; $i < $num_ques; $i++) {
+						array_push($main_responses, array());
+					}
+					while ($row = mysqli_fetch_assoc($resu)) {
+						$res = json_decode($row['response_json'], true);
+						$i = 0;
+						foreach ($res as $key => $value) {
+							array_push($main_responses[$i], round($value / 20));
+							$i++;
+							if ($i == $num_ques) {
+								break;
+								# code...
+							}
+						}
+					}
+					?>
 					<div class="row">
 						<div class="col-md-4">
-							<div class="card flex-fill w-100">
+							<div class="card flex-fill w-100 border shadow-none">
 								<div class="card-header d-flex justify-content-between">
 									<div>
-										<h5 class="card-title mb-0">PHP - Feedback</h5>
-										<h6 class="card-title mb-0">26/03/2022</h6>
+										<h5 class="card-title mb-0"><?php echo $rowse["course_name"] ?> </h5>
+										<h6 class="card-title mb-0"><?php echo date('D, d M Y H:i:s') ?></h6>
 									</div>
-									<button class="btn btn-primary" id="id4">View</button>
 								</div>
 								<div class="card-body d-flex">
 									<div class="align-self-center w-100">
@@ -88,24 +134,20 @@ session_start();
 											</div>
 										</div>
 										<div class="text-center">
-											<button class="btn btn-success mb-3">5 - 4306</button>
-											<button class="btn btn-primary mb-3">5 - 4306</button>
-											<button class="btn btn-secondary mb-3">5 - 4306</button>
-											<button class="btn btn-warning mb-3">5 - 4306</button>
-											<button class="btn btn-danger mb-3">5 - 4306</button>
+											<button class="btn btn-success mb-3">Filled - <?php echo count($main_responses[0]) ?></button>
+											<button class="btn btn-danger mb-3">Not Filled - 32</button>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="col-md-8">
-							<div class="card flex-fill w-200">
+						<div class="col-md-8" style="height: 100%">
+							<div class="card flex-fill w-200 border shadow-none">
 								<div class="card-header d-flex justify-content-between">
 									<div>
-										<h5 class="card-title mb-0">PHP - Feedback</h5>
-										<h6 class="card-title mb-0">26/03/2022</h6>
+										<h5 class="card-title mb-0"><?php echo $rowse["course_name"] ?> </h5>
+										<h6 class="card-title mb-0"><?php echo date('D, d M Y H:i:s') ?></h6>
 									</div>
-									<button class="btn btn-primary" id="id4">View</button>
 								</div>
 								<div class="card-body d-flex">
 									<canvas id="barChart" style="max-height: 800px;"></canvas>
@@ -114,10 +156,21 @@ session_start();
 											new Chart(document.querySelector('#barChart'), {
 												type: 'bar',
 												data: {
-													labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+													labels: ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7'],
 													datasets: [{
-														label: 'Bar Chart',
-														data: [65, 59, 80, 81, 56, 55, 40],
+														axis: 'y',
+														label: ['Average Student Reponses'],
+														data: [
+															<?php
+															for ($i = 0; $i < count($main_responses); $i++) {
+																echo round(array_sum($main_responses[$i]) / count($main_responses[$i]));
+																if ($i != count($main_responses) - 1) {
+																	echo ",";
+																}
+																echo ",";
+															}
+															?>
+														],
 														backgroundColor: [
 															'rgba(255, 99, 132, 0.2)',
 															'rgba(255, 159, 64, 0.2)',
@@ -154,7 +207,60 @@ session_start();
 						</div>
 					</div>
 				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="card shadow-none border">
+							<div class="card-body">
+								<div class="table-responsive">
+									<table class="table table-bordered">
+										<thead>
+											<th>Feedback Question</th>
+											<th colspan="5">Percentage of Scores</th>
+											<th>Avg</th>
+											<th></th>
 
+
+
+										</thead>
+										<tbody>
+											<tr>
+												<th></th>
+												<th>1</th>
+												<th>2</th>
+												<th>3</th>
+												<th>4</th>
+												<th>5</th>
+												<th></th>
+												<th></th>
+
+											</tr>
+											<?php
+
+											$i = 0;
+											while ($row = mysqli_fetch_assoc($result)) {
+												echo "<tr>";
+												$percentage = array_count_values($main_responses[$i]);
+												echo "<td>" . $row['question_title'] . "</td>";
+												echo "<td>" . count(array_keys($main_responses[$i], 1)) / count($main_responses[$i]) * 100 . "</td>";
+												echo "<td>" . count(array_keys($main_responses[$i], 2)) / count($main_responses[$i]) * 100 . "</td>";
+												echo "<td>" . count(array_keys($main_responses[$i], 3)) / count($main_responses[$i]) * 100 . "</td>";
+												echo "<td>" . count(array_keys($main_responses[$i], 4)) / count($main_responses[$i]) * 100 . "</td>";
+												echo "<td>" . count(array_keys($main_responses[$i], 5)) / count($main_responses[$i]) * 100 . "</td>";
+
+												echo "<td>" . array_sum($main_responses[$i]) / count($main_responses[$i]) . "</td>";
+												echo "<td>" . $row['avg'] . "</td>";
+												echo "</tr>";
+												$i++;
+											}
+											?>
+
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
 
 			</main>
@@ -177,14 +283,11 @@ session_start();
 				new Chart(document.getElementById("chartjs-dashboard-pie<?php echo $i; ?>"), {
 					type: "pie",
 					data: {
-						labels: ["5-Ratings", "4-Ratings", "3-Ratings", "2-Ratings", "1-Ratings"],
+						labels: ["Filled", "Not Filled"],
 						datasets: [{
-							data: [4306, 3801, 1689, 834, 434],
+							data: [<?php echo count($main_responses[0]) ?>, 32],
 							backgroundColor: [
 								window.theme.success,
-								window.theme.primary,
-								window.theme.secondary,
-								window.theme.warning,
 								window.theme.danger
 							],
 							borderWidth: 5
@@ -235,48 +338,7 @@ session_start();
 		});
 	</script>
 	<script>
-		document.addEventListener("DOMContentLoaded", function() {
-			// Bar chart
-			new Chart(document.getElementById("chartjs-dashboard-bar"), {
-				type: "bar",
-				data: {
-					labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-					datasets: [{
-						label: "This year",
-						backgroundColor: window.theme.primary,
-						borderColor: window.theme.primary,
-						hoverBackgroundColor: window.theme.primary,
-						hoverBorderColor: window.theme.primary,
-						data: [54, 67, 41, 55, 62, 45, 55, 73, 60, 76, 48, 79],
-						barPercentage: .75,
-						categoryPercentage: .5
-					}]
-				},
-				options: {
-					maintainAspectRatio: false,
-					legend: {
-						display: false
-					},
-					scales: {
-						yAxes: [{
-							gridLines: {
-								display: false
-							},
-							stacked: false,
-							ticks: {
-								stepSize: 20
-							}
-						}],
-						xAxes: [{
-							stacked: false,
-							gridLines: {
-								color: "transparent"
-							}
-						}]
-					}
-				}
-			});
-		});
+
 	</script>
 
 </body>
