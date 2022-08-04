@@ -1,5 +1,5 @@
 <?php
-session_start();2 
+session_start();
 ?>
 <nav id="sidebar" class="sidebar js-sidebar">
     <div class="sidebar-content js-simplebar">
@@ -73,8 +73,8 @@ session_start();2
             </li>
 
             <li class="sidebar-item">
-              <a class="sidebar-link" href="student.php">
-                <i class="align-middle" data-feather="book"></i> <span class="align-middle">Student Info</span>
+              <a class="sidebar-link" href="change_pass.php">
+                <i class="align-middle" data-feather="book"></i> <span class="align-middle">Change Password</span>
               </a>
             </li>
 

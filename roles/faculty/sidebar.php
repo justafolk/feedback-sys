@@ -19,13 +19,20 @@
 
       <li class="sidebar-item ">
         <a class="sidebar-link" href="feedback_home.php">
-          <i class="align-middle" data-feather="user"></i> <span class="align-middle">Create Feedback</span>
+          <i class="align-middle" data-feather="user"></i> <span class="align-middle">View Feedback</span>
         </a>
       </li>
 
       <li class="sidebar-item ">
         <a class="sidebar-link" href="create_group.php">
           <i class="align-middle" data-feather="user"></i> <span class="align-middle">Create student group</span>
+        </a>
+      </li>
+
+      
+      <li class="sidebar-item ">
+        <a class="sidebar-link" href="change_pass.php">
+          <i class="align-middle" data-feather="user"></i> <span class="align-middle">Change password</span>
         </a>
       </li>
 

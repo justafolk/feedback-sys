@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
+
 session_start();
 include "../../imports/config.php";
 //include 'imports/config.php';
+error_reporting(0);
 
 if ($_SESSION['role'] != 'Faculty') {
 	echo "<script>alert('Invalid Session, please login again');</script>";
