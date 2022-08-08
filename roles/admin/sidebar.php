@@ -29,37 +29,37 @@ session_start();
               </a>
               <ul id="charts-nav" class="collapse" style="list-style-type:none;">
                 <li class="sidebar-item">
-                  <a class="sidebar-link" href="civil_department.php">
+                  <a class="sidebar-link" href="./feedbacks.php?dept_id=40">
                     <span class="align-middle">Civil Dept. </span>
                   </a>
                 </li>
                 <li class="sidebar-item">
-                  <a class="sidebar-link" href="mech_department_a.php">
+                  <a class="sidebar-link" href="./feedbacks.php?dept_id=40">
                     <span class="align-middle">Mechanical Dept. (Aided)</span>
                   </a>
                 </li>
                 <li class="sidebar-item">
-                  <a class="sidebar-link" href="mech_department_u.php">
+                  <a class="sidebar-link" href="./feedbacks.php?dept_id=40">
                     <span class="align-middle">Mechanical Dept. (Un-Aided)</span>
                   </a>
                 </li>
                 <li class="sidebar-item">
-                  <a class="sidebar-link" href="elec_department.php">
+                  <a class="sidebar-link" href="./feedbacks.php?dept_id=40">
                     <span class="align-middle">Electrical Dept.</span>
                   </a>
                 </li>
                 <li>
-                  <a class="sidebar-link" href="dep_feedback2.php">
+                  <a class="sidebar-link" href="./feedbacks.php?dept_id=40">
                     <span class="align-middle">Computer Dept.</span>
                   </a>
                 </li>
                 <li class="sidebar-item">
-                  <a class="sidebar-link" href="etc_department_a.php">
+                  <a class="sidebar-link" href="./feedbacks.php?dept_id=40">
                     <span class="align-middle">E&TC Dept. (Aided)</span>
                   </a>
                 </li>
                 <li>
-                  <a class="sidebar-link" href="etc_department_u.php">
+                  <a class="sidebar-link" href="./feedbacks.php?dept_id=40">
                     <span class="align-middle">E&TC Dept. (Un-Aided)</span>
                   </a>
                 </li>

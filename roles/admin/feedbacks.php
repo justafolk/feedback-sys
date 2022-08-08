@@ -93,7 +93,7 @@
 					<div class="row">
 						<?php
 						include "../../imports/config.php";
-						$sql = "SELECT * FROM groups where deptcode = '{$row["dept_id"]}'";
+						$sql = "SELECT * FROM groups, forms where deptcode = '{$row["dept_id"]}' and groups.id=forms.group_id";
 						$result = mysqli_query($conn, $sql);
 						if (mysqli_num_rows($result) > 0) {
 							while ($row = mysqli_fetch_assoc($result)) {
@@ -124,7 +124,7 @@
 																	?></p>
 											<div class="row">
 												<div class="col-md-12">
-													<button class="btn btn-dark " onclick="window.location.href='./report.php?id=<?php echo $row['id'] ?>'" style="border-radius:5px"> <strong>
+													<button class="btn btn-dark " onclick="window.location.href='./report.php?id=<?php echo $row['form_id'] ?>'" style="border-radius:5px"> <strong>
 
 															View
 														</strong>
