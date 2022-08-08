@@ -144,10 +144,831 @@
 							</div>
 						</div>
 					</div>
-	
-
 					<div class="row">
-						<div class="col-12 col-md-6 col-xxl-3 d-flex order-1 order-xxl-1">
+						<div class="col-12 col-md-6 col-xxl-6 order-1 order-xxl-1">
+							<p class="h3 mb-3">Overall Feedbacks</p>
+							<div class="card">
+								<div class="card-body">
+								<h5 class="card-title">Total Feedbacks of Departments</h5>
+								<div id="pieChart" class="mb-3"></div>
+								<script>
+									document.addEventListener("DOMContentLoaded", () => {
+									new ApexCharts(document.querySelector("#pieChart"), {
+										series: [44, 55, 13, 43, 22],
+										chart: {
+										height: 350,
+										type: 'pie',
+										toolbar: {
+											show: true
+										}
+										},
+										labels: ['Civil Department','Mechanical Department (A)','Mechanical Department (UA)','Electrical Department','Computer Department','E&TC Department (A)','E&TC Department (UA)']
+									}).render();
+									});
+								</script>
+								</div>
+							</div>
+						</div>
+						<!-- <div class="col-6 col-md-6 col-xxl-6 order-1 order-xxl-1">
+							<p class="h3 mb-3">Civil Department Performance</p>
+							<div class="card">
+								<div class="card-body">
+								<h5 class="card-title">Year 2022-23</h5>
+								<div class="" align="center">
+									<canvas id="pieChart" style="max-height: 300px; max-width:600px;"></canvas>
+								</div>
+								<div class="text-center mt-3">
+									<button class="btn btn-success mb-3">Civil Department</button>
+									<button class="btn btn-primary mb-3">Mechanical Department (A)</button>
+									<button class="btn btn-danger mb-3">Mechanical Department (UA)</button>
+									<button class="btn btn-success mb-3">Electrical Department</button>
+									<button class="btn btn-primary mb-3">Computer Department</button>
+									<button class="btn btn-danger mb-3">E&TC Department (A)</button>
+									<button class="btn btn-success mb-3">E&TC Department (UA)</button>
+								</div>
+								<script>
+									document.addEventListener("DOMContentLoaded", () => {
+									new Chart(document.querySelector('#pieChart'), {
+										type: 'pie',
+										data: {
+										labels: ['Civil Department','Mechanical Department (A)','Mechanical Department (UA)','Electrical Department','Computer Department','E&TC Department (A)','E&TC Department (UA)']
+										datasets: [{
+											label: 'My First Dataset',
+											data: [300, 50, 100],
+											backgroundColor: [
+											window.theme.success,
+											window.theme.primary,
+											window.theme.danger,
+											window.theme.success,
+											window.theme.primary,
+											window.theme.danger,
+											window.theme.success
+											],
+											hoverOffset: 4
+										}],
+										},
+										options: {
+											legend: {
+												display: false
+											}
+										}	
+									});
+									});
+								</script>
+
+								</div>
+							</div>
+						</div> -->
+						<div class="col-6 col-md-6 col-xxl-6 order-1 order-xxl-1">
+							<p class="h3 mb-3">Department Performance</p>
+							<div class="card">
+								<div class="card-body">
+									<div class="heading d-flex justify-content-between">
+										<h5 class="card-title" id="name">Civil Department Feedbacks</h5>
+										<select name="type" id="type" class="form-select me-3" style="max-width:30%;">
+											<option value="civil" class="selected">Civil Department</option>
+											<option value="mecha">Mechanical Department (A)</option>
+											<option value="mechu">Mechanical Department (UA)</option>
+											<option value="elect">Electrical Department</option>
+											<option value="comp">Computer Department</option>
+											<option value="etca">E&TC Department (A)</option>
+											<option value="etcu">E&TC Department (UA)</option>
+										</select>
+									</div>
+								<div id="civil">
+									<div class="" align="center">
+										<canvas id="pieChart1" style="max-height: 300px; max-width:600px;"></canvas>
+									</div>
+									<div class="text-center mt-3">
+										<button class="btn btn-success mb-3">1st Year</button>
+										<button class="btn btn-primary mb-3">2nd Year</button>
+										<button class="btn btn-danger mb-3">3rd Year</button>
+										<!-- <button class="btn btn-success mb-3">1st Sem</button>
+										<button class="btn btn-primary mb-3">2nd Sem</button>
+										<button class="btn btn-danger mb-3">3rd Sem</button>
+										<button class="btn btn-success mb-3">4st Sem</button>
+										<button class="btn btn-primary mb-3">5nd Sem</button>
+										<button class="btn btn-danger mb-3">6rd Sem</button> -->
+									</div>
+									<script>
+										document.addEventListener("DOMContentLoaded", () => {
+										new Chart(document.querySelector('#pieChart1'), {
+											type: 'pie',
+											data: {
+											labels: ['First Year','Second Year','Third Year'],
+											datasets: [{
+												label: 'My First Dataset',
+												data: [300, 50, 100],
+												backgroundColor: [
+												window.theme.success,
+												window.theme.primary,
+												window.theme.danger
+												],
+												hoverOffset: 4
+											}],
+											},
+											options: {
+												legend: {
+													display: false
+												}
+											}	
+										});
+										});
+									</script>
+								</div>
+								<div id="mecha">
+									<div class="" align="center">
+										<canvas id="pieChart2" style="max-height: 300px; max-width:600px;"></canvas>
+									</div>
+									<div class="text-center mt-3">
+										<button class="btn btn-success mb-3">1st Year</button>
+										<button class="btn btn-primary mb-3">2nd Year</button>
+										<button class="btn btn-danger mb-3">3rd Year</button>
+										<!-- <button class="btn btn-success mb-3">Electrical Department</button>
+										<button class="btn btn-primary mb-3">Computer Department</button>
+										<button class="btn btn-danger mb-3">E&TC Department (A)</button>
+										<button class="btn btn-success mb-3">E&TC Department (UA)</button> -->
+									</div>
+									<script>
+										document.addEventListener("DOMContentLoaded", () => {
+										new Chart(document.querySelector('#pieChart2'), {
+											type: 'pie',
+											data: {
+											labels: ['First Year','Second Year','Third Year'],
+											datasets: [{
+												label: 'My First Dataset',
+												data: [300, 50, 100],
+												backgroundColor: [
+												window.theme.success,
+												window.theme.primary,
+												window.theme.danger
+												],
+												hoverOffset: 4
+											}],
+											},
+											options: {
+												legend: {
+													display: false
+												}
+											}	
+										});
+										});
+									</script>
+								</div>
+								<div id="mechu">
+									<div class="" align="center">
+										<canvas id="pieChart3" style="max-height: 300px; max-width:600px;"></canvas>
+									</div>
+									<div class="text-center mt-3">
+										<button class="btn btn-success mb-3">1st Year</button>
+										<button class="btn btn-primary mb-3">2nd Year</button>
+										<button class="btn btn-danger mb-3">3rd Year</button>
+										<!-- <button class="btn btn-success mb-3">Electrical Department</button>
+										<button class="btn btn-primary mb-3">Computer Department</button>
+										<button class="btn btn-danger mb-3">E&TC Department (A)</button>
+										<button class="btn btn-success mb-3">E&TC Department (UA)</button> -->
+									</div>
+									<script>
+										document.addEventListener("DOMContentLoaded", () => {
+										new Chart(document.querySelector('#pieChart3'), {
+											type: 'pie',
+											data: {
+											labels: ['First Year','Second Year','Third Year'],
+											datasets: [{
+												label: 'My First Dataset',
+												data: [300, 50, 100],
+												backgroundColor: [
+												window.theme.success,
+												window.theme.primary,
+												window.theme.danger
+												],
+												hoverOffset: 4
+											}],
+											},
+											options: {
+												legend: {
+													display: false
+												}
+											}	
+										});
+										});
+									</script>
+								</div>
+								<div id="elect">
+									<div class="" align="center">
+										<canvas id="pieChart4" style="max-height: 300px; max-width:600px;"></canvas>
+									</div>
+									<div class="text-center mt-3">
+										<button class="btn btn-success mb-3">1st Year</button>
+										<button class="btn btn-primary mb-3">2nd Year</button>
+										<button class="btn btn-danger mb-3">3rd Year</button>
+										<!-- <button class="btn btn-success mb-3">Electrical Department</button>
+										<button class="btn btn-primary mb-3">Computer Department</button>
+										<button class="btn btn-danger mb-3">E&TC Department (A)</button>
+										<button class="btn btn-success mb-3">E&TC Department (UA)</button> -->
+									</div>
+									<script>
+										document.addEventListener("DOMContentLoaded", () => {
+										new Chart(document.querySelector('#pieChart4'), {
+											type: 'pie',
+											data: {
+											labels: ['First Year','Second Year','Third Year'],
+											datasets: [{
+												label: 'My First Dataset',
+												data: [300, 50, 100],
+												backgroundColor: [
+												window.theme.success,
+												window.theme.primary,
+												window.theme.danger
+												],
+												hoverOffset: 4
+											}],
+											},
+											options: {
+												legend: {
+													display: false
+												}
+											}	
+										});
+										});
+									</script>
+								</div>
+								<div id="comp">
+									<div class="" align="center">
+										<canvas id="pieChart5" style="max-height: 300px; max-width:600px;"></canvas>
+									</div>
+									<div class="text-center mt-3">
+										<button class="btn btn-success mb-3">1st Year</button>
+										<button class="btn btn-primary mb-3">2nd Year</button>
+										<button class="btn btn-danger mb-3">3rd Year</button>
+										<!-- <button class="btn btn-success mb-3">Electrical Department</button>
+										<button class="btn btn-primary mb-3">Computer Department</button>
+										<button class="btn btn-danger mb-3">E&TC Department (A)</button>
+										<button class="btn btn-success mb-3">E&TC Department (UA)</button> -->
+									</div>
+									<script>
+										document.addEventListener("DOMContentLoaded", () => {
+										new Chart(document.querySelector('#pieChart5'), {
+											type: 'pie',
+											data: {
+											labels: ['First Year','Second Year','Third Year'],
+											datasets: [{
+												label: 'My First Dataset',
+												data: [300, 50, 100],
+												backgroundColor: [
+												window.theme.success,
+												window.theme.primary,
+												window.theme.danger
+												],
+												hoverOffset: 4
+											}],
+											},
+											options: {
+												legend: {
+													display: false
+												}
+											}	
+										});
+										});
+									</script>
+								</div>
+								<div id="etca">
+									<div class="" align="center">
+										<canvas id="pieChart6" style="max-height: 300px; max-width:600px;"></canvas>
+									</div>
+									<div class="text-center mt-3">
+										<button class="btn btn-success mb-3">1st Year</button>
+										<button class="btn btn-primary mb-3">2nd Year</button>
+										<button class="btn btn-danger mb-3">3rd Year</button>
+										<!-- <button class="btn btn-success mb-3">Electrical Department</button>
+										<button class="btn btn-primary mb-3">Computer Department</button>
+										<button class="btn btn-danger mb-3">E&TC Department (A)</button>
+										<button class="btn btn-success mb-3">E&TC Department (UA)</button> -->
+									</div>
+									<script>
+										document.addEventListener("DOMContentLoaded", () => {
+										new Chart(document.querySelector('#pieChart6'), {
+											type: 'pie',
+											data: {
+											labels: ['First Year','Second Year','Third Year'],
+											datasets: [{
+												label: 'My First Dataset',
+												data: [300, 50, 100],
+												backgroundColor: [
+												window.theme.success,
+												window.theme.primary,
+												window.theme.danger
+												],
+												hoverOffset: 4
+											}],
+											},
+											options: {
+												legend: {
+													display: false
+												}
+											}	
+										});
+										});
+									</script>
+								</div>
+								<div id="etcu">
+									<div class="" align="center">
+										<canvas id="pieChart7" style="max-height: 300px; max-width:600px;"></canvas>
+									</div>
+									<div class="text-center mt-3">
+										<button class="btn btn-success mb-3">1st Year</button>
+										<button class="btn btn-primary mb-3">2nd Year</button>
+										<button class="btn btn-danger mb-3">3rd Year</button>
+										<!-- <button class="btn btn-success mb-3">Electrical Department</button>
+										<button class="btn btn-primary mb-3">Computer Department</button>
+										<button class="btn btn-danger mb-3">E&TC Department (A)</button>
+										<button class="btn btn-success mb-3">E&TC Department (UA)</button> -->
+									</div>
+									<script>
+										document.addEventListener("DOMContentLoaded", () => {
+										new Chart(document.querySelector('#pieChart7'), {
+											type: 'pie',
+											data: {
+											labels: ['First Year','Second Year','Third Year'],
+											datasets: [{
+												label: 'My First Dataset',
+												data: [300, 50, 100],
+												backgroundColor: [
+												window.theme.success,
+												window.theme.primary,
+												window.theme.danger
+												],
+												hoverOffset: 4
+											}],
+											},
+											options: {
+												legend: {
+													display: false
+												}
+											}	
+										});
+										});
+									</script>
+								</div>
+								<script>
+									civil = document.getElementById("civil");
+									mecha = document.getElementById("mecha");
+									mechu = document.getElementById("mechu");
+									elect = document.getElementById("elect");
+									comp = document.getElementById("comp");
+									etca = document.getElementById("etca");
+									etcu = document.getElementById("etcu");
+									department = document.getElementById("department");	
+									const name = document.getElementById("name");
+
+									name.innerHTML = "Civil Department Feedbacks";
+									let b = ["civil","mecha","mechu","elect","comp","etca","etcu"];
+
+									function idk(variable, variable2){
+										let b = ["civil","mecha","mechu","elect","comp","etca","etcu"];
+										for(let i=0;i<8;i++){
+											if(variable.style.display == "block"){
+												variable.style.display = "none";
+												document.getElementById(b[i]).style.display = "none";
+											}
+											else{
+												document.getElementById(variable2).style.display = "block";
+												document.getElementById(b[i]).style.display = "none";
+											}
+										}
+									}
+
+									// for (let i=0;i<8; i++){
+									// 	document.getElementById(b[i]).style.display = "none";
+									// 	civil.style.display = "block";
+									// }
+
+									// department.addEventListener("change", function(){
+									// 	if(department.value === 'civil'){
+									// 		for (let i=0;i<8; i++){
+									// 			document.getElementById(b[i]).style.display = "none";
+									// 			civil.style.display = "block";
+									// 		}
+									// 	}
+									// 	if(department.value === 'mecha'){
+									// 		for (let i=0;i<8; i++){
+									// 			document.getElementById(b[i]).style.display = "none";
+									// 			mecha.style.display = "block";
+									// 		}
+									// 	}
+									// });
+
+									// for(let i=0;i<8; i++){
+									// 	if(b[i] === 'civil'){
+									// 		document.getElementById('civil').style.display = "block";
+									// 	}
+									// 	else{
+									// 		'b[i]'.style.display = "none";
+									// 	}
+									// 	civil.style.display = "display";
+									// 	if(b[i] !== 'civil'){
+									// 		document.getElementById(b[i]).style.display = "none";
+									// 	}
+									// }
+									civil.style.display = "block";
+									mecha.style.display = "none";
+									mechu.style.display = "none";
+									elect.style.display = "none";
+									comp.style.display = "none";
+									etca.style.display = "none";
+									etcu.style.display = "none";
+
+									type.addEventListener("change", function(){
+										let b = ["civil","mecha","mechu","elect","comp","etca","etcu"];
+										if(type.value === 'civil'){
+											civil.style.display = "block";
+											mecha.style.display = "none";
+											mechu.style.display = "none";
+											elect.style.display = "none";
+											comp.style.display = "none";
+											etca.style.display = "none";
+											etcu.style.display = "none";
+											name.innerHTML = "Civil Department Feedbacks";
+										}
+										if(type.value === 'mecha'){
+											// for(let i=0;i<8;i++){
+											// 	if(b[i] === 'mecha'){
+											// 		document.getElementById('mecha').style.display = "block";
+											// 	}
+											// 	else{
+											// 		document.getElementById(b[i]).style.display = "none";
+											// 	}
+											// }
+
+											// civil.style.display = "none";
+											// let b = ["civil","mecha","mechu","elect","comp","etca","etcu"];
+											// mecha.style.display = "display";
+											// if(b[i] !== 'mecha'){
+											// 	document.getElementById(b[i]).style.display = "none";
+											// }
+
+											civil.style.display = "none";
+											mecha.style.display = "block";
+											mechu.style.display = "none";
+											elect.style.display = "none";
+											comp.style.display = "none";
+											etca.style.display = "none";
+											etcu.style.display = "none";
+											name.innerHTML = "Aided Mechanical Department Feedbacks";
+
+										}
+										if(type.value === 'mechu'){
+											// for(let i=0;i<8;i++){
+											// 	if(b[i] !== 'mechu'){
+											// 		document.getElementById('mechu').style.display = "none";
+											// 	}
+											// 	else{
+											// 		document.getElementById(b[i]).style.display = "block";
+											// 	}
+											// }
+											civil.style.display = "none";
+											mecha.style.display = "none";
+											mechu.style.display = "block";
+											elect.style.display = "none";
+											comp.style.display = "none";
+											etca.style.display = "none";
+											etcu.style.display = "none";
+											name.innerHTML = "Unaided Mechanical Department Feedbacks";
+
+										}
+										if(type.value === 'elect'){
+											civil.style.display = "none";
+											mecha.style.display = "none";
+											mechu.style.display = "none";
+											elect.style.display = "block";
+											comp.style.display = "none";
+											etca.style.display = "none";
+											etcu.style.display = "none";
+											name.innerHTML = "Electrical Department Feedbacks";
+										}
+										if(type.value === 'comp'){
+											civil.style.display = "none";
+											mecha.style.display = "none";
+											mechu.style.display = "none";
+											elect.style.display = "none";
+											comp.style.display = "block";
+											etca.style.display = "none";
+											etcu.style.display = "none";
+											name.innerHTML = "Computer Department Feedbacks";
+										}
+										if(type.value === 'etca'){
+											civil.style.display = "none";
+											mecha.style.display = "none";
+											mechu.style.display = "none";
+											elect.style.display = "none";
+											comp.style.display = "none";
+											etca.style.display = "block";
+											etcu.style.display = "none";
+											name.innerHTML = "Aided E&TC Department Feedbacks";
+
+										}
+										if(type.value === 'etcu'){
+											civil.style.display = "none";
+											mecha.style.display = "none";
+											mechu.style.display = "none";
+											elect.style.display = "none";
+											comp.style.display = "none";
+											etca.style.display = "none";
+											etcu.style.display = "block";
+											name.innerHTML = "Unaided E&TC Department Feedbacks";
+
+										}
+									});
+
+									// department.addEventListener("change", function(){
+									// 	let b = ["civil","mecha","mechu","elect","comp","etca","etcu"];
+									// 	if(department.value === 'civil'){
+									// 		for (let i=0;i<8; i++){
+									// 			document.getElementById(b[i]).style.display = "none";
+									// 			civil.style.display = "block";
+									// 		}
+									// 	}
+									// 	if(department.value === 'mecha'){
+									// 		for (let i=0;i<8; i++){
+									// 			document.getElementById(b[i]).style.display = "none";
+									// 			mecha.style.display = "block";
+									// 		}
+									// 	}
+									// 	if(department.value === 'mechu'){
+									// 		for (let i=0;i<8; i++){
+									// 			document.getElementById(b[i]).style.display = "none";
+									// 			mechu.style.display = "block";
+									// 		}
+									// 	}
+									// 	if(department.value === 'elect'){
+									// 		for (let i=0;i<8; i++){
+									// 			document.getElementById(b[i]).style.display = "none";
+									// 			elect.style.display = "block";
+									// 		}
+									// 	}
+									// 	if(department.value === 'comp'){
+									// 		for (let i=0;i<8; i++){
+									// 			document.getElementById(b[i]).style.display = "none";
+									// 			comp.style.display = "block";
+									// 		}
+									// 	}
+									// 	if(department.value === 'etca'){
+									// 		for (let i=0;i<8; i++){
+									// 			document.getElementById(b[i]).style.display = "none";
+									// 			etca.style.display = "block";
+									// 		}
+									// 	}
+									// 	if(department.value === 'etcu'){
+									// 		for (let i=0;i<8; i++){
+									// 			document.getElementById(b[i]).style.display = "none";
+									// 			etcu.style.display = "block";
+									// 		}
+									// 	}
+									// });
+
+
+								</script>
+								</div>
+							</div>
+						</div>
+						
+						<div class="col-12 col-md-6 col-xxl-3 order-1 order-xxl-1">
+							<p class="h3 mb-3">Recent Feedbacks</p>
+							<div class="card flex-fill w-100">
+								<div class="card-header d-flex justify-content-between">
+									<div>
+										<h5 class="card-title mb-0">PHP - Feedback</h5>
+										<h6 class="card-title mb-0">26/03/2022</h6>
+									</div>
+									<!-- <button type="button" class="btn btn-primary" onclick="form()">View</button> -->
+									<button class="btn btn-primary" id="id4">View</button>
+								</div>
+								<div class="card-body d-flex">
+									<div class="align-self-center w-100">
+										<div class="py-3">
+											<div class="chart chart-xs">
+												<canvas id="chartjs-dashboard-pie"></canvas>
+											</div>
+										</div>
+										<div class="text-center">
+											<button class="btn btn-success mb-3">5 - 4306</button>
+											<button class="btn btn-primary mb-3">4 - 4306</button>
+											<button class="btn btn-secondary mb-3">3 - 4306</button>
+											<button class="btn btn-warning mb-3">2 - 4306</button>
+											<button class="btn btn-danger mb-3">1 - 4306</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<script>
+							document.addEventListener("DOMContentLoaded", function() {
+								// Pie chart
+								new Chart(document.getElementById("chartjs-dashboard-pie"), {
+									type: "pie",
+									data: {
+										labels: ["5-Ratings", "4-Ratings", "3-Ratings", "2-Ratings", "1-Ratings"],
+										datasets: [{
+											data: [406, 301, 1689, 8344, 3434],
+											backgroundColor: [
+												window.theme.success,
+												window.theme.primary,
+												window.theme.secondary,
+												window.theme.warning,
+												window.theme.danger							
+											],
+											borderWidth: 5
+										}]
+									},
+									options: {
+										responsive: !window.MSInputMethodContext,
+										maintainAspectRatio: false,
+										legend: {
+											display: false
+										},
+										cutoutPercentage: 75
+									}
+								});
+							});
+						</script>
+						<div class="col-12 col-md-6 col-xxl-3 order-1 order-xxl-1">
+							<p class="h3" style="margin-top:10%;"><p>
+							<div class="card flex-fill w-100">
+								<div class="card-header d-flex justify-content-between">
+									<div>
+										<h5 class="card-title mb-0">PHP - Feedback</h5>
+										<h6 class="card-title mb-0">26/03/2022</h6>
+									</div>
+									<!-- <button type="button" class="btn btn-primary" onclick="form()">View</button> -->
+									<button class="btn btn-primary" id="id4">View</button>
+								</div>
+								<div class="card-body d-flex">
+									<div class="align-self-center w-100">
+										<div class="py-3">
+											<div class="chart chart-xs">
+												<canvas id="chartjs-dashboard-pie1"></canvas>
+											</div>
+										</div>
+										<div class="text-center">
+											<button class="btn btn-success mb-3">5 - 4306</button>
+											<button class="btn btn-primary mb-3">4 - 4306</button>
+											<button class="btn btn-secondary mb-3">3 - 4306</button>
+											<button class="btn btn-warning mb-3">2 - 4306</button>
+											<button class="btn btn-danger mb-3">1 - 4306</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<script>
+							document.addEventListener("DOMContentLoaded", function() {
+								// Pie chart
+								new Chart(document.getElementById("chartjs-dashboard-pie1"), {
+									type: "pie",
+									data: {
+										labels: ["5-Ratings", "4-Ratings", "3-Ratings", "2-Ratings", "1-Ratings"],
+										datasets: [{
+											data: [406, 301, 1689, 8344, 3434],
+											backgroundColor: [
+												window.theme.success,
+												window.theme.primary,
+												window.theme.secondary,
+												window.theme.warning,
+												window.theme.danger							
+											],
+											borderWidth: 5
+										}]
+									},
+									options: {
+										responsive: !window.MSInputMethodContext,
+										maintainAspectRatio: false,
+										legend: {
+											display: false
+										},
+										cutoutPercentage: 75
+									}
+								});
+							});
+						</script>
+						<div class="col-12 col-md-6 col-xxl-3 order-1 order-xxl-1">
+							<p class="h3" style="margin-top:10%;"><p>
+							<div class="card flex-fill w-100">
+								<div class="card-header d-flex justify-content-between">
+									<div>
+										<h5 class="card-title mb-0">PHP - Feedback</h5>
+										<h6 class="card-title mb-0">26/03/2022</h6>
+									</div>
+									<!-- <button type="button" class="btn btn-primary" onclick="form()">View</button> -->
+									<button class="btn btn-primary" id="id4">View</button>
+								</div>
+								<div class="card-body d-flex">
+									<div class="align-self-center w-100">
+										<div class="py-3">
+											<div class="chart chart-xs">
+												<canvas id="chartjs-dashboard-pie2"></canvas>
+											</div>
+										</div>
+										<div class="text-center">
+											<button class="btn btn-success mb-3">5 - 4306</button>
+											<button class="btn btn-primary mb-3">4 - 4306</button>
+											<button class="btn btn-secondary mb-3">3 - 4306</button>
+											<button class="btn btn-warning mb-3">2 - 4306</button>
+											<button class="btn btn-danger mb-3">1 - 4306</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<script>
+							document.addEventListener("DOMContentLoaded", function() {
+								// Pie chart
+								new Chart(document.getElementById("chartjs-dashboard-pie2"), {
+									type: "pie",
+									data: {
+										labels: ["5-Ratings", "4-Ratings", "3-Ratings", "2-Ratings", "1-Ratings"],
+										datasets: [{
+											data: [406, 301, 1689, 8344, 3434],
+											backgroundColor: [
+												window.theme.success,
+												window.theme.primary,
+												window.theme.secondary,
+												window.theme.warning,
+												window.theme.danger							
+											],
+											borderWidth: 5
+										}]
+									},
+									options: {
+										responsive: !window.MSInputMethodContext,
+										maintainAspectRatio: false,
+										legend: {
+											display: false
+										},
+										cutoutPercentage: 75
+									}
+								});
+							});
+						</script>
+						<div class="col-12 col-md-6 col-xxl-3 order-1 order-xxl-1">
+							<p class="h3" style="margin-top:10%;"><p>
+							<div class="card flex-fill w-100">
+								<div class="card-header d-flex justify-content-between">
+									<div>
+										<h5 class="card-title mb-0">PHP - Feedback</h5>
+										<h6 class="card-title mb-0">26/03/2022</h6>
+									</div>
+									<!-- <button type="button" class="btn btn-primary" onclick="form()">View</button> -->
+									<button class="btn btn-primary" id="id4">View</button>
+								</div>
+								<div class="card-body d-flex">
+									<div class="align-self-center w-100">
+										<div class="py-3">
+											<div class="chart chart-xs">
+												<canvas id="chartjs-dashboard-pie3"></canvas>
+											</div>
+										</div>
+										<div class="text-center">
+											<button class="btn btn-success mb-3">5 - 4306</button>
+											<button class="btn btn-primary mb-3">4 - 4306</button>
+											<button class="btn btn-secondary mb-3">3 - 4306</button>
+											<button class="btn btn-warning mb-3">2 - 4306</button>
+											<button class="btn btn-danger mb-3">1 - 4306</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<script>
+							document.addEventListener("DOMContentLoaded", function() {
+								// Pie chart
+								new Chart(document.getElementById("chartjs-dashboard-pie3"), {
+									type: "pie",
+									data: {
+										labels: ["5-Ratings", "4-Ratings", "3-Ratings", "2-Ratings", "1-Ratings"],
+										datasets: [{
+											data: [406, 301, 1689, 8344, 3434],
+											backgroundColor: [
+												window.theme.success,
+												window.theme.primary,
+												window.theme.secondary,
+												window.theme.warning,
+												window.theme.danger							
+											],
+											borderWidth: 5
+										}]
+									},
+									options: {
+										responsive: !window.MSInputMethodContext,
+										maintainAspectRatio: false,
+										legend: {
+											display: false
+										},
+										cutoutPercentage: 75
+									}
+								});
+							});
+						</script>
+						<!-- <div class="col-12 col-md-6 col-xxl-3 d-flex order-1 order-xxl-1">
 							<div class="card flex-fill">
 								<div class="card-header">
 									<h5 class="card-title mb-0">Calendar</h5>
@@ -160,19 +981,19 @@
 									</div>
 								</div>
 							</div>
-						</div>
+						</div> -->
 						<!-- <div class="col-12 col-lg-8 col-xxl-9 d-flex order-2 order-xxl-2">
 							<div class="calendar col-12" id="calendar">
 							</div>
 						</div> -->
-						<div class="col-12 col-lg-12 col-xxl-9 d-flex order-2 order-xxl-2">
+					<!-- <div class="col-12 col-lg-12 col-xxl-9 d-flex order-2 order-xxl-2">
 						<div class="card flex-fill">
 							<div class="card-header">
 								<h5 class="card-title mb-0">Latest Feedbacks</h5>
 							</div>
 							<div class="calendar col-12" id="calendar"></div>
 						</div>
-					</div>
+					</div> -->
 
 			</main>
 
@@ -300,7 +1121,10 @@
 	<script type="text/babel">
       
 		</script>
-
+<script src="js/app.js"></script>
+	<script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+	<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  	<script src="assets/js/main.js"></script>
 
 
 </body>
