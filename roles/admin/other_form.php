@@ -33,15 +33,7 @@
 					<i class="hamburger align-self-center"></i>
 				</a>
 				<div>
-					<h1 class="h3 mb-0"><strong>Feedback | <?php
-						$dept_id = $_GET["dept_id"];
-						include "../../imports/config.php";
-						$sql = "SELECT * FROM departments WHERE dept_id = '$dept_id'";
-						$result = mysqli_query($conn, $sql);
-						$row = mysqli_fetch_assoc($result);
-						echo $row['dept_name'];
-						?></strong>
-					</h1>
+					<h1 class="h3 mb-0"><strong>Other Feedbacks </strong></h1>
 				</div>
 				<?php
 				include "notification.php";
@@ -51,7 +43,7 @@
 			<main class="content">
 				<div class="container-fluid p-0">
 					<div class="mb-3">
-						<h1 class="h3 d-inline align-middle" id="name"><?php echo $row["dept_name"] ?></h1>
+						<h1 class="h3 d-inline align-middle" id="name">Other Forms</h1>
 					</div>
 					<div class="input-group">
 						<input type="text" class="form-control" placeholder="Search for ....">
@@ -60,72 +52,39 @@
 						</span>
 					</div>
 					<br>
-					<?php
-					$i = 1;
-					while ($i < 7) {
-					?>
-						<button class="btn btn-primary me-3" id="home-tab"><?php echo $i ?> Semester</button>
-					<?php
-					$i++;
-					}
-
-					?>
-
 					</ul>
-					<br>
-					<br>
 
 					<div class="row">
-						<?php
-						include "../../imports/config.php";
-						$sql = "SELECT * FROM groups, forms where deptcode = '{$row["dept_id"]}' and groups.id=forms.form_id";
-						$result = mysqli_query($conn, $sql);
-						if (mysqli_num_rows($result) > 0) {
-							while ($row = mysqli_fetch_assoc($result)) {
-								$forms = "select * from login where id = '{$row["teacher_id"]}'";
+                        <div class="col-md-3">
+                            <div class="card border shadow-none" style="border-radius:12px">
+                                <div class="card-body">
+                                    <h4 class="h4"><strong>
+                                            Python Language (R189322)
+                                        </strong></h4>
+                                    <h6>
+                                        <a href="">
+                                            Normal Survey
+                                        </a>
+                                    </h6>
+                                    <p>Number of Students : <?php
+                                        echo "102";
+                                        ?></p>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button class="btn btn-dark " onclick="window.location.href='./report.php?id=<?php echo $row['form_id'] ?>'" style="border-radius:5px"> <strong>
 
-								$results = mysqli_query($conn, $forms);
-								$forms = mysqli_fetch_assoc($results);
-								$sql2 = "select * from courses where course_code='{$row["subject"]}'";
-								$result2 = mysqli_query($conn, $sql2);
-								$row2 = mysqli_fetch_assoc($result2);
-						?>
-								<div class="col-md-3">
-									<div class="card border shadow-none" style="border-radius:12px">
-										<div class="card-body">
-											<h4 class="h4"><strong>
-													<?php echo $row2["course_name"] . " (" . $row2["course_code"]; ?>)
-												</strong></h4>
-											<h6>
-												<a href="">
-													<?php
-													echo $forms["name"];
-													?>
-												</a>
-											</h6>
-											<p>Number of Students : <?php
-																	$students = json_decode($row["activeRoll"], true);
-																	echo count($students);
-																	?></p>
-											<div class="row">
-												<div class="col-md-12">
-													<button class="btn btn-dark " onclick="window.location.href='./report.php?id=<?php echo $row['form_id'] ?>'" style="border-radius:5px"> <strong>
+                                                    View
+                                                </strong>
+                                            </button>
+                                        
+                                        </div>
 
-															View
-														</strong>
-													</button>
-												
-												</div>
+                                    </div>
 
-											</div>
+                                </div>
 
-										</div>
-
-									</div>
-								</div>
-						<?php }
-						} ?>
-
+                            </div>
+                        </div>
 					</div>
 
 

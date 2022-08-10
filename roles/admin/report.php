@@ -73,7 +73,7 @@ session_start();
 
 			<main class="content">
 				<div class="container-fluid p-0">
-					<div class="card border shadow-none" style="">
+					<div class="card border shadow-none">
 						<div class="card-body" style="width: 100%; height:100%">
 
 							<div class="row">
