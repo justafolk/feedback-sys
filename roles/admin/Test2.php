@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php session_start(); error_reporting(0); ?>
 
 <head>
 	<meta charset="utf-8">
@@ -1220,3 +1221,135 @@
 </body>
 
 </html>
+
+
+
+<!--
+
+
+		  <script type="text/babel">
+      function LatestFeedBack() {
+        const [date, setDate] = React.useState("2022-07-15");
+        const [data, setData] = React.useState(null);
+
+        const fetchData = (date) => {
+          var requestOptions = {
+            method: "GET",
+            redirect: "follow",
+          };
+
+          fetch(
+            `http://localhost:9090/datedetails.php?date=${date}`,
+            requestOptions
+          )
+            .then((response) => response.json())
+            .then((result) => setData(result))
+            .catch((error) => console.log("error", error));
+        };
+
+        React.useEffect(() => {
+          fetchData(date);
+        }, [date]);
+
+        return (
+          <div>
+            <input
+              type="date"
+              onChange={(e) => {
+                setDate(e.target.value);
+              }}
+            />
+
+            <br />
+            <table>
+              <tr>
+                <th>Subject</th>
+                <th>Teacher</th>
+                <th>Date</th>
+              </tr>
+              {data ? (
+                <>
+                  {data.map((d) => {
+                    return (
+                      <tr>
+                        <td> {d?.subject} </td>
+                        <td> {d?.teacher} </td>
+                        <td> {d?.date} </td>
+                      </tr>
+                    );
+                  })}
+                </>
+              ) : null}
+            </table>
+          </div>
+        );
+      }
+
+      ReactDOM.render(<LatestFeedBack />, document.getElementById("mydiv"));
+	</script>
+
+
+
+
+
+
+
+	<script>
+		document.addEventListener("DOMContentLoaded", function() {
+			var highlightDate = {};
+			var date = new Date(Date.now() - 5 * 24 * 60 * 60 * 1000);
+			var defaultDate = date.getUTCFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + date.getUTCDate();
+			document.getElementById("datetimepicker-dashboard").flatpickr({
+				inline: true,
+				prevArrow: "<span title=\"Previous month\">&laquo;</span>",
+				nextArrow: "<span title=\"Next month\">&raquo;</span>",
+				defaultDate: defaultDate,
+				touchUi: true,
+				onChange: function(selectedDates, dateStr, instance) {
+					var date = new Date(dateStr);
+					
+					
+					//window.location.href = "?date=" + date.getUTCFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + date.getUTCDate();
+					//alert(date.getUTCFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + date.getUTCDate());
+					//var dateUTC = new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
+					//alert(dateUTC);
+					//highlightDate[dateUTC] = dateUTC;
+					//document.getElementById("chartjs-dashboard-line").chartjs.update();
+					
+					function postSend() {
+						var xhr = new XMLHttpRequest();
+						xhr.open("POST", url , true);
+						xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+						xhr.send("date=" + dateStr);
+					}
+
+				}
+			});
+		});
+
+	</script>
+
+
+
+
+
+    <script>
+        var highlightDate = {};
+        highlightDate[ new Date('01/20/2022')] = new Date('01/20/2022');
+        highlightDate[ new Date('01/21/2022')] = new Date('01/21/2022');
+        highlightDate[ new Date('01/22/2022')] = new Date('01/22/2022');
+        highlightDate[ new Date('01/23/2022')] = new Date('01/23/2022');
+
+        $('#datepickerId').datepicker({
+            beforeShowDay: function( date ) {
+                var highlight = highlightDate[date];
+                if( highlight ) {
+                    return [true, "eventClass", 'Tooltip text'];
+                } else {
+                    return [true, '', ''];
+                }
+            }
+        });
+    </script>
+
+	-->

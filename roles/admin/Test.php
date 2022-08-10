@@ -34,18 +34,18 @@
 <body>
 	<div class="wrapper">
 		<?php
-			include 'sidebar.php';
+		include 'sidebar.php';
 		?>
 		<div class="main">
 			<nav class="navbar navbar-expand navbar-light navbar-bg">
 				<a class="sidebar-toggle js-sidebar-toggle">
-          <i class="hamburger align-self-center"></i>
-        </a>
-			<div>
-				<h1 class="h3 mb-0"><strong>Dashboard</strong></h1>
-			</div>
+					<i class="hamburger align-self-center"></i>
+				</a>
+				<div>
+					<h1 class="h3 mb-0"><strong>Dashboard</strong></h1>
+				</div>
 				<?php
-					include 'notification.php';
+				include 'notification.php';
 				?>
 			</nav>
 
@@ -169,7 +169,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-6 col-md-6 col-xxl-6 order-1 order-xxl-1">
+						<div class="col-12 col-md-6 col-xxl-6 order-1 order-xxl-1">
 							<p class="h3 mb-3">Department Performance</p>
 							<div class="card">
 								<div class="card-body">
@@ -915,7 +915,6 @@
 	<script type="text/babel">
       
 		</script>
-<script src="js/app.js"></script>
 	<script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
 	<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
   	<script src="assets/js/main.js"></script>

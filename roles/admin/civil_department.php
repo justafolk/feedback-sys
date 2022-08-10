@@ -58,7 +58,7 @@
                     <i class="align-middle me-2" data-feather="plus-square"></i> <span class="align-middle">Feedbacks</span>
                 </a>
                 </li> -->
-                <li class="sidebar-item">
+                <li class="sidebar-item active">
                 <a class="sidebar-link" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
                     <i class="align-middle" data-feather="bar-chart-2"></i> <span>Feedbacks</span>
                 </a>

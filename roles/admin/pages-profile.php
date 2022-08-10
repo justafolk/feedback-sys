@@ -22,9 +22,182 @@
 
 <body>
 	<div class="wrapper">
-		<?php
-			include 'sidebar.php';
-		?>
+		<nav id="sidebar" class="sidebar js-sidebar">
+		<div class="sidebar-content js-simplebar">
+			<a class="sidebar-brand" href="index.html">
+	<span class="align-middle">Personal</span>
+	</a>	
+
+			<ul class="sidebar-nav">
+				<li class="sidebar-header">
+					Pages
+				</li>
+
+				<li class="sidebar-item active">
+					<a class="sidebar-link" href="index.php">
+					<i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+					</a>
+				</li>
+
+				<!-- <li class="sidebar-item">
+				<a class="sidebar-link" href="dep_feedback.php">
+					<i class="align-middle me-2" data-feather="plus-square"></i> <span class="align-middle"></span>
+				</a>
+				</li> -->
+				<li class="sidebar-item">
+				<a class="sidebar-link" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+					<i class="align-middle" data-feather="bar-chart-2"></i> <span>IDK</span>
+				</a>
+				<ul id="charts-nav" class="collapse" style="list-style-type:none;">
+					<li class="sidebar-item">
+					<a class="sidebar-link" href="civil_department.php">
+						<span class="align-middle">Civil Dept. </span>
+					</a>
+					</li>
+					<li class="sidebar-item">
+					<a class="sidebar-link" href="mech_department_a.php">
+						<span class="align-middle">Mechanical Dept. (Aided)</span>
+					</a>
+					</li>
+					<li class="sidebar-item">
+					<a class="sidebar-link" href="mech_department_u.php">
+						<span class="align-middle">Mechanical Dept. (Un-Aided)</span>
+					</a>
+					</li>
+					<li class="sidebar-item">
+					<a class="sidebar-link" href="elec_department.php">
+						<span class="align-middle">Electrical Dept.</span>
+					</a>
+					</li>
+					<li>
+					<a class="sidebar-link" href="dep_feedback2.php">
+						<span class="align-middle">Computer Dept.</span>
+					</a>
+					</li>
+					<li class="sidebar-item">
+					<a class="sidebar-link" href="etc_department_a.php">
+						<span class="align-middle">E&TC Dept. (Aided)</span>
+					</a>
+					</li>
+					<li>
+					<a class="sidebar-link" href="etc_department_u.php">
+						<span class="align-middle">E&TC Dept. (Un-Aided)</span>
+					</a>
+					</li>
+				</ul>
+				</li>
+
+				<!-- <li class="sidebar-item">
+					<a class="sidebar-link" href="notification1.php">
+					<i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Notifications</span>
+					</a>
+				</li> -->
+
+				<li class="sidebar-item">
+				<a class="sidebar-link" href="change_pass.php">
+					<i class="align-middle" data-feather="book"></i> <span class="align-middle">Change Password</span>
+				</a>
+				</li>
+
+				<li class="sidebar-header">
+				Forms
+				</li>
+
+				<li class="sidebar-item">
+					<a class="sidebar-link" href="create_group.php">
+					<i class="align-middle" data-feather="user"></i> <span class="align-middle">Create Form</span>
+					</a>
+				</li>
+
+				<li class="sidebar-item">
+				<a class="sidebar-link" data-bs-target="#charts-nav1" data-bs-toggle="collapse" href="#">
+					<i class="align-middle" data-feather="bar-chart-2"></i> <span>View Form</span>
+				</a>
+				<ul id="charts-nav1" class="collapse" style="list-style-type:none;">
+					<li>
+					<a class="sidebar-link" href="view_form.php">
+						<span class="align-middle">Computer Dept.</span>
+					</a>
+					</li>
+					<li class="sidebar-item">
+					<a class="sidebar-link" href="view_form.php">
+						<span class="align-middle">Civil Dept. </span>
+					</a>
+					</li>
+					<!-- <li class="sidebar-item">
+					<a class="sidebar-link" href="mech_department_a.php">
+						<span class="align-middle">Mechanical Dept. (Aided)</span>
+					</a>
+					</li>
+					<li class="sidebar-item">
+					<a class="sidebar-link" href="mech_department_u.php">
+						<span class="align-middle">Mechanical Dept. (Un-Aided)</span>
+					</a>
+					</li> -->
+					<li class="sidebar-item">
+					<a class="sidebar-link" href="view_form.php ">
+						<span class="align-middle">Electrical Dept.</span>
+					</a>
+					</li>
+					<!-- <li class="sidebar-item">
+					<a class="sidebar-link" href="etc_department_a.php">
+						<span class="align-middle">E&TC Dept. (Aided)</span>
+					</a>
+					</li>
+					<li>
+					<a class="sidebar-link" href="etc_department_u.php">
+						<span class="align-middle">E&TC Dept. (Un-Aided)</span>
+					</a>
+					</li> -->
+				</ul>
+				</li>
+
+				<li class="sidebar-item">
+					<a class="sidebar-link" href="other_form.php">
+					<i class="align-middle" data-feather="user"></i> <span class="align-middle">Other Form</span>
+					</a>
+				</li>
+
+				<li class="sidebar-header">
+					Profiles
+				</li>
+
+				<li class="sidebar-item">
+					<a class="sidebar-link" href="profiles.php">
+					<i class="align-middle me-2" data-feather="users"></i> <span class="align-middle">All Profiles</span>
+					</a>
+				</li>
+
+				<li class="sidebar-item">
+					<a class="sidebar-link" href="add_profile.php">
+					<i class="align-middle me-2" data-feather="user-plus"></i> <span class="align-middle">Add User</span>
+					</a>
+				</li>
+
+				<li class="sidebar-item">
+				<a class="sidebar-link" href="remove_profile.php">
+					<i class="align-middle me-2" data-feather="user-x"></i><span class="align-middle">Remove User</span>
+				</a>
+				</li>
+
+				<!-- <li class="sidebar-header">
+					Plugins & Addons
+				</li>
+
+				<li class="sidebar-item">
+					<a class="sidebar-link" href="charts-chartjs.html">
+					<i class="align-middle" data-feather="bar-chart-2"></i> <span class="align-middle">Charts</span>
+					</a>
+				</li>
+
+				<li class="sidebar-item">
+					<a class="sidebar-link" href="maps-google.html">
+					<i class="align-middle" data-feather="map"></i> <span class="align-middle">Maps</span>
+					</a>
+				</li> -->
+			</ul>
+		</div>
+	</nav>
 
 		<div class="main">
 			<nav class="navbar navbar-expand navbar-light navbar-bg">
@@ -34,9 +207,162 @@
 			<div>
 				<h1 class="h3 mb-0"><strong>Profile</strong></h1>
 			</div>
-				<?php
-					include 'notification.php';
-				?>
+				<div class="navbar-collapse collapse">
+					<ul class="navbar-nav navbar-align">
+						<li class="nav-item dropdown">
+							<a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-bs-toggle="dropdown">
+								<div class="position-relative">
+									<i class="align-middle" data-feather="bell"></i>
+									<span class="indicator">4</span>
+								</div>
+							</a>
+							<div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0" aria-labelledby="alertsDropdown">
+								<div class="dropdown-menu-header">
+									4 New Notifications
+								</div>
+								<div class="list-group">
+									<a href="#" class="list-group-item">
+										<div class="row g-0 align-items-center">
+											<div class="col-2">
+												<i class="text-danger" data-feather="alert-circle"></i>
+											</div>
+											<div class="col-10">
+												<div class="text-dark">Update completed</div>
+												<div class="text-muted small mt-1">Restart server 12 to complete the update.</div>
+												<div class="text-muted small mt-1">30m ago</div>
+											</div>
+										</div>
+									</a>
+									<a href="#" class="list-group-item">
+										<div class="row g-0 align-items-center">
+											<div class="col-2">
+												<i class="text-warning" data-feather="bell"></i>
+											</div>
+											<div class="col-10">
+												<div class="text-dark">Lorem ipsum</div>
+												<div class="text-muted small mt-1">Aliquam ex eros, imperdiet vulputate hendrerit et.</div>
+												<div class="text-muted small mt-1">2h ago</div>
+											</div>
+										</div>
+									</a>
+									<a href="#" class="list-group-item">
+										<div class="row g-0 align-items-center">
+											<div class="col-2">
+												<i class="text-primary" data-feather="home"></i>
+											</div>
+											<div class="col-10">
+												<div class="text-dark">Login from 192.186.1.8</div>
+												<div class="text-muted small mt-1">5h ago</div>
+											</div>
+										</div>
+									</a>
+									<a href="#" class="list-group-item">
+										<div class="row g-0 align-items-center">
+											<div class="col-2">
+												<i class="text-success" data-feather="user-plus"></i>
+											</div>
+											<div class="col-10">
+												<div class="text-dark">New connection</div>
+												<div class="text-muted small mt-1">Christina accepted your request.</div>
+												<div class="text-muted small mt-1">14h ago</div>
+											</div>
+										</div>
+									</a>
+								</div>
+								<div class="dropdown-menu-footer">
+									<a href="#" class="text-muted">Show all notifications</a>
+								</div>
+							</div>
+						</li>
+						<!-- <li class="nav-item dropdown">
+							<a class="nav-icon dropdown-toggle" href="#" id="messagesDropdown" data-bs-toggle="dropdown">
+								<div class="position-relative">
+									<i class="align-middle" data-feather="message-square"></i>
+								</div>
+							</a>
+							<div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0" aria-labelledby="messagesDropdown">
+								<div class="dropdown-menu-header">
+									<div class="position-relative">
+										4 New Messages
+									</div>
+								</div>
+								<div class="list-group">
+									<a href="#" class="list-group-item">
+										<div class="row g-0 align-items-center">
+											<div class="col-2">
+												<img src="img/avatars/avatar-5.jpg" class="avatar img-fluid rounded-circle" alt="Vanessa Tucker">
+											</div>
+											<div class="col-10 ps-2">
+												<div class="text-dark">Vanessa Tucker</div>
+												<div class="text-muted small mt-1">Nam pretium turpis et arcu. Duis arcu tortor.</div>
+												<div class="text-muted small mt-1">15m ago</div>
+											</div>
+										</div>
+									</a>
+									<a href="#" class="list-group-item">
+										<div class="row g-0 align-items-center">
+											<div class="col-2">
+												<img src="img/avatars/avatar-2.jpg" class="avatar img-fluid rounded-circle" alt="William Harris">
+											</div>
+											<div class="col-10 ps-2">
+												<div class="text-dark">William Harris</div>
+												<div class="text-muted small mt-1">Curabitur ligula sapien euismod vitae.</div>
+												<div class="text-muted small mt-1">2h ago</div>
+											</div>
+										</div>
+									</a>
+									<a href="#" class="list-group-item">
+										<div class="row g-0 align-items-center">
+											<div class="col-2">
+												<img src="img/avatars/avatar-4.jpg" class="avatar img-fluid rounded-circle" alt="Christina Mason">
+											</div>
+											<div class="col-10 ps-2">
+												<div class="text-dark">Christina Mason</div>
+												<div class="text-muted small mt-1">Pellentesque auctor neque nec urna.</div>
+												<div class="text-muted small mt-1">4h ago</div>
+											</div>
+										</div>
+									</a>
+									<a href="#" class="list-group-item">
+										<div class="row g-0 align-items-center">
+											<div class="col-2">
+												<img src="img/avatars/avatar-3.jpg" class="avatar img-fluid rounded-circle" alt="Sharon Lessman">
+											</div>
+											<div class="col-10 ps-2">
+												<div class="text-dark">Sharon Lessman</div>
+												<div class="text-muted small mt-1">Aenean tellus metus, bibendum sed, posuere ac, mattis non.</div>
+												<div class="text-muted small mt-1">5h ago</div>
+											</div>
+										</div>
+									</a>
+								</div>
+								<div class="dropdown-menu-footer">
+									<a href="#" class="text-muted">Show all messages</a>
+								</div>
+							</div>
+						</li> -->
+						<li class="nav-item dropdown">
+							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
+								<i class="align-middle" data-feather="settings"></i>
+							</a>
+
+							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
+								<?php error_reporting(0); ?>
+								<img src="<?php echo "https://ui-avatars.com/api/?name=" . $_SESSION["name"] ?>" class="avatar img-fluid rounded me-1" alt="<?php echo $_SESSION["name"] ?>" /> <span class="text-dark"><?php echo $_SESSION["name"] ?></span>
+							</a>
+							<div class="dropdown-menu dropdown-menu-end">
+								<a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
+								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="pie-chart"></i> Analytics</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="index.html"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
+
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="../logout.php">Log out</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+
 			</nav>
 
 			<main class="content" id="First">
@@ -65,9 +391,6 @@
 								<hr class="my-0" />
 								<div class="card-body">
 									<h5 class="h6 card-title">Info</h5>
-									<div>Department - Computer Department</div>
-									<div>Subject - Network Administration</div>
-									<div>Position - Teacher</div>
 									<!-- <a href="#" class="badge bg-primary me-1 my-1">HTML</a>
 									<a href="#" class="badge bg-primary me-1 my-1">JavaScript</a>
 									<a href="#" class="badge bg-primary me-1 my-1">Sass</a>
@@ -274,9 +597,6 @@
 
 				</div>
 			</main>
-			<?php
-				include 'footer.php';
-			?>
 		</div>
 	</div>
 
