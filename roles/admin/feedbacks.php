@@ -18,23 +18,6 @@
 
 	<link href="css/app.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-	<style>
-		.my-custom-scrollbar {
-			position: relative;
-			height: 235px;
-			width: 100%;
-			overflow: auto;
-		}
-
-		.table-wrapper-scroll-y::-webkit-scrollbar {
-			display: none;
-		}
-
-		.table-wrapper-scroll-y {
-			-ms-overflow-style: none;
-			scrollbar-width: none;
-		}
-	</style>
 </head>
 
 <body>
@@ -50,13 +33,14 @@
 				</a>
 				<div>
 					<h1 class="h3 mb-0"><strong>Feedback | <?php
-															$dept_id = $_GET["dept_id"];
-															include "../../imports/config.php";
-															$sql = "SELECT * FROM departments WHERE dept_id = '$dept_id'";
-															$result = mysqli_query($conn, $sql);
-															$row = mysqli_fetch_assoc($result);
-															echo $row['dept_name'];
-															?></strong></h1>
+						$dept_id = $_GET["dept_id"];
+						include "../../imports/config.php";
+						$sql = "SELECT * FROM departments WHERE dept_id = '$dept_id'";
+						$result = mysqli_query($conn, $sql);
+						$row = mysqli_fetch_assoc($result);
+						echo $row['dept_name'];
+						?></strong>
+					</h1>
 				</div>
 				<?php
 				include "notification.php";
@@ -93,7 +77,7 @@
 					<div class="row">
 						<?php
 						include "../../imports/config.php";
-						$sql = "SELECT * FROM groups, forms where deptcode = '{$row["dept_id"]}' and groups.id=forms.group_id";
+						$sql = "SELECT * FROM groups, forms where deptcode = '{$row["dept_id"]}' and groups.id=forms.form_id";
 						$result = mysqli_query($conn, $sql);
 						if (mysqli_num_rows($result) > 0) {
 							while ($row = mysqli_fetch_assoc($result)) {
