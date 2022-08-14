@@ -35,6 +35,7 @@
 	<div class="wrapper">
 	<?php
 		session_start();
+		include "sidebar.php";
 	?>
   <?php include "./sidebar.php" ?>
 		<div class="main">
