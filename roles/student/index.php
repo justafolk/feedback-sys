@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php
+
+session_start();
+if ($_SESSION['role'] != 'Student') {
+	header("Location: ../index.php");
+}else{
+	error_reporting(0);
+}
+?>
+
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,7 +43,7 @@
 					<i class="hamburger align-self-center"></i>
 				</a>
 				<div>
-					<h1 class="h3 mb-0"><strong>Create Feedback</strong></h1>
+					<h1 class="h3 mb-0"><strong>My Feedback</strong></h1>
 				</div>
 
 				<?php
@@ -97,57 +107,62 @@
 
 						</div>
 						<br>
-						<hr>
+						
+						<div class="container-fluid p-0">
+					<div class="row">
+						<h1 class="h3 mb-3"><strong>Past</strong> Feedback Surveys: </h1>
 						<div class="row">
-							<?php
-							session_start();
-							include "../../imports/config.php";
-							$sql = "SELECT * FROM groups, forms, form_responses";
-							$result = mysqli_query($conn, $sql);
-							if (mysqli_num_rows($result) > 0) {
-								while ($row = mysqli_fetch_assoc($result)) {
-									$sql2 = "select * from courses where course_code='{$row["subject"]}'";
-									$result2 = mysqli_query($conn, $sql2);
-									$row2 = mysqli_fetch_assoc($result2);
-							?>
+						
 									<div class="col-md-3">
 										<div class="card border shadow-none" style="border-radius:12px">
 											<div class="card-body">
 												<h4 class="h4"><strong>
-														<?php echo $row2["course_name"] . " (" . $row2["course_code"]; ?>)
+														Data Communication (R18CP3409)
 													</strong></h4>
 												<h6> <a href="">
 
-														<?php
-														$sql3 = "select * from departments where dept_id='
-												{$row["deptcode"]}'";
-														$result3 = mysqli_query($conn, $sql3);
-														$row3 = mysqli_fetch_assoc($result3);
-														echo $row3["dept_name"];
-														?>
+													Computer Engineering
 													</a>
 												</h6>
-												<h6 class="">- <?php
-													echo $row["author"] ?>
+												<h6 class="">- Rupali Shete
 												</h6>
 												<div class="row">
 													<div class="col-md-12">
-														<button class="btn btn-dark " onclick="window.location.href='./../../feedback.php?id=<?php echo $row['form_id'] ?>'" style="border-radius:5px"> <strong>
-
-																Fill 
-															</strong>
-														</button>
+                                                        <label> Status: Filled on 04/08/2022</label>
 														
 													</div>
 
 												</div>
-
 											</div>
 
 										</div>
 									</div>
-							<?php }
-							} ?>
+				
+                                    <div class="col-md-3">
+										<div class="card border shadow-none" style="border-radius:12px">
+											<div class="card-body">
+												<h4 class="h4"><strong>
+														Computer Networks (R18CP3407)
+													</strong></h4>
+												<h6> <a href="">
+
+													Computer Engineering
+													</a>
+												</h6>
+												<h6 class="">- Rupali Shete
+												</h6>
+												<div class="row">
+													<div class="col-md-12">
+                                                        <label> Status: Not filled</label>
+														
+													</div>
+
+												</div>
+											</div>
+
+										</div>
+									</div>
+				
 
 						</div>
 					

@@ -1,6 +1,7 @@
 <?php
   session_destroy();
   $_SESSION = "";
-  header("Location:../index.php");
+
+  header("Location: ../index.php");
 
 ?>

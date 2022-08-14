@@ -9,7 +9,7 @@ if(isset($_POST['login'])){
     $passwd = $_POST['passwd'];
 //    $passwd = md5($passwd);
 
-    $sql = "SELECT * FROM login WHERE `uname` = '$uname' AND `passwd` = '$passwd'";
+    $sql = "SELECT * FROM login WHERE `uname` = '$uname' AND `passwd` = '$passwdx'";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
     $count = mysqli_num_rows($result);
@@ -32,11 +32,17 @@ if(isset($_POST['login'])){
             header("Location: ./roles/faculty/index.php");
         }
         else{
+
+            if($uname == $passwd){
+                echo "<script>alert('Password cannot be same as roll number, change password on following redirected form');</script>";
+                echo "<script>window.location.href='changepassimp.php';</script>";
+            }else{
             $_SESSION['uname'] = $uname;
             $_SESSION['role'] = 'Student';
             $_SESSION["name"] = $row['name'];
             $_SESSION["id"] = $row['id'];
             header("Location: ./roles/student/index.php");
+            }
         }
     }else{
       echo $sql;

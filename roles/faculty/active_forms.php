@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,7 +16,7 @@
 
 	<link rel="canonical" href="https://demo-basic.adminkit.io/pages-blank.html" />
 
-	<title>Create Form</title>
+	<title>Requested Forms</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 
 
@@ -79,7 +81,7 @@
 					<i class="hamburger align-self-center"></i>
 				</a>
 				<div>
-					<h1 class="h3 mb-0"><strong>Feedback</strong></h1>
+					<h1 class="h3 mb-0"><strong>Requested Feedback</strong></h1>
 				</div>
 
 				<?php
@@ -89,78 +91,7 @@
 
 
 			<main class="content">
-				<div class="container-fluid p-0">
-					<div class="row">
-						<h1 class="h3 mb-3"><strong>Active</strong> Courses: </h1>
-						<div class="row">
-							<?php
-							include "../../imports/config.php";
-							$sql = "SELECT * FROM groups where teacher_id = '{$_SESSION["id"]}' and request = '0'";
-							$result = mysqli_query($conn, $sql);
-							if (mysqli_num_rows($result) > 0) {
-								while ($row = mysqli_fetch_assoc($result)) {
-									$sql2 = "select * from courses where course_code='{$row["subject"]}'";
-									$result2 = mysqli_query($conn, $sql2);
-									$row2 = mysqli_fetch_assoc($result2);
-							?>
-									<div class="col-md-3">
-										<div class="card border shadow-none" style="border-radius:12px">
-											<div class="card-body">
-												<h4 class="h4"><strong>
-														<?php echo $row2["course_name"] . " (" . $row2["course_code"]; ?>)
-													</strong></h4>
-												<h6> <a href="">
-
-														<?php
-														$sql3 = "select * from departments where dept_id='
-												{$row["deptcode"]}'";
-														$result3 = mysqli_query($conn, $sql3);
-														$row3 = mysqli_fetch_assoc($result3);
-														echo $row3["dept_name"];
-														?>
-													</a>
-												</h6>
-												<p>Number of Students : <?php
-																		$students = json_decode($row["activeRoll"], true);
-																		echo count($students);
-																		?></p>
-												<p>Date : <?php 
-												if($row["date"] == ""){
-													echo "Not Set";
-												}else{
-												echo $row["date"]; } ?></p>
-												<div class="row">
-													<div class="col-md-12">
-														<button class="btn btn-dark " onclick="window.location.href='./viewedit.php?id=<?php echo $row['id'] ?>'" style="border-radius:5px"> <strong>
-
-																View and edit 
-															</strong>
-														</button>
-														<?php 
-														if($row['date'] != ""){ ?>
-														<button class="btn btn-dark " onclick="window.location.href='./request_form.php?id=<?php echo $row['id'] ?>'" style="border-radius:5px"> <strong>
-
-																Request  
-															</strong>
-														</button>
-														<?php } ?>
-													</div>
-
-												</div>
-
-											</div>
-
-										</div>
-									</div>
-							<?php }
-							} ?>
-
-						</div>
-					
-					</div>
-					<br>
-
-					<div class="row">
+			<div class="row">
 						<h1 class="h3 mb-3"><strong>Active</strong> Feedback Surveys: </h1>
 						<div class="row">
 							<?php
@@ -199,7 +130,7 @@
 													<div class="col-md-12">
 														<button class="btn btn-dark " onclick="window.location.href='./create_form.php?id=<?php echo $row['id'] ?>'" style="border-radius:5px"> <strong>
 
-																Create Feedback
+																Revoke
 															</strong>
 														</button>
 													</div>
@@ -216,99 +147,27 @@
 						</div>
 					
 					</div>
+					<br>
+
+					
+
+						</div>
+					
+					</div>
 				</div>
 				
 
 		</div>
 		</main>
 
-		<?php
-		include 'footer.php';
-		?>
 	</div>
 	</div>
 
 	<script src="js/app.js"></script>
-	<script>
-		var textarea = document.getElementById("textarea");
-		var heightLimit = 200;
 
-		textarea.oninput = function() {
-			textarea.style.height = "";
-			textarea.style.height = Math.min(textarea.scrollHeight, heightLimit) + "px";
-		};
-	</script>
-	<script>
-		var index = 0;
-		$(document).ready(function() {
-			$("#shortans").click(function() {
-				index++;
-				$.get("./genform.php", {
-					'id': index,
-					'type': "shortans"
-				}, function(data) {
-					$("#allquestions").append(data);
-				})
-
-			});
-			$("#longans").click(function() {
-				index++;
-				$.get("./genform.php", {
-					'id': index,
-					'type': "longans"
-				}, function(data) {
-					$("#allquestions").append(data);
-				})
-
-			});
-			$("#mcqans").click(function() {
-				index++;
-				$.get("./genform.php", {
-					'id': index,
-					'type': "mcqans"
-				}, function(data) {
-					$("#allquestions").append(data);
-				})
-
-			});
-			$("#sliderans").click(function() {
-				index++;
-				$.get("./genform.php", {
-					'id': index,
-					'type': "sliderans"
-				}, function(data) {
-					$("#allquestions").append(data);
-				})
-
-			});
-			$("#addform").click(function() {
-				var formtype = $("#formtype").val();
-				var quantity = $("#quantity").val();
-				var questions = $("#questions").val();
-				for (let i = 0; i < quantity; i++) {
-					index++;
-					$.get("./genform.php", {
-						'id': index,
-						'type': formtype,
-						'questions': questions
-					}, function(data) {
-						$("#allquestions").append(data);
-					})
-				}
-
-
-			});
-		});
-	</script>
-	<script>
-		document.getElementById("personalcheck").addEventListener("click", function() {
-			if (this.checked) {
-				document.getElementById("personal").style.display = "block";
-			} else {
-				document.getElementById("personal").style.display = "none";
-			}
-		});
-	</script>
 </body>
 
 </html>
+
+
+

@@ -76,7 +76,7 @@
                       <button class="btn btn-primary w-100" name="login" type="submit">Login</button>
                     </div>
                     <div class="col-12">
-                      <p class="small mb-0">Don't have account? <a href="register.php">Register here</a></p>
+                      <p class="small mb-0">Can't login? Please contact respective <strong>Administrator</strong></a></p>
                     </div>
                   </form>
 
