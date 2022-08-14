@@ -7,7 +7,7 @@ if(isset($_POST['login'])){
 
     $uname = $_POST['uname'];
     $passwd = $_POST['passwd'];
-    $passwd = md5($passwd);
+//    $passwd = md5($passwd);
 
     $sql = "SELECT * FROM login WHERE `uname` = '$uname' AND `passwd` = '$passwd'";
     $result = mysqli_query($conn, $sql);
@@ -39,6 +39,8 @@ if(isset($_POST['login'])){
             header("Location: ./roles/student/index.php");
         }
     }else{
+      echo $sql;
+        var_dump($row);
         echo "<script>alert('Invalid username or password');</script>";
         echo "<script>window.location.href='index.php';</script>";
     }
