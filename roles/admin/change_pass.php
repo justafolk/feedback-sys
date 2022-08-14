@@ -1,5 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
+	<meta name="author" content="AdminKit">
+	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="shortcut icon" href="img/icons/icon-48x48.png" />
+
+	<link rel="canonical" href="https://demo-basic.adminkit.io/" />
+
+	<title>CWIT-Feedback Portol</title>
+
+	<link href="css/app.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+
+</head>
+
 <?php
 
 session_start();
@@ -22,30 +48,7 @@ if (!$conn) {
 }
 ?>
 
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
-	<meta name="author" content="AdminKit">
-	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 
-	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link rel="shortcut icon" href="img/icons/icon-48x48.png" />
-
-	<link rel="canonical" href="https://demo-basic.adminkit.io/" />
-
-	<title>CWIT-Feedback Portol</title>
-
-	<link href="css/app.css" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-
-
-	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
-
-</head>
 <style>
 	.eventClass a {
 		background-color: #dda919 !important;
@@ -55,9 +58,9 @@ if (!$conn) {
 
 <body>
 	<div class="wrapper">
-		<?php
-		include 'sidebar.php';
-		?>
+        <?php
+            include "sidebar.php";
+        ?>
 		<div class="main">
 			<nav class="navbar navbar-expand navbar-light navbar-bg">
 				<a class="sidebar-toggle js-sidebar-toggle">
@@ -85,7 +88,7 @@ if (!$conn) {
                                     <form action="" method="POST">
                                         <div class="form-group">
                                             <label for="uname">Username/ Roll number</label>
-                                            <input type="text" value="<?php echo $_POST["uname"] ?>" class="form-control" id="uname" name="uname" placeholder="Enter Username or roll number">
+                                            <input type="text" value="<?php echo $_POST["uname"] ?>" class="form-control" id="uname" name="uname" placeholder="Enter Username or roll number" required>
                                         </div>
                                         <br />
                                         <div class="form-group">
@@ -98,7 +101,7 @@ if (!$conn) {
                                             <input type="password" class="form-control" id="confirm_pass" name="confirm_pass" placeholder="Confirm password">
                                         </div>
                                         <br />
-                                        <button type="submit" name="changepass" class="btn btn-primary">Submit</button>
+                                        <button type="submit" name="changepass" class="btn btn-primary">Change Password</button>
                                     </form>
                                 </div>
                             </div>
@@ -108,7 +111,10 @@ if (!$conn) {
             </div>
         </div>
 
-
+        <script src="assets/js/main.js"></script>
+        <script src="js/app.js"></script>
+        <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+	    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 </body>
 
 </html>

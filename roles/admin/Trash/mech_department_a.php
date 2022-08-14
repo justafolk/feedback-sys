@@ -58,23 +58,23 @@
                     <i class="align-middle me-2" data-feather="plus-square"></i> <span class="align-middle">Feedbacks</span>
                 </a>
                 </li> -->
-                <li class="sidebar-item">
+                <li class="sidebar-item active">
                 <a class="sidebar-link" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
                     <i class="align-middle" data-feather="bar-chart-2"></i> <span>Feedbacks</span>
                 </a>
                 <ul id="charts-nav" class="collapse" style="list-style-type:none;">
-					<li class="sidebar-item active">
-						<a class="sidebar-link active" href="civil_department.php">
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="civil_department.php">
 							<span class="align-middle">Civil Dept. </span>
 						</a>
 					</li>
-					<li class="sidebar-item">
+					<li class="sidebar-item active">
 						<a class="sidebar-link" href="mech_department_a.php">
 							<span class="align-middle">Mechanical Dept. (Aided)</span>
 						</a>
 					</li>
 					<li class="sidebar-item">
-						<a class="sidebar-link active" href="mech_department_u.php">
+						<a class="sidebar-link" href="mech_department_u.php">
 							<span class="align-middle">Mechanical Dept. (Un-Aided)</span>
 						</a>
 					</li>
@@ -183,20 +183,20 @@
 		<div class="main">
 			<nav class="navbar navbar-expand navbar-light navbar-bg">
 				<a class="sidebar-toggle js-sidebar-toggle">
-          <i class="hamburger align-self-center"></i>
-        </a>
-			<div>
-				<h1 class="h3 mb-0"><strong>Feedback | Civil Department</strong></h1>
-			</div>
-			<?php
-				include "notification.php";
-			?>
+					<i class="hamburger align-self-center"></i>
+				</a>
+				<div>
+					<h1 class="h3 mb-0"><strong>Mechanical Department</strong></h1>
+				</div>
+				<?php
+				include 'notification.php';
+				?>
 			</nav>
 
 			<main class="content">
 				<div class="container-fluid p-0">
 					<div class="mb-3">
-						<h1 class="h3 d-inline align-middle" id="name">Civil Department</h1>
+						<h1 class="h3 d-inline align-middle" id="name">Mechanical Department (Aided)</h1>
 					</div>
 						<button class="btn btn-primary me-3" id="home-tab">1st Year</button>
 						<button class="btn btn-primary me-3" id="list-tab">2nd Year</button>

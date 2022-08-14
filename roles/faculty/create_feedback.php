@@ -55,7 +55,7 @@ $ss = mysqli_query($conn, $ss);
 $ss = mysqli_fetch_assoc($ss);
 $ss = $ss["deptcode"];
 echo $ss;
-$sql = "insert into forms (author, ini_date, instructions, status, course_name, dept_code) values( '{$_SESSION["name"]}', now(), '$instructions', 'online','{$_POST["course_name"]}', '$ss')";
+$sql = "insert into forms (author, ini_date, instructions, status, course_name, dept_code, group_id) values( '{$_SESSION["name"]}', now(), '$instructions', 'online','{$_POST["course_name"]}', '$ss', {$_POST["group_id"]})";
 $result = mysqli_query($conn, $sql);
 if (!$result) {
     echo "Error: " . $sql . "<br>" . mysqli_error($conn);

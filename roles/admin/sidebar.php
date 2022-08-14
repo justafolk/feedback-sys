@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <nav id="sidebar" class="sidebar js-sidebar">
     <div class="sidebar-content js-simplebar">
         <a class="sidebar-brand" href="index.html">
@@ -29,54 +26,48 @@ session_start();
               </a>
               <ul id="charts-nav" class="collapse" style="list-style-type:none;">
                 <li class="sidebar-item">
-                  <a class="sidebar-link" href="civil_department.php">
+                  <a class="sidebar-link" href="feedbacks.php?dept_id=10">
                     <span class="align-middle">Civil Dept. </span>
                   </a>
                 </li>
                 <li class="sidebar-item">
-                  <a class="sidebar-link" href="mech_department_a.php">
+                  <a class="sidebar-link" href="feedbacks.php?dept_id=20">
                     <span class="align-middle">Mechanical Dept. (Aided)</span>
                   </a>
                 </li>
                 <li class="sidebar-item">
-                  <a class="sidebar-link" href="mech_department_u.php">
+                  <a class="sidebar-link" href="feedbacks.php?dept_id=21">
                     <span class="align-middle">Mechanical Dept. (Un-Aided)</span>
                   </a>
                 </li>
                 <li class="sidebar-item">
-                  <a class="sidebar-link" href="elec_department.php">
+                  <a class="sidebar-link" href="feedbacks.php?dept_id=30">
                     <span class="align-middle">Electrical Dept.</span>
                   </a>
                 </li>
                 <li>
-                  <a class="sidebar-link" href="dep_feedback2.php">
+                  <a class="sidebar-link" href="feedbacks.php?dept_id=40">
                     <span class="align-middle">Computer Dept.</span>
                   </a>
                 </li>
                 <li class="sidebar-item">
-                  <a class="sidebar-link" href="etc_department_a.php">
+                  <a class="sidebar-link" href="feedbacks.php?dept_id=50">
                     <span class="align-middle">E&TC Dept. (Aided)</span>
                   </a>
                 </li>
                 <li>
-                  <a class="sidebar-link" href="etc_department_u.php">
+                  <a class="sidebar-link" href="feedbacks.php?dept_id=51">
                     <span class="align-middle">E&TC Dept. (Un-Aided)</span>
                   </a>
                 </li>
               </ul>
             </li>
 
-            <li class="sidebar-item">
+            <!-- <li class="sidebar-item">
                 <a class="sidebar-link" href="notification1.php">
                   <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Notifications</span>
                 </a>
-            </li>
-
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="change_pass.php">
-                <i class="align-middle" data-feather="book"></i> <span class="align-middle">Change Password</span>
-              </a>
-            </li>
+            </li> -->
 
             <li class="sidebar-header">
               Forms
@@ -84,7 +75,7 @@ session_start();
 
             <li class="sidebar-item">
                 <a class="sidebar-link" href="create_form.php">
-                  <i class="align-middle" data-feather="user"></i> <span class="align-middle">Create Form</span>
+                <i class="align-middle me-2" data-feather="plus-square"></i> <span class="align-middle">Create New Form</span>
                 </a>
             </li>
 
@@ -131,26 +122,26 @@ session_start();
               </ul>
             </li>
 
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="other_form.php">
+                  <i class="align-middle" data-feather="user"></i> <span class="align-middle">Other Form</span>
+                </a>
+            </li>
+
             <li class="sidebar-header">
                 Profiles
-            </li>
-
-            <li class="sidebar-item">
-                <a class="sidebar-link" href="pages-profile.php">
-                  <i class="align-middle" data-feather="user"></i> <span class="align-middle">Account</span>
-                </a>
-            </li>
-
-            <li class="sidebar-item">
-                <a class="sidebar-link" href="form.php">
-                  <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Forms</span>
-                </a>
             </li>
 
             <li class="sidebar-item">
                 <a class="sidebar-link" href="profiles.php">
                   <i class="align-middle me-2" data-feather="users"></i> <span class="align-middle">All Profiles</span>
                 </a>
+            </li>
+
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="change_pass.php">
+                <i class="align-middle" data-feather="book"></i> <span class="align-middle">Change Password</span>
+              </a>
             </li>
 
             <li class="sidebar-item">

@@ -34,18 +34,18 @@
 <body>
 	<div class="wrapper">
 		<?php
-		include 'sidebar.php';
+			include 'sidebar.php';
 		?>
 		<div class="main">
 			<nav class="navbar navbar-expand navbar-light navbar-bg">
 				<a class="sidebar-toggle js-sidebar-toggle">
-					<i class="hamburger align-self-center"></i>
-				</a>
-				<div>
-					<h1 class="h3 mb-0"><strong>Dashboard</strong></h1>
-				</div>
+          <i class="hamburger align-self-center"></i>
+        </a>
+			<div>
+				<h1 class="h3 mb-0"><strong>Dashboard</strong></h1>
+			</div>
 				<?php
-				include 'notification.php';
+					include 'notification.php';
 				?>
 			</nav>
 
@@ -154,7 +154,7 @@
 								<script>
 									document.addEventListener("DOMContentLoaded", () => {
 									new ApexCharts(document.querySelector("#pieChart"), {
-										series: [44, 55, 13, 43, 22, 24, 38],
+										series: [44, 55, 13, 43, 22],
 										chart: {
 										height: 350,
 										type: 'pie',
@@ -169,7 +169,57 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-12 col-md-6 col-xxl-6 order-1 order-xxl-1">
+						<!-- <div class="col-6 col-md-6 col-xxl-6 order-1 order-xxl-1">
+							<p class="h3 mb-3">Civil Department Performance</p>
+							<div class="card">
+								<div class="card-body">
+								<h5 class="card-title">Year 2022-23</h5>
+								<div class="" align="center">
+									<canvas id="pieChart" style="max-height: 300px; max-width:600px;"></canvas>
+								</div>
+								<div class="text-center mt-3">
+									<button class="btn btn-success mb-3">Civil Department</button>
+									<button class="btn btn-primary mb-3">Mechanical Department (A)</button>
+									<button class="btn btn-danger mb-3">Mechanical Department (UA)</button>
+									<button class="btn btn-success mb-3">Electrical Department</button>
+									<button class="btn btn-primary mb-3">Computer Department</button>
+									<button class="btn btn-danger mb-3">E&TC Department (A)</button>
+									<button class="btn btn-success mb-3">E&TC Department (UA)</button>
+								</div>
+								<script>
+									document.addEventListener("DOMContentLoaded", () => {
+									new Chart(document.querySelector('#pieChart'), {
+										type: 'pie',
+										data: {
+										labels: ['Civil Department','Mechanical Department (A)','Mechanical Department (UA)','Electrical Department','Computer Department','E&TC Department (A)','E&TC Department (UA)']
+										datasets: [{
+											label: 'My First Dataset',
+											data: [300, 50, 100],
+											backgroundColor: [
+											window.theme.success,
+											window.theme.primary,
+											window.theme.danger,
+											window.theme.success,
+											window.theme.primary,
+											window.theme.danger,
+											window.theme.success
+											],
+											hoverOffset: 4
+										}],
+										},
+										options: {
+											legend: {
+												display: false
+											}
+										}	
+									});
+									});
+								</script>
+
+								</div>
+							</div>
+						</div> -->
+						<div class="col-6 col-md-6 col-xxl-6 order-1 order-xxl-1">
 							<p class="h3 mb-3">Department Performance</p>
 							<div class="card">
 								<div class="card-body">
@@ -234,6 +284,10 @@
 										<button class="btn btn-success mb-3">1st Year</button>
 										<button class="btn btn-primary mb-3">2nd Year</button>
 										<button class="btn btn-danger mb-3">3rd Year</button>
+										<!-- <button class="btn btn-success mb-3">Electrical Department</button>
+										<button class="btn btn-primary mb-3">Computer Department</button>
+										<button class="btn btn-danger mb-3">E&TC Department (A)</button>
+										<button class="btn btn-success mb-3">E&TC Department (UA)</button> -->
 									</div>
 									<script>
 										document.addEventListener("DOMContentLoaded", () => {
@@ -269,6 +323,10 @@
 										<button class="btn btn-success mb-3">1st Year</button>
 										<button class="btn btn-primary mb-3">2nd Year</button>
 										<button class="btn btn-danger mb-3">3rd Year</button>
+										<!-- <button class="btn btn-success mb-3">Electrical Department</button>
+										<button class="btn btn-primary mb-3">Computer Department</button>
+										<button class="btn btn-danger mb-3">E&TC Department (A)</button>
+										<button class="btn btn-success mb-3">E&TC Department (UA)</button> -->
 									</div>
 									<script>
 										document.addEventListener("DOMContentLoaded", () => {
@@ -304,6 +362,10 @@
 										<button class="btn btn-success mb-3">1st Year</button>
 										<button class="btn btn-primary mb-3">2nd Year</button>
 										<button class="btn btn-danger mb-3">3rd Year</button>
+										<!-- <button class="btn btn-success mb-3">Electrical Department</button>
+										<button class="btn btn-primary mb-3">Computer Department</button>
+										<button class="btn btn-danger mb-3">E&TC Department (A)</button>
+										<button class="btn btn-success mb-3">E&TC Department (UA)</button> -->
 									</div>
 									<script>
 										document.addEventListener("DOMContentLoaded", () => {
@@ -339,6 +401,10 @@
 										<button class="btn btn-success mb-3">1st Year</button>
 										<button class="btn btn-primary mb-3">2nd Year</button>
 										<button class="btn btn-danger mb-3">3rd Year</button>
+										<!-- <button class="btn btn-success mb-3">Electrical Department</button>
+										<button class="btn btn-primary mb-3">Computer Department</button>
+										<button class="btn btn-danger mb-3">E&TC Department (A)</button>
+										<button class="btn btn-success mb-3">E&TC Department (UA)</button> -->
 									</div>
 									<script>
 										document.addEventListener("DOMContentLoaded", () => {
@@ -374,6 +440,10 @@
 										<button class="btn btn-success mb-3">1st Year</button>
 										<button class="btn btn-primary mb-3">2nd Year</button>
 										<button class="btn btn-danger mb-3">3rd Year</button>
+										<!-- <button class="btn btn-success mb-3">Electrical Department</button>
+										<button class="btn btn-primary mb-3">Computer Department</button>
+										<button class="btn btn-danger mb-3">E&TC Department (A)</button>
+										<button class="btn btn-success mb-3">E&TC Department (UA)</button> -->
 									</div>
 									<script>
 										document.addEventListener("DOMContentLoaded", () => {
@@ -409,6 +479,10 @@
 										<button class="btn btn-success mb-3">1st Year</button>
 										<button class="btn btn-primary mb-3">2nd Year</button>
 										<button class="btn btn-danger mb-3">3rd Year</button>
+										<!-- <button class="btn btn-success mb-3">Electrical Department</button>
+										<button class="btn btn-primary mb-3">Computer Department</button>
+										<button class="btn btn-danger mb-3">E&TC Department (A)</button>
+										<button class="btn btn-success mb-3">E&TC Department (UA)</button> -->
 									</div>
 									<script>
 										document.addEventListener("DOMContentLoaded", () => {
@@ -463,6 +537,39 @@
 											}
 										}
 									}
+
+									// for (let i=0;i<8; i++){
+									// 	document.getElementById(b[i]).style.display = "none";
+									// 	civil.style.display = "block";
+									// }
+
+									// department.addEventListener("change", function(){
+									// 	if(department.value === 'civil'){
+									// 		for (let i=0;i<8; i++){
+									// 			document.getElementById(b[i]).style.display = "none";
+									// 			civil.style.display = "block";
+									// 		}
+									// 	}
+									// 	if(department.value === 'mecha'){
+									// 		for (let i=0;i<8; i++){
+									// 			document.getElementById(b[i]).style.display = "none";
+									// 			mecha.style.display = "block";
+									// 		}
+									// 	}
+									// });
+
+									// for(let i=0;i<8; i++){
+									// 	if(b[i] === 'civil'){
+									// 		document.getElementById('civil').style.display = "block";
+									// 	}
+									// 	else{
+									// 		'b[i]'.style.display = "none";
+									// 	}
+									// 	civil.style.display = "display";
+									// 	if(b[i] !== 'civil'){
+									// 		document.getElementById(b[i]).style.display = "none";
+									// 	}
+									// }
 									civil.style.display = "block";
 									mecha.style.display = "none";
 									mechu.style.display = "none";
@@ -484,6 +591,22 @@
 											name.innerHTML = "Civil Department Feedbacks";
 										}
 										if(type.value === 'mecha'){
+											// for(let i=0;i<8;i++){
+											// 	if(b[i] === 'mecha'){
+											// 		document.getElementById('mecha').style.display = "block";
+											// 	}
+											// 	else{
+											// 		document.getElementById(b[i]).style.display = "none";
+											// 	}
+											// }
+
+											// civil.style.display = "none";
+											// let b = ["civil","mecha","mechu","elect","comp","etca","etcu"];
+											// mecha.style.display = "display";
+											// if(b[i] !== 'mecha'){
+											// 	document.getElementById(b[i]).style.display = "none";
+											// }
+
 											civil.style.display = "none";
 											mecha.style.display = "block";
 											mechu.style.display = "none";
@@ -495,6 +618,14 @@
 
 										}
 										if(type.value === 'mechu'){
+											// for(let i=0;i<8;i++){
+											// 	if(b[i] !== 'mechu'){
+											// 		document.getElementById('mechu').style.display = "none";
+											// 	}
+											// 	else{
+											// 		document.getElementById(b[i]).style.display = "block";
+											// 	}
+											// }
 											civil.style.display = "none";
 											mecha.style.display = "none";
 											mechu.style.display = "block";
@@ -548,6 +679,54 @@
 
 										}
 									});
+
+									// department.addEventListener("change", function(){
+									// 	let b = ["civil","mecha","mechu","elect","comp","etca","etcu"];
+									// 	if(department.value === 'civil'){
+									// 		for (let i=0;i<8; i++){
+									// 			document.getElementById(b[i]).style.display = "none";
+									// 			civil.style.display = "block";
+									// 		}
+									// 	}
+									// 	if(department.value === 'mecha'){
+									// 		for (let i=0;i<8; i++){
+									// 			document.getElementById(b[i]).style.display = "none";
+									// 			mecha.style.display = "block";
+									// 		}
+									// 	}
+									// 	if(department.value === 'mechu'){
+									// 		for (let i=0;i<8; i++){
+									// 			document.getElementById(b[i]).style.display = "none";
+									// 			mechu.style.display = "block";
+									// 		}
+									// 	}
+									// 	if(department.value === 'elect'){
+									// 		for (let i=0;i<8; i++){
+									// 			document.getElementById(b[i]).style.display = "none";
+									// 			elect.style.display = "block";
+									// 		}
+									// 	}
+									// 	if(department.value === 'comp'){
+									// 		for (let i=0;i<8; i++){
+									// 			document.getElementById(b[i]).style.display = "none";
+									// 			comp.style.display = "block";
+									// 		}
+									// 	}
+									// 	if(department.value === 'etca'){
+									// 		for (let i=0;i<8; i++){
+									// 			document.getElementById(b[i]).style.display = "none";
+									// 			etca.style.display = "block";
+									// 		}
+									// 	}
+									// 	if(department.value === 'etcu'){
+									// 		for (let i=0;i<8; i++){
+									// 			document.getElementById(b[i]).style.display = "none";
+									// 			etcu.style.display = "block";
+									// 		}
+									// 	}
+									// });
+
+
 								</script>
 								</div>
 							</div>
@@ -617,9 +796,10 @@
 							<div class="card flex-fill w-100">
 								<div class="card-header d-flex justify-content-between">
 									<div>
-										<h5 class="card-title mb-0">Network Administrator</h5>
+										<h5 class="card-title mb-0">PHP - Feedback</h5>
 										<h6 class="card-title mb-0">26/03/2022</h6>
 									</div>
+									<!-- <button type="button" class="btn btn-primary" onclick="form()">View</button> -->
 									<button class="btn btn-primary" id="id4">View</button>
 								</div>
 								<div class="card-body d-flex">
@@ -675,7 +855,7 @@
 							<div class="card flex-fill w-100">
 								<div class="card-header d-flex justify-content-between">
 									<div>
-										<h5 class="card-title mb-0">Linux OS</h5>
+										<h5 class="card-title mb-0">PHP - Feedback</h5>
 										<h6 class="card-title mb-0">26/03/2022</h6>
 									</div>
 									<!-- <button type="button" class="btn btn-primary" onclick="form()">View</button> -->
@@ -734,7 +914,7 @@
 							<div class="card flex-fill w-100">
 								<div class="card-header d-flex justify-content-between">
 									<div>
-										<h5 class="card-title mb-0">Python Programming</h5>
+										<h5 class="card-title mb-0">PHP - Feedback</h5>
 										<h6 class="card-title mb-0">26/03/2022</h6>
 									</div>
 									<!-- <button type="button" class="btn btn-primary" onclick="form()">View</button> -->
@@ -788,6 +968,32 @@
 								});
 							});
 						</script>
+						<!-- <div class="col-12 col-md-6 col-xxl-3 d-flex order-1 order-xxl-1">
+							<div class="card flex-fill">
+								<div class="card-header">
+									<h5 class="card-title mb-0">Calendar</h5>
+								</div>
+								<div class="card-body d-flex">
+									<div class="align-self-center w-100">
+										<div class="chart">
+											<div id="datetimepicker-dashboard"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div> -->
+						<!-- <div class="col-12 col-lg-8 col-xxl-9 d-flex order-2 order-xxl-2">
+							<div class="calendar col-12" id="calendar">
+							</div>
+						</div> -->
+					<!-- <div class="col-12 col-lg-12 col-xxl-9 d-flex order-2 order-xxl-2">
+						<div class="card flex-fill">
+							<div class="card-header">
+								<h5 class="card-title mb-0">Latest Feedbacks</h5>
+							</div>
+							<div class="calendar col-12" id="calendar"></div>
+						</div>
+					</div> -->
 
 			</main>
 
@@ -915,6 +1121,7 @@
 	<script type="text/babel">
       
 		</script>
+<script src="js/app.js"></script>
 	<script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
 	<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
   	<script src="assets/js/main.js"></script>
@@ -923,3 +1130,135 @@
 </body>
 
 </html>
+
+
+
+<!--
+
+
+		  <script type="text/babel">
+      function LatestFeedBack() {
+        const [date, setDate] = React.useState("2022-07-15");
+        const [data, setData] = React.useState(null);
+
+        const fetchData = (date) => {
+          var requestOptions = {
+            method: "GET",
+            redirect: "follow",
+          };
+
+          fetch(
+            `http://localhost:9090/datedetails.php?date=${date}`,
+            requestOptions
+          )
+            .then((response) => response.json())
+            .then((result) => setData(result))
+            .catch((error) => console.log("error", error));
+        };
+
+        React.useEffect(() => {
+          fetchData(date);
+        }, [date]);
+
+        return (
+          <div>
+            <input
+              type="date"
+              onChange={(e) => {
+                setDate(e.target.value);
+              }}
+            />
+
+            <br />
+            <table>
+              <tr>
+                <th>Subject</th>
+                <th>Teacher</th>
+                <th>Date</th>
+              </tr>
+              {data ? (
+                <>
+                  {data.map((d) => {
+                    return (
+                      <tr>
+                        <td> {d?.subject} </td>
+                        <td> {d?.teacher} </td>
+                        <td> {d?.date} </td>
+                      </tr>
+                    );
+                  })}
+                </>
+              ) : null}
+            </table>
+          </div>
+        );
+      }
+
+      ReactDOM.render(<LatestFeedBack />, document.getElementById("mydiv"));
+	</script>
+
+
+
+
+
+
+
+	<script>
+		document.addEventListener("DOMContentLoaded", function() {
+			var highlightDate = {};
+			var date = new Date(Date.now() - 5 * 24 * 60 * 60 * 1000);
+			var defaultDate = date.getUTCFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + date.getUTCDate();
+			document.getElementById("datetimepicker-dashboard").flatpickr({
+				inline: true,
+				prevArrow: "<span title=\"Previous month\">&laquo;</span>",
+				nextArrow: "<span title=\"Next month\">&raquo;</span>",
+				defaultDate: defaultDate,
+				touchUi: true,
+				onChange: function(selectedDates, dateStr, instance) {
+					var date = new Date(dateStr);
+					
+					
+					//window.location.href = "?date=" + date.getUTCFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + date.getUTCDate();
+					//alert(date.getUTCFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + date.getUTCDate());
+					//var dateUTC = new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
+					//alert(dateUTC);
+					//highlightDate[dateUTC] = dateUTC;
+					//document.getElementById("chartjs-dashboard-line").chartjs.update();
+					
+					function postSend() {
+						var xhr = new XMLHttpRequest();
+						xhr.open("POST", url , true);
+						xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+						xhr.send("date=" + dateStr);
+					}
+
+				}
+			});
+		});
+
+	</script>
+
+
+
+
+
+    <script>
+        var highlightDate = {};
+        highlightDate[ new Date('01/20/2022')] = new Date('01/20/2022');
+        highlightDate[ new Date('01/21/2022')] = new Date('01/21/2022');
+        highlightDate[ new Date('01/22/2022')] = new Date('01/22/2022');
+        highlightDate[ new Date('01/23/2022')] = new Date('01/23/2022');
+
+        $('#datepickerId').datepicker({
+            beforeShowDay: function( date ) {
+                var highlight = highlightDate[date];
+                if( highlight ) {
+                    return [true, "eventClass", 'Tooltip text'];
+                } else {
+                    return [true, '', ''];
+                }
+            }
+        });
+    </script>
+
+	-->
