@@ -11,7 +11,7 @@
         Pages
       </li>
 
-      <li class="sidebar-item active ">
+      <li class="sidebar-item">
         <a class="sidebar-link" href="index.php">
           <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Home</span>
         </a>
