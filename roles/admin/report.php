@@ -261,6 +261,11 @@ session_start();
 						</div>
 					</div>
 				</div>
+				<a href="print_report.php?id=<?php echo $_GET["id"] ?>" target=”_blank”>
+
+					<button class="btn btn-dark btn-ecomm" type="button">Print </button>
+				</a>
+				
 
 
 			</main>

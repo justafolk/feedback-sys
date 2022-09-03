@@ -35,8 +35,10 @@
 	<div class="wrapper">
 	<?php
 		session_start();
-		include "sidebar.php";
+		include "../../imports/config.php";
+
 	?>
+		
   <?php include "./sidebar.php" ?>
 		<div class="main">
 			<nav class="navbar navbar-expand navbar-light navbar-bg">
@@ -72,7 +74,12 @@
 														</div>
 													</div>
 												</div>
-												<h1 class="mt-1 mb-3">2424</h1>
+												<h1 class="mt-1 mb-3"><?php 
+												$sql = "SELECT * FROM forms";
+												$result = mysqli_query($conn, $sql);
+												$rowcount=mysqli_num_rows($result);
+												echo $rowcount;
+												?></h1>
 												<div class="mb-0">
 													<span class="text-muted">Since last month</span>
 												</div>
@@ -93,7 +100,13 @@
 														</div>
 													</div>
 												</div>
-												<h1 class="mt-1 mb-3">14</h1>
+												
+												<h1 class="mt-1 mb-3"><?php 
+												$sql = "SELECT * FROM forms where status='online'";
+												$result = mysqli_query($conn, $sql);
+												$rowcount=mysqli_num_rows($result);
+												echo $rowcount;
+												?></h1>
 												<div class="mb-0">
 													<span class="text-muted">Since last week</span>
 												</div>
@@ -114,7 +127,13 @@
 														</div>
 													</div>
 												</div>
-												<h1 class="mt-1 mb-3">29</h1>
+												
+												<h1 class="mt-1 mb-3"><?php 
+												$sql = "SELECT * FROM form_responses";
+												$result = mysqli_query($conn, $sql);
+												$rowcount=mysqli_num_rows($result);
+												echo $rowcount;
+												?></h1>
 												<div class="mb-0">
 													<span class="text-muted">Since last week</span>
 												</div>
@@ -135,7 +154,13 @@
 														</div>
 													</div>
 												</div>
-												<h1 class="mt-1 mb-3">67594</h1>
+												
+												<h1 class="mt-1 mb-3"><?php 
+												$sql = "SELECT * FROM login where role='student'";
+												$result = mysqli_query($conn, $sql);
+												$rowcount=mysqli_num_rows($result);
+												echo $rowcount;
+												?></h1>
 												<div class="mb-0">
 													<span class="text-muted">Since last week</span>
 												</div>
@@ -153,10 +178,35 @@
 								<div class="card-body">
 								<h5 class="card-title">Total Feedbacks of Departments</h5>
 								<div id="pieChart" class="mb-3"></div>
+								<?php
+
+								$sql = "SELECT * FROM departments";
+								$result = mysqli_query($conn, $sql);
+								$all = array();
+								while ($row = mysqli_fetch_array($result)){
+									$all[$row["dept_id"]] = $row['dept_name'];
+								}
+								
+								$chart_data = '';
+								$ss = "SELECT dept_code , COUNT(*) as count FROM forms GROUP BY dept_code";
+								$result1 = mysqli_query($conn, $ss);
+								
+								$row = mysqli_fetch_array($result1);
+								
+								$chart_data .= "[".$row["count"]."";
+								$chart_label .= "['".$all[$row["dept_code"]]."'";
+								while($row = mysqli_fetch_array($result1))
+								{
+								 $chart_data .= ",".$row["count"];
+								 $chart_label .= ",'".$all[$row["dept_code"]]."'";
+								}
+								$chart_data .= "]";
+								$chart_label .= "]";
+								?>
 								<script>
 									document.addEventListener("DOMContentLoaded", () => {
 									new ApexCharts(document.querySelector("#pieChart"), {
-										series: [44, 55, 13, 43, 22, 24, 38],
+										series: <?php echo $chart_data;?>,
 										chart: {
 										height: 350,
 										type: 'pie',
@@ -164,7 +214,7 @@
 											show: true
 										}
 										},
-										labels: ['Civil Department','Mechanical Department (A)','Mechanical Department (UA)','Electrical Department','Computer Department','E&TC Department (A)','E&TC Department (UA)']
+										labels: <?php echo $chart_label;?>,
 									}).render();
 									});
 								</script>

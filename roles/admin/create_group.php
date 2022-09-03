@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php 
-	session_start();
-	//include 'imports/config.php';
-	
-	if($_SESSION['role'] != 'Faculty'){
-		echo "<script>alert('Invalid Session, please login again');</script>";
-		echo "<script>window.location.href='index.php';</script>";  
-	}
-	$server="localhost";
-	$user="root";
-	$passwd="";
-	$dbname="feedback";
+<?php
+session_start();
+//include 'imports/config.php';
 
-	$conn=mysqli_connect($server,$user,$passwd,$dbname);
-	if(!$conn){
-		die("Connection failed: ".mysqli_connect_error());
-	}
+if ($_SESSION['role'] != 'Faculty') {
+	echo "<script>alert('Invalid Session, please login again');</script>";
+	echo "<script>window.location.href='index.php';</script>";
+}
+$server = "localhost";
+$user = "root";
+$passwd = "";
+$dbname = "feedback";
+
+$conn = mysqli_connect($server, $user, $passwd, $dbname);
+if (!$conn) {
+	die("Connection failed: " . mysqli_connect_error());
+}
 ?>
 
 <head>
@@ -39,9 +39,10 @@
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
 	<style>
-		   group {
-                            display: flex;
-                        }
+		group {
+			display: flex;
+		}
+
 		input[type=checkbox] {
 			opacity: 0;
 			width: 100%;
@@ -75,6 +76,7 @@
 			z-index: 2;
 			color: white;
 		}
+
 		input:not(:checked)+label {
 			background-color: red;
 			top: 0;
@@ -311,64 +313,64 @@
 									<div class="form-group">
 										<!-- select department -->
 										<div class="row">
-										<div class=col-md-4>
-											<label for="department">Select Department</label>
-											<select class="form-control" id="department" name="deptcode" required = "">
-												<?php
-												if($_POST['deptcode']){
-													$sql = "SELECT * FROM departments WHERE dept_id	 = '".$_POST['deptcode']."'";
-													$result = mysqli_query($conn, $sql);
-													$row = mysqli_fetch_assoc($result);
-													echo "<option value='".$row['dept_id']."' selected>".$row['dept_name']."</option>";
+											<div class=col-md-4>
+												<label for="department">Select Department</label>
+												<select class="form-control" id="department" name="deptcode" required="">
+													<?php
+													if ($_POST['deptcode']) {
+														$sql = "SELECT * FROM departments WHERE dept_id	 = '" . $_POST['deptcode'] . "'";
+														$result = mysqli_query($conn, $sql);
+														$row = mysqli_fetch_assoc($result);
+														echo "<option value='" . $row['dept_id'] . "' selected>" . $row['dept_name'] . "</option>";
 
-													$_SESSION['deptcode'] = $row['dept_id'];
+														$_SESSION['deptcode'] = $row['dept_id'];
+													} else {
+														echo "<option value=''>Select Department</option>";
 
-												}else{
-												echo "<option value=''>Select Department</option>";
-												
-												$sql = "SELECT * FROM departments";
-												$result = mysqli_query($conn, $sql);
-												while ($row = mysqli_fetch_assoc($result)) {
-													echo "<option value='" . $row["dept_id"] . "'>" . $row["dept_name"] . "</option>";
-												} }
-												?>
-											</select>
-										</div>
-										<!-- select semester -->
-										<div class=col-md-4>
-											<label for="semester">Select Year</label>
-											<select class="form-control" id="year" name="year" required="">
-												<?php if($_POST['year']){
-													echo "<option value='" . $_POST['year'] . "'>" . $_POST['year'] . "</option>";
-													$_SESSION['year'] = $_POST['year'];
-												}else{
-													echo "<option value=''>Select year</option>";
-												} ?>
-												<option value="1">1st year</option>
-												<option value="2">2nd year</option>
-												<option value="3">3rd year</option>
+														$sql = "SELECT * FROM departments";
+														$result = mysqli_query($conn, $sql);
+														while ($row = mysqli_fetch_assoc($result)) {
+															echo "<option value='" . $row["dept_id"] . "'>" . $row["dept_name"] . "</option>";
+														}
+													}
+													?>
+												</select>
+											</div>
+											<!-- select semester -->
+											<div class=col-md-4>
+												<label for="semester">Select Year</label>
+												<select class="form-control" id="year" name="year" required="">
+													<?php if ($_POST['year']) {
+														echo "<option value='" . $_POST['year'] . "'>" . $_POST['year'] . "</option>";
+														$_SESSION['year'] = $_POST['year'];
+													} else {
+														echo "<option value=''>Select year</option>";
+													} ?>
+													<option value="1">1st year</option>
+													<option value="2">2nd year</option>
+													<option value="3">3rd year</option>
 
-											</select>
-										</div>
+												</select>
+											</div>
 
-										<div class=col-md-4>
-											<label for="semester">Select Subject</label>
-											<select class="form-control" id="subject" name="subject" required="">
-											<?php if($_POST['subject']){
-												echo "<option value='" . $_POST['subject'] . "'>" . $_POST['subject'] . "</option>";
-												$_SESSION['subject'] = $_POST['subject'];	
-											}else{
-												echo "<option value=''>Select Subject</option>";
-											} ?>
-												<option > Network Administration </option>
-												<option > Computer Neworks </option>
-											</select>
-										</div>
+											<div class=col-md-4>
+												<label for="semester">Select Subject</label>
+												<select class="form-control" id="subject" name="subject" required="">
+													<?php if ($_POST['subject']) {
+														echo "<option value='" . $_POST['subject'] . "'>" . $_POST['subject'] . "</option>";
+														$_SESSION['subject'] = $_POST['subject'];
+													} else {
+														echo "<option value=''>Select Subject</option>";
+													} ?>
+													<option> Network Administration </option>
+													<option> Computer Neworks </option>
+												</select>
+											</div>
 
 										</div>
 										<br />
 
-											<!--
+										<!--
 										<label for="department">Select Department</label>
 										<select class="form-control" id="department" name="department">
 											<option value="">Select Department</option>
@@ -388,135 +390,139 @@
 
 											<div class=col-md-4>
 												<label for="name">Enter roll number range</label>
-												<?php if($_POST['rollrange']){
+												<?php if ($_POST['rollrange']) {
 													echo "<input type='text' class='form-control' id='rollrange' name='rollrange' value='" . $_POST['rollrange'] . "'>";
-												}else{
+												} else {
 													echo "<input type='text' class='form-control' id='rollrange' name='rollrange' placeholder='Enter roll number range'>";
 												} ?>
 											</div>
 
 											<div class=col-md-4>
 												<label for="name">Additional Roll numbers (Range)</label>
-												<?php if($_POST['addrollrange']){
+												<?php if ($_POST['addrollrange']) {
 													echo "<input type='text' class='form-control' id='addrollrange' name='addrollrange' value='" . $_POST['addrollrange'] . "'>";
-												}else{
+												} else {
 													echo "<input type='text' class='form-control' id='addrollrange' name='addrollrange' placeholder='Enter additional roll number range'>";
 												} ?>
 											</div>
 											<div class=col-md-4>
 												<label for="name">Additional Roll numbers (Units)</label>
-												<input type="text" class="form-control" id="name" name="addrollunit" placeholder= "split with ','">	
+												<input type="text" class="form-control" id="name" name="addrollunit" placeholder="split with ','">
 											</div>
 										</div>
 
 										<br />
-										<br />	
+										<br />
 
-										<center><button type="submit" class="btn btn-primary" name="checkroll">Summarise range</submit></center>
-										</div>	
+										<center><button type="submit" class="btn btn-primary" name="checkroll">Summarise range</submit>
+										</center>
 									</div>
+							</div>
 
 
-										
-									
-								<div class="form-group">
-
-			
-									<h3><label for="exampleInputPassword1"><b>Final student survey group </b></label></h3>
-									<div class="form-group atrangi">
-										<?php
-
-											if(isset($_POST['checkroll'])){
-												$deptcode = $_POST['deptcode'];
-												$semester = $_POST['year'];
-												$subject = $_POST['subject'];
-												$rollrange = $_POST['rollrange'];
-												$rollrange = explode('-', $rollrange);
-
-												if($additionalroll = $_POST['addrollrange']){
-													$additionalroll = explode('-', $additionalroll);
-												}else{
-													$additionalroll = "-";
-												}
-
-												$additionalstart = $additionalroll[0];
-												$additionalend = $additionalroll[1];
-												$additionalyear = $additionalstart[0] . $additionalstart[1];
-
-												$addstart = explode($deptcode, $additionalstart);
-												$addstart = $addstart[1];
-
-												$addend = explode($deptcode, $additionalend);
-												$addend = $addend[1];
 
 
-												$start = $rollrange[0];
-												$end = $rollrange[1];
-												$year = $start[0] . $start[1];
+							<div class="form-group">
 
-												$rollstart = explode($deptcode, $start);
-												$rollstart = $rollstart[1];
 
-												$rollend = explode($deptcode, $end);
-												$rollend = $rollend[1];
+								<h3><label for="exampleInputPassword1"><b>Final student survey group </b></label></h3>
+								<div class="form-group atrangi">
+									<?php
 
+									if (isset($_POST['checkroll'])) {
+										$deptcode = $_POST['deptcode'];
+										$semester = $_POST['year'];
+										$subject = $_POST['subject'];
+										$rollrange = $_POST['rollrange'];
+										$rollrange = explode('-', $rollrange);
+
+										if ($additionalroll = $_POST['addrollrange']) {
+											$additionalroll = explode('-', $additionalroll);
+										} else {
+											$additionalroll = "-";
+										}
+
+										$additionalstart = $additionalroll[0];
+										$additionalend = $additionalroll[1];
+										$additionalyear = $additionalstart[0] . $additionalstart[1];
+
+										$addstart = explode($deptcode, $additionalstart);
+										$addstart = $addstart[1];
+
+										$addend = explode($deptcode, $additionalend);
+										$addend = $addend[1];
+
+
+										$start = $rollrange[0];
+										$end = $rollrange[1];
+										$year = $start[0] . $start[1];
+
+										$rollstart = explode($deptcode, $start);
+										$rollstart = $rollstart[1];
+
+										$rollend = explode($deptcode, $end);
+										$rollend = $rollend[1];
+									}
+									$count = $rollstart;
+
+									$active_roll = array();
+
+									//current year
+									for ($i = $rollstart; $i <= $rollend; $i++) {
+										$i = sprintf("%02d", $i);
+										$active_roll[] = $year . $deptcode . $i;
+									}
+									//new year
+									for ($i = $addstart; $i <= $addend; $i++) {
+										$i = sprintf("%02d", $i);
+										$active_roll[] = $additionalyear . $deptcode . $i;
+									}
+
+									$allrolls = count($active_roll);
+
+									echo "<p>Total number of students: " . $allrolls . "</p>";
+									$count = 1;
+									while ($count <= $allrolls) {
+										echo "<group>";
+										for ($i = 1; $i < 14; $i++) {
+
+											$row["enrollid"] = $active_roll[$count - 1];
+
+
+											$count += 1;
+											if ($row['enrollid'] == 0) {
+												continue;
 											}
-										$count = $rollstart;
-										
-										$active_roll=array();
-
-										//current year
-										for($i = $rollstart; $i<=$rollend; $i++){
-											$i = sprintf("%02d", $i);
-											$active_roll[] = $year. $deptcode . $i;
+											if ($count == $allrolls + 2) {
+												break;
 											}
-										//new year
-										for($i = $addstart; $i <= $addend; $i++){
-											$i = sprintf("%02d", $i);
-											$active_roll[] = $additionalyear. $deptcode . $i;
-											}
+											error_reporting(0);
 
-										$allrolls = count($active_roll);
-										
-										echo "<p>Total number of students: ".$allrolls."</p>";
-										$count = 1;
-										while ($count <= $allrolls) {
-											echo "<group>";
-											for ($i = 1; $i < 14; $i++) {	
-												
-												$row["enrollid"] = $active_roll[$count-1];
-
-												
-												$count += 1;
-												if ($row['enrollid'] == 0) {
-													continue;
-												}
-												if ($count == $allrolls + 2) {
-													break;
-												}
-												error_reporting(0);
-
-												echo  "<div class=\"input-container\"/>
-                                                            <input checked type=\"checkbox\" name=\"{$row['enrollid']}\" id=\"{$row['enrollid']}\">
+											echo  "<div class=\"input-container\"/>
+                                                            <input checked type=\"checkbox\" value=\'1\' name=\"{$row['enrollid']}\" id=\"{$row['enrollid']}\">
                                                             <label for=\"{$row['enrollid']}\">{$row['enrollid']}</label>
                                                             </div>";
-											}
-											echo "</group>";
+											echo  "<div class=\"input-container\"/>
+                                                            <input  type=\"hidden\" name=\"{$row['enrollid']}\" id=\"{$row['enrollid']}no\" value=\'0\'>
+                                                            <label for=\"{$row['enrollid']}\">{$row['enrollid']}</label>
+                                                            </div>";
+										}
+										echo "</group>";
+									}
 
-										} 
-
-										?>
-
-									</div>
-									<br />
-									<br />
-									<center><button tpye="submit" class="btn btn-primary" name="finalroll">Finalise range</submit></center>
+									?>
+	
 								</div>
 								<br />
-								</form>
+								<br />
+								<center><button tpye="submit" class="btn btn-primary" name="finalroll">Finalise range</submit>
+								</center>
 							</div>
+							<br />
+							</form>
 						</div>
 					</div>
+				</div>
 			</main>
 		</div>
 	</div>
@@ -528,41 +534,38 @@
 
 <?php
 
-	if(isset($_POST['finalroll'])){
+if (isset($_POST['finalroll'])) {
+	var_dump($_POST);
+}
 
 
-//		echo "<script>alert('$rolls');</script>";
+// 	$year = $_SESSION['year'];
+// 	$deptcode = $_SESSION['deptcode'];
+// 	$subject = $_SESSION['subject'];
+// 	$active_roll = $_SESSION['activeRolls'];
+// 	$active_roll = json_encode($active_roll);
 
-		/*
-
-		$year = $_SESSION['year'];
-		$deptcode = $_SESSION['deptcode'];
-		$subject = $_SESSION['subject'];
-		$active_roll = $_SESSION['activeRolls'];
-		$active_roll = json_encode($active_roll);
-
-		$inactiveroll = NULL;
+// 	$inactiveroll = NULL;
 
 
-		$sqltest = "SELECT * FROM `groups` WHERE `deptcode` = '$deptcode' AND `year` = '$year' AND `subject` = '$subject'";
-		$resulttest = mysqli_query($conn, $sqltest);
-		if(mysqli_num_rows($resulttest) > 0){
-			echo "<script>alert('Group already exists');</script>";
-			echo "<script>window.location.href='create_group.php';</script>";
-		}else{
-		$sql = "INSERT INTO `groups` (`year`, `subject` , `deptcode`, `activeRoll`, `inactiveRoll`) VALUES ('$year','$subject', '$deptcode', '$active_roll', '$inactiveroll')";
-		$result = mysqli_query($conn, $sql);
-		if($result){
-			echo "<script>alert('Group created successfully');</script>";
-			echo "<script>window.location.href='create_group.php';</script>";
-	
-		}else{
-			echo "<script>alert('Group creation failed');</script>";
-			echo "<script>window.location.href='create_group.php';</script>";
-		}
-	}
-	*/
-	}
+// 	$sqltest = "SELECT * FROM `groups` WHERE `deptcode` = '$deptcode' AND `year` = '$year' AND `subject` = '$subject'";
+// 	$resulttest = mysqli_query($conn, $sqltest);
+// 	if (mysqli_num_rows($resulttest) > 0) {
+// 		echo "<script>alert('Group already exists');</script>";
+// 		echo "<script>window.location.href='create_group.php';</script>";
+// 	} else {
+// 		$sql = "INSERT INTO `groups` (`year`, `subject` , `deptcode`, `activeRoll`, `inactiveRoll`) VALUES ('$year','$subject', '$deptcode', '$active_roll', '$inactiveroll')";
+// 		$result = mysqli_query($conn, $sql);
+// 		if ($result) {
+// 			echo "<script>alert('Group created successfully');</script>";
+// 			echo "<script>window.location.href='create_group.php';</script>";
+// 		} else {
+// 			echo "<script>alert('Group creation failed');</script>";
+// 			echo "<script>window.location.href='create_group.php';</script>";
+// 		}
+// 	}
+// }
 
 ?>
+
 </html>

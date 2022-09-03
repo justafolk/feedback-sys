@@ -321,11 +321,15 @@ if (!$conn) {
 													}
 													error_reporting(0);
 													//array_push($rolls, $row['enrollid']);
-
+													echo  "
+                                                            <input  type=\"hidden\" name=\"{$row['enrollid']}\" id=\"{$row['enrollid']}no\" value='0'>
+                                                          
+                                                        ";
 													echo  "<div class=\"input-container\"/>
-                                                            <input checked type=\"checkbox\" name=\"{$row['enrollid']}\" id=\"{$row['enrollid']}\">
+                                                            <input checked type=\"checkbox\" value='1' name=\"{$row['enrollid']}\" id=\"{$row['enrollid']}\">
                                                             <label for=\"{$row['enrollid']}\">{$row['enrollid']}</label>
                                                             </div>";
+													
 												}
 												echo "</group>";
 											}
@@ -369,27 +373,33 @@ if (!$conn) {
 
 		$known_posts = array('deptcode', 'semester', 'subject', 'rollrange', 'addrollrange', 'addrollunit', 'finalroll');
 		$active_rolls = array();
+		$remove_rolls = array();
 		foreach ($_POST as $key => $value) {
 			if (!in_array($key, $known_posts)) {
-				array_push($active_rolls, $key);
+				if ($value == "0") {
+					$remove_rolls[] = $key;
+				} else {
+					array_push($active_rolls, $key);
+				}
 			}
 		}
+		var_dump($remove_rolls);
 		$active_rolls = array_unique($active_rolls);
 		$active_rolls = json_encode($active_rolls);
 		$sqltest = "SELECT * FROM `groups` WHERE `deptcode` = '$deptcode' AND `year` = '$year' AND `subject` = '$subject'";
 		$resulttest = mysqli_query($conn, $sqltest);
-		if (mysqli_num_rows($resulttest) > 0) {
-			echo "<script>alert('Group already exists');</script>";
-			echo "<script>window.location.href='create_group.php';</script>";
-		} else {
-			$sql = "INSERT INTO groups(year, semester, subject , deptcode, activeRoll, teacher_id) VALUES ('$year','{$_POST["semester"]}','$subject', '$deptcode', '$active_rolls', '{$_SESSION["id"]}')";
-			$result = mysqli_query($conn, $sql);
-			if ($result) {
-				echo "success";
-			} else {
-				echo mysqli_error($conn);
-			}
-		}
+		// if (mysqli_num_rows($resulttest) > 0) {
+		// 	echo "<script>alert('Group already exists');</script>";
+		// 	echo "<script>window.location.href='create_group.php';</script>";
+		// } else {
+		// 	$sql = "INSERT INTO groups(year, semester, subject , deptcode, activeRoll, teacher_id) VALUES ('$year','{$_POST["semester"]}','$subject', '$deptcode', '$active_rolls', '{$_SESSION["id"]}')";
+		// 	$result = mysqli_query($conn, $sql);
+		// 	if ($result) {
+		// 		echo "success";
+		// 	} else {
+		// 		echo mysqli_error($conn);
+		// 	}
+		// }
 	}
 
 	?>

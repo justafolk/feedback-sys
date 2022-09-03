@@ -254,7 +254,6 @@ session_start();
 											<th>Feedback Question</th>
 											<th colspan="5">Percentage of Scores</th>
 											<th>Avg</th>
-											<th></th>
 
 
 
@@ -267,7 +266,6 @@ session_start();
 												<th>3</th>
 												<th>4</th>
 												<th>5</th>
-												<th></th>
 												<th></th>
 
 											</tr>
@@ -285,7 +283,6 @@ session_start();
 												echo "<td>" . count(array_keys($main_responses[$i], 5)) / count($main_responses[$i]) * 100 . "</td>";
 
 												echo "<td>" . array_sum($main_responses[$i]) / count($main_responses[$i]) . "</td>";
-												echo "<td>" . $row['avg'] . "</td>";
 												echo "</tr>";
 												$i++;
 											}
