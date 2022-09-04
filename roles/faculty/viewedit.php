@@ -3,35 +3,23 @@
 <?php
 
 session_start();
-include "../../imports/config.php";
 //include 'imports/config.php';
-error_reporting(0);
 
 if ($_SESSION['role'] != 'Faculty') {
 	echo "<script>alert('Invalid Session, please login again');</script>";
 	echo "<script>window.location.href='index.php';</script>";
 }
-$server = "localhost";
-$user = "root";
-$passwd = "";
-$dbname = "feedback";
-
-$conn = mysqli_connect($server, $user, $passwd, $dbname);
-if (!$conn) {
-	die("Connection failed: " . mysqli_connect_error());
-}
 ?>
 
 <?php 
     $feedbackid = $_GET['id'];
-
-    $sql = "select `deptcode`, `semester`, `subject`, `date` from groups where `id` = '$feedbackid'";
+	include "../../imports/config.php";
+    $sql = "select `deptcode`, `semester`, `subject` from groups where `id` = '$feedbackid'";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
     $deptcode = $row['deptcode'];
     $semester = $row['semester'];
     $subjectcode = $row['subject'];
-    $date = $row['date'];
 
 
     $sql2 = "select `dept_name` from departments where `dept_id` = '$deptcode'";
@@ -150,8 +138,6 @@ if (!$conn) {
 						<h1 class="h3 mb-3"><strong>Set</strong> feedback details </h1>
 						<div class="card border">
 							<div class="card-body">
-								
-
 									<div class="form-group">
 										<!-- select department -->
 										<div class="row">
@@ -312,6 +298,7 @@ if (!$conn) {
 
         array_pop($active_rolls);
         $activeRoll = json_encode($active_rolls);
+		//echo "<script>alert('$feedbackid')</script>";
       
         $sql = "UPDATE groups SET `activeRoll` = '$activeRoll', `date` = '$date' WHERE `id` = '$feedbackid'";
         $result = mysqli_query($conn, $sql);

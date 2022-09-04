@@ -25,6 +25,7 @@
 		<?php
 			session_start();
 			include 'sidebar.php';
+			require_once "../../imports/config.php";
 		?>
 		<div class="main">
 			<nav class="navbar navbar-expand navbar-light navbar-bg">
@@ -56,8 +57,9 @@
 								<div class="m-sm-4">
 									<form action="" method="post">
 										<div class="mb-3">
+											<?php echo $sql1; ?>
 											<label for="inputFirstName" class="form-label">Name</label>
-											<input type="text" class="form-control  form-control-lg" id="inputFirstName" name="firstname" required />										
+											<input type="text" class="form-control  form-control-lg" id="inputFirstName" name="name" required />										
 										</div>
 										<div class="mb-3">
 											<label class="form-label">Email</label>
@@ -65,47 +67,136 @@
 										</div>
 										<div class="mb-3">
 											<label class="form-label">Phone No</label>
-											<input class="form-control form-control-lg" type="text" name="phone_no" placeholder="Enter your phone no" pattern="[7-9]{1}[0-9]{9}" required />
+											<input class="form-control form-control-lg" type="text" name="phone_no" placeholder="Enter your phone no"  required />
 										</div>
-										<div class="mb-3">
-											<label for="formFileMultiple"class="form-label">Upload Images</label>
-											<input type="file" id="formFileMultiple" class="form-control form-control-lg" name="images" />
-										</div>
-										<div class="mb-3">
-											<label class="form-label">Position</label>
-											<select id="inputState" class="form-control form-control-lg" name="position" required>
-												<option selected>Choose Position</option>
-												<option>Teacher</option>
-												<option>I/C H.O.D</option>
-												<option>H.O.D</option>
-											</select>
-											<!-- <input class="form-control form-control-lg" type="text" name="position" placeholder="Select position" required> -->
-										</div>
+										<!-- <div class="mb-3 d-flex">
+											<label class="form-label">Gender: </label>
+											<div class="form-check mx-2">
+												<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+												<label class="form-check-label" for="flexRadioDefault1">
+													Male
+												</label>
+											</div>
+											<div class="form-check">
+												<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+												<label class="form-check-label" for="flexRadioDefault1">
+													Female
+												</label>
+											</div>
+										</div> -->
 										<div class="mb-3">
 											<label class="form-label">Department</label>
-											<select id="inputState" class="form-control form-control-lg" name="position" required>
-												<option selected>Choose Department</option>
-												<option>Computer Department</option>
-												<option>Electrical Department</option>
-												<option>Civil Department</option>
-												<option>E&TC Department</option>
-												<option>Mechanical Department</option>
+											<select id="inputState" class="form-control form-control-lg" name="department" required>
+												<option>Select Department</option>
+												<?php
+													$sql = "select * from departments";
+													$result = mysqli_query($conn, $sql);
+													while ($row = mysqli_fetch_assoc($result)) {
+														echo "<option value='" . $row["dept_name"] . "'>" . $row["dept_name"]."-".$row["dept_id"]."</option>";
+													}
+												?>
 											</select>
 											<!-- <input class="form-control form-control-lg" type="text" name="department" placeholder="Select Department" required> -->
 										</div>
 										<div class="mb-3">
+											<label class="form-label">Course Code</label>
+											<input class="form-control form-control-lg" type="text" name="course" placeholder="Enter Course code" required>
+											<p class="text-right"><small>Enter , for multiple course codes</small></p>
+
+										</div>
+										<div class="mb-3">
 											<label class="form-label">Username</label>
-											<input class="form-control form-control-lg" type="email" name="email" placeholder="Enter username" required>
+											<input class="form-control form-control-lg" type="text" name="username" placeholder="Enter username" required>
 										</div>
 										<div class="mb-3">
 											<label class="form-label">Password</label>
 											<input class="form-control form-control-lg" type="password" name="password" placeholder="Enter password" required>
 										</div>
 										<div class="text-center mb-3">
-											<button type="button" name="submit" value="submit" class="btn btn-lg btn-primary">Sign up</a>
+											<button type="submit" name="submit" value="submit" class="btn btn-lg btn-primary">Sign up</a>
 										</div>
 									</form>
+									<?php
+										if (isset($_POST['submit'])) {
+											$name = $_POST["name"];
+											$email = $_POST["email"];
+											$phone_no = $_POST["phone_no"];
+											$department = $_POST["department"];
+											$course = $_POST["course"];
+											$username = $_POST["username"];
+											$password = $_POST["password"];
+											function createuser($conn, $name, $username, $password){
+												require_once "../../imports/config.php";
+												$sql = "SELECT * FROM login WHERE uname = '$username'";
+												$result = mysqli_query($conn, $sql);
+												if (mysqli_num_rows($result) > 0) {
+													echo "<script>alert('Username already exists');</script>";
+												}
+												else{
+													$password1 = md5($password);
+													$sql = "INSERT INTO login(uname, passwd, role, name) VALUES('$username', '$password1','Faculty', '$name');";
+													$smt = mysqli_stmt_init($conn);
+													if(!mysqli_stmt_prepare($smt, $sql)){
+														$error .= "Error in STMT";
+														exit();
+													}
+													mysqli_stmt_execute($smt);
+													mysqli_stmt_close($smt);
+													$error .= "User Created Successfully";
+													return $error;
+												}
+											}
+											function createteacher($conn, $name, $email, $phone_no, $department, $course, $username, $password){
+												require_once "../../imports/config.php";
+												$data = array();
+												$check = 0;
+												$j=0;
+												$sql = "SELECT course FROM teacher";
+												$result = mysqli_query($conn, $sql);
+												while ($row = mysqli_fetch_assoc($result)) {
+													$data[$j] = $row;
+													$j++;
+												}
+												if(str_contains($course,",")){
+													$courses = explode(",", $course);
+												}
+												else{
+													$courses[] = $course;
+												}
+												for($i=0;$i<$j;$i++){
+													$data1 = explode(",", $data[$i]["course"]);
+													for($a=0;$a<count($data1);$a++){
+														for($b=0;$b<count($courses);$b++){
+															if($data1[$a] == $courses[$b]){
+																$check = 1;
+																break;
+															}
+														}
+													}
+												}
+												$sql = "SELECT * FROM login WHERE uname = '$username'";
+												$result = mysqli_query($conn, $sql);
+												if (mysqli_num_rows($result) > 0) {
+													echo "<script>alert('Username already exists');</script>";
+												}
+												elseif ($check == 1) {
+													echo "<script>alert('Course code already exists');</script>";
+												}
+
+												else{
+													$sql = createuser($conn, $name, $username, $password);
+													$result = mysqli_query($conn, $sql);
+													$sql = "INSERT INTO teacher(name, email, phone_no, department, course) VALUES('$name', '$email', '$phone_no', '$department', '$course');";
+													$result = mysqli_query($conn, $sql);
+													return $result;
+												}
+										}
+											
+											$sql1 =  createteacher($conn, $name, $email, $phone_no, $department, $course, $username, $password);
+										}
+									?>
 								</div>
+								<?php echo md5("idk	"); ?>
 							</div>
 						</div>
 

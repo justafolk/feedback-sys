@@ -95,7 +95,7 @@
 						<div class="row">
 							<?php
 							include "../../imports/config.php";
-							$sql = "SELECT * FROM groups where teacher_id = '{$_SESSION["id"]}' and request = '0'";
+							$sql = "SELECT * FROM groups where teacher_id = '{$_SESSION["id"]}'";
 							$result = mysqli_query($conn, $sql);
 							if (mysqli_num_rows($result) > 0) {
 								while ($row = mysqli_fetch_assoc($result)) {
@@ -157,62 +157,10 @@
 
 						</div>
 					
-					</div>
-					<br>
+					</div>	
+				
 
-					<div class="row">
-						<h1 class="h3 mb-3"><strong>Active</strong> Feedback Surveys: </h1>
-						<div class="row">
-							<?php
-							include "../../imports/config.php";
-							$sql = "SELECT * FROM forms where author = '{$_SESSION["name"]}'";
-							$result = mysqli_query($conn, $sql);
-							if (mysqli_num_rows($result) > 0) {
-								while ($row = mysqli_fetch_assoc($result)) {
-									$sql2 = "select * from courses where course_code='{$row["course_name"]}'";
-									$result2 = mysqli_query($conn, $sql2);
-									$row2 = mysqli_fetch_assoc($result2);
-							?>
-									<div class="col-md-3">
-										<div class="card border shadow-none" style="border-radius:12px">
-											<div class="card-body">
-												<h4 class="h4"><strong>
-														<?php echo $row2["course_name"] . " (" . $row2["course_code"]; ?>)
-													</strong></h4>
-												<h6> <a href="">
-
-														<?php
-														$sql3 = "select * from departments where dept_id='
-												{$row["dept_code"]}'";
-														$result3 = mysqli_query($conn, $sql3);
-														$row3 = mysqli_fetch_assoc($result3);
-														echo $row3["dept_name"];
-														?>
-													</a>
-												</h6>
-												<p style="color:green">Number of Students Filled : <?php
-																		$students = json_decode($row["activeRoll"], true);
-																		echo count($students);
-																		?></p>
-																		
-												<div class="row">
-													<div class="col-md-12">
-														<button class="btn btn-dark " onclick="window.location.href='./create_form.php?id=<?php echo $row['id'] ?>'" style="border-radius:5px"> <strong>
-
-																Create Feedback
-															</strong>
-														</button>
-													</div>
-
-												</div>
-
-											</div>
-
-										</div>
-									</div>
-							<?php }
-							} ?>
-
+					
 						</div>
 					
 					</div>
