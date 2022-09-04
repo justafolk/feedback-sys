@@ -35,11 +35,8 @@
 	<div class="wrapper">
 	<?php
 		session_start();
-		include "../../imports/config.php";
-
+		include "sidebar.php";
 	?>
-		
-  <?php include "./sidebar.php" ?>
 		<div class="main">
 			<nav class="navbar navbar-expand navbar-light navbar-bg">
 				<a class="sidebar-toggle js-sidebar-toggle">
@@ -74,12 +71,7 @@
 														</div>
 													</div>
 												</div>
-												<h1 class="mt-1 mb-3"><?php 
-												$sql = "SELECT * FROM forms";
-												$result = mysqli_query($conn, $sql);
-												$rowcount=mysqli_num_rows($result);
-												echo $rowcount;
-												?></h1>
+												<h1 class="mt-1 mb-3">2424</h1>
 												<div class="mb-0">
 													<span class="text-muted">Since last month</span>
 												</div>
@@ -100,13 +92,7 @@
 														</div>
 													</div>
 												</div>
-												
-												<h1 class="mt-1 mb-3"><?php 
-												$sql = "SELECT * FROM forms where status='online'";
-												$result = mysqli_query($conn, $sql);
-												$rowcount=mysqli_num_rows($result);
-												echo $rowcount;
-												?></h1>
+												<h1 class="mt-1 mb-3">14</h1>
 												<div class="mb-0">
 													<span class="text-muted">Since last week</span>
 												</div>
@@ -127,13 +113,7 @@
 														</div>
 													</div>
 												</div>
-												
-												<h1 class="mt-1 mb-3"><?php 
-												$sql = "SELECT * FROM form_responses";
-												$result = mysqli_query($conn, $sql);
-												$rowcount=mysqli_num_rows($result);
-												echo $rowcount;
-												?></h1>
+												<h1 class="mt-1 mb-3">29</h1>
 												<div class="mb-0">
 													<span class="text-muted">Since last week</span>
 												</div>
@@ -154,13 +134,7 @@
 														</div>
 													</div>
 												</div>
-												
-												<h1 class="mt-1 mb-3"><?php 
-												$sql = "SELECT * FROM login where role='student'";
-												$result = mysqli_query($conn, $sql);
-												$rowcount=mysqli_num_rows($result);
-												echo $rowcount;
-												?></h1>
+												<h1 class="mt-1 mb-3">67594</h1>
 												<div class="mb-0">
 													<span class="text-muted">Since last week</span>
 												</div>
@@ -172,55 +146,6 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-12 col-md-6 col-xxl-6 order-1 order-xxl-1">
-							<p class="h3 mb-3">Overall Feedbacks</p>
-							<div class="card">
-								<div class="card-body">
-								<h5 class="card-title">Total Feedbacks of Departments</h5>
-								<div id="pieChart" class="mb-3"></div>
-								<?php
-
-								$sql = "SELECT * FROM departments";
-								$result = mysqli_query($conn, $sql);
-								$all = array();
-								while ($row = mysqli_fetch_array($result)){
-									$all[$row["dept_id"]] = $row['dept_name'];
-								}
-								
-								$chart_data = '';
-								$ss = "SELECT dept_code , COUNT(*) as count FROM forms GROUP BY dept_code";
-								$result1 = mysqli_query($conn, $ss);
-								
-								$row = mysqli_fetch_array($result1);
-								
-								$chart_data .= "[".$row["count"]."";
-								$chart_label .= "['".$all[$row["dept_code"]]."'";
-								while($row = mysqli_fetch_array($result1))
-								{
-								 $chart_data .= ",".$row["count"];
-								 $chart_label .= ",'".$all[$row["dept_code"]]."'";
-								}
-								$chart_data .= "]";
-								$chart_label .= "]";
-								?>
-								<script>
-									document.addEventListener("DOMContentLoaded", () => {
-									new ApexCharts(document.querySelector("#pieChart"), {
-										series: <?php echo $chart_data;?>,
-										chart: {
-										height: 350,
-										type: 'pie',
-										toolbar: {
-											show: true
-										}
-										},
-										labels: <?php echo $chart_label;?>,
-									}).render();
-									});
-								</script>
-								</div>
-							</div>
-						</div>
 						<div class="col-12 col-md-6 col-xxl-6 order-1 order-xxl-1">
 							<p class="h3 mb-3">Department Performance</p>
 							<div class="card">
@@ -722,125 +647,6 @@
 								});
 							});
 						</script>
-						<div class="col-12 col-md-6 col-xxl-3 order-1 order-xxl-1">
-							<p class="h3" style="margin-top:10%;"><p>
-							<div class="card flex-fill w-100">
-								<div class="card-header d-flex justify-content-between">
-									<div>
-										<h5 class="card-title mb-0">Linux OS</h5>
-										<h6 class="card-title mb-0">26/03/2022</h6>
-									</div>
-									<!-- <button type="button" class="btn btn-primary" onclick="form()">View</button> -->
-									<button class="btn btn-primary" id="id4">View</button>
-								</div>
-								<div class="card-body d-flex">
-									<div class="align-self-center w-100">
-										<div class="py-3">
-											<div class="chart chart-xs">
-												<canvas id="chartjs-dashboard-pie2"></canvas>
-											</div>
-										</div>
-										<div class="text-center">
-											<button class="btn btn-success mb-3">5 - 4306</button>
-											<button class="btn btn-primary mb-3">4 - 4306</button>
-											<button class="btn btn-secondary mb-3">3 - 4306</button>
-											<button class="btn btn-warning mb-3">2 - 4306</button>
-											<button class="btn btn-danger mb-3">1 - 4306</button>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<script>
-							document.addEventListener("DOMContentLoaded", function() {
-								// Pie chart
-								new Chart(document.getElementById("chartjs-dashboard-pie2"), {
-									type: "pie",
-									data: {
-										labels: ["5-Ratings", "4-Ratings", "3-Ratings", "2-Ratings", "1-Ratings"],
-										datasets: [{
-											data: [406, 301, 1689, 8344, 3434],
-											backgroundColor: [
-												window.theme.success,
-												window.theme.primary,
-												window.theme.secondary,
-												window.theme.warning,
-												window.theme.danger							
-											],
-											borderWidth: 5
-										}]
-									},
-									options: {
-										responsive: !window.MSInputMethodContext,
-										maintainAspectRatio: false,
-										legend: {
-											display: false
-										},
-										cutoutPercentage: 75
-									}
-								});
-							});
-						</script>
-						<div class="col-12 col-md-6 col-xxl-3 order-1 order-xxl-1">
-							<p class="h3" style="margin-top:10%;"><p>
-							<div class="card flex-fill w-100">
-								<div class="card-header d-flex justify-content-between">
-									<div>
-										<h5 class="card-title mb-0">Python Programming</h5>
-										<h6 class="card-title mb-0">26/03/2022</h6>
-									</div>
-									<!-- <button type="button" class="btn btn-primary" onclick="form()">View</button> -->
-									<button class="btn btn-primary" id="id4">View</button>
-								</div>
-								<div class="card-body d-flex">
-									<div class="align-self-center w-100">
-										<div class="py-3">
-											<div class="chart chart-xs">
-												<canvas id="chartjs-dashboard-pie3"></canvas>
-											</div>
-										</div>
-										<div class="text-center">
-											<button class="btn btn-success mb-3">5 - 4306</button>
-											<button class="btn btn-primary mb-3">4 - 4306</button>
-											<button class="btn btn-secondary mb-3">3 - 4306</button>
-											<button class="btn btn-warning mb-3">2 - 4306</button>
-											<button class="btn btn-danger mb-3">1 - 4306</button>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<script>
-							document.addEventListener("DOMContentLoaded", function() {
-								// Pie chart
-								new Chart(document.getElementById("chartjs-dashboard-pie3"), {
-									type: "pie",
-									data: {
-										labels: ["5-Ratings", "4-Ratings", "3-Ratings", "2-Ratings", "1-Ratings"],
-										datasets: [{
-											data: [406, 301, 1689, 8344, 3434],
-											backgroundColor: [
-												window.theme.success,
-												window.theme.primary,
-												window.theme.secondary,
-												window.theme.warning,
-												window.theme.danger							
-											],
-											borderWidth: 5
-										}]
-									},
-									options: {
-										responsive: !window.MSInputMethodContext,
-										maintainAspectRatio: false,
-										legend: {
-											display: false
-										},
-										cutoutPercentage: 75
-									}
-								});
-							});
-						</script>
-
 			</main>
 
 

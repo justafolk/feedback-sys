@@ -196,7 +196,6 @@
 										}
 									?>
 								</div>
-								<?php echo md5("idk	"); ?>
 							</div>
 						</div>
 
