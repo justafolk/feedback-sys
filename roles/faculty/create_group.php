@@ -246,10 +246,28 @@ if (!$conn) {
 
 
 										<h3><label for="exampleInputPassword1"><b>Final student survey group </b></label></h3>
+										<!-- required red mark-->
+
+
+
 										<div class="form-group atrangi">
 											<?php
 
 											if (isset($_POST['checkroll']) or isset($_POST['finalroll'])) {
+											?>
+												<span style="color:red;">*</span> Click to add / remove students from group.
+
+												<br>
+												<button class="btn btn-md btn-success"></button>
+												Add to group
+												<br>
+												<button class="btn btn-md btn-danger"></button>
+
+												Remove from group
+												<br>
+												<br>
+
+											<?php
 												$deptcode = $_POST['deptcode'];
 												$semester = $_POST['semester'];
 												$subject = $_POST['subject'];
@@ -301,9 +319,7 @@ if (!$conn) {
 												}
 												$active_roll = array_diff($active_roll, [-4000, "", " "]);
 												$allrolls = count($active_roll);
-												var_dump($allrolls);
-												print_r($active_roll);
-												echo "<p>Total number of students: " . $allrolls . "</p>";
+												echo "<p class=\' my-0 \' >Total number of students: <strong>" . $allrolls . "</strong>  </p>";
 												$count = 1;
 
 												while ($count <= $allrolls) {
