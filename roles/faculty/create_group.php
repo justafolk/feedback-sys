@@ -9,7 +9,7 @@ error_reporting(0);
 
 if ($_SESSION['role'] != 'Faculty') {
 	echo "<script>alert('Invalid Session, please login again');</script>";
-	echo "<script>window.location.href='index.php';</script>";
+	echo "<script>window.location.href='../../index.php';</script>";
 }
 $server = "localhost";
 $user = "root";
@@ -301,22 +301,22 @@ if (!$conn) {
 												$active_roll[] = $value;
 											}
 
-											$allrolls = count($active_roll);
-											echo "<p>Total number of students: " . $allrolls . "</p>";
+											$allrolls = count($active_roll)  ;
+											//echo "<p>Total number of students: " . $allrolls . "</p>";
 											$count = 1;
 
 											while ($count <= $allrolls) {
 												echo "<group>";
 												for ($i = 1; $i < 16; $i++) {
 
-													$row["enrollid"] = $active_roll[$count - 1];
+													$row["enrollid"] = $active_roll[$count -1];
 
 
 													$count += 1;
 													if ($row['enrollid'] == 0) {
 														continue;
 													}
-													if ($count == $allrolls + 2) {
+													if ($count == $allrolls + 3) {
 														break;
 													}
 													error_reporting(0);
@@ -325,8 +325,10 @@ if (!$conn) {
                                                             <input  type=\"hidden\" name=\"{$row['enrollid']}\" id=\"{$row['enrollid']}no\" value='0'>
                                                           
                                                         ";
+														
 													echo  "<div class=\"input-container\"/>
-                                                            <input checked type=\"checkbox\" value='1' name=\"{$row['enrollid']}\" id=\"{$row['enrollid']}\">
+															
+                                                            <input checked type=\"checkbox\" value='1' name=\"{$row['enrollid']}\" id=\"{$row['enrollid']}\" margin=10px  >
                                                             <label for=\"{$row['enrollid']}\">{$row['enrollid']}</label>
                                                             </div>";
 													
@@ -388,18 +390,19 @@ if (!$conn) {
 		$active_rolls = json_encode($active_rolls);
 		$sqltest = "SELECT * FROM `groups` WHERE `deptcode` = '$deptcode' AND `year` = '$year' AND `subject` = '$subject'";
 		$resulttest = mysqli_query($conn, $sqltest);
-		// if (mysqli_num_rows($resulttest) > 0) {
-		// 	echo "<script>alert('Group already exists');</script>";
-		// 	echo "<script>window.location.href='create_group.php';</script>";
-		// } else {
-		// 	$sql = "INSERT INTO groups(year, semester, subject , deptcode, activeRoll, teacher_id) VALUES ('$year','{$_POST["semester"]}','$subject', '$deptcode', '$active_rolls', '{$_SESSION["id"]}')";
-		// 	$result = mysqli_query($conn, $sql);
-		// 	if ($result) {
-		// 		echo "success";
-		// 	} else {
-		// 		echo mysqli_error($conn);
-		// 	}
-		// }
+		if (mysqli_num_rows($resulttest) > 0) {
+		 	echo "<script>alert('Group already exists');</script>";
+		 	echo "<script>window.location.href='create_group.php';</script>";
+		 } else {
+		 	$sql = "INSERT INTO groups(year, semester, subject , deptcode, activeRoll, teacher_id) VALUES ('$year','{$_POST["semester"]}','$subject', '$deptcode', '$active_rolls', '{$_SESSION["id"]}')";
+		 	$result = mysqli_query($conn, $sql);
+		 	if ($result) {
+		 		echo "<script>alert('Group created successfully');</script>";
+				echo "<script>window.location.href='feedback_home.php';</script>";	
+		 	} else {
+		 		echo mysqli_error($conn);
+		 	}
+		 }
 	}
 
 	?>

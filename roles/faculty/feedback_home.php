@@ -95,7 +95,7 @@
 						<div class="row">
 							<?php
 							include "../../imports/config.php";
-							$sql = "SELECT * FROM groups where teacher_id = '{$_SESSION["id"]}'";
+							$sql = "SELECT * FROM groups where req='0' and teacher_id = '{$_SESSION["id"]}'";
 							$result = mysqli_query($conn, $sql);
 							if (mysqli_num_rows($result) > 0) {
 								while ($row = mysqli_fetch_assoc($result)) {
@@ -112,8 +112,7 @@
 												<h6> <a href="">
 
 														<?php
-														$sql3 = "select * from departments where dept_id='
-												{$row["deptcode"]}'";
+														$sql3 = "select * from departments where dept_id='{$row["deptcode"]}'";
 														$result3 = mysqli_query($conn, $sql3);
 														$row3 = mysqli_fetch_assoc($result3);
 														echo $row3["dept_name"];
@@ -133,17 +132,16 @@
 													<div class="col-md-12">
 														<button class="btn btn-dark " onclick="window.location.href='./viewedit.php?id=<?php echo $row['id'] ?>'" style="border-radius:5px"> <strong>
 
-																View and edit 
+																Edit and request 
 															</strong>
 														</button>
-														<?php 
-														if($row['date'] != ""){ ?>
-														<button class="btn btn-dark " onclick="window.location.href='./request_form.php?id=<?php echo $row['id'] ?>'" style="border-radius:5px"> <strong>
 
-																Request  
+														<button class="btn btn-dark " onclick="window.location.href='./delete_form.php?id=<?php echo $row['id'] ?>'" style="border-radius:5px"> <strong>
+
+																Delete  
 															</strong>
 														</button>
-														<?php } ?>
+													
 													</div>
 
 												</div>

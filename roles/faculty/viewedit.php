@@ -4,6 +4,7 @@
 
 session_start();
 //include 'imports/config.php';
+error_reporting(0);
 
 if ($_SESSION['role'] != 'Faculty') {
 	echo "<script>alert('Invalid Session, please login again');</script>";
@@ -225,6 +226,8 @@ if ($_SESSION['role'] != 'Faculty') {
                                             $activeRoll = $row['activeRoll'];
 
                                             $active_rolls = json_decode($activeRoll, true);
+											//delete last item of array
+											array_pop($active_rolls);
                                             $allrolls = count($active_rolls);
 
 
@@ -259,9 +262,10 @@ if ($_SESSION['role'] != 'Faculty') {
 										</div>
 										<br />
 										<br />
-										<center><button submit class="btn btn-primary" name="finalfeed">Finalise feedback</submit></button>
+										<center>
+										<!--<button submit class="btn btn-primary" name="finalfeed">Finalise feedback</submit></button> -->
 										
-                                        <!-- <button type="submit" class="btn btn-primary" name="request">Finalise and Request</button> -->
+                                        <button type="submit" class="btn btn-primary" name="request">Finalise and Request</button>
                                         </center>
 									</div>
 							</div>
@@ -282,7 +286,7 @@ if ($_SESSION['role'] != 'Faculty') {
 
 	<?php
 
-	if (isset($_POST['finalfeed'])) {
+	if (isset($_POST['request'])) {
 
         $date = $_POST['date'];
         $feedbackid = $_GET['id'];
@@ -300,11 +304,11 @@ if ($_SESSION['role'] != 'Faculty') {
         $activeRoll = json_encode($active_rolls);
 		//echo "<script>alert('$feedbackid')</script>";
       
-        $sql = "UPDATE groups SET `activeRoll` = '$activeRoll', `date` = '$date' WHERE `id` = '$feedbackid'";
+        $sql = "UPDATE groups SET `activeRoll` = '$activeRoll', `date` = '$date' , `req` = '1' WHERE `id` = '$feedbackid' ";
         $result = mysqli_query($conn, $sql);
         if ($result) {
-            echo "<script>alert('Feedback updated successfully');</script>";
-            echo "<script>window.location.href = 'feedback_home.php';</script>"; 
+            echo "<script>alert('Feedback requested successfully');</script>";
+            echo "<script>window.location.href = 'requested_forms.php';</script>"; 
         } else {
             echo "<script>alert('Error updating feedback');</script>";
         }
