@@ -137,26 +137,7 @@
 												 } ?></p>
 
 
-												<?php 
 
-												if($row["accepted"] == "0"){ ?>
-												<div class="row">
-													<div class="col-md-12">
-														<button class="btn btn-dark " onclick="window.location.href='./viewedit.php?id=<?php echo $row['id'] ?>'" style="border-radius:5px"> <strong>
-
-																Update
-															</strong>
-														</button>
-														<button class="btn btn-dark " onclick="window.location.href='./delete_form.php?id=<?php echo $row['id'] ?>'" style="border-radius:5px"> 
-														<strong>
-
-																Delete
-															</strong>
-														</button>
-													</div>
-
-												</div>
-											<?php } ?>
 											</div>
 
 										</div>
@@ -188,3 +169,28 @@
 </body>
 
 </html>
+
+<!--
+
+<?php 
+
+//if($row["accepted"] == "0"){ ?>
+<div class="row">
+	<div class="col-md-12">
+		<button class="btn btn-dark " onclick="window.location.href='./viewedit.php?id=<?php //echo $row['id'] ?>'" style="border-radius:5px"> <strong>
+
+				Update
+			</strong>
+		</button>
+		<button class="btn btn-dark " onclick="window.location.href='./delete_form.php?id=<?php //echo $row['id'] ?>'" style="border-radius:5px"> 
+		<strong>
+
+				Delete
+			</strong>
+		</button>
+	</div>
+
+</div>
+<?php //} ?>
+
+-->

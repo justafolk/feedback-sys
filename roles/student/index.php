@@ -7,7 +7,16 @@ session_start();
 if ($_SESSION['role'] != 'Student') {
 	header("Location: ../index.php");
 }else{
+	include '../../imports/config.php';
 	error_reporting(0);
+	//echo "<script>alert(".$_SESSION['uname'].");</script>";
+	$sqllog = "Select flog from login where uname = '".$_SESSION['uname']."'";
+	$resultlog = mysqli_query($conn, $sqllog);
+	$rowlog = mysqli_fetch_assoc($resultlog);
+	if($rowlog['flog'] == 1){
+		echo "<script>alert('Please change your password');</script>";
+		echo "<script>window.location.href='changepassimp.php';</script>";
+	}
 }
 ?>
 

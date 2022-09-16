@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php
+session_start();
+
+//echo "<script>alert(".$_SESSION['uname'].")</script>";
+
+?>
+
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -59,6 +66,14 @@
 
                   <form class="row g-3 needs-validation" method="POST" action="">
 
+                  <div class="col-12">
+                      <label for="yourname" class="form-label">Your Name</label>
+                      <div class="input-group has-validation">
+                        <input type="text" name="pername" class="form-control" id="pername" required>
+                        <div class="invalid-feedback">Please enter your Name.</div>
+                      </div>
+                    </div>
+
                     <div class="col-12">
                       <label for="yourUsername" class="form-label">Roll number</label>
                       <div class="input-group has-validation">
@@ -115,13 +130,34 @@
 <?php
 
 if(isset($_POST['changepass'])){
-
-  include 'imports/config.php';
+  //session_start();
+  
+  include '../../imports/config.php';
 
   $uname = $_POST['uname'];
   $passwd = $_POST['passwd'];
+  $pername = $_POST['pername'];
   $passwdx = md5($passwd);
   
+  if($uname == $_SESSION['uname']){
+    if(md5($uname) == $passwdx){
+      echo "<script>alert('Please enter new password!, Password cannot be your own roll number!!')</script>";
+    }else{
+    $sql = "UPDATE `login` SET `passwd` = '$passwdx', `flog`='0', `name`= '$pername' WHERE `uname` = '$uname'";
+    $result = mysqli_query($conn, $sql);
+    if($result){
+      echo '<script>alert("Password changed successfully, please login")</script>';
+      echo '<script>window.location.href = "../../index.php"</script>';
+    }else{
+      echo '<script>alert("Password not changed")</script>';
+    }
+  }
+  }else{
+    echo "<script>alert('Please enter your roll number correctly')</script>";
+    //echo '<script>alert("Invalid roll number, try using your own roll number")</script>';
+    //echo '<script>alert("Invalid roll number")</script>';
+  }
+  /*
   $sql = "UPDATE `login` SET `passwd`='$passwdx' WHERE `uname`='$uname'";
   $result = mysqli_query($conn, $sql);
   if($result){
@@ -135,6 +171,7 @@ if(isset($_POST['changepass'])){
   else{
     echo "<script>alert('Password change failed');</script>";
   }
+  */
 }
 
 ?>

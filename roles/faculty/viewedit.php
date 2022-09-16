@@ -312,7 +312,37 @@ if ($_SESSION['role'] != 'Faculty') {
         } else {
             echo "<script>alert('Error updating feedback');</script>";
         }
+	}
 
+	$loginroll = json_decode($activeRoll);
+
+	for($i = 0; $i < count($loginroll); $i++) {
+		$roll = $loginroll[$i];
+		//create login id for each rollnumber
+		$loginid = $roll ;
+		//create password for each rollnumber
+		$password = md5($roll); ;
+		//create login table
+
+		$rollcount = "SELECT * FROM `login` WHERE `uname` = '$roll'";
+		$rollcountresult = mysqli_query($conn, $rollcount);
+		$rollcountrow = mysqli_num_rows($rollcountresult);
+
+		if($rollcountrow == 0) {
+	
+		$sql = "INSERT INTO `login`(`uname`, `passwd`, `role`, `name`) VALUES ('$loginid','$password','Student', 'Student')";
+		$result = mysqli_query($conn, $sql);
+		}
+
+	}
+	
+	?>
+
+</body>
+
+</html>
+
+<?php
 
         /*
 		$known_posts = array('deptcode', 'semester', 'subject', 'rollrange', 'addrollrange', 'addrollunit', 'finalroll');
@@ -368,9 +398,6 @@ if(isset($_POST['request'])){
     } else {
         echo "<script>alert('Error updating feedback');</script>";
     }*/
-}
-	?>
 
-</body>
 
-</html>
+?>
