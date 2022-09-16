@@ -59,7 +59,13 @@ session_start();
 							$sql = "SELECT * FROM forms WHERE form_id = '$feedback_id'";
 							$result = mysqli_query($conn, $sql);
 							$row = mysqli_fetch_assoc($result);
+							$author = $row['author'];
 							echo $row['course_name'];
+							$sql_group = "SELECT * FROM groups WHERE id = '{$row["group_id"]}'";
+							$result_group = mysqli_query($conn, $sql_group);
+							$row_group = mysqli_fetch_assoc($result_group);
+							$student_count = $row_group['student_count'];
+
 							?></strong></h1>
 				</div>
 				<?php
@@ -81,11 +87,10 @@ session_start();
 								<div class="col-md-6">
 
 									<h4><?php echo $rowse["course_name"] ?> : #<?php echo $row["course_name"] ?></h4>
-									<p>Rupali Shete</p>
+									<p><?php echo $author ?></p>
 								</div>
 								<div class="col-md-6" style="text-align:right; ">
 									<h4>Last Updated <span style="color: green;">: <?php echo $row["ini_date"] ?></span></h4>
-									<!-- text input for tracking id -->
 
 								</div>
 							</div>
@@ -108,7 +113,7 @@ session_start();
 						$res = json_decode($row['response_json'], true);
 						$i = 0;
 						foreach ($res as $key => $value) {
-							array_push($main_responses[$i], round($value / 20));
+							array_push($main_responses[$i], round($value));
 							$i++;
 							if ($i == $num_ques) {
 								break;
@@ -135,7 +140,7 @@ session_start();
 										</div>
 										<div class="text-center">
 											<button class="btn btn-success mb-3">Filled - <?php echo count($main_responses[0]) ?></button>
-											<button class="btn btn-danger mb-3">Not Filled - 32</button>
+											<button class="btn btn-danger mb-3">Not Filled - <?php echo $student_count - count($main_responses[0]) ?></button>
 										</div>
 									</div>
 								</div>
@@ -163,11 +168,10 @@ session_start();
 														data: [
 															<?php
 															for ($i = 0; $i < count($main_responses); $i++) {
-																echo round(array_sum($main_responses[$i]) / count($main_responses[$i]));
+																echo round(array_sum($main_responses[$i])/count($main_responses[$i]));
 																if ($i != count($main_responses) - 1) {
 																	echo ",";
 																}
-																echo ",";
 															}
 															?>
 														],
@@ -217,7 +221,6 @@ session_start();
 											<th>Feedback Question</th>
 											<th colspan="5">Percentage of Scores</th>
 											<th>Avg</th>
-											<th></th>
 
 
 
@@ -231,7 +234,6 @@ session_start();
 												<th>4</th>
 												<th>5</th>
 												<th></th>
-												<th></th>
 
 											</tr>
 											<?php
@@ -241,14 +243,13 @@ session_start();
 												echo "<tr>";
 												$percentage = array_count_values($main_responses[$i]);
 												echo "<td>" . $row['question_title'] . "</td>";
-												echo "<td>" . count(array_keys($main_responses[$i], 1)) / count($main_responses[$i]) * 100 . "</td>";
-												echo "<td>" . count(array_keys($main_responses[$i], 2)) / count($main_responses[$i]) * 100 . "</td>";
-												echo "<td>" . count(array_keys($main_responses[$i], 3)) / count($main_responses[$i]) * 100 . "</td>";
-												echo "<td>" . count(array_keys($main_responses[$i], 4)) / count($main_responses[$i]) * 100 . "</td>";
-												echo "<td>" . count(array_keys($main_responses[$i], 5)) / count($main_responses[$i]) * 100 . "</td>";
+												echo "<td>" . round(count(array_keys($main_responses[$i], 1)) / count($main_responses[$i]) * 100, 2) . "</td>";
+												echo "<td>" . round(count(array_keys($main_responses[$i], 2)) / count($main_responses[$i]) * 100, 2) . "</td>";
+												echo "<td>" . round(count(array_keys($main_responses[$i], 3)) / count($main_responses[$i]) * 100, 2) . "</td>";
+												echo "<td>" . round(count(array_keys($main_responses[$i], 4)) / count($main_responses[$i]) * 100, 2) . "</td>";
+												echo "<td>" . round(count(array_keys($main_responses[$i], 5)) / count($main_responses[$i]) * 100, 2) . "</td>";
 
-												echo "<td>" . array_sum($main_responses[$i]) / count($main_responses[$i]) . "</td>";
-												echo "<td>" . $row['avg'] . "</td>";
+												echo "<td>" . round(array_sum($main_responses[$i]) / count($main_responses[$i]), 2) . "</td>";
 												echo "</tr>";
 												$i++;
 											}
@@ -290,7 +291,7 @@ session_start();
 					data: {
 						labels: ["Filled", "Not Filled"],
 						datasets: [{
-							data: [<?php echo count($main_responses[0]) ?>, 32],
+							data: [<?php echo count($main_responses[0]) ?>, <?php echo $student_count - count($main_responses[0]) ?>],
 							backgroundColor: [
 								window.theme.success,
 								window.theme.danger

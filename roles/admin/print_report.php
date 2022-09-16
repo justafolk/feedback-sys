@@ -91,7 +91,7 @@ session_start();
 				$res = json_decode($row['response_json'], true);
 				$i = 0;
 				foreach ($res as $key => $value) {
-					array_push($main_responses[$i], round($value / 20));
+					array_push($main_responses[$i], round($value ));
 					$i++;
 					if ($i == $num_ques) {
 						break;
@@ -204,7 +204,6 @@ session_start();
 																if ($i != count($main_responses) - 1) {
 																	echo ",";
 																}
-																echo ",";
 															}
 															?>
 														],
@@ -276,13 +275,13 @@ session_start();
 												echo "<tr>";
 												$percentage = array_count_values($main_responses[$i]);
 												echo "<td>" . $row['question_title'] . "</td>";
-												echo "<td>" . count(array_keys($main_responses[$i], 1)) / count($main_responses[$i]) * 100 . "</td>";
-												echo "<td>" . count(array_keys($main_responses[$i], 2)) / count($main_responses[$i]) * 100 . "</td>";
-												echo "<td>" . count(array_keys($main_responses[$i], 3)) / count($main_responses[$i]) * 100 . "</td>";
-												echo "<td>" . count(array_keys($main_responses[$i], 4)) / count($main_responses[$i]) * 100 . "</td>";
-												echo "<td>" . count(array_keys($main_responses[$i], 5)) / count($main_responses[$i]) * 100 . "</td>";
+												echo "<td>" . round(count(array_keys($main_responses[$i], 1)) / count($main_responses[$i]) * 100, 2) . "</td>";
+												echo "<td>" . round(count(array_keys($main_responses[$i], 2)) / count($main_responses[$i]) * 100, 2) . "</td>";
+												echo "<td>" . round(count(array_keys($main_responses[$i], 3)) / count($main_responses[$i]) * 100, 2) . "</td>";
+												echo "<td>" . round(count(array_keys($main_responses[$i], 4)) / count($main_responses[$i]) * 100, 2) . "</td>";
+												echo "<td>" . round(count(array_keys($main_responses[$i], 5)) / count($main_responses[$i]) * 100, 2) . "</td>";
 
-												echo "<td>" . array_sum($main_responses[$i]) / count($main_responses[$i]) . "</td>";
+												echo "<td>" . round(array_sum($main_responses[$i]) / count($main_responses[$i]), 2) . "</td>";
 												echo "</tr>";
 												$i++;
 											}

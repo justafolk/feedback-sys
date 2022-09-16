@@ -404,6 +404,7 @@ if (!$conn) {
 		}
 		var_dump($remove_rolls);
 		$active_rolls = array_unique($active_rolls);
+		$student_count = count($active_rolls);
 		$active_rolls = json_encode($active_rolls);
 		$sqltest = "SELECT * FROM `groups` WHERE `deptcode` = '$deptcode' AND `year` = '$year' AND `subject` = '$subject'";
 		$resulttest = mysqli_query($conn, $sqltest);
@@ -411,7 +412,7 @@ if (!$conn) {
 			echo "<script>alert('Group already exists');</script>";
 			echo "<script>window.location.href='create_group.php';</script>";
 		} else {
-			$sql = "INSERT INTO groups(year, semester, subject , deptcode, activeRoll, teacher_id) VALUES ('$year','{$_POST["semester"]}','$subject', '$deptcode', '$active_rolls', '{$_SESSION["id"]}')";
+			$sql = "INSERT INTO groups(year, semester, subject , deptcode, activeRoll, teacher_id, student_count) VALUES ('$year','{$_POST["semester"]}','$subject', '$deptcode', '$active_rolls', '{$_SESSION["id"]}', '$student_count')";
 			$result = mysqli_query($conn, $sql);
 			if ($result) {
 				echo "<script>alert('Group created successfully');</script>";
