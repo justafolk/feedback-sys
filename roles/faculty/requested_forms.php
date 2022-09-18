@@ -124,10 +124,10 @@
 																		echo count($students);
 																		?></p>
 												<p>Date : <?php 
-												if($row["date"] == ""){
+												if($row["fdate"] == ""){
 													echo "Not Set";
 												}else{
-												echo $row["date"]; } ?></p>
+												echo $row["fdate"]; } ?></p>
 
 												<p>Status : <?php 
 												if($row["accepted"] == "0"){

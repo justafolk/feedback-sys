@@ -67,7 +67,100 @@
                 <a class="sidebar-link" href="notification1.php">
                   <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Notifications</span>
                 </a>
+
+                    <li class="sidebar-item">
+              <a class="sidebar-link" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+                <i class="align-middle" data-feather="bar-chart-2"></i> <span>Feedbacks</span>
+              </a>
+              <ul id="charts-nav" class="collapse" style="list-style-type:none;">
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="feedbacks.php?dept_id=10">
+                    <span class="align-middle">Civil Dept. </span>
+                  </a>
+                </li>
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="feedbacks.php?dept_id=20">
+                    <span class="align-middle">Mechanical Dept. (A)</span>
+                  </a>
+                </li>
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="feedbacks.php?dept_id=21">
+                    <span class="align-middle">Mechanical Department(U)</span>
+                  </a>
+                </li>
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="feedbacks.php?dept_id=30">
+                    <span class="align-middle">Electrical Department</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="sidebar-link" href="feedbacks.php?dept_id=40">
+                    <span class="align-middle">Computer Department</span>
+                  </a>
+                </li>
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="feedbacks.php?dept_id=50">
+                    <span class="align-middle">E&TC Department(A)</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="sidebar-link" href="feedbacks.php?dept_id=51">
+                    <span class="align-middle">E&TC Department(U)</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
             </li> -->
+
+            <li class="sidebar-header">
+              Requestes
+            </li>
+
+            <li class="sidebar-item">
+              <a class="sidebar-link" data-bs-target="#charts-nav3" data-bs-toggle="collapse" href="#">
+                <i class="align-middle" data-feather="bar-chart-2"></i> <span>Requests</span>
+              </a>
+              <ul id="charts-nav3" class="collapse" style="list-style-type:none;">
+                <li>
+                  <a class="sidebar-link" href="requested_feedback.php?deptcode=40">
+                    <span class="align-middle">Computer Department</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="sidebar-link" href="requested_feedback.php?deptcode=10">
+                    <span class="align-middle">Civil Department</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="sidebar-link" href="requested_feedback.php?deptcode=20">
+                    <span class="align-middle">Mechanical Department(A)</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="sidebar-link" href="requested_feedback.php?deptcode=21">
+                    <span class="align-middle">Mechanical Department(U)</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="sidebar-link" href="requested_feedback.php?deptcode=30">
+                    <span class="align-middle">Electrical Department</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="sidebar-link" href="requested_feedback.php?deptcode=50">
+                    <span class="align-middle">E&TC Department(A)</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="sidebar-link" href="requested_feedback.php?deptcode=51">
+                    <span class="align-middle">E&TC Department(U)</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            
+
+
 
             <li class="sidebar-header">
               Forms
