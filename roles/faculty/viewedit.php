@@ -302,7 +302,7 @@ $course_name = $row3['course_name'];
 		$activeRoll = json_encode($active_rolls);
 		//echo "<script>alert('$feedbackid')</script>";
 
-		$sql = "UPDATE groups SET `activeRoll` = '$activeRoll', `req` = '1' WHERE `id` = '$feedbackid' ";
+		$sql = "UPDATE groups SET `activeRoll` = '$activeRoll',`fdate`= '$date', `req` = '1' WHERE `id` = '$feedbackid' ";
 		$result = mysqli_query($conn, $sql);
 		if ($result) {
 			echo "<script>alert('Feedback requested successfully');</script>";
