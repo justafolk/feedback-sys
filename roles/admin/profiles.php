@@ -105,20 +105,22 @@
                                 $teacher[$t] = $row;
                                 $t++;
                             }
-                            $sql2 = "SELECT uname,name from login";
-                            $login = mysqli_query($conn, $sql2);
                             for($i=0;$i<$t;$i++){
+                                $name = $teacher[$i]["name"];
+                                $sql2 = "SELECT uname from login where name='$name'";
+                                $login = mysqli_query($conn, $sql2);
+                                $login1 = mysqli_fetch_array($login);
                         ?>
                         <div class="col-12 col-md-6 col-xxl-3">
                             <div class="card flex-fill w-100 text-center pt-3 pb-3">
                                 <div class="member-card pt-2 pb-2">
                                     <div class="thumb-lg member-thumb mx-auto" style="width:30%;"><img src="img/photos/avatar7.png" class="rounded-circle img-thumbnail" alt="profile-image"></div>
                                     <div class="mt-2">
-                                        <h4><?php echo $teacher[$i]["name"]; ?></h4>
+                                        <h4><?php echo $name; ?></h4>
                                         <p class="text-muted"><?php echo $teacher[$i]["phone_no"]; ?> | <a href="#" class="text-pink"><?php echo $teacher[$i]["email"]; ?></a></span></p>
                                     </div>
-                                    <a type="button" href="remove_profile.php" class="btn btn-danger mt-2 waves-effect w-md waves-light"><i class="align-middle me-2 mb-1" data-feather="trash-2"></i>Remove</a>
-                                    <a type="button" href="change_pass.php?username=" class="btn btn-primary mt-2 waves-effect w-md waves-light">Change Password</a>
+                                    <a type="button" href="remove_profile.php?username=<?php echo $login1["uname"]; ?>" class="btn btn-danger mt-2 waves-effect w-md waves-light"><i class="align-middle me-2 mb-1" data-feather="trash-2"></i>Remove</a>
+                                    <a type="button" href="change_pass.php?username=<?php echo $login1["uname"]; ?>" class="btn btn-primary mt-2 waves-effect w-md waves-light">Change Password</a>
                                     <div class="d-flex justify-content-between mt-3 p-4 pb-0">
                                         <h6>Department</h6>
                                         <h6><?php echo $teacher[$i]["department"]; ?></h6>
@@ -146,13 +148,12 @@
                                                     $check = $row['active'];
                                                     if($check){
                                                         ?>
-                                                        <label style="color:green">Active| </label>
+                                                        <label style="color:green">Active </label>
                                                         <?php
-                                                        break;
                                                     }
                                                     else{
                                                         ?>
-                                                        <label style="color:red">Inactive| </label>
+                                                        <label style="color:red">Inactive </label>
                                                         <?php
                                                     }
                                                 }
