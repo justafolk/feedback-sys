@@ -124,7 +124,7 @@
                                                                                     <td>$course_code</td>
                                                                                     <td>$teacher_name</td>
                                                                                     <td>$date</td>
-                                                                                    <td><a href='approve.php?id=$id&deptcode=$deptcode' class='btn btn-success'>Approve</a></td>
+                                                                                    <td><a href='approve.php?id=$id&deptcode=$deptcode' class='btn btn-success'>Approve</a> <a href='reject.php?id=$id&deptcode=$deptcode' class='btn btn-danger'>Reject</a></td>
                                                                                     <td><a href='view.php?id=$id&deptcode=$deptcode' class='btn btn-primary'>View</a></td>
                                                                                 </tr>";
                                                                             $i++;
@@ -188,7 +188,7 @@
                                                                                     <td>$course_code</td>
                                                                                     <td>$teacher_name</td>
                                                                                     <td>$date</td>
-                                                                                    <td><a href='approve.php?id=$id&deptcode=$deptcode' class='btn btn-success'>Approve</a></td>
+                                                                                    <td><a href='approve.php?id=$id&deptcode=$deptcode' class='btn btn-success'>Approve</a> <a href='reject.php?id=$id&deptcode=$deptcode' class='btn btn-danger'>Reject</a></td>
                                                                                     <td><a href='view.php?id=$id&deptcode=$deptcode' class='btn btn-primary'>View</a></td>
                                                                                 </tr>";
                                                                             $i++;
@@ -258,7 +258,7 @@
                                                                                     <td>$course_code</td>
                                                                                     <td>$teacher_name</td>
                                                                                     <td>$date</td>
-                                                                                    <td><a href='approve.php?id=$id&deptcode=$deptcode' class='btn btn-success'>Approve</a></td>
+                                                                                    <td><a href='approve.php?id=$id&deptcode=$deptcode' class='btn btn-success'>Approve</a> <a href='reject.php?id=$id&deptcode=$deptcode' class='btn btn-danger'>Reject</a></td>
                                                                                     <td><a href='view.php?id=$id&deptcode=$deptcode' class='btn btn-primary'>View</a></td>
                                                                                 </tr>";
                                                                             $i++;
@@ -321,7 +321,7 @@
                                                                                     <td>$course_code</td>
                                                                                     <td>$teacher_name</td>
                                                                                     <td>$date</td>
-                                                                                    <td><a href='approve.php?id=$id&deptcode=$deptcode' class='btn btn-success'>Approve</a></td>
+                                                                                    <td><a href='approve.php?id=$id&deptcode=$deptcode' class='btn btn-success'>Approve</a> <a href='reject.php?id=$id&deptcode=$deptcode' class='btn btn-danger'>Reject</a></td>
                                                                                     <td><a href='view.php?id=$id&deptcode=$deptcode' class='btn btn-primary'>View</a></td>
                                                                                 </tr>";
                                                                             $i++;
@@ -390,7 +390,7 @@
                                                                                     <td>$course_code</td>
                                                                                     <td>$teacher_name</td>
                                                                                     <td>$date</td>
-                                                                                    <td><a href='approve.php?id=$id&deptcode=$deptcode' class='btn btn-success'>Approve</a></td>
+                                                                                    <td><a href='approve.php?id=$id&deptcode=$deptcode' class='btn btn-success'>Approve</a> <a href='reject.php?id=$id&deptcode=$deptcode' class='btn btn-danger'>Reject</a></td>
                                                                                     <td><a href='view.php?id=$id&deptcode=$deptcode' class='btn btn-primary'>View</a></td>
                                                                                 </tr>";
                                                                             $i++;
@@ -453,7 +453,7 @@
                                                                                     <td>$course_code</td>
                                                                                     <td>$teacher_name</td>
                                                                                     <td>$date</td>
-                                                                                    <td><a href='approve.php?id=$id&deptcode=$deptcode' class='btn btn-success'>Approve</a></td>
+                                                                                    <td><a href='approve.php?id=$id&deptcode=$deptcode' class='btn btn-success'>Approve</a> <a href='reject.php?id=$id&deptcode=$deptcode' class='btn btn-danger'>Reject</a></td>
                                                                                     <td><a href='view.php?id=$id&deptcode=$deptcode' class='btn btn-primary'>View</a></td>
                                                                                 </tr>";
                                                                             $i++;
