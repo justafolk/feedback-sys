@@ -103,6 +103,7 @@
                                                                     $result = mysqli_query($conn, $sql);
                                                                     //$num = mysqli_num_rows($result);
                                                                     while($row = mysqli_fetch_assoc($result)){
+                                                                            $id = $row['id'];
                                                                             $sqlsubj = "SELECT course_name FROM courses WHERE course_code = '$row[subject]'";
                                                                             $resultsubj = mysqli_query($conn, $sqlsubj);
                                                                             $rowsubj = mysqli_fetch_assoc($resultsubj);
@@ -165,6 +166,8 @@
                                                                     $result = mysqli_query($conn, $sql);
                                                                     //$num = mysqli_num_rows($result);
                                                                     while($row = mysqli_fetch_assoc($result)){
+
+                                                                        $id = $row['id'];
                                                                             $sqlsubj = "SELECT course_name FROM courses WHERE course_code = '$row[subject]'";
                                                                             $resultsubj = mysqli_query($conn, $sqlsubj);
                                                                             $rowsubj = mysqli_fetch_assoc($resultsubj);
@@ -233,6 +236,8 @@
                                                                     $result = mysqli_query($conn, $sql);
                                                                     //$num = mysqli_num_rows($result);
                                                                     while($row = mysqli_fetch_assoc($result)){
+
+                                                                        $id = $row['id'];
                                                                             $sqlsubj = "SELECT course_name FROM courses WHERE course_code = '$row[subject]'";
                                                                             $resultsubj = mysqli_query($conn, $sqlsubj);
                                                                             $rowsubj = mysqli_fetch_assoc($resultsubj);
@@ -295,6 +300,7 @@
                                                                     $result = mysqli_query($conn, $sql);
                                                                     //$num = mysqli_num_rows($result);
                                                                     while($row = mysqli_fetch_assoc($result)){
+                                                                            $id = $row['id'];
                                                                             $sqlsubj = "SELECT course_name FROM courses WHERE course_code = '$row[subject]'";
                                                                             $resultsubj = mysqli_query($conn, $sqlsubj);
                                                                             $rowsubj = mysqli_fetch_assoc($resultsubj);
@@ -363,6 +369,7 @@
                                                                     $result = mysqli_query($conn, $sql);
                                                                     //$num = mysqli_num_rows($result);
                                                                     while($row = mysqli_fetch_assoc($result)){
+                                                                        $id = $row['id'];
                                                                             $sqlsubj = "SELECT course_name FROM courses WHERE course_code = '$row[subject]'";
                                                                             $resultsubj = mysqli_query($conn, $sqlsubj);
                                                                             $rowsubj = mysqli_fetch_assoc($resultsubj);
@@ -425,7 +432,8 @@
                                                                     $result = mysqli_query($conn, $sql);
                                                                     //$num = mysqli_num_rows($result);
                                                                     while($row = mysqli_fetch_assoc($result)){
-                                                                            $sqlsubj = "SELECT course_name FROM courses WHERE course_code = '$row[subject]'";
+                                                                        $id = $row['id'];
+                                                                          $sqlsubj = "SELECT course_name FROM courses WHERE course_code = '$row[subject]'";
                                                                             $resultsubj = mysqli_query($conn, $sqlsubj);
                                                                             $rowsubj = mysqli_fetch_assoc($resultsubj);
                                                                             $subject = $rowsubj['course_name'];
