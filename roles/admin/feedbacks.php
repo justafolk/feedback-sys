@@ -64,7 +64,7 @@
 					$i = 1;
 					while ($i < 7) {
 					?>
-						<button class="btn btn-primary me-3" id="home-tab"><?php echo $i ?> Semester</button>
+						<button class="btn btn-primary me-3" onclick="window.location.href='./final_report.php?semester=<?php echo $i ?>&dept=<?php echo $dept_id ?>'" id="home-tab"><?php echo $i ?> Semester</button>
 					<?php
 					$i++;
 					}
