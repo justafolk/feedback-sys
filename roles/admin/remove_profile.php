@@ -25,6 +25,41 @@
 		<?php
 			session_start();
             include "sidebar.php";
+			include "../../imports/config.php";
+			error_reporting(0);
+			$uname = $_GET["username"];
+			if(isset($_POST['remove'])){
+				$uname = $_POST['uname'];
+				$pass = $_POST['password'];
+				$pass = md5($pass);
+				$sql = "SELECT * FROM login WHERE uname = '$uname'";
+				$sql1 = "SELECT * FROM login WHERE uname = 'admin'";
+				$result = mysqli_query($conn, $sql);
+				$admin = mysqli_fetch_array(mysqli_query($conn, $sql1));
+				$count = mysqli_num_rows($result);
+			
+				if($count >= 1){
+					$row = mysqli_fetch_assoc($result);
+						if($pass == $admin["passwd"]){
+							$name = $row["name"];
+							$sql2 = "DELETE from login where uname = '$uname';";
+							$sql3 = "DELETE from teacher where name = '$name';";
+							$sql4 = "DELETE from feedbacks where faculty_name = '$name';";
+							$result1 = mysqli_query($conn, $sql2);
+							$result2 = mysqli_query($conn, $sql3);
+							$result3 = mysqli_query($conn, $sql4);
+							if($result && $result2 && $result3){
+								echo "<script>alert('User deleted Successfully');</script>";
+							}else{
+								echo "<script>alert('Error 404');</script>";
+							}
+						}else{
+							echo "<script>alert('admin password is wrong');</script>";
+						}
+				}else{
+					echo "<script>alert('Username not found');</script>";
+				}
+			}
         ?>
 		<div class="main">
 			<nav class="navbar navbar-expand navbar-light navbar-bg">
@@ -54,9 +89,9 @@
 									<form action="" method="post">
 										<div class="mb-3">
 											<label for="inputFirstName" class="form-label">Username / Email</label>
-											<input type="text" class="form-control  form-control-lg" id="inputFirstName" name="firstname" placeholder="Enter Username / Email" required />										
+											<input type="text" value="<?php echo $uname; ?>"class="form-control  form-control-lg" id="inputFirstName" name="uname" placeholder="Enter Username / Email" required />										
 										</div>
-										<div class="mb-3">
+										<!-- <div class="mb-3">
 											<label class="form-label">Department</label>
 											<select id="inputState" class="form-control form-control-lg" name="position" required>
 												<option selected>Choose Department</option>
@@ -66,14 +101,13 @@
 												<option>E&TC Department</option>
 												<option>Mechanical Department</option>
 											</select>
-											<!-- <input class="form-control form-control-lg" type="text" name="department" placeholder="Select Department" required> -->
-										</div>
+										</div> -->
 										<div class="mb-3">
 											<label class="form-label">Enter Admin Password</label>
 											<input class="form-control form-control-lg" type="password" name="password" placeholder="Enter password" required>
 										</div>
-										<div class="text-center mb-3">
-                                            <button href="remove_profile.php" type="button" name="remove" value="remove" class="btn btn-danger"><i class="align-middle me-2 mb-1" data-feather="trash-2"></i>Remove</button>
+										<div class="text-center">
+                                            <button href="remove_profile.php" type="submit" name="remove" value="remove" class="btn btn-danger"><i class="align-middle me-2 mb-1" data-feather="trash-2"></i>Remove</button>
 											<!-- <button type="button" name="submit" value="submit" class="btn btn-lg btn-primary">Remove</button> -->
 										</div>
 									</form>
