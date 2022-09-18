@@ -12,28 +12,29 @@ if ($_SESSION['role'] != 'Faculty') {
 }
 ?>
 
-<?php 
-    $feedbackid = $_GET['id'];
-	include "../../imports/config.php";
-    $sql = "select `deptcode`, `semester`, `subject` from groups where `id` = '$feedbackid'";
-    $result = mysqli_query($conn, $sql);
-    $row = mysqli_fetch_assoc($result);
-    $deptcode = $row['deptcode'];
-    $semester = $row['semester'];
-    $subjectcode = $row['subject'];
+<?php
+$feedbackid = $_GET['id'];
+include "../../imports/config.php";
+$sql = "select `deptcode`, `semester`, `subject` from groups where `id` = '$feedbackid'";
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_assoc($result);
+$deptcode = $row['deptcode'];
+$semester = $row['semester'];
+$subjectcode = $row['subject'];
 
 
-    $sql2 = "select `dept_name` from departments where `dept_id` = '$deptcode'";
-    $result2 = mysqli_query($conn, $sql2);
-    $row2 = mysqli_fetch_assoc($result2);
-    $dept_name = $row2['dept_name'];
+$sql2 = "select `dept_name` from departments where `dept_id` = '$deptcode'";
+$result2 = mysqli_query($conn, $sql2);
+$row2 = mysqli_fetch_assoc($result2);
+$dept_name = $row2['dept_name'];
 
-    $sql3 = "select `course_name` from courses where `course_code` = '$subjectcode'";
-    $result3 = mysqli_query($conn, $sql3);
-    $row3 = mysqli_fetch_assoc($result3);
-    $course_name = $row3['course_name'];
+$sql3 = "select `course_name` from courses where `course_code` = '$subjectcode'";
+$result3 = mysqli_query($conn, $sql3);
+$row3 = mysqli_fetch_assoc($result3);
+$course_name = $row3['course_name'];
 
 ?>
+
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -139,49 +140,44 @@ if ($_SESSION['role'] != 'Faculty') {
 						<h1 class="h3 mb-3"><strong>Set</strong> feedback details </h1>
 						<div class="card border">
 							<div class="card-body">
-									<div class="form-group">
-										<!-- select department -->
-										<div class="row">
-											<div class=col-md-4>
-												<h4><strong>Department:</strong></h4>
-                                                <?php echo $dept_name; ?>
-												
-											</div>
-											<!-- select semester -->
-											<div class=col-md-4>
-												<h4><strong>Semester:</strong></h4>
-                                                <?php 
-                                                    if($semester == 1){
-                                                        echo "1st Semester";
-                                                    }
-                                                    elseif($semester == 2){
-                                                        echo "2nd Semester";
-                                                    }
-                                                    elseif($semester == 3){
-                                                        echo "3rd Semester";
-                                                    }
-                                                    elseif($semester == 4){
-                                                        echo "4th Semester";
-                                                    }
-                                                    elseif($semester == 5){
-                                                        echo "5th Semester";
-                                                    }
-                                                    elseif($semester == 6){
-                                                        echo "6th Semester";
-                                                    }   
-
-                                                ?>
-											</div>
-
-											<div class=col-md-4>
-												<h4><strong>Course:</strong></h4>
-                                                <?php echo $course_name; ?>
-											</div>
+								<div class="form-group">
+									<!-- select department -->
+									<div class="row">
+										<div class=col-md-4>
+											<h4><strong>Department:</strong></h4>
+											<?php echo $dept_name; ?>
 
 										</div>
-										<br />
+										<!-- select semester -->
+										<div class=col-md-4>
+											<h4><strong>Semester:</strong></h4>
+											<?php
+											if ($semester == 1) {
+												echo "1st Semester";
+											} elseif ($semester == 2) {
+												echo "2nd Semester";
+											} elseif ($semester == 3) {
+												echo "3rd Semester";
+											} elseif ($semester == 4) {
+												echo "4th Semester";
+											} elseif ($semester == 5) {
+												echo "5th Semester";
+											} elseif ($semester == 6) {
+												echo "6th Semester";
+											}
 
-										<!--
+											?>
+										</div>
+
+										<div class=col-md-4>
+											<h4><strong>Course:</strong></h4>
+											<?php echo $course_name; ?>
+										</div>
+
+									</div>
+									<br />
+
+									<!--
 										<label for="department">Select Department</label>
 										<select class="form-control" id="department" name="department">
 											<option value="">Select Department</option>
@@ -193,88 +189,90 @@ if ($_SESSION['role'] != 'Faculty') {
 											<option value="50">Electronics And Telecommuncation (Aided)</option>
 											<option value="51">Electronics And Telecommuncation (Un-Aided)</option>
 										</select> -->
-									</div>
+								</div>
 
-                                    <br />
-                                    <form action="" method="POST">
+								<br />
+								<form action="" method="POST">
 									<div class="form-group">
 										<div class="row">
 
 											<div class=col-md-4>
-												<label for="name"><h4><strong> Select date for the feedback </strong></h4></label>
+												<label for="name">
+													<h4><strong> Select date for the feedback </strong></h4>
+												</label>
 												<input type="date" class="form-control" id="name" name="date" required="" value="<?php echo $date; ?>">
 											</div>
 
-                                            <br />
+											<br />
+											<br />
+
+										</div>
+
+										<br />
+										<br />
 										<br />
 
-									</div>
-                                    
-                                    <br />
-                                    <br />
-                                    <br />
-								    
-                                    <div class="form-group">
+										<div class="form-group">
 
-										<h3><label for="exampleInputPassword1"><b>Student survey group </b></label></h3>
-										<div class="form-group atrangi">
-											<?php
+											<h3><label for="exampleInputPassword1"><b>Student survey group </b></label></h3>
+											<div class="form-group atrangi">
+												<?php
 
-											$sql = "SELECT activeRoll FROM groups WHERE `id` = '$feedbackid' AND `semester` = '$semester'";
-                                            $result = mysqli_query($conn, $sql);
-                                            $row = mysqli_fetch_assoc($result);
-                                            $activeRoll = $row['activeRoll'];
+												$sql = "SELECT activeRoll FROM groups WHERE `id` = '$feedbackid' AND `semester` = '$semester'";
+												$result = mysqli_query($conn, $sql);
+												$row = mysqli_fetch_assoc($result);
+												$activeRoll = $row['activeRoll'];
 
-                                            $active_rolls = json_decode($activeRoll, true);
-											//delete last item of array
-											array_pop($active_rolls);
-                                            $allrolls = count($active_rolls);
+												$active_rolls = json_decode($activeRoll, true);
+												//delete last item of array
+												array_pop($active_rolls);
+												$allrolls = count($active_rolls);
 
 
-                                            $count = 1;
+												$count = 1;
 
-											while ($count <= $allrolls) {
-												echo "<group>";
-												for ($i = 1; $i < 16; $i++) {
+												while ($count <= $allrolls) {
+													echo "<group>";
+													for ($i = 1; $i < 16; $i++) {
 
-													$row["enrollid"] = $active_rolls[$count - 1];
+														$row["enrollid"] = $active_rolls[$count - 1];
 
 
-													$count += 1;
-													if ($row['enrollid'] == 0) {
-														continue;
-													}
-													if ($count == $allrolls + 2) {
-														break;
-													}
-													error_reporting(0);
-													array_push($rolls, $row['enrollid']);
+														$count += 1;
+														if ($row['enrollid'] == 0) {
+															continue;
+														}
+														if ($count == $allrolls + 2) {
+															break;
+														}
+														error_reporting(0);
+														array_push($rolls, $row['enrollid']);
 
-													echo  "<div class=\"input-container\"/>
+														echo  "<div class=\"input-container\"/>
                                                             <input checked type=\"checkbox\" name=\"{$row['enrollid']}\" id=\"{$row['enrollid']}\">
                                                             <label for=\"{$row['enrollid']}\">{$row['enrollid']}</label>
                                                             </div>";
+													}
+													echo "</group>";
 												}
-												echo "</group>";
-											}
-											?>
+												?>
 
+											</div>
+											<br />
+											<br />
+											<center>
+												<!--<button submit class="btn btn-primary" name="finalfeed">Finalise feedback</submit></button> -->
+
+												<button type="submit" class="btn btn-primary" name="request">Finalise and Request</button>
+											</center>
 										</div>
-										<br />
-										<br />
-										<center>
-										<!--<button submit class="btn btn-primary" name="finalfeed">Finalise feedback</submit></button> -->
-										
-                                        <button type="submit" class="btn btn-primary" name="request">Finalise and Request</button>
-                                        </center>
 									</div>
-							</div>
 
-							<br />
-							</form>
+									<br />
+								</form>
+							</div>
 						</div>
 					</div>
-				</div>
 
 			</main>
 
@@ -288,54 +286,69 @@ if ($_SESSION['role'] != 'Faculty') {
 
 	if (isset($_POST['request'])) {
 
-        $date = $_POST['date'];
-        $feedbackid = $_GET['id'];
+		$date = $_POST['date'];
+		$feedbackid = $_GET['id'];
 
-        $known_posts = array('date');
-        $active_rolls = array();
+		$known_posts = array('date');
+		$active_rolls = array();
 
-        foreach($_POST as $key => $value) {
-            if(!in_array($key, $known_posts)) {
-                array_push($active_rolls, $key);
-            }
-        }
-
-        array_pop($active_rolls);
-        $activeRoll = json_encode($active_rolls);
-		//echo "<script>alert('$feedbackid')</script>";
-      
-        $sql = "UPDATE groups SET `activeRoll` = '$activeRoll', `date` = '$date' , `req` = '1' WHERE `id` = '$feedbackid' ";
-        $result = mysqli_query($conn, $sql);
-        if ($result) {
-            echo "<script>alert('Feedback requested successfully');</script>";
-            echo "<script>window.location.href = 'requested_forms.php';</script>"; 
-        } else {
-            echo "<script>alert('Error updating feedback');</script>";
-        }
-	}
-
-	$loginroll = json_decode($activeRoll);
-
-	for($i = 0; $i < count($loginroll); $i++) {
-		$roll = $loginroll[$i];
-		//create login id for each rollnumber
-		$loginid = $roll ;
-		//create password for each rollnumber
-		$password = md5($roll); ;
-		//create login table
-
-		$rollcount = "SELECT * FROM `login` WHERE `uname` = '$roll'";
-		$rollcountresult = mysqli_query($conn, $rollcount);
-		$rollcountrow = mysqli_num_rows($rollcountresult);
-
-		if($rollcountrow == 0) {
-	
-		$sql = "INSERT INTO `login`(`uname`, `passwd`, `role`, `name`) VALUES ('$loginid','$password','Student', 'Student')";
-		$result = mysqli_query($conn, $sql);
+		foreach ($_POST as $key => $value) {
+			if (!in_array($key, $known_posts)) {
+				array_push($active_rolls, $key);
+			}
 		}
 
+		array_pop($active_rolls);
+		$activeRoll = json_encode($active_rolls);
+		//echo "<script>alert('$feedbackid')</script>";
+
+		$sql = "UPDATE groups SET `activeRoll` = '$activeRoll', `req` = '1' WHERE `id` = '$feedbackid' ";
+		$result = mysqli_query($conn, $sql);
+		if ($result) {
+			echo "<script>alert('Feedback requested successfully');</script>";
+			echo "<script>window.location.href = 'requested_forms.php';</script>";
+		} else {
+			echo "<script>alert('Error updating feedback');</script>";
+		}
+
+		$loginroll = json_decode($activeRoll);
+
+		for ($i = 0; $i < count($loginroll); $i++) {
+			$roll = $loginroll[$i];
+			//create login id for each rollnumber
+			$loginid = $roll;
+			//create password for each rollnumber
+			$password = md5($roll);;
+			//create login table
+
+			$rollcount = "SELECT * FROM `login` WHERE `uname` = '$roll'";
+			$rollcountresult = mysqli_query($conn, $rollcount);
+			$rollcountrow = mysqli_num_rows($rollcountresult);
+			$row_login = mysqli_fetch_assoc($rollcountresult);
+			if ($rollcountrow == 0) {
+				$student_grp = $feedbackid;
+				$sql = "INSERT INTO `login`(`uname`, `passwd`, `role`, `name`, `student_groups` ) VALUES ('$loginid','$password','Student', 'Student', $feedbackid)";
+				$result = mysqli_query($conn, $sql);
+
+				if (!$result) {
+
+					echo "<script>alert('" . mysqli_error($conn) . "');</script>";
+					exit();
+				}
+			} else {
+				$student_grp = $row['student_groups'] . ';' . $feedbackid;
+				$sql = "UPDATE `login` SET `student_groups` = '{$student_grp}'  WHERE `uname` = '$roll'";
+				$result = mysqli_query($conn, $sql);
+				if (!$result) {
+
+					echo "<script>alert('" . mysqli_error($conn) . "');</script>";
+					exit();
+				}
+			}
+		}
 	}
-	
+
+
 	?>
 
 </body>
@@ -344,7 +357,7 @@ if ($_SESSION['role'] != 'Faculty') {
 
 <?php
 
-        /*
+/*
 		$known_posts = array('deptcode', 'semester', 'subject', 'rollrange', 'addrollrange', 'addrollunit', 'finalroll');
 		$active_rolls = array();
 		foreach ($_POST as $key => $value) {

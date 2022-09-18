@@ -68,7 +68,13 @@ if ($_SESSION['role'] != 'Student') {
 						<div class="row">
 							<?php
 							include "../../imports/config.php";
-							$sql = "SELECT * FROM groups, forms where activeRoll LIKE '%{$_SESSION["uname"]}%' and groups.id = forms.form_id ";
+							$student_login = "select * from login where uname = '".$_SESSION['uname']."'";
+							$student_login_result = mysqli_query($conn, $student_login);
+							$student_login_row = mysqli_fetch_assoc($student_login_result);
+							$groups = explode(";", $student_login_row['student_groups']);
+							$groups = array_filter($groups);
+							$groups_string = "(".implode(",", $groups).")";
+							$sql = "SELECT * FROM groups, forms WHERE groups.id IN $groups_string and forms.group_id = groups.id ";
 							$result = mysqli_query($conn, $sql);
 							if (mysqli_num_rows($result) > 0) {
 								while ($row = mysqli_fetch_assoc($result)) {
