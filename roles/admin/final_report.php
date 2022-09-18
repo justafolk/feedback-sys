@@ -1,8 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-$feedback_id = $_GET["id"];
+$semester_id = $_GET['semester'];
+$department_id = $_GET['dept'];
 session_start();
+include "../../imports/config.php";
+$sql = "select * from groups where semester ={$semester_id} and deptcode = {$department_id}";
+
+$result = mysqli_query($conn, $sql);
+$group_array = array();
+$courses = array();
+while ($row = mysqli_fetch_assoc($result)) {
+	$group_array[] = $row['id'];
+	$courses[] = $row['subject'];
+}
 ?>
 
 <head>
@@ -55,8 +66,9 @@ session_start();
 				<div>
 					<h1 class="h3 mb-0"><strong>Feedback |
 							<?php
+							echo $semester_id;
 							include "../../imports/config.php";
-							$sql = "SELECT * FROM forms WHERE form_id = '$feedback_id'";
+							$sql = "SELECT * FROM forms WHERE group_id = '{$row['id']}'";
 							$result = mysqli_query($conn, $sql);
 							$row = mysqli_fetch_assoc($result);
 							$author = $row['author'];
@@ -66,7 +78,7 @@ session_start();
 							$row_group = mysqli_fetch_assoc($result_group);
 							$student_count = $row_group['student_count'];
 
-							?></strong></h1>
+							?> term</strong></h1>
 				</div>
 				<?php
 				include "notification.php";
@@ -78,7 +90,7 @@ session_start();
 			</nav>
 
 			<main class="content">
-				<div class="container-fluid p-0">
+				<!-- <div class="container-fluid p-0">
 					<div class="card border shadow-none">
 						<div class="card-body" style="width: 100%; height:100%">
 
@@ -168,7 +180,7 @@ session_start();
 														data: [
 															<?php
 															for ($i = 0; $i < count($main_responses); $i++) {
-																echo round(array_sum($main_responses[$i])/count($main_responses[$i]), 2);
+																echo round(array_sum($main_responses[$i]) / count($main_responses[$i]), 2);
 																if ($i != count($main_responses) - 1) {
 																	echo ",";
 																}
@@ -210,16 +222,57 @@ session_start();
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 				<div class="row">
 					<div class="col-md-12">
 						<div class="card shadow-none border">
 							<div class="card-body">
 								<div class="table-responsive">
 									<table class="table table-bordered">
+										<?php
+										$averages = array();
+										for ($i = 0; $i < count($group_array); $i++) {
+											array_push($averages, array()) ;
+										}
+										$count = 0;
+										foreach ($group_array as $key => $value) {
+
+											$i = 1;
+											$sql = "SELECT * FROM form_ques where form_id = '1'";
+											$result = mysqli_query($conn, $sql);
+											$num_ques = mysqli_num_rows($result);
+
+											$sql = "select * from form_responses where form_id='$value'";
+											$resu = mysqli_query($conn, $sql);
+											$main_responses = array();
+											for ($i = 0; $i < $num_ques; $i++) {
+												array_push($main_responses, array());
+											}
+											while ($row = mysqli_fetch_assoc($resu)) {
+												$res = json_decode($row['response_json'], true);
+												$i = 0;
+												foreach ($res as $key => $value) {
+													array_push($main_responses[$i], round($value));
+													$i++;
+													if ($i == $num_ques) {
+														break;
+														# code...
+													}
+												}
+											}
+
+											for ($i=0; $i <  7; $i++) { 
+												# code...
+												array_push($averages[$count] ,round(array_sum($main_responses[$i]) / count($main_responses[$i]), 2));
+												
+											}
+											$count++;
+										}
+										?>
+
 										<thead>
-											<th>Feedback Question</th>
-											<th colspan="5">Percentage of Scores</th>
+											<th>Courses</th>
+											<th colspan="7">Questions</th>
 											<th>Avg</th>
 
 
@@ -233,26 +286,25 @@ session_start();
 												<th>3</th>
 												<th>4</th>
 												<th>5</th>
+												<th>6</th>
+												<th>7</th>
 												<th></th>
 
 											</tr>
 											<?php
-
-											$i = 0;
-											while ($row = mysqli_fetch_assoc($result)) {
-												echo "<tr>";
-												$percentage = array_count_values($main_responses[$i]);
-												echo "<td>" . $row['question_title'] . "</td>";
-												echo "<td>" . round(count(array_keys($main_responses[$i], 1)) / count($main_responses[$i]) * 100, 2) . "</td>";
-												echo "<td>" . round(count(array_keys($main_responses[$i], 2)) / count($main_responses[$i]) * 100, 2) . "</td>";
-												echo "<td>" . round(count(array_keys($main_responses[$i], 3)) / count($main_responses[$i]) * 100, 2) . "</td>";
-												echo "<td>" . round(count(array_keys($main_responses[$i], 4)) / count($main_responses[$i]) * 100, 2) . "</td>";
-												echo "<td>" . round(count(array_keys($main_responses[$i], 5)) / count($main_responses[$i]) * 100, 2) . "</td>";
-
-												echo "<td>" . round(array_sum($main_responses[$i]) / count($main_responses[$i]), 2) . "</td>";
-												echo "</tr>";
-												$i++;
-											}
+												foreach ($group_array as $key => $value) {
+													$grp_sql = "select * from courses where course_code='$courses[$key]'";
+													$grp_res = mysqli_query($conn, $grp_sql);
+													$grp_row = mysqli_fetch_assoc($grp_res);
+													echo "<tr>";
+													echo "<td>" . $grp_row['course_name']." ({$grp_row['course_code']})" . "</td>";
+													$avgd = 0;
+													for ($i = 0; $i < 7; $i++) {
+														echo "<td>" . $averages[$key][$i] . "</td>";
+														$avgd += $averages[$key][$i];
+													}
+													echo "<td>" . round($avgd / 7, 2) . "</td>";
+												}
 											?>
 
 										</tbody>
@@ -266,7 +318,7 @@ session_start();
 
 					<button class="btn btn-dark btn-ecomm" type="button">Print </button>
 				</a>
-				
+
 
 
 			</main>
