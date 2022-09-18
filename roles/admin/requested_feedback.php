@@ -145,67 +145,54 @@
                                                     <table class="table text-center">
                                                         <thead class="thead-dark">
                                                             <tr>
-                                                                <th scope="col">Sr. No</th>
+                                                            <th scope="col">Sr. No</th>
                                                                 <th scope="col">Subject</th>
                                                                 <th scope="col">Course Code</th>
                                                                 <th scope="col">Teacher Name</th>
-                                                                <th scope="col">Total Questions</th>
-                                                                <th scope="col">Status</th>
+                                                                <th scope="col">Date</th>
                                                                 <th scope="col">Action</th>
                                                                 <th scope="col">View</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr>
-                                                                <th scope="row">1</th>
-                                                                <td>Basic Mathematics</td>
-                                                                <td>R18SC1701</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <th>Not Done</th>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id7">View</button></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">2</th>
-                                                                <td>Basic Physics</td>
-                                                                <td>R18SC1703</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <th>Done</th>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id8">View</button></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">3</th>
-                                                                <td>English</td>
-                                                                <td>R18SC1707</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <td>Not Done</td>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id9">View</button></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">4</th>
-                                                                <td>Engineering Graphic Skills</td>
-                                                                <td>R18ME1210</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <td>Not Done</td>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id10">View</button></td>
-                                                            </tr> 
-                                                            <tr>
-                                                                <th scope="row">5</th>
-                                                                <td>Programming in C</td>
-                                                                <td>R18CP3401</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <td>Not Done</td>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id11">View</button></td>
-                                                            </tr>
+                                                            <?php
+                                                                include "../../imports/config.php";
+                                                            ?>
+                                                            <form method="post" action="">
+                                                                <?php 
+                                                                    $i = 1;
+                                                                    $sql = "SELECT * FROM groups WHERE deptcode = '$deptcode' AND `semester` = '2' AND `req` = '1' and accepted = '0'";
+                                                                    $result = mysqli_query($conn, $sql);
+                                                                    //$num = mysqli_num_rows($result);
+                                                                    while($row = mysqli_fetch_assoc($result)){
+                                                                            $sqlsubj = "SELECT course_name FROM courses WHERE course_code = '$row[subject]'";
+                                                                            $resultsubj = mysqli_query($conn, $sqlsubj);
+                                                                            $rowsubj = mysqli_fetch_assoc($resultsubj);
+                                                                            $subject = $rowsubj['course_name'];
+
+                                                                            $course_code = $row['subject'];
+
+                                                                            $sqlteacher = "SELECT name FROM login WHERE `id` = '$row[teacher_id]'";
+                                                                            $resultteacher = mysqli_query($conn, $sqlteacher);
+                                                                            $rowteacher = mysqli_fetch_assoc($resultteacher);
+                                                                            $teacher_name = $rowteacher['name'];
+
+                                                                            $date = $row['fdate'];
+
+                                                                            echo "<tr>
+                                                                                    <th scope='row'>$i</th>
+                                                                                    <td>$subject</td>
+                                                                                    <td>$course_code</td>
+                                                                                    <td>$teacher_name</td>
+                                                                                    <td>$date</td>
+                                                                                    <td><a href='approve.php?id=$id&deptcode=$deptcode' class='btn btn-success'>Approve</a></td>
+                                                                                    <td><a href='view.php?id=$id&deptcode=$deptcode' class='btn btn-primary'>View</a></td>
+                                                                                </tr>";
+                                                                            $i++;
+                                                                        }
+                                                                    
+                                                                ?>
+                                                            </form>
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -226,67 +213,54 @@
                                                     <table class="table text-center">
                                                         <thead class="thead-dark">
                                                             <tr>
-                                                                <th scope="col">Sr. No</th>
+                                                            <th scope="col">Sr. No</th>
                                                                 <th scope="col">Subject</th>
                                                                 <th scope="col">Course Code</th>
                                                                 <th scope="col">Teacher Name</th>
-                                                                <th scope="col">Total Questions</th>
-                                                                <th scope="col">Status</th>
+                                                                <th scope="col">Date</th>
                                                                 <th scope="col">Action</th>
                                                                 <th scope="col">View</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr>
-                                                                <th scope="row">1</th>
-                                                                <td>Basic Mathematics</td>
-                                                                <td>R18SC1701</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <th>Not Done</th>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id12">View</button></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">2</th>
-                                                                <td>Basic Physics</td>
-                                                                <td>R18SC1703</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <th>Done</th>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id13">View</button></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">3</th>
-                                                                <td>English</td>
-                                                                <td>R18SC1707</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <td>Not Done</td>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id14">View</button></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">4</th>
-                                                                <td>Engineering Graphic Skills</td>
-                                                                <td>R18ME1210</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <td>Not Done</td>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id15">View</button></td>
-                                                            </tr> 
-                                                            <tr>
-                                                                <th scope="row">5</th>
-                                                                <td>Programming in C</td>
-                                                                <td>R18CP3401</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <td>Not Done</td>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id16">View</button></td>
-                                                            </tr>
+                                                            <?php
+                                                                include "../../imports/config.php";
+                                                            ?>
+                                                            <form method="post" action="">
+                                                                <?php 
+                                                                    $i = 1;
+                                                                    $sql = "SELECT * FROM groups WHERE deptcode = '$deptcode' AND `semester` = '3' AND `req` = '1' and accepted = '0'";
+                                                                    $result = mysqli_query($conn, $sql);
+                                                                    //$num = mysqli_num_rows($result);
+                                                                    while($row = mysqli_fetch_assoc($result)){
+                                                                            $sqlsubj = "SELECT course_name FROM courses WHERE course_code = '$row[subject]'";
+                                                                            $resultsubj = mysqli_query($conn, $sqlsubj);
+                                                                            $rowsubj = mysqli_fetch_assoc($resultsubj);
+                                                                            $subject = $rowsubj['course_name'];
+
+                                                                            $course_code = $row['subject'];
+
+                                                                            $sqlteacher = "SELECT name FROM login WHERE `id` = '$row[teacher_id]'";
+                                                                            $resultteacher = mysqli_query($conn, $sqlteacher);
+                                                                            $rowteacher = mysqli_fetch_assoc($resultteacher);
+                                                                            $teacher_name = $rowteacher['name'];
+
+                                                                            $date = $row['fdate'];
+
+                                                                            echo "<tr>
+                                                                                    <th scope='row'>$i</th>
+                                                                                    <td>$subject</td>
+                                                                                    <td>$course_code</td>
+                                                                                    <td>$teacher_name</td>
+                                                                                    <td>$date</td>
+                                                                                    <td><a href='approve.php?id=$id&deptcode=$deptcode' class='btn btn-success'>Approve</a></td>
+                                                                                    <td><a href='view.php?id=$id&deptcode=$deptcode' class='btn btn-primary'>View</a></td>
+                                                                                </tr>";
+                                                                            $i++;
+                                                                        }
+                                                                    
+                                                                ?>
+                                                            </form>
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -301,67 +275,54 @@
                                                     <table class="table text-center">
                                                         <thead class="thead-dark">
                                                             <tr>
-                                                                <th scope="col">Sr. No</th>
+                                                            <th scope="col">Sr. No</th>
                                                                 <th scope="col">Subject</th>
                                                                 <th scope="col">Course Code</th>
                                                                 <th scope="col">Teacher Name</th>
-                                                                <th scope="col">Total Questions</th>
-                                                                <th scope="col">Status</th>
+                                                                <th scope="col">Date</th>
                                                                 <th scope="col">Action</th>
                                                                 <th scope="col">View</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr>
-                                                                <th scope="row">1</th>
-                                                                <td>Basic Mathematics</td>
-                                                                <td>R18SC1701</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <th>Not Done</th>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id17">View</button></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">2</th>
-                                                                <td>Basic Physics</td>
-                                                                <td>R18SC1703</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <th>Done</th>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id18">View</button></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">3</th>
-                                                                <td>English</td>
-                                                                <td>R18SC1707</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <td>Not Done</td>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id19">View</button></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">4</th>
-                                                                <td>Engineering Graphic Skills</td>
-                                                                <td>R18ME1210</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <td>Not Done</td>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id20">View</button></td>
-                                                            </tr> 
-                                                            <tr>
-                                                                <th scope="row">5</th>
-                                                                <td>Programming in C</td>
-                                                                <td>R18CP3401</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <td>Not Done</td>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id21">View</button></td>
-                                                            </tr>
+                                                            <?php
+                                                                include "../../imports/config.php";
+                                                            ?>
+                                                            <form method="post" action="">
+                                                                <?php 
+                                                                    $i = 1;
+                                                                    $sql = "SELECT * FROM groups WHERE deptcode = '$deptcode' AND `semester` = '4' AND `req` = '1' and accepted = '0'";
+                                                                    $result = mysqli_query($conn, $sql);
+                                                                    //$num = mysqli_num_rows($result);
+                                                                    while($row = mysqli_fetch_assoc($result)){
+                                                                            $sqlsubj = "SELECT course_name FROM courses WHERE course_code = '$row[subject]'";
+                                                                            $resultsubj = mysqli_query($conn, $sqlsubj);
+                                                                            $rowsubj = mysqli_fetch_assoc($resultsubj);
+                                                                            $subject = $rowsubj['course_name'];
+
+                                                                            $course_code = $row['subject'];
+
+                                                                            $sqlteacher = "SELECT name FROM login WHERE `id` = '$row[teacher_id]'";
+                                                                            $resultteacher = mysqli_query($conn, $sqlteacher);
+                                                                            $rowteacher = mysqli_fetch_assoc($resultteacher);
+                                                                            $teacher_name = $rowteacher['name'];
+
+                                                                            $date = $row['fdate'];
+
+                                                                            echo "<tr>
+                                                                                    <th scope='row'>$i</th>
+                                                                                    <td>$subject</td>
+                                                                                    <td>$course_code</td>
+                                                                                    <td>$teacher_name</td>
+                                                                                    <td>$date</td>
+                                                                                    <td><a href='approve.php?id=$id&deptcode=$deptcode' class='btn btn-success'>Approve</a></td>
+                                                                                    <td><a href='view.php?id=$id&deptcode=$deptcode' class='btn btn-primary'>View</a></td>
+                                                                                </tr>";
+                                                                            $i++;
+                                                                        }
+                                                                    
+                                                                ?>
+                                                            </form>
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -382,67 +343,54 @@
                                                     <table class="table text-center">
                                                         <thead class="thead-dark">
                                                             <tr>
-                                                                <th scope="col">Sr. No</th>
+                                                            <th scope="col">Sr. No</th>
                                                                 <th scope="col">Subject</th>
                                                                 <th scope="col">Course Code</th>
                                                                 <th scope="col">Teacher Name</th>
-                                                                <th scope="col">Total Questions</th>
-                                                                <th scope="col">Status</th>
+                                                                <th scope="col">Date</th>
                                                                 <th scope="col">Action</th>
                                                                 <th scope="col">View</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr>
-                                                                <th scope="row">1</th>
-                                                                <td>Basic Mathematics</td>
-                                                                <td>R18SC1701</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <th>Not Done</th>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id22">View</button></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">2</th>
-                                                                <td>Basic Physics</td>
-                                                                <td>R18SC1703</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <th>Done</th>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id23">View</button></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">3</th>
-                                                                <td>English</td>
-                                                                <td>R18SC1707</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <td>Not Done</td>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id24">View</button></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">4</th>
-                                                                <td>Engineering Graphic Skills</td>
-                                                                <td>R18ME1210</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <td>Not Done</td>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id25">View</button></td>
-                                                            </tr> 
-                                                            <tr>
-                                                                <th scope="row">5</th>
-                                                                <td>Programming in C</td>
-                                                                <td>R18CP3401</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <td>Not Done</td>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id26">View</button></td>
-                                                            </tr>
+                                                            <?php
+                                                                include "../../imports/config.php";
+                                                            ?>
+                                                            <form method="post" action="">
+                                                                <?php 
+                                                                    $i = 1;
+                                                                    $sql = "SELECT * FROM groups WHERE deptcode = '$deptcode' AND `semester` = '5' AND `req` = '1' and accepted = '0'";
+                                                                    $result = mysqli_query($conn, $sql);
+                                                                    //$num = mysqli_num_rows($result);
+                                                                    while($row = mysqli_fetch_assoc($result)){
+                                                                            $sqlsubj = "SELECT course_name FROM courses WHERE course_code = '$row[subject]'";
+                                                                            $resultsubj = mysqli_query($conn, $sqlsubj);
+                                                                            $rowsubj = mysqli_fetch_assoc($resultsubj);
+                                                                            $subject = $rowsubj['course_name'];
+
+                                                                            $course_code = $row['subject'];
+
+                                                                            $sqlteacher = "SELECT name FROM login WHERE `id` = '$row[teacher_id]'";
+                                                                            $resultteacher = mysqli_query($conn, $sqlteacher);
+                                                                            $rowteacher = mysqli_fetch_assoc($resultteacher);
+                                                                            $teacher_name = $rowteacher['name'];
+
+                                                                            $date = $row['fdate'];
+
+                                                                            echo "<tr>
+                                                                                    <th scope='row'>$i</th>
+                                                                                    <td>$subject</td>
+                                                                                    <td>$course_code</td>
+                                                                                    <td>$teacher_name</td>
+                                                                                    <td>$date</td>
+                                                                                    <td><a href='approve.php?id=$id&deptcode=$deptcode' class='btn btn-success'>Approve</a></td>
+                                                                                    <td><a href='view.php?id=$id&deptcode=$deptcode' class='btn btn-primary'>View</a></td>
+                                                                                </tr>";
+                                                                            $i++;
+                                                                        }
+                                                                    
+                                                                ?>
+                                                            </form>
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -457,67 +405,54 @@
                                                     <table class="table text-center">
                                                         <thead class="thead-dark">
                                                             <tr>
-                                                                <th scope="col">Sr. No</th>
+                                                            <th scope="col">Sr. No</th>
                                                                 <th scope="col">Subject</th>
                                                                 <th scope="col">Course Code</th>
                                                                 <th scope="col">Teacher Name</th>
-                                                                <th scope="col">Total Questions</th>
-                                                                <th scope="col">Status</th>
+                                                                <th scope="col">Date</th>
                                                                 <th scope="col">Action</th>
                                                                 <th scope="col">View</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr>
-                                                                <th scope="row">1</th>
-                                                                <td>Basic Mathematics</td>
-                                                                <td>R18SC1701</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <th>Not Done</th>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id27">View</button></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">2</th>
-                                                                <td>Basic Physics</td>
-                                                                <td>R18SC1703</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <th>Done</th>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id28">View</button></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">3</th>
-                                                                <td>English</td>
-                                                                <td>R18SC1707</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <td>Not Done</td>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id29">View</button></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">4</th>
-                                                                <td>Engineering Graphic Skills</td>
-                                                                <td>R18ME1210</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <td>Not Done</td>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id30">View</button></td>
-                                                            </tr> 
-                                                            <tr>
-                                                                <th scope="row">5</th>
-                                                                <td>Programming in C</td>
-                                                                <td>R18CP3401</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <td>Not Done</td>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id31">View</button></td>
-                                                            </tr>
+                                                            <?php
+                                                                include "../../imports/config.php";
+                                                            ?>
+                                                            <form method="post" action="">
+                                                                <?php 
+                                                                    $i = 1;
+                                                                    $sql = "SELECT * FROM groups WHERE deptcode = '$deptcode' AND `semester` = '6' AND `req` = '1' and accepted = '0'";
+                                                                    $result = mysqli_query($conn, $sql);
+                                                                    //$num = mysqli_num_rows($result);
+                                                                    while($row = mysqli_fetch_assoc($result)){
+                                                                            $sqlsubj = "SELECT course_name FROM courses WHERE course_code = '$row[subject]'";
+                                                                            $resultsubj = mysqli_query($conn, $sqlsubj);
+                                                                            $rowsubj = mysqli_fetch_assoc($resultsubj);
+                                                                            $subject = $rowsubj['course_name'];
+
+                                                                            $course_code = $row['subject'];
+
+                                                                            $sqlteacher = "SELECT name FROM login WHERE `id` = '$row[teacher_id]'";
+                                                                            $resultteacher = mysqli_query($conn, $sqlteacher);
+                                                                            $rowteacher = mysqli_fetch_assoc($resultteacher);
+                                                                            $teacher_name = $rowteacher['name'];
+
+                                                                            $date = $row['fdate'];
+
+                                                                            echo "<tr>
+                                                                                    <th scope='row'>$i</th>
+                                                                                    <td>$subject</td>
+                                                                                    <td>$course_code</td>
+                                                                                    <td>$teacher_name</td>
+                                                                                    <td>$date</td>
+                                                                                    <td><a href='approve.php?id=$id&deptcode=$deptcode' class='btn btn-success'>Approve</a></td>
+                                                                                    <td><a href='view.php?id=$id&deptcode=$deptcode' class='btn btn-primary'>View</a></td>
+                                                                                </tr>";
+                                                                            $i++;
+                                                                        }
+                                                                    
+                                                                ?>
+                                                            </form>
                                                         </tbody>
                                                     </table>
                                                 </div>
