@@ -145,24 +145,44 @@
                                                                         $code = $data[$i]["course_code"];
                                                                         $tname = $data[$i]["teacher"];
                                                                         $status = "Not Done";
+                                                                        $error = 1;
                                                                         $date = date("Y-m-d");
                                                                         if($tname == NULL){
                                                                             $tname = "@mda";
                                                                         }
                                                                         $check = if_exists($conn, $name);
-                                                                        if($id == "Inactive"){
-                                                                            if($check == NULL){
-                                                                                $sql = "INSERT INTO feedbacks (f_name,cors_code,faculty_name, f_sdate, status, active) values('$name','$code','$tname','$date','$status',1)";
-                                                                                $result = mysqli_query($conn, $sql);
-                                                                            }
-                                                                            else{
-                                                                                $sql = "update feedbacks set f_name = '$name', cors_code = '$code',faculty_name = '$tname', status = '$status', f_sdate = '$date', active = '1' where f_id = '$check[f_id]';";
-                                                                                $result = mysqli_query($conn, $sql);
+                                                                        $sql1 = "SELECT * from teacher";
+                                                                        $t=0;
+                                                                        $cc = array();
+                                                                        $teacher = array();
+                                                                        $result = mysqli_query($conn, $sql1);
+                                                                        while ($row = mysqli_fetch_assoc($result)) {
+                                                                            $teacher[$t] = $row;
+                                                                            $t++;
+                                                                        }
+                                                                        for($c=0;$c<$t;$c++){
+                                                                            $cc = explode(",",$teacher[$c]["course"]);
+                                                                            if(in_array($code, $cc)){
+                                                                                $tname = $teacher[$c]["name"];
+                                                                                $error = 0;
+                                                                                if($id == "Inactive"){
+                                                                                    if($check == NULL){
+                                                                                        $sql = "INSERT INTO feedbacks (f_name,cors_code,faculty_name, f_sdate, status, active) values('$name','$code','$tname','$date','$status',1)";
+                                                                                        $result = mysqli_query($conn, $sql);
+                                                                                    }
+                                                                                    else{
+                                                                                        $sql = "update feedbacks set f_name = '$name', cors_code = '$code',faculty_name = '$tname', status = '$status', f_sdate = '$date', active = '1' where f_id = '$check[f_id]';";
+                                                                                        $result = mysqli_query($conn, $sql);
+                                                                                    }
+                                                                                }
+                                                                                else{
+                                                                                    $sql = "update feedbacks set f_name = '$name', cors_code = '$code',faculty_name = '$tname', status = '$status', f_edate = '$date', active = '0' where f_id = '$check[f_id]';";
+                                                                                    $result = mysqli_query($conn, $sql);
+                                                                                }
                                                                             }
                                                                         }
-                                                                        else{
-                                                                            $sql = "update feedbacks set f_name = '$name', cors_code = '$code',faculty_name = '$tname', status = '$status', f_edate = '$date', active = '0' where f_id = '$check[f_id]';";
-                                                                            $result = mysqli_query($conn, $sql);
+                                                                        if($error){
+                                                                            echo "<script>alert('Teacher doesnt exists');</script>";
                                                                         }
                                                                         // if($check == NULL){
                                                                         //     $sql = "INSERT INTO feedbacks (f_name,cors_code,faculty_name, f_sdate, status, active) values('$name','$code','$tname','$date','$status',1)";
@@ -209,10 +229,10 @@
                                                                     <?php for($b=0;$b<$j;$b++){
                                                                         if($data[$i]["course_name"] == $feedbacks[$b]["f_name"]){
                                                                             if($check["active"]){
-                                                                                echo "S- ".$feedbacks[$b]["f_sdate"]; 
+                                                                                echo $feedbacks[$b]["f_sdate"]; 
                                                                             }
                                                                             else{
-                                                                                echo "E- ".$feedbacks[$b]["f_sdate"]; 
+                                                                                echo $feedbacks[$b]["f_sdate"]; 
                                                                             }
                                                                         }
                                                                         else{

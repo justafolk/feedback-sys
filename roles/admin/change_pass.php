@@ -46,6 +46,7 @@ $conn = mysqli_connect($server, $user, $passwd, $dbname);
 if (!$conn) {
 	die("Connection failed: " . mysqli_connect_error());
 }
+$uname = $_GET["username"];
 ?>
 
 
@@ -88,7 +89,7 @@ if (!$conn) {
                                     <form action="" method="POST">
                                         <div class="form-group">
                                             <label for="uname">Username/ Roll number</label>
-                                            <input type="text" value="<?php echo $_POST["uname"] ?>" class="form-control" id="uname" name="uname" placeholder="Enter Username or roll number" required>
+                                            <input type="text" value="<?php echo $uname; ?>" class="form-control" id="uname" name="uname" placeholder="Enter Username or roll number" required>
                                         </div>
                                         <br />
                                         <div class="form-group">
