@@ -98,6 +98,7 @@ session_start();
 							$sql = "SELECT * FROM forms WHERE form_id = '$feedback_id'";
 							$result = mysqli_query($conn, $sql);
 							$row = mysqli_fetch_assoc($result);
+							$default_flag = $row['default_ques'];
 							$author = $row['author'];
 							echo $row['course_code'];
 							$sql_group = "SELECT * FROM groups WHERE id = '{$row["group_id"]}'";
@@ -147,14 +148,20 @@ session_start();
 					<?php
 
 					$i = 1;
-					$sql = "SELECT * FROM form_ques where form_id = '$feedback_id'";
+					if ($default_flag == 1){
+					$sql = "SELECT * FROM form_ques where form_id = '0'";
+
+					}else{
+
+						$sql = "SELECT * FROM form_ques where form_id = '$feedback_id'";
+					}
 					$result = mysqli_query($conn, $sql);
-					$num_ques = mysqli_num_rows($result);
+					$num_ques = 7;
 
 					$sql = "select * from form_responses where form_id='$feedback_id'";
 					$resu = mysqli_query($conn, $sql);
 					$main_responses = array();
-					for ($i = 0; $i < $num_ques; $i++) {
+					for ($i = 0; $i < 7; $i++) {
 						array_push($main_responses, array());
 					}
 					while ($row = mysqli_fetch_assoc($resu)) {

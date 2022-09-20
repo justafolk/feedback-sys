@@ -225,7 +225,6 @@ $course_name = $row3['course_name'];
 
 												$active_rolls = json_decode($activeRoll, true);
 												//delete last item of array
-												array_pop($active_rolls);
 												$allrolls = count($active_rolls);
 
 
@@ -336,7 +335,7 @@ $course_name = $row3['course_name'];
 					exit();
 				}
 			} else {
-				$student_grp = $row['student_groups'] . ';' . $feedbackidz;
+				$student_grp = $row['student_groups'] . ';' . $feedbackid. ';';
 				$sql = "UPDATE `login` SET `student_groups` = '{$student_grp}'  WHERE `uname` = '$roll'";
 				$result = mysqli_query($conn, $sql);
 				if (!$result) {

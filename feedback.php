@@ -57,7 +57,20 @@
     <?php
     include 'imports/config.php';
     $form_id = $_GET['id'];
-    $sql = "SELECT * FROM form_ques WHERE form_id = '$form_id'";
+    $sqls = "select * from forms where form_id = '$form_id'";
+    $result_forms = mysqli_query($conn, $sqls);
+    if (!$result_forms) {
+        printf("Error: %s\n", mysqli_error($conn));
+        exit();
+    }
+    $row_forms = mysqli_fetch_assoc($result_forms);
+    $default_flag = $row_forms['default_ques'];
+    if ($default_flag == 1){
+        $sql = "select * from form_ques where form_id = '0'";
+    }else{
+
+        $sql = "SELECT * FROM form_ques WHERE form_id = '$form_id'";
+    }
     $result = mysqli_query($conn, $sql);
     ?>
 </head>
@@ -76,21 +89,15 @@
                     <div class="col-md-12 my-1">
                         <h3 class="h2">
                             <?php
-                            $sqls = "select * from forms where form_id = '$form_id'";
-                            $result_forms = mysqli_query($conn, $sqls);
-                            if (!$result_forms) {
-                                printf("Error: %s\n", mysqli_error($conn));
-                                exit();
-                            }
-                            $row_forms = mysqli_fetch_assoc($result_forms);
-                            $ss = "select * from courses where course_code='$row_forms[course_name]'";
+
+                            $ss = "select * from courses where course_code='$row_forms[course_code]'";
                             $result_courses = mysqli_query($conn, $ss);
                             if (!$result_courses) {
                                 printf("Error: %s\n", mysqli_error($conn));
                                 exit();
                             }
                             $row_courses = mysqli_fetch_assoc($result_courses);
-                            echo $row_courses['course_name'] . " - " . $row_forms['course_name'];
+                            echo $row_courses['course_name'] . " - " . $row_forms['course_code'];
                             ?>
                         </h3>
                     </div>
