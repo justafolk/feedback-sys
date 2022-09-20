@@ -20,7 +20,7 @@ error_reporting(0);
 	<link rel="canonical" href="https://demo-basic.adminkit.io/" />
 
 	<?php
-	// Path: roles\admin\print_report.php
+		// Path: roles\admin\print_report.php
 	?>
 	<title>CWIT-Feedback Portol</title>
 
@@ -70,14 +70,14 @@ error_reporting(0);
 				?></strong></h1>
 			</div>
 			<?php
-			$course_code = $row["course_code"];
+			$course_code = $row["course_name"];
 			$sql = "select * from courses where course_code = '$course_code'";
 			$resul = mysqli_query($conn, $sql);
 			$rowse = mysqli_fetch_assoc($resul);
 			$dept = "select * from departments where dept_id='" . $rowse["dept_code"] . "'";
 			$resultd = mysqli_query($conn, $dept);
 			$rowd = mysqli_fetch_assoc($resultd);
-			$course_code = $row["course_code"];
+			$course_code = $row["course_name"];
 			?>
 
 			<?php
@@ -135,7 +135,7 @@ error_reporting(0);
 										</tr>
 										<tr>
 											<th>Course</th>
-											<td><?php echo $rowse["course_code"] ?></td>
+											<td><?php echo $rowse["course_name"] ?></td>
 										</tr>
 										<tr>
 											<th>Course Code</th>
@@ -165,7 +165,7 @@ error_reporting(0);
 							<div class="card flex-fill w-100 border shadow-none">
 								<div class="card-header d-flex justify-content-between">
 									<div>
-										<h5 class="card-title mb-0"><?php echo $rowse["course_code"] ?> </h5>
+										<h5 class="card-title mb-0"><?php echo $rowse["course_name"] ?> </h5>
 										<h6 class="card-title mb-0"><?php echo date('D, d M Y H:i:s') ?></h6>
 									</div>
 								</div>
@@ -188,7 +188,7 @@ error_reporting(0);
 							<div class="card flex-fill w-200 border shadow-none">
 								<div class="card-header d-flex justify-content-between">
 									<div>
-										<h5 class="card-title mb-0"><?php echo $rowse["course_code"] ?> </h5>
+										<h5 class="card-title mb-0"><?php echo $rowse["course_name"] ?> </h5>
 										<h6 class="card-title mb-0"><?php echo date('D, d M Y H:i:s') ?></h6>
 									</div>
 								</div>
@@ -338,7 +338,7 @@ error_reporting(0);
 	<script src="assets/js/main.js"></script>
 	<script src="js/app.js"></script>
 
-	
+
 
 	<script>
 		<?php
