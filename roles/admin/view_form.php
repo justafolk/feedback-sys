@@ -36,50 +36,18 @@
     </style>
 </head>
 <body>
-    <?php
-    function if_exists($conn, $name) {
-        require_once "../../imports/config.php";
-        $sql = "SELECT * FROM feedbacks WHERE f_name = ?;";
-        $smt = mysqli_stmt_init($conn);
-        if(!mysqli_stmt_prepare($smt, $sql)){
-            header("location: authentication-signup.php/?error=stmtfailed");
-            exit();
-        }
-        mysqli_stmt_bind_param($smt, "s", $name);
-        mysqli_stmt_execute($smt);
-        $resultData = mysqli_stmt_get_result($smt);
-        if($row = mysqli_fetch_assoc($resultData)) {
-            return $row;
-        }
-        else{
-            $result = false;
-            return $result;
-        }
-    }
-    function active($conn, $name) {
-        require_once "../../imports/config.php";
-        $sql = "SELECT active FROM feedbacks WHERE f_name = ?;";
-        $smt = mysqli_stmt_init($conn);
-        if(!mysqli_stmt_prepare($smt, $sql)){
-            header("location: authentication-signup.php/?error=stmtfailed");
-            exit();
-        }
-        mysqli_stmt_bind_param($smt, "s", $name);
-        mysqli_stmt_execute($smt);
-        $resultData = mysqli_stmt_get_result($smt);
-        if($row = mysqli_fetch_assoc($resultData)) {
-            return $row;
-        }
-        else{
-            $result = false;
-            return $result;
-        }
-    }
-    ?>
 	<div class="wrapper">
         <?php
             session_start();
             include 'sidebar.php';
+            include '../../imports/config.php';
+            //error_reporting(0);
+
+            $deptcode = $_GET['deptcode'];
+            $sqlhead = "SELECT dept_name FROM departments WHERE dept_id = '$deptcode'";
+            $resulthead = mysqli_query($conn, $sqlhead);
+            $rowhead = mysqli_fetch_assoc($resulthead);
+            $deptname = $rowhead['dept_name'];
         ?>
 		<div class="main">
 			<nav class="navbar navbar-expand navbar-light navbar-bg">
@@ -87,17 +55,7 @@
           <i class="hamburger align-self-center"></i>
         </a>
 			<div>
-                <?php
-
-                include '../../imports/config.php';
-
-                 $deptcode = $_GET['deptcode'];
-                    $sql = "SELECT * FROM departments WHERE dept_id = '$deptcode'";
-                    $result = mysqli_query($conn, $sql);
-                    $row = mysqli_fetch_assoc($result);
-                    $deptname = $row['dept_name'];
-                ?>
-				<h1 class="h3 mb-0"><strong>View Form | <?php echo $deptname; ?></strong></h1>
+				<h1 class="h3 mb-0"><strong>Approved forms | <?php echo "$deptname"; ?> </strong></h1>
 			</div>
 			<?php
 				include "notification.php";
@@ -125,234 +83,68 @@
                                                     <table class="table text-center">
                                                         <thead class="thead-dark">
                                                             <tr>
-                                                                <th scope="col">Sr. No</th>
+                                                            <th scope="col">Sr. No</th>
                                                                 <th scope="col">Subject</th>
                                                                 <th scope="col">Course Code</th>
                                                                 <th scope="col">Teacher Name</th>
                                                                 <th scope="col">Date</th>
                                                                 <th scope="col">Status</th>
-                                                                <th scope="col">Action</th>
                                                                 <th scope="col">View</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <?php
-                                                                $data = array();
-                                                                $sql = "";
-                                                                $j=0;
-                                                                $sql = "SELECT * FROM courses";
-                                                                $result = mysqli_query($conn, $sql);
-                                                                while ($row = mysqli_fetch_assoc($result)) {
-                                                                    $data[$j] = $row;
-                                                                    $j++;
-                                                                }
-
-                                                                for($i=0;$i<$j;$i++){
-                                                                    if(isset($_POST["id".$i])){
-                                                                        $id = $_POST["id".$i];
-                                                                        $name = $data[$i]["course_name"];
-                                                                        $code = $data[$i]["course_code"];
-                                                                        $tname = $data[$i]["teacher"];
-                                                                        $status = "Not Done";
-                                                                        $error = 1;
-                                                                        $date = date("Y-m-d");
-                                                                        if($tname == NULL){
-                                                                            $tname = "@mda";
-                                                                        }
-                                                                        $check = if_exists($conn, $name);
-                                                                        $sql1 = "SELECT * from teacher";
-                                                                        $t=0;
-                                                                        $cc = array();
-                                                                        $teacher = array();
-                                                                        $result = mysqli_query($conn, $sql1);
-                                                                        while ($row = mysqli_fetch_assoc($result)) {
-                                                                            $teacher[$t] = $row;
-                                                                            $t++;
-                                                                        }
-                                                                        for($c=0;$c<$t;$c++){
-                                                                            $cc = explode(",",$teacher[$c]["course"]);
-                                                                            if(in_array($code, $cc)){
-                                                                                $tname = $teacher[$c]["name"];
-                                                                                $error = 0;
-                                                                                if($id == "Inactive"){
-                                                                                    if($check == NULL){
-                                                                                        $sql = "INSERT INTO feedbacks (f_name,cors_code,faculty_name, f_sdate, status, active) values('$name','$code','$tname','$date','$status',1)";
-                                                                                        $result = mysqli_query($conn, $sql);
-                                                                                    }
-                                                                                    else{
-                                                                                        $sql = "update feedbacks set f_name = '$name', cors_code = '$code',faculty_name = '$tname', status = '$status', f_sdate = '$date', active = '1' where f_id = '$check[f_id]';";
-                                                                                        $result = mysqli_query($conn, $sql);
-                                                                                    }
-                                                                                }
-                                                                                else{
-                                                                                    $sql = "update feedbacks set f_name = '$name', cors_code = '$code',faculty_name = '$tname', status = '$status', f_edate = '$date', active = '0' where f_id = '$check[f_id]';";
-                                                                                    $result = mysqli_query($conn, $sql);
-                                                                                }
-                                                                            }
-                                                                        }
-                                                                        if($error){
-                                                                            echo "<script>alert('Teacher doesnt exists');</script>";
-                                                                        }
-                                                                        // if($check == NULL){
-                                                                        //     $sql = "INSERT INTO feedbacks (f_name,cors_code,faculty_name, f_sdate, status, active) values('$name','$code','$tname','$date','$status',1)";
-                                                                        //     $result = mysqli_query($conn, $sql);
-                                                                        // }
-                                                                        // else{
-                                                                        //     
-                                                                        // }
-                                                                    }
-                                                                }
-
                                                                 include "../../imports/config.php";
-                                                                $feedbacks = array();
-                                                                $sql = "";
-                                                                $a=0;
-                                                                $sql = "SELECT * FROM feedbacks";
-                                                                $result = mysqli_query($conn, $sql);
-                                                                while ($row = mysqli_fetch_assoc($result)) {
-                                                                    $feedbacks[$a] = $row;
-                                                                    $a++;
-                                                                }
-                                                                
                                                             ?>
                                                             <form method="post" action="">
                                                                 <?php 
-                                                                    for($i=0;$i<$j;$i++){
-                                                                    $check = active($conn, $data[$i]["course_name"])
-                                                                ?>
-                                                                <tr>
-                                                                    <th scope="row"><?php echo $i+1; ?></th>
-                                                                    <td><?php echo $data[$i]["course_name"]; ?></td>
-                                                                    <td><?php echo $data[$i]["course_code"]; ?></td>
-                                                                    <td><?php for($b=0;$b<$j;$b++){
-                                                                        if($data[$i]["course_name"] == $feedbacks[$b]["f_name"]){
-                                                                            echo $feedbacks[$b]["faculty_name"]; 
+                                                                    $i = 1;
+                                                                    $sql = "SELECT * from `forms` WHERE dept_code = '$deptcode' AND semester = '1'";
+                                                                    $result = mysqli_query($conn, $sql);
+
+                                                                    while($row = mysqli_fetch_assoc($result)){
+
+                                                                        $data = "select * from `courses` where course_code = '".$row['course_code']."'";
+                                                                        $subject = mysqli_query($conn, $data);
+                                                                        $row2 = mysqli_fetch_assoc($subject);
+                                                                        $subject = $row2['course_name'];
+
+                                                                        $course_code = $row['course_code'];
+                                                                        $teacher_name = $row['author'];
+                                                                        $date = $row['ini_date'];
+
+                                                                        $todays_date = date("Y-m-d");
+
+                                                                        if($todays_date > $date){
+                                                                            $status = "<span class='badge bg-danger'>Expired</span>";
+                                                                        }
+                                                                        elseif($todays_date == $date){
+                                                                            $status = "<span class='badge bg-success'>Active</span>";
                                                                         }
                                                                         else{
-                                                                            echo ""; 
+                                                                            $status = "<span class='badge bg-warning'>Pending</span>";
                                                                         }
-                                                                        }
-                                                                        ?>
-                                                                    </td>
-                                                                    <td>
-                                                                    <?php for($b=0;$b<$j;$b++){
-                                                                        if($data[$i]["course_name"] == $feedbacks[$b]["f_name"]){
-                                                                            if($check["active"]){
-                                                                                echo $feedbacks[$b]["f_sdate"]; 
-                                                                            }
-                                                                            else{
-                                                                                echo $feedbacks[$b]["f_sdate"]; 
-                                                                            }
-                                                                        }
-                                                                        else{
-                                                                            echo "";
-                                                                        }
-                                                                        }
-                                                                    ?>
-                                                                    </td>
-                                                                    <th><?php for($b=0;$b<$j;$b++){
-                                                                        if($data[$i]["course_name"] == $feedbacks[$b]["f_name"]){
-                                                                            echo $feedbacks[$b]["status"]; 
-                                                                        }
-                                                                        else{
-                                                                            echo ""; 
-                                                                        }
-                                                                        }
-                                                                        ?></th>                                                         
-                                                                    <td><?php
-                                                                        if($check['active']){
-                                                                        ?><input class="btn btn-success" type="submit" name="id<?php echo $i; ?>" value="Active"></td><?php
-                                                                        }
-                                                                        else{
-                                                                            ?><input class="btn btn-danger" type="submit" name="id<?php echo $i; ?>" value="Inactive"></td><?php
-                                                                        }
-                                                                        ?>
-                                                                    <td><button type="button" class="btn btn-primary" id="id2">View</button></td>
-                                                                </tr>
-                                                                <?php
+
+
+                                                                        $fid = $row['form_id'];
+
+                                                                        echo "<tr>
+                                                                                <th scope='row'>$i</th>
+                                                                                <td>$subject</td>
+                                                                                <td>$course_code</td>
+                                                                                <td>$teacher_name</td>
+                                                                                <td>$date</td>
+                                                                                <td>$status</td>
+                                                                            <td><a href='report.php?id=$fid' class='btn btn-primary'>View</a></td>
+                                                                            </tr>";
+                                                                        $i++;
+
                                                                     }
+                                                                        
                                                                 ?>
                                                             </form>
-                                                            <!-- <script>
-                                                                id1.onclick = function() {
-                                                                    var id1 = document.getElementById("id1");
-                                                                    if(id1.classList == "btn btn-success"){
-                                                                        id1.classList.remove('btn-success');
-                                                                        id1.classList.add('btn-danger');
-                                                                        id1.value="Inactive";
-                                                                    }
-                                                                    else{
-                                                                        id1.classList.remove('btn-danger');
-                                                                        id1.classList.add('btn-success');
-                                                                        id1.value="active";
-                                                                        $(document).ready(function(){
-                                                                            $("#id1").click(function(){
-                                                                                var data = $("#user_form").serialize()+"&id1=id1";
-                                                                                $.ajax({
-                                                                                    url:"insert_data.php",
-                                                                                    type:"post",
-                                                                                    data:data,
-                                                                                    success:function(response){
-                                                                                        $("#msg").text(response);
-                                                                                    }
-                                                                                });
-                                                                            });
-                                                                        })
-                                                                    }
-                                                                }
-                                                                // function myFunction(){
-                                                                //     color = document.getElementById("id1").style.color;
-                                                                //     if(color = "red"){
-                                                                //         id1.classList.remove("btn-primary");
-                                                                //         id1.classList.add("btn-success");
-                                                                //     }
-                                                                //     else{
-                                                                //         id1.classList.remove("btn-primary");
-                                                                //         id1.classList.remove("btn-success");
 
-                                                                //     }
-                                                                // }
-                                                            </script> -->
-                                                            <!-- <tr>
-                                                                <th scope="row">2</th>
-                                                                <td>Basic Physics</td>
-                                                                <td>R18SC1703</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <th>Done</th>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id3">View</button></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">3</th>
-                                                                <td>English</td>
-                                                                <td>R18SC1707</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <td>Not Done</td>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id4">View</button></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">4</th>
-                                                                <td>Engineering Graphic Skills</td>
-                                                                <td>R18ME1210</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <td>Not Done</td>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id5">View</button></td>
-                                                            </tr> 
-                                                            <tr>
-                                                                <th scope="row">5</th>
-                                                                <td>Programming in C</td>
-                                                                <td>R18CP3401</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <td>Not Done</td>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id6">View</button></td>
-                                                            </tr> -->
+                                                          <!-- <td><input class=\"btn btn-success\" type=\"submit\" name='id $fid' value=\"Active\"> <input class=\"btn btn-danger\" type=\"submit\" name=\"id $fid\" value=\"Inactive\"> </td> -->
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -363,71 +155,68 @@
                                         <div class="card-body">
                                             <div class="">
                                                 <div class="mb-1">
-                                                    <h5 class="mb-4 card-title">Summer Seasons | 2st Semester</h5>
+                                                    <h5 class="mb-4 card-title">Summer Seasons | 2nd Semester</h5>
                                                     <table class="table text-center">
                                                         <thead class="thead-dark">
                                                             <tr>
-                                                                <th scope="col">Sr. No</th>
+                                                            <th scope="col">Sr. No</th>
                                                                 <th scope="col">Subject</th>
                                                                 <th scope="col">Course Code</th>
                                                                 <th scope="col">Teacher Name</th>
-                                                                <th scope="col">Total Questions</th>
+                                                                <th scope="col">Date</th>
                                                                 <th scope="col">Status</th>
-                                                                <th scope="col">Action</th>
+                                                               
                                                                 <th scope="col">View</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr>
-                                                                <th scope="row">1</th>
-                                                                <td>Basic Mathematics</td>
-                                                                <td>R18SC1701</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <th>Not Done</th>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id7">View</button></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">2</th>
-                                                                <td>Basic Physics</td>
-                                                                <td>R18SC1703</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <th>Done</th>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id8">View</button></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">3</th>
-                                                                <td>English</td>
-                                                                <td>R18SC1707</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <td>Not Done</td>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id9">View</button></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">4</th>
-                                                                <td>Engineering Graphic Skills</td>
-                                                                <td>R18ME1210</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <td>Not Done</td>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id10">View</button></td>
-                                                            </tr> 
-                                                            <tr>
-                                                                <th scope="row">5</th>
-                                                                <td>Programming in C</td>
-                                                                <td>R18CP3401</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <td>Not Done</td>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id11">View</button></td>
-                                                            </tr>
+                                                            <?php
+                                                                include "../../imports/config.php";
+                                                            ?>
+                                                            <form method="post" action="">
+                                                            <?php 
+                                                                    $i = 1;
+                                                                    $sql = "SELECT * from `forms` WHERE dept_code = '$deptcode' AND semester = '2'";
+                                                                    $result = mysqli_query($conn, $sql);
+
+                                                                    while($row = mysqli_fetch_assoc($result)){
+
+                                                                        $data = "select * from `courses` where course_code = '".$row['course_code']."'";
+                                                                        $subject = mysqli_query($conn, $data);
+                                                                        $row2 = mysqli_fetch_assoc($subject);
+                                                                        $subject = $row2['course_name'];
+
+                                                                        $course_code = $row['course_code'];
+                                                                        $teacher_name = $row['author'];
+                                                                        $date = $row['ini_date'];
+
+                                                                        $todays_date = date("Y-m-d");
+
+                                                                        if($todays_date > $date){
+                                                                            $status = "<span class='badge bg-danger'>Expired</span>";
+                                                                        }
+                                                                        elseif($todays_date == $date){
+                                                                            $status = "<span class='badge bg-success'>Active</span>";
+                                                                        }
+                                                                        else{
+                                                                            $status = "<span class='badge bg-warning'>Pending</span>";
+                                                                        }
+
+                                                                        echo "<tr>
+                                                                                <th scope='row'>$i</th>
+                                                                                <td>$subject</td>
+                                                                                <td>$course_code</td>
+                                                                                <td>$teacher_name</td>
+                                                                                <td>$date</td>
+                                                                                <td>$status</td>
+<td><a href='report.php?id=$fid' class='btn btn-primary'>View</a></td>
+                                                                            </tr>";
+                                                                        $i++;
+
+                                                                    }
+                                                                        
+                                                                ?>
+                                                            </form>
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -444,71 +233,66 @@
                                         <div class="card-body">
                                             <div class="">
                                                 <div class="mb-1">
-                                                    <h5 class="mb-4 card-title">Winter Seasons | 3st Semester</h5>
+                                                    <h5 class="mb-4 card-title">Winter Seasons | 3rd Semester</h5>
                                                     <table class="table text-center">
                                                         <thead class="thead-dark">
                                                             <tr>
-                                                                <th scope="col">Sr. No</th>
+                                                            <th scope="col">Sr. No</th>
                                                                 <th scope="col">Subject</th>
                                                                 <th scope="col">Course Code</th>
                                                                 <th scope="col">Teacher Name</th>
-                                                                <th scope="col">Total Questions</th>
+                                                                <th scope="col">Date</th>
                                                                 <th scope="col">Status</th>
-                                                                <th scope="col">Action</th>
+                                                               
                                                                 <th scope="col">View</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr>
-                                                                <th scope="row">1</th>
-                                                                <td>Basic Mathematics</td>
-                                                                <td>R18SC1701</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <th>Not Done</th>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id12">View</button></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">2</th>
-                                                                <td>Basic Physics</td>
-                                                                <td>R18SC1703</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <th>Done</th>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id13">View</button></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">3</th>
-                                                                <td>English</td>
-                                                                <td>R18SC1707</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <td>Not Done</td>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id14">View</button></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">4</th>
-                                                                <td>Engineering Graphic Skills</td>
-                                                                <td>R18ME1210</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <td>Not Done</td>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id15">View</button></td>
-                                                            </tr> 
-                                                            <tr>
-                                                                <th scope="row">5</th>
-                                                                <td>Programming in C</td>
-                                                                <td>R18CP3401</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <td>Not Done</td>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id16">View</button></td>
-                                                            </tr>
+                                                            <?php
+                                                                include "../../imports/config.php";
+                                                            ?>
+                                                            <form method="post" action="">
+                                                            <?php 
+                                                                    $i = 1;
+                                                                    $sql = "SELECT * from `forms` WHERE dept_code = '$deptcode' AND semester = '3'";
+                                                                    $result = mysqli_query($conn, $sql);
+
+                                                                    while($row = mysqli_fetch_assoc($result)){
+
+                                                                        $data = "select * from `courses` where course_code = '".$row['course_code']."'";
+                                                                        $subject = mysqli_query($conn, $data);
+                                                                        $row2 = mysqli_fetch_assoc($subject);
+                                                                        $subject = $row2['course_name'];
+
+                                                                        $course_code = $row['course_code'];
+                                                                        $teacher_name = $row['author'];
+                                                                        $date = $row['ini_date'];
+
+                                                                        $status = $row['status'];
+                                                                        if($status == 0){
+                                                                            $status = "Not Active";
+                                                                        }elseif($status == 1){
+                                                                            $status = "Active";
+                                                                        }else{
+                                                                            $status = "Completed";
+                                                                        }
+
+                                                                        echo "<tr>
+                                                                                <th scope='row'>$i</th>
+                                                                                <td>$subject</td>
+                                                                                <td>$course_code</td>
+                                                                                <td>$teacher_name</td>
+                                                                                <td>$date</td>
+                                                                                <td>$status</td>
+                                                                                
+<td><a href='report.php?id=$fid' class='btn btn-primary'>View</a></td>
+                                                                            </tr>";
+                                                                        $i++;
+
+                                                                    }
+                                                                        
+                                                                ?>
+                                                            </form>
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -519,71 +303,66 @@
                                         <div class="card-body">
                                             <div class="">
                                                 <div class="mb-1">
-                                                    <h5 class="mb-4 card-title">Summer Seasons | 4st Semester</h5>
+                                                    <h5 class="mb-4 card-title">Summer Seasons | 4th Semester</h5>
                                                     <table class="table text-center">
                                                         <thead class="thead-dark">
                                                             <tr>
-                                                                <th scope="col">Sr. No</th>
+                                                            <th scope="col">Sr. No</th>
                                                                 <th scope="col">Subject</th>
                                                                 <th scope="col">Course Code</th>
                                                                 <th scope="col">Teacher Name</th>
-                                                                <th scope="col">Total Questions</th>
+                                                                <th scope="col">Date</th>
                                                                 <th scope="col">Status</th>
-                                                                <th scope="col">Action</th>
+                                                               
                                                                 <th scope="col">View</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr>
-                                                                <th scope="row">1</th>
-                                                                <td>Basic Mathematics</td>
-                                                                <td>R18SC1701</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <th>Not Done</th>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id17">View</button></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">2</th>
-                                                                <td>Basic Physics</td>
-                                                                <td>R18SC1703</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <th>Done</th>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id18">View</button></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">3</th>
-                                                                <td>English</td>
-                                                                <td>R18SC1707</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <td>Not Done</td>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id19">View</button></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">4</th>
-                                                                <td>Engineering Graphic Skills</td>
-                                                                <td>R18ME1210</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <td>Not Done</td>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id20">View</button></td>
-                                                            </tr> 
-                                                            <tr>
-                                                                <th scope="row">5</th>
-                                                                <td>Programming in C</td>
-                                                                <td>R18CP3401</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <td>Not Done</td>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id21">View</button></td>
-                                                            </tr>
+                                                            <?php
+                                                                include "../../imports/config.php";
+                                                            ?>
+                                                            <form method="post" action="">
+                                                            <?php 
+                                                                    $i = 1;
+                                                                    $sql = "SELECT * from `forms` WHERE dept_code = '$deptcode' AND semester = '4'";
+                                                                    $result = mysqli_query($conn, $sql);
+
+                                                                    while($row = mysqli_fetch_assoc($result)){
+
+                                                                        $data = "select * from `courses` where course_code = '".$row['course_code']."'";
+                                                                        $subject = mysqli_query($conn, $data);
+                                                                        $row2 = mysqli_fetch_assoc($subject);
+                                                                        $subject = $row2['course_name'];
+
+                                                                        $course_code = $row['course_code'];
+                                                                        $teacher_name = $row['author'];
+                                                                        $date = $row['ini_date'];
+
+                                                                        $status = $row['status'];
+                                                                        if($status == 0){
+                                                                            $status = "Not Active";
+                                                                        }elseif($status == 1){
+                                                                            $status = "Active";
+                                                                        }else{
+                                                                            $status = "Completed";
+                                                                        }
+
+                                                                        echo "<tr>
+                                                                                <th scope='row'>$i</th>
+                                                                                <td>$subject</td>
+                                                                                <td>$course_code</td>
+                                                                                <td>$teacher_name</td>
+                                                                                <td>$date</td>
+                                                                                <td>$status</td>
+                                                                                
+<td><a href='report.php?id=$fid' class='btn btn-primary'>View</a></td>
+                                                                            </tr>";
+                                                                        $i++;
+
+                                                                    }
+                                                                        
+                                                                ?>
+                                                            </form>
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -600,71 +379,66 @@
                                         <div class="card-body">
                                             <div class="">
                                                 <div class="mb-1">
-                                                    <h5 class="mb-4 card-title">Winter Seasons | 5st Semester</h5>
+                                                    <h5 class="mb-4 card-title">Winter Seasons | 5th Semester</h5>
                                                     <table class="table text-center">
                                                         <thead class="thead-dark">
                                                             <tr>
-                                                                <th scope="col">Sr. No</th>
+                                                            <th scope="col">Sr. No</th>
                                                                 <th scope="col">Subject</th>
                                                                 <th scope="col">Course Code</th>
                                                                 <th scope="col">Teacher Name</th>
-                                                                <th scope="col">Total Questions</th>
+                                                                <th scope="col">Date</th>
                                                                 <th scope="col">Status</th>
-                                                                <th scope="col">Action</th>
+                                                               
                                                                 <th scope="col">View</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr>
-                                                                <th scope="row">1</th>
-                                                                <td>Basic Mathematics</td>
-                                                                <td>R18SC1701</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <th>Not Done</th>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id22">View</button></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">2</th>
-                                                                <td>Basic Physics</td>
-                                                                <td>R18SC1703</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <th>Done</th>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id23">View</button></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">3</th>
-                                                                <td>English</td>
-                                                                <td>R18SC1707</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <td>Not Done</td>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id24">View</button></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">4</th>
-                                                                <td>Engineering Graphic Skills</td>
-                                                                <td>R18ME1210</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <td>Not Done</td>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id25">View</button></td>
-                                                            </tr> 
-                                                            <tr>
-                                                                <th scope="row">5</th>
-                                                                <td>Programming in C</td>
-                                                                <td>R18CP3401</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <td>Not Done</td>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id26">View</button></td>
-                                                            </tr>
+                                                            <?php
+                                                                include "../../imports/config.php";
+                                                            ?>
+                                                            <form method="post" action="">
+                                                            <?php 
+                                                                    $i = 1;
+                                                                    $sql = "SELECT * from `forms` WHERE dept_code = '$deptcode' AND semester = '5'";
+                                                                    $result = mysqli_query($conn, $sql);
+
+                                                                    while($row = mysqli_fetch_assoc($result)){
+
+                                                                        $data = "select * from `courses` where course_code = '".$row['course_code']."'";
+                                                                        $subject = mysqli_query($conn, $data);
+                                                                        $row2 = mysqli_fetch_assoc($subject);
+                                                                        $subject = $row2['course_name'];
+
+                                                                        $course_code = $row['course_code'];
+                                                                        $teacher_name = $row['author'];
+                                                                        $date = $row['ini_date'];
+
+                                                                        $status = $row['status'];
+                                                                        if($status == 0){
+                                                                            $status = "Not Active";
+                                                                        }elseif($status == 1){
+                                                                            $status = "Active";
+                                                                        }else{
+                                                                            $status = "Completed";
+                                                                        }
+
+                                                                        echo "<tr>
+                                                                                <th scope='row'>$i</th>
+                                                                                <td>$subject</td>
+                                                                                <td>$course_code</td>
+                                                                                <td>$teacher_name</td>
+                                                                                <td>$date</td>
+                                                                                <td>$status</td>
+                                                                                
+                                                                            <td><a href='report.php?id=$fid' class='btn btn-primary'>View</a></td>
+                                                                            </tr>";
+                                                                        $i++;
+
+                                                                    }
+                                                                        
+                                                                ?>
+                                                            </form>
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -675,71 +449,63 @@
                                         <div class="card-body">
                                             <div class="">
                                                 <div class="mb-1">
-                                                    <h5 class="mb-4 card-title">Summer Seasons | 6st Semester</h5>
+                                                    <h5 class="mb-4 card-title">Summer Seasons | 6th Semester</h5>
                                                     <table class="table text-center">
                                                         <thead class="thead-dark">
                                                             <tr>
-                                                                <th scope="col">Sr. No</th>
+                                                            <th scope="col">Sr. No</th>
                                                                 <th scope="col">Subject</th>
                                                                 <th scope="col">Course Code</th>
                                                                 <th scope="col">Teacher Name</th>
-                                                                <th scope="col">Total Questions</th>
+                                                                <th scope="col">Date</th>
                                                                 <th scope="col">Status</th>
-                                                                <th scope="col">Action</th>
                                                                 <th scope="col">View</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr>
-                                                                <th scope="row">1</th>
-                                                                <td>Basic Mathematics</td>
-                                                                <td>R18SC1701</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <th>Not Done</th>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id27">View</button></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">2</th>
-                                                                <td>Basic Physics</td>
-                                                                <td>R18SC1703</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <th>Done</th>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id28">View</button></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">3</th>
-                                                                <td>English</td>
-                                                                <td>R18SC1707</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <td>Not Done</td>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id29">View</button></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">4</th>
-                                                                <td>Engineering Graphic Skills</td>
-                                                                <td>R18ME1210</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <td>Not Done</td>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id30">View</button></td>
-                                                            </tr> 
-                                                            <tr>
-                                                                <th scope="row">5</th>
-                                                                <td>Programming in C</td>
-                                                                <td>R18CP3401</td>
-                                                                <td>@mdo</td>
-                                                                <td>7</td>
-                                                                <td>Not Done</td>
-                                                                <td><button class="btn btn-primary" id="id1">Allow Access</button></td>
-                                                                <td><button class="btn btn-primary" id="id31">View</button></td>
-                                                            </tr>
+                                                            <?php
+                                                                include "../../imports/config.php";
+                                                            ?>
+                                                            <form method="post" action="">
+                                                            <?php 
+                                                                    $i = 1;
+                                                                    $sql = "SELECT * from `forms` WHERE dept_code = '$deptcode' AND semester = '6'";
+                                                                    $result = mysqli_query($conn, $sql);
+
+                                                                    while($row = mysqli_fetch_assoc($result)){
+
+                                                                        $data = "select * from `courses` where course_code = '".$row['course_code']."'";
+                                                                        $subject = mysqli_query($conn, $data);
+                                                                        $row2 = mysqli_fetch_assoc($subject);
+                                                                        $subject = $row2['course_name'];
+
+                                                                        $course_code = $row['course_code'];
+                                                                        $teacher_name = $row['author'];
+                                                                        $date = $row['ini_date'];
+
+                                                                        $status = $row['status'];
+                                                                        if($status == 0){
+                                                                            $status = "Not Active";
+                                                                        }elseif($status == 1){
+                                                                            $status = "Active";
+                                                                        }else{
+                                                                            $status = "Completed";
+                                                                        }
+
+                                                                        echo "<tr>
+                                                                                <th scope='row'>$i</th>
+                                                                                <td>$subject</td>
+                                                                                <td>$course_code</td>
+                                                                                <td>$teacher_name</td>
+                                                                                <td>$date</td>
+                                                                                <td>$status</td>
+                                                                                <td><a href='report.php?id=$fid' class='btn btn-primary'>View</a></td>
+                                                                            </tr>";
+                                                                        $i++;
+
+                                                                    }
+                                                                ?>
+                                                            </form>
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -841,9 +607,7 @@
 					</div>
 				</div>
 			</main>
-			<?php
-				include "footer.php";
-			?>
+
 		</div>
 	</div>
 	<script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
@@ -1078,41 +842,27 @@
                 <?php
             }
         ?>
-        // function show1(){
-        //     first.style.display = "block";
-        //     second.style.display = "none";
-        //     third.style.display = "none";
-
-        //     list.style.display = "none";
-        //     profile1.style.display = "none";
-        //     profile2.style.display = "none";
-
-        // }
-        // function show2(){
-        //     first.style.display = "none";
-        //     second.style.display = "none";
-        //     third.style.display = "none";
-
-        //     list.style.display = "none";
-        //     profile1.style.display = "none";
-        //     profile2.style.display = "block";
-
-        //     first.style.display = "block";
-        //     second.style.display = "none";
-        //     list.style.display = "none";
-        // }
-        // function show3(){
-        //     first.style.display = "none";
-        //     second.style.display = "none";
-        //     third.style.display = "none";
-
-        //     list.style.display = "block";
-        //     profile1.style.display = "none";
-        //     profile2.style.display = "none";
-
-        //     first.style.display = "none";
-        //     second.style.display = "none";
-        // }
     </script>
 </body>
 </html>
+
+
+<?php
+ /*
+if(isset($_POST['id'])){
+    $id = $_POST['id'];
+
+    echo "<script>alert('".$id."');</script>";
+   
+    $sql = "UPDATE `forms` SET `status` = '1' WHERE `forms`.`form_id` = $id";
+    $result = mysqli_query($conn, $sql);
+    if($result){
+        echo "<script>alert('Status Changed Successfully!')</script>";
+        echo "<script>window.location.href = 'forms.php'</script>";
+    }else{
+        echo "<script>alert('Status Not Changed!')</script>";
+        echo "<script>window.location.href = 'forms.php'</script>";
+    } 
+}
+*/
+?>

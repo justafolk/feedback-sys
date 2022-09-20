@@ -20,7 +20,7 @@ error_reporting(0);
 	<link rel="canonical" href="https://demo-basic.adminkit.io/" />
 
 	<?php
-		// Path: roles\admin\print_report.php
+	//title of the page is the pdf name
 	?>
 	<title>CWIT-Feedback Portol</title>
 
@@ -122,7 +122,7 @@ error_reporting(0);
 							</div>
 						</div>
 					</div>
-					<div class="card border shadow-none" style="">
+					<div class="card border shadow-none">
 						<div class="card-body" style="width: 100%; height:100%">
 
 							<div class="row">
