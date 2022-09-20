@@ -42,6 +42,7 @@ if (isset($_POST["export"])) {
 <?php
 $feedback_id = $_GET["id"];
 session_start();
+include 'confirm.php';
 ?>
 
 <head>

@@ -3,6 +3,7 @@
 <?php
 $feedback_id = $_GET["id"];
 session_start();
+include 'confirm.php';
 error_reporting(0);
 ?>
 
@@ -70,14 +71,14 @@ error_reporting(0);
 				?></strong></h1>
 			</div>
 			<?php
-			$course_code = $row["course_name"];
+			$course_code = $row["course_code"];
 			$sql = "select * from courses where course_code = '$course_code'";
 			$resul = mysqli_query($conn, $sql);
 			$rowse = mysqli_fetch_assoc($resul);
 			$dept = "select * from departments where dept_id='" . $rowse["dept_code"] . "'";
 			$resultd = mysqli_query($conn, $dept);
 			$rowd = mysqli_fetch_assoc($resultd);
-			$course_code = $row["course_name"];
+			$course_code = $row["course_code"];
 			?>
 
 			<?php
@@ -131,7 +132,7 @@ error_reporting(0);
 									<table class="table">
 										<tr>
 											<th>Programme</th>
-											<td><?php echo $rowd["dept_name"] ?></td>
+											<td><?php echo $rowd["dept_name"]; ?></td>
 										</tr>
 										<tr>
 											<th>Course</th>

@@ -39,6 +39,7 @@
 	<div class="wrapper">
         <?php
             session_start();
+            include 'confirm.php';
             include 'sidebar.php';
             include '../../imports/config.php';
             //error_reporting(0);

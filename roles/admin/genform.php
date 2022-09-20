@@ -1,5 +1,7 @@
 <?php
 $id = $_GET["id"];
+session_start();
+include 'confirm.php';
 if ($_GET["type"] == "sliderans") {
 ?>
     <div class="question<?php echo $id ?>">

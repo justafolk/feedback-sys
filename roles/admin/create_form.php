@@ -72,6 +72,7 @@
 		<?php
 		session_start();
 		include 'sidebar.php';
+		include 'confirm.php';
 		?>
 
 		<div class="main">

@@ -2,6 +2,7 @@
 <html lang="en">
 <?php
 session_start();
+include 'confirm.php';
 //include 'imports/config.php';
 
 if ($_SESSION['role'] != 'Faculty') {

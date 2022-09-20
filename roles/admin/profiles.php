@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+session_start();
+include 'confirm.php';
+?>
 
 <head>
     <meta charset="utf-8">

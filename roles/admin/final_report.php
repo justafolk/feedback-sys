@@ -4,6 +4,7 @@
 $semester_id = $_GET['semester'];
 $department_id = $_GET['dept'];
 session_start();
+include 'confirm.php';
 include "../../imports/config.php";
 $sql = "select * from groups where semester ={$semester_id} and deptcode = {$department_id}";
 

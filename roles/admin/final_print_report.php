@@ -3,6 +3,7 @@
 <?php
 $feedback_id = $_GET["id"];
 session_start();
+include 'confirm.php';
 error_reporting(0);
 ?>
 
@@ -119,7 +120,7 @@ error_reporting(0);
 							</div>
 						</div>
 					</div>
-					<div class="card border shadow-none" style="">
+					<div class="card border shadow-none" >
 						<div class="card-body" style="width: 100%; height:100%">
 
 							<div class="row">

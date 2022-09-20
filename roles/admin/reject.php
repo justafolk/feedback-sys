@@ -2,6 +2,7 @@
 
 include '../../imports/config.php';
 session_start();
+include 'confirm.php';
 
 if ($_SESSION['role'] == "Admin") {
 $id = $_GET['id'];

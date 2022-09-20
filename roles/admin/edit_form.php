@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
+session_start();
+include 'confirm.php';
 $form_id = $_GET["id"];
 include "../../imports/config.php";
 $sql = "select * from forms where form_id = '{$form_id}'";

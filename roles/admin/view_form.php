@@ -39,6 +39,7 @@
 	<div class="wrapper">
         <?php
             session_start();
+            include 'confirm.php';
             include 'sidebar.php';
             include '../../imports/config.php';
             //error_reporting(0);
@@ -119,6 +120,9 @@
                                                                             $status = "<span class='badge bg-danger'>Expired</span>";
                                                                         }
                                                                         elseif($todays_date == $date){
+                                                                            $sql3 = "UPDATE `forms` SET status = '1' WHERE course_code = '$course_code' AND author = '$teacher_name' AND ini_date = '$date'";
+                                                                            $result3 = mysqli_query($conn, $sql3);
+                                                                            
                                                                             $status = "<span class='badge bg-success'>Active</span>";
                                                                         }
                                                                         else{

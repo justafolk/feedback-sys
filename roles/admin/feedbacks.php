@@ -24,6 +24,7 @@
 	<div class="wrapper">
 		<?php
 		session_start();
+		include 'confirm.php';
 		include 'sidebar.php';
 		?>
 

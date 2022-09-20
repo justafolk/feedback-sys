@@ -35,6 +35,9 @@
 	<div class="wrapper">
 	<?php
 		session_start();
+		error_reporting(0);
+		
+		include 'confirm.php';
 		include "sidebar.php";
 	?>
 		<div class="main">
