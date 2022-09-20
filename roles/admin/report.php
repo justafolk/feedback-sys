@@ -125,7 +125,7 @@ session_start();
 
 								<div class="col-md-6">
 
-									<h4><?php echo $rowse["course_code"] ?> : #<?php echo $row["course_code"] ?></h4>
+									<h4><?php echo $rowse["course_name"] ?> : #<?php echo $row["course_code"] ?></h4>
 									<p><?php echo $author ?></p>
 								</div>
 								<div class="col-md-6" style="text-align:right; ">
@@ -175,7 +175,7 @@ session_start();
 							<div class="card flex-fill w-100 border shadow-none">
 								<div class="card-header d-flex justify-content-between">
 									<div>
-										<h5 class="card-title mb-0"><?php echo $rowse["course_code"] ?> </h5>
+										<h5 class="card-title mb-0"><?php echo $rowse["course_name"] ?> </h5>
 										<h6 class="card-title mb-0"><?php echo date('D, d M Y H:i:s') ?></h6>
 									</div>
 								</div>
@@ -198,7 +198,7 @@ session_start();
 							<div class="card flex-fill w-200 border shadow-none">
 								<div class="card-header d-flex justify-content-between">
 									<div>
-										<h5 class="card-title mb-0"><?php echo $rowse["course_code"] ?> </h5>
+										<h5 class="card-title mb-0"><?php echo $rowse["course_name"] ?> </h5>
 										<h6 class="card-title mb-0"><?php echo date('D, d M Y H:i:s') ?></h6>
 									</div>
 								</div>

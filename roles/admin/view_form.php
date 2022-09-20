@@ -202,6 +202,7 @@
                                                                             $status = "<span class='badge bg-warning'>Pending</span>";
                                                                         }
 
+                                                                        $fid = $row['form_id'];
                                                                         echo "<tr>
                                                                                 <th scope='row'>$i</th>
                                                                                 <td>$subject</td>
@@ -209,7 +210,7 @@
                                                                                 <td>$teacher_name</td>
                                                                                 <td>$date</td>
                                                                                 <td>$status</td>
-<td><a href='report.php?id=$fid' class='btn btn-primary'>View</a></td>
+                                                                                <td><a href='report.php?id=$fid' class='btn btn-primary'>View</a></td>
                                                                             </tr>";
                                                                         $i++;
 
@@ -276,7 +277,7 @@
                                                                         }else{
                                                                             $status = "Completed";
                                                                         }
-
+                                                                        $fid = $row['form_id'];
                                                                         echo "<tr>
                                                                                 <th scope='row'>$i</th>
                                                                                 <td>$subject</td>
@@ -285,7 +286,7 @@
                                                                                 <td>$date</td>
                                                                                 <td>$status</td>
                                                                                 
-<td><a href='report.php?id=$fid' class='btn btn-primary'>View</a></td>
+                                                                                <td><a href='report.php?id=$fid' class='btn btn-primary'>View</a></td>
                                                                             </tr>";
                                                                         $i++;
 
@@ -346,7 +347,7 @@
                                                                         }else{
                                                                             $status = "Completed";
                                                                         }
-
+                                                                        $fid = $row['form_id']; 
                                                                         echo "<tr>
                                                                                 <th scope='row'>$i</th>
                                                                                 <td>$subject</td>
@@ -355,7 +356,7 @@
                                                                                 <td>$date</td>
                                                                                 <td>$status</td>
                                                                                 
-<td><a href='report.php?id=$fid' class='btn btn-primary'>View</a></td>
+                                                                                <td><a href='report.php?id=$fid' class='btn btn-primary'>View</a></td>
                                                                             </tr>";
                                                                         $i++;
 
@@ -422,7 +423,7 @@
                                                                         }else{
                                                                             $status = "Completed";
                                                                         }
-
+                                                                        $fid = $row['form_id'];
                                                                         echo "<tr>
                                                                                 <th scope='row'>$i</th>
                                                                                 <td>$subject</td>
@@ -491,6 +492,9 @@
                                                                         }else{
                                                                             $status = "Completed";
                                                                         }
+
+                                                                        //$fid = $row['id'];
+                                                                        $fid = $row['form_id'];
 
                                                                         echo "<tr>
                                                                                 <th scope='row'>$i</th>
