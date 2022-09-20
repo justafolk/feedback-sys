@@ -335,7 +335,7 @@ $course_name = $row3['course_name'];
 					exit();
 				}
 			} else {
-				$student_grp = $row['student_groups'] . ';' . $feedbackid. ';';
+				$student_grp = $row_login['student_groups'] . ';' . $feedbackid. ';';
 				$sql = "UPDATE `login` SET `student_groups` = '{$student_grp}'  WHERE `uname` = '$roll'";
 				$result = mysqli_query($conn, $sql);
 				if (!$result) {
