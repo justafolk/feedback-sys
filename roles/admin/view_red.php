@@ -1,42 +1,3 @@
-<?php
-require_once "../../imports/config.php";
-$feedback_id = $_GET["id"];
-$query = "SELECT * FROM form_responses where form_id='$feedback_id';";
-$result = mysqli_query($conn, $query);
-$items = array();
-while ($row = $result->fetch_assoc()) {
-	$items[] = $row;
-}
-if (isset($_POST["export"])) {
-	$fileName = "itemdata-" . date('d-m-Y') . ".xls";
-	$json1 = array();
-	for ($i = 0; $i < count($items); $i++) {
-		$json = $items[$i]["response_json"];
-		$json1[] = json_decode($json, true);
-	}
-	$heading = false;
-	$headings = array('Student_id', 'Form ID', 'Fill_date', '1', '2', '3', '4', '5', '6', '7');
-	$item = array();
-	$data[] = "";
-	for ($i = 0; $i < count($items); $i++) {
-		$item = array($items[$i]['student_id'], $items[$i]['form_id'], $items[$i]['filldate'], $json1[$i]['slider-1'], $json1[$i]['slider-2'], $json1[$i]['slider-3'], $json1[$i]['slider-4'], $json1[$i]['slider-5'], $json1[$i]['slider-6'], $json1[$i]['slider-7']);
-		$data[$i] = $item;
-	}
-	header('Content-Type: application/vnd.ms-excel');
-	header('Content-Disposition: attachment; filename=' . $fileName);
-	if (!empty($items)) {
-		foreach ($data as $item) {
-			if (!$heading) {
-				echo implode("\t", array_values($headings)) . "\n\n";
-				$heading = true;
-			}
-			echo implode("\t", array_values($item)) . "\n";
-		}
-	}
-	exit();
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <?php
@@ -57,7 +18,7 @@ session_start();
 
 	<link rel="canonical" href="https://demo-basic.adminkit.io/" />
 
-	<title>CWIT-Feedback Portol</title>
+	<title>Feedback Stats<?php ?></title>
 
 	<link href="css/app.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
@@ -131,15 +92,6 @@ session_start();
 								<div class="col-md-6" style="text-align:right; ">
 									<h4>Last Updated <span style="color: green;">: <?php echo $row["ini_date"] ?></span></h4>
 
-									<br>
-
-									<form action="" method="post">
-										<a href="print_report.php?id=<?php echo $_GET["id"] ?>" target=”_blank”>
-
-											<button class="btn btn-dark btn-ecomm" type="button">Print </button>
-										</a>
-										<button type="submit" id="export" name="export" value="Export to excel" class="btn btn-success">Export</button>
-									</form>
 								</div>
 							</div>
 						</div>
@@ -212,11 +164,11 @@ session_start();
 													labels: ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7'],
 													datasets: [{
 														axis: 'y',
-														label: ['Average Student Reponses'],
+														label: 'Average Student Reponses',
 														data: [
 															<?php
 															for ($i = 0; $i < count($main_responses); $i++) {
-																echo round(array_sum($main_responses[$i]) / count($main_responses[$i]), 2);
+																echo round(array_sum($main_responses[$i])/count($main_responses[$i]), 2);
 																if ($i != count($main_responses) - 1) {
 																	echo ",";
 																}
@@ -245,11 +197,7 @@ session_start();
 													}]
 												},
 												options: {
-													scales: {
-														y: {
-															beginAtZero: true
-														}
-													}
+													indexAxis: 'y',
 												}
 											});
 										});
@@ -259,157 +207,13 @@ session_start();
 						</div>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-md-12">
-						<div class="card shadow-none border">
-							<div class="card-body">
-								<div class="table-responsive">
-									<table class="table table-bordered">
-										<thead>
-											<th>Feedback Question</th>
-											<th colspan="5">Percentage of Scores</th>
-											<th>Avg</th>
+				<!-- two table of filled roll numbers and not filled roll numbers in green and red -->
+			
+				<a href="print_report.php?id=<?php echo $_GET["id"] ?>" target=”_blank”>
 
-
-
-										</thead>
-										<tbody>
-											<tr>
-												<th></th>
-												<th>1</th>
-												<th>2</th>
-												<th>3</th>
-												<th>4</th>
-												<th>5</th>
-												<th></th>
-
-											</tr>
-											<?php
-
-											$i = 0;
-											while ($row = mysqli_fetch_assoc($result)) {
-												echo "<tr>";
-												$percentage = array_count_values($main_responses[$i]);
-												echo "<td>" . $row['question_title'] . "</td>";
-												echo "<td>" . round(count(array_keys($main_responses[$i], 1)) / count($main_responses[$i]) * 100, 2) . "</td>";
-												echo "<td>" . round(count(array_keys($main_responses[$i], 2)) / count($main_responses[$i]) * 100, 2) . "</td>";
-												echo "<td>" . round(count(array_keys($main_responses[$i], 3)) / count($main_responses[$i]) * 100, 2) . "</td>";
-												echo "<td>" . round(count(array_keys($main_responses[$i], 4)) / count($main_responses[$i]) * 100, 2) . "</td>";
-												echo "<td>" . round(count(array_keys($main_responses[$i], 5)) / count($main_responses[$i]) * 100, 2) . "</td>";
-
-												echo "<td>" . round(array_sum($main_responses[$i]) / count($main_responses[$i]), 2) . "</td>";
-												echo "</tr>";
-												$i++;
-											}
-											?>
-
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6">
-						<div class="card flex-fill w-200 border shadow-none">
-							<div class="card-header d-flex justify-content-between">
-								<div>
-									<h5 class="card-title mb-0" style="color:green">Filled Roll Numbers</h5>
-								</div>
-							</div>
-							<div class="card-body d-flex">
-
-								<?php
-								$sql = "select * from form_responses where form_id='$feedback_id'";
-								$result = mysqli_query($conn, $sql);
-								$filled = array();
-								$rows = mysqli_num_rows($result);
-								for ($i = 0; $i < 4; $i++) {
-								?>
-									<table class="table table-hover table-bordered">
-										<thead>
-											<tr>
-												<th scope="col" colspan="4">Roll Number</th>
-
-											</tr>
-										</thead>
-										<tbody>
-											<?php
-											$j = 0;
-											while ($row = mysqli_fetch_assoc($result)) {
-												echo "<tr>";
-												echo "<td>" . $row['student_id'] . "</td>";
-												echo "</tr>";
-												array_push($filled, $row['student_id']);
-												if ($j == round($rows / 4)) {
-													break;
-												}
-												$j++;
-											}
-
-											?>
-										</tbody>
-
-									</table>
-
-								<?php
-								}
-
-								?>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="card flex-fill w-200 border shadow-none">
-							<div class="card-header d-flex justify-content-between">
-								<div>
-									<h5 class="card-title mb-0" style="color:red"> Not Filled Roll Numbers</h5>
-								</div>
-							</div>
-							<div class="card-body d-flex">
-
-								<?php
-								$sql = "select * from login where student_groups LIKE ';$feedback_id;'";
-								$result = mysqli_query($conn, $sql);
-								$countse = $student_count - count($main_responses[0]);
-								for ($s = 0; $s < 4; $s++) {
-								?>
-									<table class="table table-hover table-bordered">
-										<thead>
-											<tr>
-												<th scope="col">Roll Number</th>
-											</tr>
-										</thead>
-										<tbody>
-
-											<?php
-											$i = 0;
-											while ($row = mysqli_fetch_assoc($result)) {
-												if (!in_array($row['uname'], $filled)) {
-													echo "<tr><td>" . $row['uname'] . "</td></tr>";
-													$i++;
-												}
-
-												if ($i == 4) {
-													break;
-												}
-											}
-											?>
-										</tbody>
-
-									</table>
-								<?php
-								}
-
-								?>
-
-							</div>
-						</div>
-					</div>
-				</div>
-
-
+					<button class="btn btn-dark btn-ecomm" type="button">Print </button>
+				</a>
+				
 
 
 			</main>

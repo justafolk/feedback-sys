@@ -90,7 +90,7 @@
                                 exit();
                             }
                             $row_courses = mysqli_fetch_assoc($result_courses);
-                            echo $row_courses['course_name']. " - " .$row_forms['course_name'];
+                            echo $row_courses['course_name'] . " - " . $row_forms['course_name'];
                             ?>
                         </h3>
                     </div>
@@ -146,7 +146,7 @@
 
                             <div class="card my-2">
                                 <div class="card-body">
-                                    <h5 class="card-title"> <input type="text" value="<?php echo $id ?>. " name="main-question main-question<?php echo $id ?>" class="main-question" id="main-question<?php echo $id ?>"> </h5>
+                                    <h5 class="card-title"> <?php echo $id . ". " . $row["question_title"] ?></h5>
                                     <input type="text" name="shortans<?php echo $id ?>" class="form-control" placeholder="Enter Answer in Short" id="shortans<?php echo $id ?>">
 
                                 </div>
@@ -159,7 +159,8 @@
                         <div class="question<?php echo $id ?>">
                             <div class="card my-2">
                                 <div class="card-body">
-                                    <h5 class="card-title"> <input type="text" value="<?php echo $id ?>. " name="main-question main-question<?php echo $id ?>" class="main-question" id="main-question<?php echo $id ?>"> </h5>
+                                    <h5 class="card-title"> <?php echo $id . ". " . $row["question_title"] ?></h5>
+
                                     <textarea name="longans<?php echo $id ?>" class="form-control" id="longans<?php echo $id ?>" rows="3"></textarea>
                                 </div>
                             </div>
@@ -173,7 +174,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">
                                         <?php echo $row["question_title"] ?> </h5>
-                                   
+
                                     <ul>
                                         <li style="text-align:left; align-items:left;">Very Bad </li>
                                         <li style="padding-left:4%;text-align:left; align-items:left;">Bad</li>
@@ -196,7 +197,7 @@
                                             </div>
                                         </div>
                                     <?php } ?>
-                                   
+
                                 </div>
 
                             </div>
@@ -211,7 +212,7 @@
             <br>
 
 
-                <input type="hidden" name="form_id" value="<?php echo $_GET["id"] ?>">
+            <input type="hidden" name="form_id" value="<?php echo $_GET["id"] ?>">
             <input type="submit" class="btn  btn-dark" value="Submit">
             <button class="btn btn-light border">Discard</button>
 
