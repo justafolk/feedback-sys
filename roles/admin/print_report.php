@@ -19,6 +19,9 @@ error_reporting(0);
 
 	<link rel="canonical" href="https://demo-basic.adminkit.io/" />
 
+	<?php
+		// Path: roles\admin\print_report.php
+	?>
 	<title>CWIT-Feedback Portol</title>
 
 	<link href="css/app.css" rel="stylesheet">
