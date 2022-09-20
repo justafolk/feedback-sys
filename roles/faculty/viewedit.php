@@ -327,7 +327,7 @@ $course_name = $row3['course_name'];
 			$row_login = mysqli_fetch_assoc($rollcountresult);
 			if ($rollcountrow == 0) {
 				$student_grp = $feedbackid;
-				$sql = "INSERT INTO `login`(`uname`, `passwd`, `role`, `name`, `student_groups` ) VALUES ('$loginid','$password','Student', 'Student', $feedbackid)";
+				$sql = "INSERT INTO `login`(`uname`, `passwd`, `role`, `name`, `student_groups` ) VALUES ('$loginid','$password','Student', 'Student', ;$feedbackid;)";
 				$result = mysqli_query($conn, $sql);
 
 				if (!$result) {
@@ -336,7 +336,7 @@ $course_name = $row3['course_name'];
 					exit();
 				}
 			} else {
-				$student_grp = $row['student_groups'] . ';' . $feedbackid;
+				$student_grp = $row['student_groups'] . ';' . $feedbackidz;
 				$sql = "UPDATE `login` SET `student_groups` = '{$student_grp}'  WHERE `uname` = '$roll'";
 				$result = mysqli_query($conn, $sql);
 				if (!$result) {
