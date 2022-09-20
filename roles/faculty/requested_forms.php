@@ -95,7 +95,7 @@
 						<div class="row">
 							<?php
 							include "../../imports/config.php";
-							$sql = "SELECT * FROM groups where teacher_id = '{$_SESSION["id"]}' and req = 1";
+							$sql = "SELECT * FROM groups where teacher_id = '{$_SESSION["id"]}'";
 							$result = mysqli_query($conn, $sql);
 							if (mysqli_num_rows($result) > 0) {
 								while ($row = mysqli_fetch_assoc($result)) {
@@ -130,11 +130,20 @@
 												echo $row["fdate"]; } ?></p>
 
 												<p>Status : <?php 
-												if($row["accepted"] == "0"){
-													echo "Pending";
+												if($row["rejected"] == "1"){
+													echo "<b>Rejected</b>";
 												}elseif ($row["accepted"] == "1") {
-													echo "Accepted";
+													echo "<b>Accepted</b>";
+												 }
+												 else{
+													if($row["req"] == "1"){
+														echo "<b>Pending</b>"; }
+														else{
+															echo "<b>Error, contact admin</b>";
+														}
+													
 												 } ?></p>
+												 
 
 
 

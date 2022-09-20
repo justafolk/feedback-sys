@@ -87,7 +87,17 @@
           <i class="hamburger align-self-center"></i>
         </a>
 			<div>
-				<h1 class="h3 mb-0"><strong>View Form | Computer Department</strong></h1>
+                <?php
+
+                include '../../imports/config.php';
+
+                 $deptcode = $_GET['deptcode'];
+                    $sql = "SELECT * FROM departments WHERE dept_id = '$deptcode'";
+                    $result = mysqli_query($conn, $sql);
+                    $row = mysqli_fetch_assoc($result);
+                    $deptname = $row['dept_name'];
+                ?>
+				<h1 class="h3 mb-0"><strong>View Form | <?php echo $deptname; ?></strong></h1>
 			</div>
 			<?php
 				include "notification.php";
@@ -127,7 +137,6 @@
                                                         </thead>
                                                         <tbody>
                                                             <?php
-                                                                include "../../imports/config.php";
                                                                 $data = array();
                                                                 $sql = "";
                                                                 $j=0;

@@ -71,8 +71,13 @@
 							</a>
 
 							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-								<?php error_reporting(0); ?>
-								<img src="<?php echo "https://ui-avatars.com/api/?name=" . $_SESSION["name"] ?>" class="avatar img-fluid rounded me-1" alt="<?php echo $_SESSION["name"] ?>" /> <span class="text-dark"><?php echo $_SESSION["name"] ?></span>
+								<?php error_reporting(0);
+									$sqll = "SELECT `uname` FROM `login` WHERE `id` = '".$_SESSION['id']."'";
+									$resultt = mysqli_query($conn, $sqll);
+									$roww = mysqli_fetch_assoc($resultt);
+									$roll = $roww['uname'];
+								?>
+								<img src="<?php echo "https://ui-avatars.com/api/?name=" . $_SESSION["name"] ?>" class="avatar img-fluid rounded me-1" alt="<?php echo $_SESSION["name"] ?>" /> <span class="text-dark"><?php echo $_SESSION["name"]; echo ' - '.$roll; ?></span>
 							</a>
 							<div class="dropdown-menu dropdown-menu-end">
 								<a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1" data-feather="user"></i> Profile</a>

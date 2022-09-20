@@ -178,40 +178,41 @@
               </a>
               <ul id="charts-nav1" class="collapse" style="list-style-type:none;">
                 <li>
-                  <a class="sidebar-link" href="view_form.php">
-                    <span class="align-middle">Computer Dept.</span>
-                  </a>
-                </li>
-                <li class="sidebar-item">
-                  <a class="sidebar-link" href="view_form.php">
-                    <span class="align-middle">Civil Dept. </span>
-                  </a>
-                </li>
-                <!-- <li class="sidebar-item">
-                  <a class="sidebar-link" href="mech_department_a.php">
-                    <span class="align-middle">Mechanical Dept. (Aided)</span>
-                  </a>
-                </li>
-                <li class="sidebar-item">
-                  <a class="sidebar-link" href="mech_department_u.php">
-                    <span class="align-middle">Mechanical Dept. (Un-Aided)</span>
-                  </a>
-                </li> -->
-                <li class="sidebar-item">
-                  <a class="sidebar-link" href="view_form.php ">
-                    <span class="align-middle">Electrical Dept.</span>
-                  </a>
-                </li>
-                <!-- <li class="sidebar-item">
-                  <a class="sidebar-link" href="etc_department_a.php">
-                    <span class="align-middle">E&TC Dept. (Aided)</span>
+                  <a class="sidebar-link" href="view_form.php?deptcode=40">
+                    <span class="align-middle">Computer Department</span>
                   </a>
                 </li>
                 <li>
-                  <a class="sidebar-link" href="etc_department_u.php">
-                    <span class="align-middle">E&TC Dept. (Un-Aided)</span>
+                  <a class="sidebar-link" href="view_form.php?deptcode=10">
+                    <span class="align-middle">Civil Department</span>
                   </a>
-                </li> -->
+                </li>
+                <li>
+                  <a class="sidebar-link" href="view_form.php?deptcode=20">
+                    <span class="align-middle">Mechanical Department(A)</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="sidebar-link" href="view_form.php?deptcode=21">
+                    <span class="align-middle">Mechanical Department(U)</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="sidebar-link" href="view_form.php?deptcode=30">
+                    <span class="align-middle">Electrical Department</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="sidebar-link" href="view_form.php?deptcode=50">
+                    <span class="align-middle">E&TC Department(A)</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="sidebar-link" href="view_form.php?deptcode=51">
+                    <span class="align-middle">E&TC Department(U)</span>
+                  </a>
+                </li>
+                
               </ul>
             </li>
 
