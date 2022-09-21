@@ -378,7 +378,7 @@ include 'confirm.php';
 							<div class="card-body d-flex">
 
 								<?php
-								$sql = "select * from login where student_groups LIKE ';$feedback_id;'";
+								$sql = "select * from login where student_groups LIKE '%;$feedback_id;%'";
 								$result = mysqli_query($conn, $sql);
 								$countse = $student_count - count($main_responses[0]);
 								for ($s = 0; $s < 4; $s++) {
