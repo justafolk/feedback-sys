@@ -327,15 +327,39 @@ if (!$conn) {
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td>1</td>
-													<td>Web Development</td>
-													<td>R18CP2405</td>
-													<td>3rd Sem, DCP</td>
-													<td>
-														
-													</td>
-												</tr>
+											<?php
+
+												$active_feedbacks = "SELECT * FROM forms WHERE `ini_date` < '$td' AND `status` = '0'";
+												$active_feedbacks_result = mysqli_query($conn, $active_feedbacks);
+												$active_feedbacks_count = mysqli_num_rows($active_feedbacks_result);
+
+												if($active_feedbacks_count > 0){
+													$active_feedbacks_count = 1;
+													while($active_feedbacks_row = mysqli_fetch_assoc($active_feedbacks_result)){
+														$course_code = $active_feedbacks_row['course_code'];
+
+														$course = "SELECT * FROM courses WHERE course_code = '$course_code'";
+														$course_result = mysqli_query($conn, $course);
+														$course_row = mysqli_fetch_assoc($course_result);
+														$course_name = $course_row['course_name'];
+														$total_stud = $active_feedbacks_row['total_students'];
+														//$feedback_date = date('d-m-Y', strtotime($feedback_date));
+														echo "<tr>
+																<td>$active_feedbacks_count</td>
+																<td>$course_name</td>
+																<td>$course_code</td>
+																<td>$total_stud</td>
+															</tr>";
+														$active_feedbacks_count++;
+													}
+												}
+												else{
+													echo "<tr>
+															<td colspan='4' span class='text-center'><h5>No Active Feedbacks</h5></td>
+														</tr>";
+												}
+
+												?>
 											</tbody>
 										</table>
 									</div>
