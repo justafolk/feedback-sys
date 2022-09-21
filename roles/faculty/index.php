@@ -118,20 +118,13 @@ if (!$conn) {
 				<div class="container-fluid p-0">
 					<h1 class="h3 "><strong>Faculty</strong> Home </h1>
 					<div class="row">
-						<div class="col-3">
-							<button class="btn btn-primary  " style="width: 100%; height:100%" type="button">
-								<i class="align-middle" data-feather="plus-circle">
 
-								</i>
-								Create A new Form
-							</button>
-						</div>
 						<div class="col-3">
 							<button class="btn btn-primary  " style="width: 100%; height:100%" type="button">
 								<i class="align-middle" data-feather="user-plus">
 
 								</i>
-								Create A New Student Group
+								<a href="create_group.php" style="color: white;">Create Group</a>
 							</button>
 						</div>
 						<div class="col-3">
@@ -139,7 +132,7 @@ if (!$conn) {
 								<i class="align-middle" data-feather="info">
 
 								</i>
-								View Active Forms
+								<a href="feedback_home.php" style="color: white;">View Group</a>
 							</button>
 						</div>
 						<div class="col-3">
@@ -147,10 +140,19 @@ if (!$conn) {
 								<i class="align-middle" data-feather="user-check">
 
 								</i>
-								View Student Groups
+								<a href="requested_forms.php" style="color: white;">View Requested forms</a>
+							</button>
+						</div>
+						<div class="col-3">
+							<button class="btn btn-primary  " style="width: 100%; height:100%" type="button">
+								<i class="align-middle" data-feather="user-check">
+
+								</i>
+								<a href="change_pass.php" style="color: white;">Change password</a>
 							</button>
 						</div>
 					</div>
+					
 					<hr>
 					<div class="row">
 
@@ -162,12 +164,12 @@ if (!$conn) {
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
-														<h5 class="card-title">Current Courses</h5>
+														<h5 class="card-title">Current Requested Forms</h5>
 													</div>
 
 													<div class="col-auto">
 														<div class="stat text-primary">
-															<i class="align-middle" data-feather="truck"></i>
+															<i class="align-middle" data-feather="info"></i>
 														</div>
 													</div>
 												</div>
@@ -184,12 +186,12 @@ if (!$conn) {
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
-														<h5 class="card-title">Students</h5>
+														<h5 class="card-title">Current Created Forms</h5>
 													</div>
 
 													<div class="col-auto">
 														<div class="stat text-primary">
-															<i class="align-middle" data-feather="users"></i>
+															<i class="align-middle" data-feather="info"></i>
 														</div>
 													</div>
 												</div>
@@ -211,7 +213,7 @@ if (!$conn) {
 
 													<div class="col-auto">
 														<div class="stat text-primary">
-															<i class="align-middle" data-feather="dollar-sign"></i>
+															<i class="align-middle" data-feather="hash"></i>
 														</div>
 													</div>
 												</div>
@@ -254,7 +256,7 @@ if (!$conn) {
 							<!-- table showing active feedbacks -->
 							<div class="card">
 								<div class="card-body">
-									<h5 class="card-title">Active Feedbacks</h5>
+									<h5 class="card-title">Active Feedbacks  - <?php $td= date('Y-m-d'); echo "<b>$td</b>"; ?></h5>
 									<div class="table-responsive">
 										<table class="table table-striped">
 											<thead>
@@ -262,20 +264,45 @@ if (!$conn) {
 													<th>#</th>
 													<th>Course</th>
 													<th>Course Code</th>
-													<th>Date</th>
-													<th>Action</th>
+													<th>Total Students</th>
+													
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td>1</td>
-													<td>Web Development</td>
-													<td>R18CP2405</td>
-													<td>20-20-2022</td>
-													<td>
-														<a href="feedback-details.php" class="btn btn-primary btn-sm">View</a>
-													</td>
-												</tr>
+												<?php
+
+													$active_feedbacks = "SELECT * FROM forms WHERE `ini_date` = '$td' AND `status` = '1'";
+													$active_feedbacks_result = mysqli_query($conn, $active_feedbacks);
+													$active_feedbacks_count = mysqli_num_rows($active_feedbacks_result);
+
+													if($active_feedbacks_count > 0){
+														$active_feedbacks_count = 1;
+														while($active_feedbacks_row = mysqli_fetch_assoc($active_feedbacks_result)){
+															$course_code = $active_feedbacks_row['course_code'];
+
+															$course = "SELECT * FROM courses WHERE course_code = '$course_code'";
+															$course_result = mysqli_query($conn, $course);
+															$course_row = mysqli_fetch_assoc($course_result);
+															$course_name = $course_row['course_name'];
+															$total_stud = $active_feedbacks_row['total_students'];
+															//$feedback_date = date('d-m-Y', strtotime($feedback_date));
+															echo "<tr>
+																	<td>$active_feedbacks_count</td>
+																	<td>$course_name</td>
+																	<td>$course_code</td>
+																	<td>$total_stud</td>
+																</tr>";
+															$active_feedbacks_count++;
+														}
+													}
+													else{
+														echo "<tr>
+																<td colspan='4' span class='text-center'><h5>No Active Feedbacks</h5></td>
+															</tr>";
+													}
+
+												?>
+
 											</tbody>
 										</table>
 									</div>
@@ -287,7 +314,7 @@ if (!$conn) {
 						<div class="col-md-6 my-2">
 							<div class="card">
 								<div class="card-body">
-									<h5 class="card-title">Active Student Groups (Courses) this semester</h5>
+									<h5 class="card-title">Past Feedbacks</h5>
 									<div class="table-responsive">
 										<table class="table table-striped">
 											<thead>
@@ -296,7 +323,7 @@ if (!$conn) {
 													<th>Course</th>
 													<th>Course Code</th>
 													<th>Department and Sem</th>
-													<th>Action</th>
+													
 												</tr>
 											</thead>
 											<tbody>
@@ -306,7 +333,7 @@ if (!$conn) {
 													<td>R18CP2405</td>
 													<td>3rd Sem, DCP</td>
 													<td>
-														<a href="feedback-details.php" class="btn btn-primary btn-sm">View</a>
+														
 													</td>
 												</tr>
 											</tbody>

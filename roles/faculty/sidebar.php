@@ -56,18 +56,7 @@
                   <a class="sidebar-link" href="requested_forms.php">
                     <span class="align-middle">Requested Feedbacks</span>
                   </a>
-                </li>
-                <li class="sidebar-item">
-                  <a class="sidebar-link" href="active_forms.php">
-                    <span class="align-middle">Active Feedbacks</span>
-                  </a>
-                </li>
-                <li class="sidebar-item">
-                  <a class="sidebar-link" href="past_feedbacks.php">
-                    <span class="align-middle">Past Feedbacks</span>
-                  </a>
-                </li>
-              
+                </li>              
               </ul>
             </li>
 

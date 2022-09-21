@@ -3,6 +3,7 @@
 
 <?php
 session_start();
+include 'confirm.php';
 
 //echo "<script>alert(".$_SESSION['uname'].")</script>";
 

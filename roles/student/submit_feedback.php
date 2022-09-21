@@ -1,5 +1,6 @@
 <?php
 session_start();
+include 'confirm.php';
 include "../../imports/config.php";
 // print all post data in table
 foreach ($_POST as $key => $value) {
@@ -15,7 +16,8 @@ $sql = "insert into form_responses(student_id, form_id, filldate, response_json)
 
 $result = mysqli_query($conn, $sql);
 if ($result) {
-    echo "success";
+    
+    //echo "success";
     header("Location: ./index.php");
 } else {
     echo "fail";

@@ -67,7 +67,7 @@ if ($_SESSION['role'] != 'Student') {
 						<h1 class="h3 mb-3"><strong>Active</strong> Feedback Surveys: </h1>
 						<div class="row">
 							<?php
-							include "../../imports/config.php";
+							include '../../imports/config.php';
 							$student_login = "select * from login where uname = '".$_SESSION['uname']."'";
 							$student_login_result = mysqli_query($conn, $student_login);
 							$student_login_row = mysqli_fetch_assoc($student_login_result);
@@ -77,6 +77,7 @@ if ($_SESSION['role'] != 'Student') {
 							$sql = "SELECT * FROM groups, forms WHERE groups.id IN $groups_string and forms.group_id = groups.id ";
 							$result = mysqli_query($conn, $sql);
 							if (mysqli_num_rows($result) > 0) {
+								
 								while ($row = mysqli_fetch_assoc($result)) {
 									$sql2 = "select * from courses where course_code='{$row["subject"]}'";
 									$result2 = mysqli_query($conn, $sql2);
@@ -91,8 +92,7 @@ if ($_SESSION['role'] != 'Student') {
 												<h6> <a href="">
 
 														<?php
-														$sql3 = "select * from departments where dept_id='
-												{$row["deptcode"]}'";
+														$sql3 = "select * from departments where dept_id='{$row["deptcode"]}'";
 														$result3 = mysqli_query($conn, $sql3);
 														$row3 = mysqli_fetch_assoc($result3);
 														echo $row3["dept_name"];
@@ -104,11 +104,19 @@ if ($_SESSION['role'] != 'Student') {
 												</h6>
 												<div class="row">
 													<div class="col-md-12">
-														<button class="btn btn-dark " onclick="window.location.href='./../../feedback.php?id=<?php echo $row['form_id'] ?>'" style="border-radius:5px"> <strong>
+														<?php
+														$sql99 = "select * from form_responses where form_id='{$row["id"]}' and student_id='{$_SESSION["uname"]}'";
+														$result99 = mysqli_query($conn, $sql99);
+														if (mysqli_num_rows($result99) > 0) {
+															$row99 = mysqli_fetch_assoc($result99);
+															echo "<h4 class='text-success'>Submitted on $row99[filldate]</h4>";
+														} else { ?>
+														<button class="btn btn-dark " onclick="window.location.href='../../feedback.php?id=<?php echo $row['form_id'] ?>'" style="border-radius:5px"> <strong>
 
-																Fill 
+																<?php echo "Fill"; ?>
 															</strong>
 														</button>
+														<?php } ?>
 														
 													</div>
 
