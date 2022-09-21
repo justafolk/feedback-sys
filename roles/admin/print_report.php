@@ -68,6 +68,7 @@ error_reporting(0);
 				$sql = "SELECT * FROM forms WHERE form_id = '$feedback_id'";
 				$result = mysqli_query($conn, $sql);
 				$row = mysqli_fetch_assoc($result);
+				$default_flag = $row['default_ques'];
 				?></strong></h1>
 			</div>
 			<?php
@@ -82,9 +83,16 @@ error_reporting(0);
 			?>
 
 			<?php
-
+			
+			
 			$i = 1;
-			$sql = "SELECT * FROM form_ques where form_id = '$feedback_id'";
+			if ($default_flag == 1){
+				$sql = "SELECT * FROM form_ques where form_id = '0'";
+
+			}else{
+
+				$sql = "SELECT * FROM form_ques where form_id = '$feedback_id'";
+			}
 			$result = mysqli_query($conn, $sql);
 			$num_ques = mysqli_num_rows($result);
 
