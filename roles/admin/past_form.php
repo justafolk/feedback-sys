@@ -56,7 +56,7 @@
           <i class="hamburger align-self-center"></i>
         </a>
 			<div>
-				<h1 class="h3 mb-0"><strong>Approved forms | <?php echo "$deptname"; ?> </strong></h1>
+				<h1 class="h3 mb-0"><strong>Past forms | <?php echo "$deptname"; ?> </strong></h1>
 			</div>
 			<?php
 				include "notification.php";
