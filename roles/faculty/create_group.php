@@ -248,8 +248,6 @@ if (!$conn) {
 										<h3><label for="exampleInputPassword1"><b>Final student survey group </b></label></h3>
 										<!-- required red mark-->
 
-
-
 										<div class="form-group atrangi">
 											<?php
 
@@ -258,11 +256,14 @@ if (!$conn) {
 												<span style="color:red;">*</span> Click to add / remove students from group.
 
 												<br>
-												<button class="btn btn-md btn-success"></button>
+												<span class="badge bg-success">Add
+												</span>
+
 												Add to group
 												<br>
-												<button class="btn btn-md btn-danger"></button>
 
+												<span class="badge bg-danger">Remove
+												</span>
 												Remove from group
 												<br>
 												<br>

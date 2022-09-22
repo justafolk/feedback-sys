@@ -19,6 +19,11 @@ if(isset($_POST['login'])){
     if($count == 1){
 
         if($row['role'] == 'Admin'){
+
+            $today = date("Y-m-d");
+            $sql22 = "UPDATE `forms` SET `status` = '0' WHERE `ini_date` < '$today'";
+            $result22 = mysqli_query($conn, $sql22);
+
             $_SESSION['uname'] = $uname;
             $_SESSION['role'] = 'Admin';
             $_SESSION["name"] = $row['name'];

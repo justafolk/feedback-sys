@@ -47,8 +47,8 @@ if ($result) {
     echo 'totalstudents = '.$totalstudents.'<br>';
 */
     
-    $sql2 = "INSERT INTO `forms` (`form_id`, `author`, `ini_date`, `instructions`, `status`, `semester`, `course_code`,`dept_code`, `group_id`, `default_ques`, `total_students`, `filled_students`, `done`) 
-    VALUES ('$id', '$teachername', '$ini_date', '$instructions', '0','$semester', '$course_code', '$deptcode', '$id', '1', '$totalstudents', '0', '0');";
+    $sql2 = "INSERT INTO `forms` (`form_id`, `author`, `ini_date`, `instructions`, `status`, `semester`, `course_code`,`dept_code`, `group_id`, `default_ques`, `total_students`) 
+    VALUES ('$id', '$teachername', '$ini_date', '$instructions', '0','$semester', '$course_code', '$deptcode', '$id', '1', '$totalstudents');";
     $result2 = mysqli_query($conn, $sql2);
 
     if($result2){

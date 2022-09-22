@@ -329,7 +329,7 @@ if (!$conn) {
 											<tbody>
 											<?php
 
-												$active_feedbacks = "SELECT * FROM forms WHERE `ini_date` < '$td' AND `status` = '0'";
+												$active_feedbacks = "SELECT * FROM forms WHERE `ini_date` < '$td' AND `status` = '0' AND `author` = '$_SESSION[name]'";
 												$active_feedbacks_result = mysqli_query($conn, $active_feedbacks);
 												$active_feedbacks_count = mysqli_num_rows($active_feedbacks_result);
 

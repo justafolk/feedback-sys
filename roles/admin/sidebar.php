@@ -168,16 +168,16 @@
       <li class="sidebar-header">
         Forms
       </li>
-
+<!--
       <li class="sidebar-item">
         <a class="sidebar-link" href="create_form.php">
           <i class="align-middle me-2" data-feather="plus-square"></i> <span class="align-middle">Create New Form</span>
         </a>
-      </li>
+      </li> -->
 
       <li class="sidebar-item">
         <a class="sidebar-link" data-bs-target="#charts-nav1" data-bs-toggle="collapse" href="#">
-          <i class="align-middle" data-feather="bar-chart-2"></i> <span>View Form</span>
+          <i class="align-middle" data-feather="bar-chart-2"></i> <span>View Feedbacks</span>
         </a>
         <ul id="charts-nav1" class="collapse" style="list-style-type:none;">
           <li>
@@ -220,10 +220,49 @@
       </li>
 
       <li class="sidebar-item">
-        <a class="sidebar-link" href="other_form.php">
-          <i class="align-middle" data-feather="user"></i> <span class="align-middle">Other Form</span>
+        <a class="sidebar-link" data-bs-target="#charts-nav2" data-bs-toggle="collapse" href="#">
+          <i class="align-middle" data-feather="bar-chart-2"></i> <span>Past Feedbacks</span>
         </a>
+        <ul id="charts-nav2" class="collapse" style="list-style-type:none;">
+          <li>
+            <a class="sidebar-link" href="past_form.php?deptcode=40">
+              <span class="align-middle">Computer Department</span>
+            </a>
+          </li>
+          <li>
+            <a class="sidebar-link" href="past_form.php?deptcode=10">
+              <span class="align-middle">Civil Department</span>
+            </a>
+          </li>
+          <li>
+            <a class="sidebar-link" href="past_form.php?deptcode=20">
+              <span class="align-middle">Mechanical Department(A)</span>
+            </a>
+          </li>
+          <li>
+            <a class="sidebar-link" href="past_form.php?deptcode=21">
+              <span class="align-middle">Mechanical Department(U)</span>
+            </a>
+          </li>
+          <li>
+            <a class="sidebar-link" href="past_form.php?deptcode=30">
+              <span class="align-middle">Electrical Department</span>
+            </a>
+          </li>
+          <li>
+            <a class="sidebar-link" href="past_form.php?deptcode=50">
+              <span class="align-middle">E&TC Department(A)</span>
+            </a>
+          </li>
+          <li>
+            <a class="sidebar-link" href="past_form.php?deptcode=51">
+              <span class="align-middle">E&TC Department(U)</span>
+            </a>
+          </li>
+
+        </ul>
       </li>
+
 
       <li class="sidebar-header">
         Profiles

@@ -1,6 +1,11 @@
 <?php
 require_once "../../imports/config.php";
 $feedback_id = $_GET["id"];
+
+//expired feedbacks part 
+$sqlop = "UPDATE forms SET `viewed` = '1' WHERE `form_id` = '$feedback_id' AND `ini_date` < CURRENT_DATE()";
+$resultop = mysqli_query($conn, $sqlop);
+
 $query = "SELECT * FROM form_responses where form_id='$feedback_id';";
 $result = mysqli_query($conn, $query);
 $items = array();
