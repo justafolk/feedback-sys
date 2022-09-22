@@ -5,26 +5,26 @@ $activeRoll = [194000,194001,194002,194003,194004,194005,194006,194007,194008,19
 //$activeRoll = json_encode($activeRoll);
 
 for($i=0;$i<sizeof($activeRoll);$i++){
-    echo $activeRoll[$i] . "<br>";
+  echo $activeRoll[$i] . "<br>";
 }
 
 
 ?>
 
 <th scope="col">Sr. No</th>
-                                                                <th scope="col">Subject</th>
-                                                                <th scope="col">Course Code</th>
-                                                                <th scope="col">Teacher Name</th>
-                                                                <th scope="col">Date</th>
-                                                                <th scope="col">Status</th>
-                                                                <th scope="col">Action</th>
-                                                                <th scope="col">View</th>
+<th scope="col">Subject</th>
+<th scope="col">Course Code</th>
+<th scope="col">Teacher Name</th>
+<th scope="col">Date</th>
+<th scope="col">Status</th>
+<th scope="col">Action</th>
+<th scope="col">View</th>
 
 <?php
 if($check['active']){
-?><input class="btn btn-success" type="submit" name="id<?php echo $i; ?>" value="Active"></td><?php
+  ?><input class="btn btn-success" type="submit" name="id<?php echo $i; ?>" value="Active"></td><?php
 }
 else{
-?><input class="btn btn-danger" type="submit" name="id<?php echo $i; ?>" value="Inactive"></td><?php
+  ?><input class="btn btn-danger" type="submit" name="id<?php echo $i; ?>" value="Inactive"></td><?php
 }
 ?>
