@@ -100,7 +100,7 @@
                                                             <form method="post" action="">
                                                                 <?php 
                                                                     $i = 1;
-                                                                    $sql = "SELECT * from `forms` WHERE dept_code = '$deptcode' AND semester = '1' AND `viewed`='0'";
+                                                                    $sql = "SELECT * from `forms` WHERE dept_code = '$deptcode' AND semester = '1' AND `viewed`='1'";
                                                                     $result = mysqli_query($conn, $sql);
 
                                                                     while($row = mysqli_fetch_assoc($result)){
@@ -180,7 +180,7 @@
                                                             <form method="post" action="">
                                                             <?php 
                                                                     $i = 1;
-                                                                    $sql = "SELECT * from `forms` WHERE dept_code = '$deptcode' AND semester = '2' AND `viewed`='0'";
+                                                                    $sql = "SELECT * from `forms` WHERE dept_code = '$deptcode' AND semester = '2' AND `viewed`='1'";
                                                                     $result = mysqli_query($conn, $sql);
 
                                                                     while($row = mysqli_fetch_assoc($result)){
@@ -264,7 +264,7 @@
                                                             <form method="post" action="">
                                                             <?php 
                                                                     $i = 1;
-                                                                    $sql = "SELECT * from `forms` WHERE dept_code = '$deptcode' AND semester = '3' AND `viewed`='0'";
+                                                                    $sql = "SELECT * from `forms` WHERE dept_code = '$deptcode' AND semester = '3' AND `viewed`='1'";
                                                                     $result = mysqli_query($conn, $sql);
 
                                                                     while($row = mysqli_fetch_assoc($result)){
@@ -342,7 +342,7 @@
                                                             <form method="post" action="">
                                                             <?php 
                                                                     $i = 1;
-                                                                    $sql = "SELECT * from `forms` WHERE dept_code = '$deptcode' AND semester = '4' AND `viewed`='0'";
+                                                                    $sql = "SELECT * from `forms` WHERE dept_code = '$deptcode' AND semester = '4' AND `viewed`='1'";
                                                                     $result = mysqli_query($conn, $sql);
 
                                                                     while($row = mysqli_fetch_assoc($result)){
@@ -426,7 +426,7 @@
                                                             <form method="post" action="">
                                                             <?php 
                                                                     $i = 1;
-                                                                    $sql = "SELECT * from `forms` WHERE dept_code = '$deptcode' AND semester = '5' AND `viewed`='0'";
+                                                                    $sql = "SELECT * from `forms` WHERE dept_code = '$deptcode' AND semester = '5' AND `viewed`='1'";
                                                                     $result = mysqli_query($conn, $sql);
 
                                                                     while($row = mysqli_fetch_assoc($result)){
@@ -503,7 +503,7 @@
                                                             <form method="post" action="">
                                                             <?php 
                                                                     $i = 1;
-                                                                    $sql = "SELECT * from `forms` WHERE dept_code = '$deptcode' AND semester = '6' AND `viewed`='0'";
+                                                                    $sql = "SELECT * from `forms` WHERE dept_code = '$deptcode' AND semester = '6' AND `viewed`='1'";
                                                                     $result = mysqli_query($conn, $sql);
 
                                                                     while($row = mysqli_fetch_assoc($result)){

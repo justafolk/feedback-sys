@@ -74,7 +74,7 @@ if ($_SESSION['role'] != 'Student') {
 							$groups = explode(";", $student_login_row['student_groups']);
 							$groups = array_filter($groups);
 							$groups_string = "(".implode(",", $groups).")";
-							$sql = "SELECT * FROM groups, forms WHERE groups.id IN $groups_string and forms.group_id = groups.id ";
+							$sql = "SELECT * FROM groups, forms WHERE groups.id IN $groups_string and forms.group_id = groups.id and `status` = '1'";
 							$result = mysqli_query($conn, $sql);
 							if (mysqli_num_rows($result) > 0) {
 								
