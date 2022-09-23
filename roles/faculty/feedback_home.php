@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<?php include 'confirm.php'; ?>
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -95,7 +95,7 @@
 						<div class="row">
 							<?php
 							include "../../imports/config.php";
-							$sql = "SELECT * FROM groups where req='0' and teacher_id = '{$_SESSION["id"]}'";
+							$sql = "SELECT * FROM groups where req='0' AND accepted='0' and rejected='0' and teacher_id = '{$_SESSION["id"]}'";
 							$result = mysqli_query($conn, $sql);
 							if (mysqli_num_rows($result) > 0) {
 								while ($row = mysqli_fetch_assoc($result)) {

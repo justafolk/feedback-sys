@@ -1,6 +1,12 @@
 <?php 
 include "../../imports/config.php";
+
 session_start();
+
+if ($_SESSION['role'] != 'Faculty') {
+	echo "<script>alert('Invalid Session, please login again');</script>";
+	echo "<script>window.location.href='../../index.php';</script>";
+}
 $title = $_POST["form-title"];
 $instructions = $_POST["instructions"];
 $sliders_idk = array();

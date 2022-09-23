@@ -73,6 +73,7 @@
 	<div class="wrapper">
 		<?php
 		include 'sidebar.php';
+
 		?>
 
 		<div class="main">
@@ -86,6 +87,11 @@
 
 				<?php
 				include 'notification.php';
+				session_start();
+				if ($_SESSION['role'] != 'Faculty') {
+					echo "<script>alert('Invalid Session, please login again');</script>";
+					echo "<script>window.location.href='../../index.php';</script>";
+				}
 				?>
 			</nav>
 

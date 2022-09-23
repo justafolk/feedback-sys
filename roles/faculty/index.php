@@ -8,7 +8,7 @@ error_reporting(0);
 
 if ($_SESSION['role'] != 'Faculty') {
 	echo "<script>alert('Invalid Session, please login again');</script>";
-	echo "<script>window.location.href='index.php';</script>";
+	echo "<script>window.location.href='../../index.php';</script>";
 }
 $server = "localhost";
 $user = "root";
@@ -355,7 +355,7 @@ if (!$conn) {
 												}
 												else{
 													echo "<tr>
-															<td colspan='4' span class='text-center'><h5>No Active Feedbacks</h5></td>
+															<td colspan='4' span class='text-center'><h5>No Feedback Records</h5></td>
 														</tr>";
 												}
 
