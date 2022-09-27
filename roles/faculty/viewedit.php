@@ -339,6 +339,7 @@ $course_name = $row3['course_name'];
 				}
 			}
 		}
+		echo "<script>window.location.href='requested_forms.php';</script>";
 	}
 
 

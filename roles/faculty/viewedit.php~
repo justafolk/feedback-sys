@@ -303,16 +303,10 @@ $course_name = $row3['course_name'];
 
 		$sql = "UPDATE groups SET `activeRoll` = '$activeRoll',`fdate`= '$date', `req` = '1' WHERE `id` = '$feedbackid' ";
 		$result = mysqli_query($conn, $sql);
-		if ($result) {
-			echo "<script>alert('Feedback requested successfully');</script>";
-			echo "<script>window.location.href = 'requested_forms.php';</script>";
-		} else {
-			echo "<script>alert('Error updating feedback');</script>";
-		}
+		
 
 		$loginroll = json_decode($activeRoll);
-    echo count($loginroll);
-  exit();
+		echo count($loginroll);
 		for ($i = 0; $i < count($loginroll); $i++) {
 			$roll = $loginroll[$i];
 			//create login id for each rollnumber
@@ -322,22 +316,13 @@ $course_name = $row3['course_name'];
 			//create login table
 
 			$rollcount = "SELECT * FROM `login` WHERE `uname` = '$roll'";
-      echo $rollcount;
 			$rollcountresult = mysqli_query($conn, $rollcount);
-      if (!$rollcountresult) {
-        printf("Error: %s\n", mysqli_error($conn));
-        exit();
-      }
-      echo $rollcount;
-      echo $rollcountresult;
-    exit();
 			$rollcountrow = mysqli_num_rows($rollcountresult);
 			$row_login = mysqli_fetch_assoc($rollcountresult);
 			if ($rollcountrow == 0) {
 				$student_grp = $feedbackid;
-				$sql = "INSERT INTO `login`(`uname`, `passwd`, `role`, `name`, `student_groups` ) VALUES ('$loginid','$password','Student', 'Student', ;$feedbackid;)";
-//				$result = mysqli_query($conn, $sql);
-
+				$sql = "INSERT INTO `login`(`uname`, `passwd`, `role`, `name`, `student_groups` ) VALUES ('$loginid','$password','Student', 'Student', ';$feedbackid;')";
+				$result = mysqli_query($conn, $sql);
 				if (!$result) {
 
 					echo "<script>alert('" . mysqli_error($conn) . "');</script>";
@@ -354,6 +339,7 @@ $course_name = $row3['course_name'];
 				}
 			}
 		}
+		echo "<script>window.location.href='requested_forms.php';</script>";
 	}
 
 
