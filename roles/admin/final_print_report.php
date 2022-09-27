@@ -1,10 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-$feedback_id = $_GET["id"];
+
+$semester_id = $_GET['semester'];
+$department_id = $_GET['dept'];
+
+if (isset($_GET["academic_year"])) {
+	$academic_year = $_GET["academic_year"];
+	$sql = "select * from forms where academic_year = '{$academic_year}' and dept_code = {$department_id}";
+}
+if (isset($_GET["semester"])) {
+	$sql = "select * from forms where semester = '{$semester_id}' and dept_code = {$department_id}";
+	$semester = $semester_id . " term";
+}
+
 session_start();
 include 'confirm.php';
-error_reporting(0);
+include "../../imports/config.php";
+$result = mysqli_query($conn, $sql);
+$group_array = array();
+$courses = array();
+
+while ($row = mysqli_fetch_assoc($result)) {
+	$group_array[] = $row['form_id'];
+	$courses[] = $row['course_code'];
+	$academic_fo = $row["academic_year"];
+}
 ?>
 
 <head>
@@ -41,295 +62,284 @@ error_reporting(0);
 			scrollbar-width: none;
 		}
 	</style>
-	<style>
-		@media print {
-
-			.table thead tr th td,
-			.table tbody tr th td {
-				border-width: 1px !important;
-				border-style: solid !important;
-				border-color: black !important;
-				-webkit-print-color-adjust: exact;
-			}
-		}
-	</style>
 </head>
 
 <body>
 	<div class="wrapper">
 
+
 		<div class="main">
+
 			<div>
 				<?php
 				include "../../imports/config.php";
-				$sql = "SELECT * FROM forms WHERE form_id = '$feedback_id'";
+				$sql = "SELECT * FROM forms WHERE form_id = '{$row['id']}'";
 				$result = mysqli_query($conn, $sql);
 				$row = mysqli_fetch_assoc($result);
-				?></strong></h1>
-			</div>
-			<?php
-			$course_code = $row["course_name"];
-			$sql = "select * from courses where course_code = '$course_code'";
-			$resul = mysqli_query($conn, $sql);
-			$rowse = mysqli_fetch_assoc($resul);
-			$dept = "select * from departments where dept_id='" . $rowse["dept_code"] . "'";
-			$resultd = mysqli_query($conn, $dept);
-			$rowd = mysqli_fetch_assoc($resultd);
-			$course_code = $row["course_name"];
-			?>
+				$default_flag = $row['default_ques'];
+				$author = $row['author'];
+				echo $row['course_code'];
+				$sql_group = "SELECT * FROM groups WHERE id = '{$row["group_id"]}'";
+				$result_group = mysqli_query($conn, $sql_group);
+				$row_group = mysqli_fetch_assoc($result_group);
+				$student_count = $row_group['student_count'];
 
-			<?php
+				?>
+				<?php
+				$course_code = $row["course_code"];
+				$sql = "select * from courses where course_code = '$course_code'";
+				$resul = mysqli_query($conn, $sql);
+				$rowse = mysqli_fetch_assoc($resul);
+				?>
 
-			$i = 1;
-			$sql = "SELECT * FROM form_ques where form_id = '$feedback_id'";
-			$result = mysqli_query($conn, $sql);
-			$num_ques = mysqli_num_rows($result);
 
-			$sql = "select * from form_responses where form_id='$feedback_id'";
-			$resu = mysqli_query($conn, $sql);
-			$main_responses = array();
-			for ($i = 0; $i < $num_ques; $i++) {
-				array_push($main_responses, array());
-			}
-			while ($row = mysqli_fetch_assoc($resu)) {
-				$res = json_decode($row['response_json'], true);
-				$i = 0;
-				foreach ($res as $key => $value) {
-					array_push($main_responses[$i], round($value));
-					$i++;
-					if ($i == $num_ques) {
-						break;
-						# code...
-					}
-				}
-			}
-			?>
-			<main class="content">
-				<div class="container-fluid p-0">
-					<div class="card shadow-none border">
-						<div class="card-body">
-							<div class="row" style="justify-content: center;">
-								<div class="col-md-6" style="justify-content:center;">
-									<div class="text-center">
-										<img src="../../assets/img/logo.png" alt="" style="width: 51px">
-
-										<h3 class="mb-0">Cusrow Wadia Institute of Technology, Pune-41</h3>
-										<footer class="">Student's Feedback Report 2021-22</footer>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="card border shadow-none" >
+				<main class="content">
+					<!-- <div class="container-fluid p-0">
+					<div class="card border shadow-none">
 						<div class="card-body" style="width: 100%; height:100%">
 
 							<div class="row">
 
 								<div class="col-md-6">
-									<table class="table">
-										<tr>
-											<th>Programme</th>
-											<td><?php echo $rowd["dept_name"] ?></td>
-										</tr>
-										<tr>
-											<th>Course</th>
-											<td><?php echo $rowse["course_name"] ?></td>
-										</tr>
-										<tr>
-											<th>Course Code</th>
-											<td>
-												<?php echo $course_code ?>
-											</td>
-										</tr>
-										<tr>
-											<th>No. of Feedback entries</th>
-											<td><?php echo count($main_responses[0]) ?></td>
-										</tr>
 
-									</table>
-
+									<h4><?php echo $rowse["course_name"] ?> : #<?php echo $row["course_code"] ?></h4>
+									<p><?php echo $author ?></p>
 								</div>
 								<div class="col-md-6" style="text-align:right; ">
-									<h4>Date <span style="color: green;">: <?php echo date('D, d M Y H:i:s') ?></span></h4>
-									<!-- text input for tracking id -->
+									<h4>Last Updated <span style="color: green;">: <?php echo $row["ini_date"] ?></span></h4>
 
 								</div>
 							</div>
 						</div>
 					</div>
+					<?php
 
-					<!-- <div class="row">
-						<div class="col-md-4">
-							<div class="card flex-fill w-100 border shadow-none">
-								<div class="card-header d-flex justify-content-between">
-									<div>
-										<h5 class="card-title mb-0"><?php echo $rowse["course_name"] ?> </h5>
-										<h6 class="card-title mb-0"><?php echo date('D, d M Y H:i:s') ?></h6>
-									</div>
-								</div>
-								<div class="card-body d-flex">
-									<div class="align-self-center w-100">
-										<div class="py-3">
-											<div class="chart chart-xs">
-												<canvas id="chartjs-dashboard-pie2"></canvas>
-											</div>
-										</div>
-										<div class="text-center">
-											<button class="btn btn-success mb-3">Filled - <?php echo count($main_responses[0]) ?></button>
-											<button class="btn btn-danger mb-3">Not Filled - 32</button>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-8" style="height: 100%">
-							<div class="card flex-fill w-200 border shadow-none">
-								<div class="card-header d-flex justify-content-between">
-									<div>
-										<h5 class="card-title mb-0"><?php echo $rowse["course_name"] ?> </h5>
-										<h6 class="card-title mb-0"><?php echo date('D, d M Y H:i:s') ?></h6>
-									</div>
-								</div>
-								<div class="card-body d-flex">
-									<canvas id="barChart" style="max-height: 800px;"></canvas>
-									<script>
-										document.addEventListener("DOMContentLoaded", () => {
-											new Chart(document.querySelector('#barChart'), {
-												type: 'bar',
-												data: {
-													labels: ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7'],
-													datasets: [{
-														axis: 'y',
-														label: ['Average Student Reponses'],
-														data: [
-															<?php
-															for ($i = 0; $i < count($main_responses); $i++) {
-																echo round(array_sum($main_responses[$i]) / count($main_responses[$i]));
-																if ($i != count($main_responses) - 1) {
-																	echo ",";
-																}
-																echo ",";
-															}
-															?>
-														],
-														backgroundColor: [
-															'rgba(255, 99, 132, 0.2)',
-															'rgba(255, 159, 64, 0.2)',
-															'rgba(255, 205, 86, 0.2)',
-															'rgba(75, 192, 192, 0.2)',
-															'rgba(54, 162, 235, 0.2)',
-															'rgba(153, 102, 255, 0.2)',
-															'rgba(201, 203, 207, 0.2)'
-														],
-														borderColor: [
-															'rgb(255, 99, 132)',
-															'rgb(255, 159, 64)',
-															'rgb(255, 205, 86)',
-															'rgb(75, 192, 192)',
-															'rgb(54, 162, 235)',
-															'rgb(153, 102, 255)',
-															'rgb(201, 203, 207)'
-														],
-														borderWidth: 1
-													}]
-												},
-												options: {
-													scales: {
-														y: {
-															beginAtZero: true
-														}
-													}
-												}
-											});
-										});
-									</script>
-								</div>
-							</div>
-						</div>
-					</div> -->
-				</div>
-				<div class="row">
-					<div class="col-md-12">
+					$i = 1;
+					if ($default_flag == 1) {
+						$sql = "SELECT * FROM form_ques where form_id = '0'";
+						$count_ques = 7;
+					} else {
+
+						$sql = "SELECT * FROM form_ques where form_id = '$feedback_id'";
+					}
+					$result = mysqli_query($conn, $sql);
+					$num_ques = $count_ques;
+
+					$sql = "select * from form_responses where form_id='$feedback_id'";
+					$resu = mysqli_query($conn, $sql);
+					$main_responses = array();
+					if (!isset($count_ques)) {
+						$count_ques = mysqli_num_rows($resu);
+					}
+					for ($i = 0; $i < $count_ques; $i++) {
+						array_push($main_responses, array());
+					}
+					while ($row = mysqli_fetch_assoc($resu)) {
+						$res = json_decode($row['response_json'], true);
+						$i = 0;
+						foreach ($res as $key => $value) {
+							if ($value == "NAN") {
+								$value = 0;
+							}
+							array_push($main_responses[$i], round($value));
+							$i++;
+							if ($i == $num_ques) {
+								break;
+								# code...
+							}
+						}
+					}
+					var_dump($main_responses);
+					?>
+					-->
+					<div class="container-fluid p-0">
 						<div class="card shadow-none border">
 							<div class="card-body">
-								<div class="table-responsive">
-									<table class="table table-bordered">
-										<thead>
-											<th>Feedback Question</th>
-											<th colspan="5">Percentage of Scores</th>
-											<th>Avg</th>
+								<div class="row" style="justify-content: center;">
+									<div class="col-md-6" style="justify-content:center;">
+										<div class="text-center">
+											<img src="../../assets/img/logo.png" alt="" style="width: 51px">
 
-
-
-										</thead>
-										<tbody>
-											<tr>
-												<th></th>
-												<th>1</th>
-												<th>2</th>
-												<th>3</th>
-												<th>4</th>
-												<th>5</th>
-												<th></th>
-
-											</tr>
-											<?php
-
-											$i = 0;
-											while ($row = mysqli_fetch_assoc($result)) {
-												echo "<tr>";
-												$percentage = array_count_values($main_responses[$i]);
-												echo "<td>" . $row['question_title'] . "</td>";
-												echo "<td>" . round(count(array_keys($main_responses[$i], 1)) / count($main_responses[$i]) * 100, 2) . "</td>";
-												echo "<td>" . round(count(array_keys($main_responses[$i], 2)) / count($main_responses[$i]) * 100, 2) . "</td>";
-												echo "<td>" . round(count(array_keys($main_responses[$i], 3)) / count($main_responses[$i]) * 100, 2) . "</td>";
-												echo "<td>" . round(count(array_keys($main_responses[$i], 4)) / count($main_responses[$i]) * 100, 2) . "</td>";
-												echo "<td>" . round(count(array_keys($main_responses[$i], 5)) / count($main_responses[$i]) * 100, 2) . "</td>";
-
-												echo "<td>" . round(array_sum($main_responses[$i]) / count($main_responses[$i]), 2) . "</td>";
-												echo "</tr>";
-												$i++;
-											}
-											?>
-
-										</tbody>
-									</table>
-									<br>
-									<div class="table-responsive">
-										<table class="table table-bordered" style="border:1px solid #000;">
-											<thead>
-												<tr class="text-center">
-													<th colspan="5">FIVE POINT GRADING SCALE</th>
-												</tr>
-												<tr>
-
-													<th>Excellent : 5</th>
-													<th>Good : 4</th>
-													<th>Satisfactory : 3</th>
-													<th>Needs Improvement : 2</th>
-													<th>Poor : 1</th>
-												</tr>
-											</thead>
-										</table>
+											<h3 class="mb-0">Cusrow Wadia Institute of Technology, Pune-41</h3>
+											<footer class="">Student's Feedback Report <?php echo $academic_fo; ?></footer>
+										</div>
 									</div>
-									<br>
-									<!-- note paragraph -->
-									<p>
-										<b>Note:</b> 1. The score index less than 3 and greater than 4.5 is Highlighted.
-										<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2. The response for more than 40% score is highlighted.
-									</p>
-
 								</div>
 							</div>
 						</div>
 
+						<div class="row">
+							<div class="col-md-12">
+								<div class="card shadow-none border">
+									<div class="card-body">
+										<div class="table-responsive">
+											<table class="table table-bordered">
+												<?php
+												$averages = array();
+												$max_ques = 0;
+												for ($i = 0; $i < count($group_array); $i++) {
+													array_push($averages, array());
+												}
+												$count = 0;
+												foreach ($group_array as $key => $value) {
+
+													$forms_sql = "select * from forms where form_id='$value'";
+													$forms_result = mysqli_query($conn, $forms_sql);
+													$forms_row = mysqli_fetch_assoc($forms_result);
+													$default_flag = $forms_row['default_ques'];
+													$i = 1;
+													$count_ques = 0;
+													if ($default_flag == 1) {
+														$sql = "SELECT * FROM form_ques where form_id = '0'";
+														$count_ques = 7;
+													} else {
+
+														$sql = "SELECT * FROM form_ques where form_id = '$value'";
+													}
+													$result = mysqli_query($conn, $sql);
+													if ($count_ques == 0) {
+
+														$count_ques = mysqli_num_rows($result);
+													}
+													$sql = "select * from form_responses where form_id='$value'";
+													$resu = mysqli_query($conn, $sql);
+
+													$main_responses = array();
+													$num_ques = $count_ques;
+													if ($count_ques > $max_ques) {
+														$max_ques = $count_ques;
+													}
+													$main_responses = array();
+													for ($i = 0; $i < $num_ques; $i++) {
+														array_push($main_responses, array());
+													}
+													while ($row = mysqli_fetch_assoc($resu)) {
+														$res = json_decode($row['response_json'], true);
+														$i = 0;
+														foreach ($res as $key => $value) {
+															if ($value == "null") {
+																$value = 0;
+															}
+															array_push($main_responses[$i], round($value));
+															$i++;
+															if ($i == $num_ques) {
+																break;
+																# code...
+															}
+														}
+													}
+
+													for ($i = 0; $i <  $count_ques; $i++) {
+														# code...
+														array_push($averages[$count], round(array_sum($main_responses[$i]) / count($main_responses[$i]), 2));
+													}
+													$count++;
+												}
+												?>
+
+												<thead>
+													<th>Courses</th>
+													<th colspan="7">Score Index</th>
+													<th>Avg Score Index</th>
+
+
+
+												</thead>
+												<tbody>
+													<tr>
+														<th></th>
+														<th>1</th>
+														<th>2</th>
+														<th>3</th>
+														<th>4</th>
+														<th>5</th>
+														<th>6</th>
+														<th>7</th>
+														<th></th>
+
+													</tr>
+													<?php
+													foreach ($group_array as $key => $value) {
+														$grp_sql = "select * from courses where course_code='$courses[$key]'";
+														$grp_res = mysqli_query($conn, $grp_sql);
+														$grp_row = mysqli_fetch_assoc($grp_res);
+														echo "<tr>";
+														echo "<td>" . $grp_row['course_name'] . " ({$grp_row['course_code']})" . "</td>";
+														$avgd = 0;
+														for ($i = 0; $i < count($averages[$key]); $i++) {
+															if ($averages[$key][$i] >= 4.5 or $averages[$key][$i] <= 3) {
+																echo "<td><u>" . $averages[$key][$i] . "</u></td>";
+																$avgd += $averages[$key][$i];
+																continue;
+															}
+															echo "<td>" . $averages[$key][$i] . "</td>";
+															$avgd += $averages[$key][$i];
+														}
+														for ($i = 0; $i < $max_ques - count($averages[$key]); $i++) {
+															echo "<td>" . "</td>";
+														}
+														$avg_er = round($avgd / count($averages[$key]), 2);
+														if ($avg_er >= 4.5 or $avg_er <= 3) {
+															echo "<td><u>" . round($avgd / count($averages[$key]), 2) . "</u></td>";
+															continue;
+														}
+														echo "<td>" . round($avgd / count($averages[$key]), 2) . "</td>";
+													}
+													?>
+
+												</tbody>
+											</table>
+
+										</div>
+										<br>
+										<div class="table-responsive">
+											<table class="table table-bordered" style="border:1px solid #000;">
+												<thead>
+													<tr class="text-center">
+														<th colspan="5">FIVE POINT GRADING SCALE</th>
+													</tr>
+													<tr>
+
+														<th>Excellent : 5</th>
+														<th>Good : 4</th>
+														<th>Satisfactory : 3</th>
+														<th>Needs Improvement : 2</th>
+														<th>Poor : 1</th>
+													</tr>
+												</thead>
+											</table>
+										</div>
+										<br>
+										<!-- note paragraph -->
+										<p>
+											<b>Note:</b> 1. The score index less than 3 and greater than 4.5 is Highlighted.
+											<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2. The response for more than 40% score is highlighted.
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+
+
+
 					</div>
-				</div>
-
-
-			</main>
-
+			</div>
 		</div>
+	</div>
+	</div>
+	</div>
+
+	</div>
+	</div>
+
+
+
+
+	</main>
+
+	</div>
 	</div>
 	<script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
 	<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
@@ -349,7 +359,7 @@ error_reporting(0);
 					data: {
 						labels: ["Filled", "Not Filled"],
 						datasets: [{
-							data: [<?php echo count($main_responses[0]) ?>, 32],
+							data: [<?php echo count($main_responses[0]) ?>, <?php echo $student_count - count($main_responses[0]) ?>],
 							backgroundColor: [
 								window.theme.success,
 								window.theme.danger

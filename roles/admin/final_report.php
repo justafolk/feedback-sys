@@ -1,19 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
+
 $semester_id = $_GET['semester'];
 $department_id = $_GET['dept'];
+
+if (isset($_GET["academic_year"])) {
+	$academic_year = $_GET["academic_year"];
+	$sql = "select * from forms where academic_year = '{$academic_year}' and dept_code = {$department_id}";
+}
+if (isset($_GET["semester"])) {
+	$sql = "select * from forms where semester = '{$semester_id}' and dept_code = {$department_id}";
+	$semester = $semester_id." term";
+}
+
 session_start();
 include 'confirm.php';
 include "../../imports/config.php";
-$sql = "select * from groups where semester ={$semester_id} and deptcode = {$department_id}";
-
 $result = mysqli_query($conn, $sql);
 $group_array = array();
 $courses = array();
 while ($row = mysqli_fetch_assoc($result)) {
-	$group_array[] = $row['id'];
-	$courses[] = $row['subject'];
+	$group_array[] = $row['form_id'];
+	$courses[] = $row['course_code'];
 }
 ?>
 
@@ -67,7 +76,8 @@ while ($row = mysqli_fetch_assoc($result)) {
 				<div>
 					<h1 class="h3 mb-0"><strong>Feedback |
 							<?php
-							echo $semester_id;
+							echo $academic_year;
+							echo $semester;
 							include "../../imports/config.php";
 							$sql = "SELECT * FROM forms WHERE form_id = '{$row['id']}'";
 							$result = mysqli_query($conn, $sql);
@@ -80,7 +90,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 							$row_group = mysqli_fetch_assoc($result_group);
 							$student_count = $row_group['student_count'];
 
-							?> term</strong></h1>
+							?> </strong></h1>
 				</div>
 				<?php
 				include "notification.php";
@@ -340,10 +350,10 @@ while ($row = mysqli_fetch_assoc($result)) {
 													echo "<td>" . $averages[$key][$i] . "</td>";
 													$avgd += $averages[$key][$i];
 												}
-												for ($i=0; $i < $max_ques-count($averages[$key]); $i++) { 
-													echo "<td>" . "</td>"; 
+												for ($i = 0; $i < $max_ques - count($averages[$key]); $i++) {
+													echo "<td>" . "</td>";
 												}
-												echo "<td>" . round($avgd /count($averages[$key]) , 2) . "</td>";
+												echo "<td>" . round($avgd / count($averages[$key]), 2) . "</td>";
 											}
 											?>
 
@@ -354,7 +364,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 						</div>
 					</div>
 				</div>
-				<a href="print_report.php?id=<?php echo $_GET["id"] ?>" target=”_blank”>
+				<a href="final_print_report.php?academic_year=<?php echo $academic_year ?>&dept=<?php echo $deptcode ?>" target=”_blank”>
 
 					<button class="btn btn-dark btn-ecomm" type="button">Print </button>
 				</a>

@@ -68,6 +68,7 @@ error_reporting(0);
 				$sql = "SELECT * FROM forms WHERE form_id = '$feedback_id'";
 				$result = mysqli_query($conn, $sql);
 				$row = mysqli_fetch_assoc($result);
+				$acadmic_e = $row['academic_year'];
 				$default_flag = $row['default_ques'];
 				?></strong></h1>
 			</div>
@@ -125,7 +126,7 @@ error_reporting(0);
 										<img src="../../assets/img/logo.png" alt="" style="width: 51px">
 
 										<h3 class="mb-0">Cusrow Wadia Institute of Technology, Pune-41</h3>
-										<footer class="">Student's Feedback Report 2021-22</footer>
+										<footer class="">Student's Feedback Report <?php echo $acadmic_e; ?></footer>
 									</div>
 								</div>
 							</div>
@@ -296,8 +297,13 @@ error_reporting(0);
 												echo "<td>" . round(count(array_keys($main_responses[$i], 3)) / count($main_responses[$i]) * 100, 2) . "</td>";
 												echo "<td>" . round(count(array_keys($main_responses[$i], 4)) / count($main_responses[$i]) * 100, 2) . "</td>";
 												echo "<td>" . round(count(array_keys($main_responses[$i], 5)) / count($main_responses[$i]) * 100, 2) . "</td>";
+												if ( round(array_sum($main_responses[$i]) / count($main_responses[$i]), 2) >= 4.5 or  round(array_sum($main_responses[$i]) / count($main_responses[$i]), 2) <=3 ){
+													
+												echo "<td><u>" . round(array_sum($main_responses[$i]) / count($main_responses[$i]), 2) . "</u></td>";
+												}else{
 
-												echo "<td>" . round(array_sum($main_responses[$i]) / count($main_responses[$i]), 2) . "</td>";
+													echo "<td>" . round(array_sum($main_responses[$i]) / count($main_responses[$i]), 2) . "</td>";
+												}
 												echo "</tr>";
 												$i++;
 											}

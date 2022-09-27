@@ -56,12 +56,16 @@ if (!$conn) {
         }
 
         .input-container {
+            margin: 2px 2px 2px 2px;
+
             width: 75px;
             height: 42px;
         }
 
         .input-container label {
             position: absolute;
+            margin: 10px 10px 10px 10px;
+
             top: 0;
             left: 0;
             color: #737373;
@@ -73,6 +77,8 @@ if (!$conn) {
 
         input:checked+label {
             background-color: #D9F8C4;
+            border: 1px solid green;
+
             top: 0;
             left: 0;
             z-index: 2;
