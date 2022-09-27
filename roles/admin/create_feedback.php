@@ -1,6 +1,7 @@
 <?php 
 include "../../imports/config.php";
 session_start();
+error_reporting(0);
 include 'confirm.php';
 
 $sqls = "delete from form_ques where form_id=".$_POST['form_id'];

@@ -13,7 +13,7 @@
 		<tr>
 			<td>Computer Networks</td>
 			<td class="">Rupali Shete</td>
-			<td class=""> <?php echo $_GET['date']; ?> | 00:30</td>
+			<td class=""> <?php error_reporting(0); echo $_GET['date']; ?> | 00:30</td>
 			<td class=""> <?php echo $_GET['date']; ?> | 00:40</td>
 			<td><span class="badge bg-success">Done</span></td>
 		</tr>

@@ -24,6 +24,7 @@
 	<div class="wrapper">
 		<?php
 			session_start();
+			error_reporting(0);
 			include 'sidebar.php';
 		?>
 		<div class="main">

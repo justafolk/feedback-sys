@@ -90,13 +90,13 @@ if ($_SESSION['role'] != 'Student') {
 												<h4 class="h4"><strong>
 														<?php echo $row2["course_name"] . " (" . $row2["course_code"]; ?>)
 													</strong></h4>
-												<h6> <a href="">
+												<h6> 
 
 														<?php
 														$sql3 = "select * from departments where dept_id='{$row["deptcode"]}'";
 														$result3 = mysqli_query($conn, $sql3);
 														$row3 = mysqli_fetch_assoc($result3);
-														echo $row3["dept_name"];
+														echo "<class style='color:blue'>" . $row3["dept_name"] . "</class>";
 														?>
 													</a>
 												</h6>
@@ -160,13 +160,13 @@ if ($_SESSION['role'] != 'Student') {
 												<h4 class="h4"><strong>
 														<?php echo $row2["course_name"] . " (" . $row2["course_code"]; ?>)
 													</strong></h4>
-												<h6> <a href="">
+												<h6> 
 
 														<?php
 														$sql3 = "select * from departments where dept_id='{$row["deptcode"]}'";
 														$result3 = mysqli_query($conn, $sql3);
 														$row3 = mysqli_fetch_assoc($result3);
-														echo $row3["dept_name"];
+														echo "<class style='color:blue'>" . $row3["dept_name"] . "</class>";
 														?>
 													</a>
 												</h6>

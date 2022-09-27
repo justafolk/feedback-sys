@@ -2,7 +2,7 @@
 
 include '../../imports/config.php';
 session_start();
-
+error_reporting(0);
 $instructions= ' Note: 
 - Please fill the survey questions and ratings in the order of your preference.
 - Extreme left indicates postive and extreme right indicates negative. 
