@@ -69,11 +69,12 @@ while ($row = mysqli_fetch_assoc($result)) {
 							<?php
 							echo $semester_id;
 							include "../../imports/config.php";
-							$sql = "SELECT * FROM forms WHERE group_id = '{$row['id']}'";
+							$sql = "SELECT * FROM forms WHERE form_id = '{$row['id']}'";
 							$result = mysqli_query($conn, $sql);
 							$row = mysqli_fetch_assoc($result);
+							$default_flag = $row['default_ques'];
 							$author = $row['author'];
-							echo $row['course_name'];
+							echo $row['course_code'];
 							$sql_group = "SELECT * FROM groups WHERE id = '{$row["group_id"]}'";
 							$result_group = mysqli_query($conn, $sql_group);
 							$row_group = mysqli_fetch_assoc($result_group);
@@ -83,7 +84,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 				</div>
 				<?php
 				include "notification.php";
-				$course_code = $row["course_name"];
+				$course_code = $row["course_code"];
 				$sql = "select * from courses where course_code = '$course_code'";
 				$resul = mysqli_query($conn, $sql);
 				$rowse = mysqli_fetch_assoc($resul);
@@ -99,7 +100,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 
 								<div class="col-md-6">
 
-									<h4><?php echo $rowse["course_name"] ?> : #<?php echo $row["course_name"] ?></h4>
+									<h4><?php echo $rowse["course_name"] ?> : #<?php echo $row["course_code"] ?></h4>
 									<p><?php echo $author ?></p>
 								</div>
 								<div class="col-md-6" style="text-align:right; ">
@@ -112,20 +113,32 @@ while ($row = mysqli_fetch_assoc($result)) {
 					<?php
 
 					$i = 1;
-					$sql = "SELECT * FROM form_ques where form_id = '$feedback_id'";
+					if ($default_flag == 1) {
+						$sql = "SELECT * FROM form_ques where form_id = '0'";
+						$count_ques = 7;
+					} else {
+
+						$sql = "SELECT * FROM form_ques where form_id = '$feedback_id'";
+					}
 					$result = mysqli_query($conn, $sql);
-					$num_ques = mysqli_num_rows($result);
+					$num_ques = $count_ques;
 
 					$sql = "select * from form_responses where form_id='$feedback_id'";
 					$resu = mysqli_query($conn, $sql);
 					$main_responses = array();
-					for ($i = 0; $i < $num_ques; $i++) {
+					if (!isset($count_ques)) {
+						$count_ques = mysqli_num_rows($resu);
+					}
+					for ($i = 0; $i < $count_ques; $i++) {
 						array_push($main_responses, array());
 					}
 					while ($row = mysqli_fetch_assoc($resu)) {
 						$res = json_decode($row['response_json'], true);
 						$i = 0;
 						foreach ($res as $key => $value) {
+							if ($value == "NAN") {
+								$value = 0;
+							}
 							array_push($main_responses[$i], round($value));
 							$i++;
 							if ($i == $num_ques) {
@@ -134,6 +147,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 							}
 						}
 					}
+					var_dump($main_responses);
 					?>
 					<div class="row">
 						<div class="col-md-4">
@@ -232,19 +246,39 @@ while ($row = mysqli_fetch_assoc($result)) {
 									<table class="table table-bordered">
 										<?php
 										$averages = array();
+										$max_ques = 0;
 										for ($i = 0; $i < count($group_array); $i++) {
-											array_push($averages, array()) ;
+											array_push($averages, array());
 										}
 										$count = 0;
 										foreach ($group_array as $key => $value) {
 
+											$forms_sql = "select * from forms where form_id='$value'";
+											$forms_result = mysqli_query($conn, $forms_sql);
+											$forms_row = mysqli_fetch_assoc($forms_result);
+											$default_flag = $forms_row['default_ques'];
 											$i = 1;
-											$sql = "SELECT * FROM form_ques where form_id = '1'";
-											$result = mysqli_query($conn, $sql);
-											$num_ques = mysqli_num_rows($result);
+											$count_ques = 0;
+											if ($default_flag == 1) {
+												$sql = "SELECT * FROM form_ques where form_id = '0'";
+												$count_ques = 7;
+											} else {
 
+												$sql = "SELECT * FROM form_ques where form_id = '$value'";
+											}
+											$result = mysqli_query($conn, $sql);
+											if ($count_ques == 0) {
+
+												$count_ques = mysqli_num_rows($result);
+											}
 											$sql = "select * from form_responses where form_id='$value'";
 											$resu = mysqli_query($conn, $sql);
+
+											$main_responses = array();
+											$num_ques = $count_ques;
+											if ($count_ques > $max_ques) {
+												$max_ques = $count_ques;
+											}
 											$main_responses = array();
 											for ($i = 0; $i < $num_ques; $i++) {
 												array_push($main_responses, array());
@@ -253,6 +287,9 @@ while ($row = mysqli_fetch_assoc($result)) {
 												$res = json_decode($row['response_json'], true);
 												$i = 0;
 												foreach ($res as $key => $value) {
+													if ($value == "null") {
+														$value = 0;
+													}
 													array_push($main_responses[$i], round($value));
 													$i++;
 													if ($i == $num_ques) {
@@ -262,10 +299,9 @@ while ($row = mysqli_fetch_assoc($result)) {
 												}
 											}
 
-											for ($i=0; $i <  7; $i++) { 
+											for ($i = 0; $i <  $count_ques; $i++) {
 												# code...
-												array_push($averages[$count] ,round(array_sum($main_responses[$i]) / count($main_responses[$i]), 2));
-												
+												array_push($averages[$count], round(array_sum($main_responses[$i]) / count($main_responses[$i]), 2));
 											}
 											$count++;
 										}
@@ -293,19 +329,22 @@ while ($row = mysqli_fetch_assoc($result)) {
 
 											</tr>
 											<?php
-												foreach ($group_array as $key => $value) {
-													$grp_sql = "select * from courses where course_code='$courses[$key]'";
-													$grp_res = mysqli_query($conn, $grp_sql);
-													$grp_row = mysqli_fetch_assoc($grp_res);
-													echo "<tr>";
-													echo "<td>" . $grp_row['course_name']." ({$grp_row['course_code']})" . "</td>";
-													$avgd = 0;
-													for ($i = 0; $i < 7; $i++) {
-														echo "<td>" . $averages[$key][$i] . "</td>";
-														$avgd += $averages[$key][$i];
-													}
-													echo "<td>" . round($avgd / 7, 2) . "</td>";
+											foreach ($group_array as $key => $value) {
+												$grp_sql = "select * from courses where course_code='$courses[$key]'";
+												$grp_res = mysqli_query($conn, $grp_sql);
+												$grp_row = mysqli_fetch_assoc($grp_res);
+												echo "<tr>";
+												echo "<td>" . $grp_row['course_name'] . " ({$grp_row['course_code']})" . "</td>";
+												$avgd = 0;
+												for ($i = 0; $i < count($averages[$key]); $i++) {
+													echo "<td>" . $averages[$key][$i] . "</td>";
+													$avgd += $averages[$key][$i];
 												}
+												for ($i=0; $i < $max_ques-count($averages[$key]); $i++) { 
+													echo "<td>" . "</td>"; 
+												}
+												echo "<td>" . round($avgd /count($averages[$key]) , 2) . "</td>";
+											}
 											?>
 
 										</tbody>
