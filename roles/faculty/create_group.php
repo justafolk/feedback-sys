@@ -179,22 +179,8 @@ if (!$conn) {
                                                 <label for="semester">Select Subject</label>
                                                 <select class="form-control" id="subject" name="subject" required="">
                                                     <option value="">Select Subject</option>
-                                                    <?php
-                                                    $sql = "select * from courses";
-                                                    $result = mysqli_query($conn, $sql);
-                                                    while ($row = mysqli_fetch_assoc($result)) {
-                                                        echo "<option value='" . $row["course_code"] . "'>" . $row["course_name"] . "(" . $row["course_code"] . ")" . "</option>";
-                                                    }
-                                                    ?>
-                                                    <?php
-                                                    if (isset($_POST["subject"])) {
-                                                        $sql = "select * from courses where course_code = '{$_POST["subject"]}'";
-                                                        $result = mysqli_query($conn, $sql);
-                                                        $row = mysqli_fetch_assoc($result);
-                                                        echo "<option value='" . $_POST["subject"] . "' selected>" . $row["course_name"] . "(" . $row["course_code"] . ")" . "</option>";
-                                                    }
-                                                    ?>
-                                                </select>
+
+                                               </select>
                                             </div>
 
                                         </div>
@@ -424,11 +410,20 @@ if (!$conn) {
         }
     }
 
+
     ?>
+<script>
+$('#department').change(function () {
+    var dept_codes = document.getElementById("department").value;
+   $.get("./courses_list.php", {dept_code: dept_codes}, function(data, status){
+    
+    document.getElementById("subject").innerHTML = data;
+console.log(data);
+  });
+});
+  </script>
 </body>
-
 </html>
-
 
 
 <!--
