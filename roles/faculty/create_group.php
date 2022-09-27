@@ -160,8 +160,8 @@ if (!$conn) {
                                                 <select class="form-control" id="semester" name="semester" required="" value="<?php echo $_POST["semester"] ?>">
                                                     <option value="">Select Semester</option>
                                                     <option value="1" <?php if ($selected == '1') {
-                                                        echo ("selected");
-} ?>>1st Semester</option>
+                                                                            echo ("selected");
+                                                                        } ?>>1st Semester</option>
                                                     <option value="2">2nd Semester</option>
                                                     <option value="3">3rd Semester</option>
                                                     <option value="4">4th Semester</option>
@@ -179,8 +179,15 @@ if (!$conn) {
                                                 <label for="semester">Select Subject</label>
                                                 <select class="form-control" id="subject" name="subject" required="">
                                                     <option value="">Select Subject</option>
-
-                                               </select>
+                                                    <?php
+                                                    if (isset($_POST["subject"])) {
+                                                        $sql = "select * from courses where course_code = '{$_POST["subject"]}'";
+                                                        $result = mysqli_query($conn, $sql);
+                                                        $row = mysqli_fetch_assoc($result);
+                                                        echo "<option value='" . $_POST["subject"] . "' selected>" . $row["course_name"] . "(" . $row["course_code"] . ")" . "</option>";
+                                                    }
+                                                    ?>
+                                                </select>
                                             </div>
 
                                         </div>
@@ -238,7 +245,7 @@ if (!$conn) {
                                             <?php
 
                                             if (isset($_POST['checkroll']) or isset($_POST['finalroll'])) {
-                                                ?>
+                                            ?>
                                                 <span style="color:red;">*</span> Click to add / remove students from group.
 
                                                 <br>
@@ -254,7 +261,7 @@ if (!$conn) {
                                                 <br>
                                                 <br>
 
-                                                <?php
+                                            <?php
                                                 $deptcode = $_POST['deptcode'];
                                                 $semester = $_POST['semester'];
                                                 $subject = $_POST['subject'];
@@ -318,10 +325,10 @@ if (!$conn) {
 
                                                         $count += 1;
                                                         if ($row['enrollid'] == 0) {
-                                                                                                    continue;
+                                                            continue;
                                                         }
                                                         if ($count == $allrolls + 3) {
-                                                                                            break;
+                                                            break;
                                                         }
                                                         error_reporting(0);
                                                         //array_push($rolls, $row['enrollid']);
@@ -412,17 +419,20 @@ if (!$conn) {
 
 
     ?>
-<script>
-$('#department').change(function () {
-    var dept_codes = document.getElementById("department").value;
-   $.get("./courses_list.php", {dept_code: dept_codes}, function(data, status){
-    
-    document.getElementById("subject").innerHTML = data;
-console.log(data);
-  });
-});
-  </script>
+    <script>
+        $('#department').change(function() {
+            var dept_codes = document.getElementById("department").value;
+            $.get("./courses_list.php", {
+                dept_code: dept_codes
+            }, function(data, status) {
+
+                document.getElementById("subject").innerHTML = data;
+                console.log(data);
+            });
+        });
+    </script>
 </body>
+
 </html>
 
 

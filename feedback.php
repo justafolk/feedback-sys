@@ -103,7 +103,6 @@
                     </div>
                     <div class="col-md-12">
                         <h6 class="h6">
-                            <div class="blockquote-footer"><?php echo $row_forms["author"] ?></div>
                         </h6>
                     </div>
                 </div>

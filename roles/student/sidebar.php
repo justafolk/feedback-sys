@@ -2,7 +2,7 @@
 
 <?php 
 if ($_SESSION['role'] !== "Student"){
-  header("Location ../../index.php")
+  header("Location ../../index.php");
 }
 ?>
 <nav id="sidebar" class="sidebar js-sidebar">

@@ -1,6 +1,11 @@
 <?php
 require_once "../../imports/config.php";
 $feedback_id = $_GET["id"];
+
+//expired feedbacks part 
+$sqlop = "UPDATE forms SET `viewed` = '1' WHERE `form_id` = '$feedback_id' AND `ini_date` < CURRENT_DATE()";
+$resultop = mysqli_query($conn, $sqlop);
+
 $query = "SELECT * FROM form_responses where form_id='$feedback_id';";
 $result = mysqli_query($conn, $query);
 $items = array();
@@ -151,6 +156,7 @@ include 'confirm.php';
 					$i = 1;
 					if ($default_flag == 1){
 					$sql = "SELECT * FROM form_ques where form_id = '0'";
+          $count_ques = 7;
 
 					}else{
 
@@ -162,7 +168,10 @@ include 'confirm.php';
 					$sql = "select * from form_responses where form_id='$feedback_id'";
 					$resu = mysqli_query($conn, $sql);
 					$main_responses = array();
-					for ($i = 0; $i < 7; $i++) {
+          if (!isset($count_ques)){
+              $count_ques = mysqli_num_rows($resu);
+}
+					for ($i = 0; $i < $count_ques; $i++) {
 						array_push($main_responses, array());
 					}
 					while ($row = mysqli_fetch_assoc($resu)) {
@@ -399,7 +408,7 @@ include 'confirm.php';
 													$i++;
 												}
 
-												if ($i == round($rows / 4)) {
+												if ($i >= ($countse / 4)) {
 													break;
 												}
 											}
