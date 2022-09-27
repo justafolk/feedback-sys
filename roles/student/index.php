@@ -131,27 +131,60 @@ if ($_SESSION['role'] != 'Student') {
 						</div>
 						<br>
 						
-						<div class="container-fluid p-0">
+					
+				<div class="container-fluid p-0">
 					<div class="row">
 						<h1 class="h3 mb-3"><strong>Past</strong> Feedback Surveys: </h1>
 						<div class="row">
-						
+							<?php
+							include '../../imports/config.php';
+							$student_login = "select * from login where uname = '".$_SESSION['uname']."'";
+							$student_login_result = mysqli_query($conn, $student_login);
+							$student_login_row = mysqli_fetch_assoc($student_login_result);
+							$groups = explode(";", $student_login_row['student_groups']);
+							$groups = array_filter($groups);
+							$groups_string = "(".implode(",", $groups).")";
+							$sql = "SELECT * FROM groups, forms WHERE groups.id IN $groups_string and forms.group_id = groups.id and `status` = '0'";
+							$result = mysqli_query($conn, $sql);
+							if (mysqli_num_rows($result) > 0) {
+								
+								while ($row = mysqli_fetch_assoc($result)) {
+									$sql2 = "select * from courses where course_code='{$row["subject"]}'";
+									$result2 = mysqli_query($conn, $sql2);
+									$row2 = mysqli_fetch_assoc($result2);
+							?>
 									<div class="col-md-3">
 										<div class="card border shadow-none" style="border-radius:12px">
 											<div class="card-body">
 												<h4 class="h4"><strong>
-														Data Communication (R18CP3409)
+														<?php echo $row2["course_name"] . " (" . $row2["course_code"]; ?>)
 													</strong></h4>
 												<h6> <a href="">
 
-													Computer Engineering
+														<?php
+														$sql3 = "select * from departments where dept_id='{$row["deptcode"]}'";
+														$result3 = mysqli_query($conn, $sql3);
+														$row3 = mysqli_fetch_assoc($result3);
+														echo $row3["dept_name"];
+														?>
 													</a>
 												</h6>
-												<h6 class="">- Rupali Shete
+												<h6 class="">- <?php
+													echo $row["author"] ?>
 												</h6>
 												<div class="row">
 													<div class="col-md-12">
-                                                        <label> Status: Filled on 04/08/2022</label>
+														<?php
+														$sql99 = "select * from form_responses where form_id='{$row["id"]}' and student_id='{$_SESSION["uname"]}'";
+														$result99 = mysqli_query($conn, $sql99);
+														if (mysqli_num_rows($result99) > 0) {
+															$row99 = mysqli_fetch_assoc($result99);
+															echo "<h4 class='text-success'>Submitted on $row99[filldate]</h4>";
+														} else { ?>
+														<?php echo "<h4><span class='text-danger'>Not Submitted</span></h4>"; ?>
+															</strong>
+														
+														<?php } ?>
 														
 													</div>
 
@@ -160,39 +193,10 @@ if ($_SESSION['role'] != 'Student') {
 
 										</div>
 									</div>
-				
-                                    <div class="col-md-3">
-										<div class="card border shadow-none" style="border-radius:12px">
-											<div class="card-body">
-												<h4 class="h4"><strong>
-														Computer Networks (R18CP3407)
-													</strong></h4>
-												<h6> <a href="">
-
-													Computer Engineering
-													</a>
-												</h6>
-												<h6 class="">- Rupali Shete
-												</h6>
-												<div class="row">
-													<div class="col-md-12">
-                                                        <label> Status: Not filled</label>
-														
-													</div>
-
-												</div>
-											</div>
-
-										</div>
-									</div>
-				
+							<?php }
+							} ?>
 
 						</div>
-					
-					</div>
-
-				
-				</div>
 
 		</div>
 		</main>

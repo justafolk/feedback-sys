@@ -404,7 +404,7 @@ include 'confirm.php';
 													$i++;
 												}
 
-												if ($i == round($rows / 4)) {
+												if ($i >= ($countse / 4)) {
 													break;
 												}
 											}
