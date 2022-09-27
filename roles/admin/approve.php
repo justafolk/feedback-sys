@@ -36,6 +36,14 @@ if ($result) {
     $totalstudents = $data['student_count'];
     $semester = $data['semester'];
 
+    $date_year = date("Y", strtotime($ini_date));
+    $date_month = date("m", strtotime($ini_date));
+
+    if ($date_month >= 8) {
+        $academic = $date_year . "-" . ($date_year + 1);
+    } else {
+        $academic = ($date_year - 1). "-" .$date_year ;
+    }
     /*
     echo 'id = '.$id.'<br>';
     echo 'author = '.$teachername.'<br>';
@@ -47,8 +55,8 @@ if ($result) {
     echo 'totalstudents = '.$totalstudents.'<br>';
 */
     
-    $sql2 = "INSERT INTO `forms` (`form_id`, `author`, `ini_date`, `instructions`, `status`, `semester`, `course_code`,`dept_code`, `group_id`, `default_ques`, `total_students`) 
-    VALUES ('$id', '$teachername', '$ini_date', '$instructions', '0','$semester', '$course_code', '$deptcode', '$id', '1', '$totalstudents');";
+    $sql2 = "INSERT INTO `forms` (`form_id`, `author`, `ini_date`, `instructions`, `status`, `semester`, `course_code`,`dept_code`, `group_id`, `default_ques`, `total_students`, `academic_year`) 
+    VALUES ('$id', '$teachername', '$ini_date', '$instructions', '0','$semester', '$course_code', '$deptcode', '$id', '1', '$totalstudents', '$academic');";
     $result2 = mysqli_query($conn, $sql2);
 
     if($result2){
