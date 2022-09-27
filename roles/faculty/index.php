@@ -164,8 +164,22 @@ if (!$conn) {
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
-														<h5 class="card-title">Current Requested Forms</h5>
+														<h5 class="card-title">Current Created Forms</h5>
 													</div>
+													<?php
+
+														$teach_id = $_SESSION['id'];
+														$sqlcount = "SELECT COUNT(teacher_id) FROM `groups` WHERE `req` = '0' and `accepted` = '0' and `rejected`='0' and `teacher_id` = '$teach_id'";
+														$result = mysqli_query($conn, $sqlcount);
+														$row = mysqli_fetch_array($result);
+														$created = $row['COUNT(teacher_id)'];
+														//echo "<script>alert('".$created."')</script>";
+
+														$sqltotal = "SELECT COUNT(teacher_id) FROM `groups` WHERE `teacher_id` = '$teach_id'";
+														$result = mysqli_query($conn, $sqltotal);
+														$row = mysqli_fetch_array($result);
+														$total = $row['COUNT(teacher_id)'];
+													?>
 
 													<div class="col-auto">
 														<div class="stat text-primary">
@@ -173,10 +187,11 @@ if (!$conn) {
 														</div>
 													</div>
 												</div>
-												<h1 class="mt-1 mb-3">7</h1>
+												<h1 class="mt-1 mb-3"> <?php echo $created; ?> </h1>
 												<div class="mb-0">
-													<span class="text-primary"> <i class="mdi mdi-arrow-bottom-right"></i> Total 3 </span>
-													<span class="text-muted">Departments</span>
+
+													<span class="text-primary"> <i class="mdi mdi-arrow-bottom-right"></i> Total <?php echo $total; ?> </span>
+													<span class="text-muted">till date</span>
 												</div>
 											</div>
 										</div>
@@ -186,19 +201,32 @@ if (!$conn) {
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
-														<h5 class="card-title">Current Created Forms</h5>
+														<h5 class="card-title">Current Requested Forms</h5>
 													</div>
+													<?php
 
+														$teach_id = $_SESSION['id'];
+														$sqlcount = "SELECT COUNT(teacher_id) FROM `groups` WHERE `req` = '1' and `accepted` = '0' and `rejected`='0' and `teacher_id` = '$teach_id'";
+														$result = mysqli_query($conn, $sqlcount);
+														$row = mysqli_fetch_array($result);
+														$requsted = $row['COUNT(teacher_id)'];
+														//echo "<script>alert('".$created."')</script>";
+
+														$sqltotal = "SELECT COUNT(teacher_id) FROM `groups` WHERE `accepted`='1' AND `teacher_id` = '$teach_id'";
+														$result = mysqli_query($conn, $sqltotal);
+														$row = mysqli_fetch_array($result);
+														$accepted = $row['COUNT(teacher_id)'];
+													?>
 													<div class="col-auto">
 														<div class="stat text-primary">
 															<i class="align-middle" data-feather="info"></i>
 														</div>
 													</div>
 												</div>
-												<h1 class="mt-1 mb-3">750</h1>
+												<h1 class="mt-1 mb-3"> <?php echo $requsted; ?></h1>
 												<div class="mb-0">
-													<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 2,506 </span>
-													<span class="text-muted">Students till date</span>
+													<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> <?php echo $accepted; ?></span>
+													<span class="text-muted">accepted till date</span>
 												</div>
 											</div>
 										</div>
@@ -217,10 +245,33 @@ if (!$conn) {
 														</div>
 													</div>
 												</div>
-												<h1 class="mt-1 mb-3">5</h1>
+
+												<?php 
+													$today = date("Y-m-d");
+
+													$sqllogin = "SELECT `name` from `login` where `id` = '$teach_id'";
+													$result = mysqli_query($conn, $sqllogin);
+													$row = mysqli_fetch_array($result);
+													$teacher_name = $name = $row['name'];
+
+													$sqlongoing = "SELECT COUNT(status) from `forms` WHERE `status` = '1' OR `ini_date`='$today' and `author` = '$name'";
+													$result = mysqli_query($conn, $sqlongoing);
+													$row = mysqli_fetch_array($result);
+													$ongoing = $row['COUNT(status)'];
+													//echo "<script>alert('".$name."')</script>";
+
+													$sqlcompleted = "SELECT COUNT(`status`) from `forms` WHERE `status` = '1' and `author` = '$name' and date(`ini_date`) >= '$today'";
+													//echo "<script>alert('".$today."')</script>";
+													$result = mysqli_query($conn, $sqlcompleted);
+													$row = mysqli_fetch_array($result);
+													$completed = $row['COUNT(status)'];
+													//echo "<script>alert('".$completed."')</script>";
+												?>
+
+												<h1 class="mt-1 mb-3"><?php echo $ongoing; ?></h1>
 												<div class="mb-0">
-													<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> 2 Courses </span>
-													<span class="text-muted">Remaining</span>
+													<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> <?php echo $completed; ?></span>
+													<span class="text-muted">Feedbacks</span>
 												</div>
 											</div>
 										</div>
@@ -230,20 +281,29 @@ if (!$conn) {
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
-														<h5 class="card-title">Student Responses (Current)</h5>
+														<h5 class="card-title">Session Details</h5>
 													</div>
 
 													<div class="col-auto">
 														<div class="stat text-primary">
-															<i class="align-middle" data-feather="shopping-cart"></i>
+															<i class="align-middle" data-feather="info"></i>
 														</div>
 													</div>
 												</div>
-												<h1 class="mt-1 mb-3">625</h1>
-												<div class="mb-0">
-													<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> 175 Students </span>
-													<span class="text-muted">Remaining</span>
-												</div>
+												<class="mt-1 mb-3">
+													<?php
+													echo "<b>Username : </b>".$_SESSION['uname'];
+													echo "<br>";
+													echo '<b>Name : </b>'.$name; 
+													echo '<br>';
+													echo '<b>teacher ID : </b>'.$teach_id;
+													echo '<br>';
+													echo '<b>Role : </b>'.$_SESSION['role'];
+													?>
+													
+
+												</class>
+												
 											</div>
 										</div>
 									</div>
@@ -271,7 +331,7 @@ if (!$conn) {
 											<tbody>
 												<?php
 
-													$active_feedbacks = "SELECT * FROM forms WHERE `ini_date` = '$td' AND `status` = '1'";
+													$active_feedbacks = "SELECT * FROM forms WHERE `ini_date` = '$td' AND `status` = '1' ORDER BY `form_id` DESC";
 													$active_feedbacks_result = mysqli_query($conn, $active_feedbacks);
 													$active_feedbacks_count = mysqli_num_rows($active_feedbacks_result);
 
@@ -321,15 +381,16 @@ if (!$conn) {
 												<tr>
 													<th> ID</th>
 													<th>Course</th>
-													<th>Course Code</th>
-													<th>Department and Sem</th>
+													<th>Code</th>
+													<th>Students</th>
+													<th>Date</th>
 													
 												</tr>
 											</thead>
 											<tbody>
 											<?php
 
-												$active_feedbacks = "SELECT * FROM forms WHERE `ini_date` < '$td' AND `status` = '0' AND `author` = '$_SESSION[name]'";
+												$active_feedbacks = "SELECT * FROM forms WHERE `ini_date` < '$td' AND `status` = '0' AND `author` = '$_SESSION[name]' ORDER BY `form_id` DESC";
 												$active_feedbacks_result = mysqli_query($conn, $active_feedbacks);
 												$active_feedbacks_count = mysqli_num_rows($active_feedbacks_result);
 
@@ -349,6 +410,7 @@ if (!$conn) {
 																<td>$course_name</td>
 																<td>$course_code</td>
 																<td>$total_stud</td>
+																<td>$active_feedbacks_row[ini_date]</td>
 															</tr>";
 														$active_feedbacks_count++;
 													}

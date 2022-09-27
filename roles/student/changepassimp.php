@@ -18,8 +18,8 @@ include 'confirm.php';
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="assets/img/logo.png" rel="icon">
-  <link href="assets/img/logo.png" rel="apple-touch-icon">
+  <link href="../../assets/img/logo.png" rel="icon">
+  <link href="../../assets/img/logo.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -51,7 +51,7 @@ include 'confirm.php';
 
               <div class="d-flex justify-content-center py-4">
                 <a href="index.html" class="logo d-flex align-items-center w-auto">
-                  <img src="assets/img/logo.png" alt="">
+                  <img src="../../assets/img/logo.png" alt="">
                   <span class="d-none d-lg-block">Password Change form</span>
                 </a>
               </div><!-- End Logo -->

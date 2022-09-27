@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feedback-sys</title>
+    <title>Feedback Form</title>
+    <link href="assets/img/logo.png" rel="icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
@@ -55,6 +56,7 @@
         }
     </style>
     <?php
+    session_start();
     include 'imports/config.php';
     $form_id = $_GET['id'];
     $sqls = "select * from forms where form_id = '$form_id'";
@@ -65,6 +67,21 @@
     }
     $row_forms = mysqli_fetch_assoc($result_forms);
     $default_flag = $row_forms['default_ques'];
+    $status = $row_forms['status'];
+
+    if ($status == 0) {
+        echo "<script>alert('This form is not active. Please contact the admin.')</script>";
+        echo "<script>window.location.href='roles/student/index.php'</script>";
+    }else{
+        //echo "<script>alert('" . $_SESSION['uname'] . "')</script>";
+        $sqlconfirm = "SELECT `student_id` from `form_responses` where `student_id` = '$_SESSION[uname]' and `form_id` = '$form_id'";
+        $resultconfirm = mysqli_query($conn, $sqlconfirm);
+        if (mysqli_num_rows($resultconfirm) > 0) {
+            echo "<script>alert('You have already submitted the feedback for this form.')</script>";
+            echo "<script>window.location.href='roles/student/index.php'</script>";
+        }
+    }
+
     if ($default_flag == 1){
         $sql = "select * from form_ques where form_id = '0'";
     }else{
@@ -167,9 +184,9 @@
                                         <?php echo $row["question_title"] ?> </h5>
 
                                     <ul>
-                                        <li style="text-align:left; align-items:left;">Very Bad </li>
-                                        <li style="padding-left:4%;text-align:left; align-items:left;">Bad</li>
-                                        <li style="text-align:center; align-items:center;">Neutral </li>
+                                        <li style="text-align:left; align-items:left;">Poor </li>
+                                        <li style="padding-left:4%;text-align:left; align-items:left;">Needs Improvement</li>
+                                        <li style="text-align:center; align-items:center;">Satisfactory </li>
                                         <li style="text-align:right;padding-right:4%; align-items:right;">Good</li>
                                         <li style="text-align:right; align-items:right;">Excellent</li>
                                     </ul>
@@ -205,9 +222,7 @@
 
             <input type="hidden" name="form_id" value="<?php echo $_GET["id"] ?>">
             <input type="submit" class="btn  btn-dark" value="Submit">
-            <button class="btn btn-light border">Discard</button>
-
-        </form>
+            </form>
 
 
     </div>
