@@ -5,6 +5,15 @@
 session_start();
 include 'confirm.php';
 
+$sqlconfirm = "SELECT `flog` from `login` where `uname` = '{$_SESSION["uname"]}'";
+$result = mysqli_query($conn, $sqlconfirm);
+$row = mysqli_fetch_assoc($result);
+if ($row["flog"] == 0) {
+    echo "<script>alert('Password already changed, please contact admin if any issues faced.');</script>";
+    echo "<script>window.location.href='index.php';</script>";
+    //exit();
+}
+
 //echo "<script>alert(".$_SESSION['uname'].")</script>";
 
 ?>
