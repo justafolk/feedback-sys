@@ -2,7 +2,6 @@
 $dept_code = $_GET["dept_code"];
 include "../../imports/config.php";
 $sql = "select * from courses where dept_code = $dept_code";
-echo $sql;
 $result = mysqli_query($conn, $sql);
 while ($row = mysqli_fetch_assoc($result)) {
     echo "<option value='" . $row["course_code"] . "'>" . $row["course_name"] . "(" . $row["course_code"] . ")" . "</option>";
