@@ -5,7 +5,8 @@
 
 session_start();
 if ($_SESSION['role'] != 'Student') {
-	header("Location: ../index.php");
+	echo "<script>alert('Invalid Session, please login again');</script>";
+	echo "<script>window.location.href='../../index.php';</script>";
 }else{
 	include '../../imports/config.php';
 	error_reporting(0);

@@ -2,7 +2,7 @@
 					<ul class="navbar-nav navbar-align">
 						<li class="nav-item dropdown">
 							<a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-bs-toggle="dropdown">
-								<div class="position-relative">
+							<!--	<div class="position-relative">
 									<i class="align-middle" data-feather="bell"></i>
 									<span class="indicator">4</span>
 								</div>
@@ -131,7 +131,7 @@
 									<a href="#" class="text-muted">Show all messages</a>
 								</div>
 							</div>
-						</li>
+						</li> -->
 						<li class="nav-item dropdown">
 							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
 								<i class="align-middle" data-feather="settings"></i>
@@ -142,12 +142,7 @@
 								<img src="<?php echo "https://ui-avatars.com/api/?name=" . $_SESSION["name"] ?>" class="avatar img-fluid rounded me-1" alt="<?php echo $_SESSION["name"] ?>" /> <span class="text-dark"><?php echo $_SESSION["name"] ?></span>
 							</a>
 							<div class="dropdown-menu dropdown-menu-end">
-								<a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
-								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="pie-chart"></i> Analytics</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="index.html"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
-
-								<div class="dropdown-divider"></div>
+							
 								<a class="dropdown-item" href="../logout.php">Log out</a>
 							</div>
 						</li>
