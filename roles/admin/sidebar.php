@@ -23,6 +23,11 @@ if ($_SESSION['role'] !== "Admin"){
           <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
         </a>
       </li>
+      <li class="sidebar-item">
+        <a class="sidebar-link" href="create_course.php">
+          <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Create Course</span>
+        </a>
+      </li>
 
       <!-- <li class="sidebar-item">
               <a class="sidebar-link" href="dep_feedback.php">
