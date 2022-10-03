@@ -16,7 +16,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
-    <title>Add Profile</title>
+    <title>Add Course</title>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <link href="css/app.css" rel="stylesheet">
@@ -37,7 +37,7 @@
                     <i class="hamburger align-self-center"></i>
                 </a>
                 <div>
-                    <h1 class="h3 mb-0"><strong>New Profile</strong></h1>
+                    <h1 class="h3 mb-0"><strong>New Course</strong></h1>
                 </div>
                 <?php
                 include 'notification.php';
@@ -50,9 +50,9 @@
                             <div class="align-middle">
 
                                 <div class="text-center mt-4">
-                                    <h1 class="h2">New Profile</h1>
+                                    <h1 class="h2">New Course</h1>
                                     <p class="lead">
-                                        Create a New Profile
+                                        Create a New Course
                                     </p>
                                 </div>
                                 <div class="card shadow-none border">

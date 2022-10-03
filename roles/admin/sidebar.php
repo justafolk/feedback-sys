@@ -1,7 +1,7 @@
 <?php session_start(); ?>
 
-<?php 
-if ($_SESSION['role'] !== "Admin"){
+<?php
+if ($_SESSION['role'] !== "Admin") {
   header("Location ../../index.php");
 }
 ?><nav id="sidebar" class="sidebar js-sidebar">
@@ -133,6 +133,13 @@ if ($_SESSION['role'] !== "Admin"){
       <li class="sidebar-item">
         <a class="sidebar-link" data-bs-target="#charts-nav3" data-bs-toggle="collapse" href="#">
           <i class="align-middle" data-feather="bar-chart-2"></i> <span>Requests</span>
+
+          <span class="indicator"><?php
+            $sql = "SELECT * FROM groups WHERE deptcode = '$deptcode' AND `semester` = '1' AND `req` = '1' and accepted = '0'";
+            $result = mysqli_query($conn, $sql);
+            echo mysqli_num_rows($result);
+            ?></span>
+
         </a>
         <ul id="charts-nav3" class="collapse" style="list-style-type:none;">
           <li>
@@ -179,7 +186,7 @@ if ($_SESSION['role'] !== "Admin"){
       <li class="sidebar-header">
         Forms
       </li>
-<!--
+      <!--
       <li class="sidebar-item">
         <a class="sidebar-link" href="create_form.php">
           <i class="align-middle me-2" data-feather="plus-square"></i> <span class="align-middle">Create New Form</span>
@@ -278,7 +285,7 @@ if ($_SESSION['role'] !== "Admin"){
       <li class="sidebar-header">
         Profiles
       </li>
-<!--
+      <!--
       <li class="sidebar-item">
         <a class="sidebar-link" href="profiles.php">
           <i class="align-middle me-2" data-feather="users"></i> <span class="align-middle">All Profiles</span>
