@@ -227,14 +227,14 @@ if (!$conn) {
                                             </div>
                                             <div class=col-md-4>
                                                 <label for="name">Additional Roll numbers (Units)</label>
-                                                <input type="text" value="<?php echo $_POST["addrollunit"] ?>" class="form-control" id="name" name="addrollunit" placeholder="split with ','">
+                                                <input type="text" value="<?php echo $_POST["addrollunit"] ?>" class="form-control" id="name" name="addrollunit" placeholder="split with ';'">
                                             </div>
                                         </div>
 
                                         <br />
                                         <br />
 
-                                        <center><button type="submit" class="btn btn-primary" name="checkroll">Summarise range</submit>
+                                        <center> <button type="submit" class="btn btn-primary" name="checkroll">Summarise range</submit>
                                         </center>
                                     </div>
 
@@ -251,19 +251,20 @@ if (!$conn) {
 
                                             if (isset($_POST['checkroll']) or isset($_POST['finalroll'])) {
                                             ?>
-                                                <span style="color:red;">*</span> Click to add / remove students from group.
-
+                                                
                                                 <br>
-                                                <span class="badge bg-success">Add
+                                                <span class="badge bg-success">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                 </span>
 
-                                                Add to group
+                                                <b>Green checkbox indicates student is in the course group.</b>
                                                 <br>
 
-                                                <span class="badge bg-danger">Remove
+                                                <span class="badge bg-danger">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                 </span>
-                                                Remove from group
+                                                <b>Red checkbox indicates student is not in the course group.</b>
                                                 <br>
+                                                <br>
+                                                <span style="color:red;">*</span> <b> Click on the roll number to add/remove student from group.</b>
                                                 <br>
 
                                             <?php
