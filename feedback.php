@@ -86,7 +86,7 @@
         $sql = "select * from form_ques where form_id = '0'";
     }else{
 
-        $sql = "SELECT * FROM form_ques WHERE form_id = '$form_id'";
+        $sql = "SELECT * FROM form_ques WHERE form_id = '$default_flag'";
     }
     $result = mysqli_query($conn, $sql);
     ?>

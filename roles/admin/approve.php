@@ -7,7 +7,7 @@ $instructions= ' Note:
 - Please fill the survey questions and ratings in the order of your preference.
 - Extreme left indicates postive and extreme right indicates negative. 
 - If any difficulty is encountered, please contact your respective supervisor. ';
-
+$default_ques = '1';
 if ($_SESSION['role'] == "Admin") {
 $id = $_GET['id'];
 $deptcode = $_GET['deptcode'];
@@ -54,7 +54,13 @@ if ($result) {
     echo 'deptcode = '.$deptcode.'<br>';
     echo 'totalstudents = '.$totalstudents.'<br>';
 */
-    
+    if (strpos(strtolower($course_code),'office') !== false){
+        $default_ques = "2";
+    }
+    elseif (strpos(strtolower($course_code),'library') !== false){
+        $default_ques = "3";
+    }
+
     $sql2 = "INSERT INTO `forms` (`form_id`, `author`, `ini_date`, `instructions`, `status`, `semester`, `course_code`,`dept_code`, `group_id`, `default_ques`, `total_students`, `academic_year`) 
     VALUES ('$id', '$teachername', '$ini_date', '$instructions', '0','$semester', '$course_code', '$deptcode', '$id', '1', '$totalstudents', '$academic');";
     $result2 = mysqli_query($conn, $sql2);

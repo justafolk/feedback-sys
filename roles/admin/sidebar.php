@@ -135,6 +135,7 @@ if ($_SESSION['role'] !== "Admin") {
           <i class="align-middle" data-feather="bar-chart-2"></i> <span>Requests</span>
 
           <span class="indicator"><?php
+            include "../../imports/config.php";
             $sql = "SELECT * FROM groups WHERE deptcode = '$deptcode' AND `semester` = '1' AND `req` = '1' and accepted = '0'";
             $result = mysqli_query($conn, $sql);
             echo mysqli_num_rows($result);
