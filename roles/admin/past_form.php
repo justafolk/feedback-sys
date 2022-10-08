@@ -189,7 +189,7 @@
                                     </div>
                                     <div class="card">
                                         <div class="card-body">
-                                            <div class="">
+                                            <div class="table-responsive">
                                                 <div class="mb-1">
                                                     <h5 class="mb-4 card-title">Summer Seasons | 2nd Semester</h5>
                                                     <table class="table text-center">
@@ -203,6 +203,7 @@
                                                                 <th scope="col">Status</th>
 
                                                                 <th scope="col">View</th>
+                                                                <th scope="col">Reschedule</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -250,6 +251,7 @@
                                                                                 <td>$date</td>
                                                                                 <td>$status</td>
                                                                             <td><a href='report.php?id=$fid' class='btn btn-primary'>View</a></td>
+                                                                            <td><a href='reschedule.php?id=$fid' class='btn btn-primary'>Edit</a></td>
                                                                             </tr>";
                                                                     $i++;
                                                                 }

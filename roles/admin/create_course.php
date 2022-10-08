@@ -29,6 +29,7 @@
         session_start();
         error_reporting(0);
         include 'sidebar.php';
+        include 'confirm.php';
         require_once "../../imports/config.php";
         ?>
         <div class="main">
