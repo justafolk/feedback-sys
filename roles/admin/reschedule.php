@@ -117,7 +117,7 @@ if (!$conn) {
                     <i class="hamburger align-self-center"></i>
                 </a>
                 <div>
-                    <h1 class="h3 mb-0"><strong>Create Feedback</strong></h1>
+                    <h1 class="h3 mb-0"><strong>Updating Feedback</strong></h1>
                 </div>
 
                 <?php
@@ -130,7 +130,7 @@ if (!$conn) {
             <main class="content">
                 <div class="container-fluid p-0">
                     <div class="row">
-                        <h1 class="h3 mb-3"><strong>Create</strong> Student group</h1>
+                        <h1 class="h3 mb-3"><strong>Update</strong> Student group</h1>
                         <div class="card border">
                             <div class="card-body">
                                 <form action="" method="POST">
@@ -434,33 +434,63 @@ if (!$conn) {
         $rowfinal = mysqli_fetch_assoc($resultfinal);
         $deptcode = $rowfinal['deptcode'];
         $rollrange = $rowfinal['activeRoll'];
-        //$rollrange = json_decode($rollrange);
-        //$rollrange = count($rollrange);
-        echo "<script>alert('$deptcode')</script>";
-
+       
+        
+        $final = array();
+        $active_rolls = json_decode($active_rolls);
         $rollrange = json_decode($rollrange);
-        $active_rolls += $rollrange;
 
-        $active_rolls = array_unique($active_rolls); 
-        $student_count = count($active_rolls);
-        $active_rolls = json_encode($active_rolls);
-        //echo "<script>alert('$active_rolls')</script>";
-        /*
-        $sqltest = "SELECT * FROM `groups` WHERE `deptcode` = '$deptcode' AND `year` = '$year' AND `subject` = '$subject'";
-        $resulttest = mysqli_query($conn, $sqltest);
-        if (mysqli_num_rows($resulttest) > 0) {
-            echo "<script>alert('Group already exists');</script>";
-            echo "<script>window.location.href='create_group.php';</script>";
-        } else {
-            $sql = "INSERT INTO groups(year, semester, subject , deptcode, activeRoll, teacher_id, student_count) VALUES ('$year','{$_POST["semester"]}','$subject', '$deptcode', '$active_rolls', '{$_SESSION["id"]}', '$student_count')";
-            $result = mysqli_query($conn, $sql);
-            if ($result) {
-                echo "<script>alert('Group created successfully');</script>";
-                echo "<script>window.location.href='feedback_home.php';</script>";
-            } else {
-                echo mysqli_error($conn);
+        for ($i = 0; $i < count($rollrange); $i++) {
+            if(!in_array($rollrange[$i], $active_rolls)){
+                $final[] = $rollrange[$i];
             }
-        } */
+        }
+
+        $uniqueig = array();
+        foreach (explode(";", $_POST["addrollunit"]) as $key => $value) {
+            $uniqueig[] = $value;
+        }
+        //$uniqueig = array_diff($uniqueig, [-4000, "", " "]);
+        //$uniqueig = array_unique($uniqueig);
+        //$uniqueig = json_encode($uniqueig);
+        //echo "<script>alert('$uniqueig')</script>";
+
+        $final = array_merge($final, $active_rolls);
+        $final_count = count($final);
+        //echo "<script>alert('$final_count')</script>";
+        $final = json_encode($final);
+        //echo "<script>alert('$final')</script>";
+        $date = $_POST['date'];
+        
+        
+        $sql = "UPDATE groups SET activeRoll = '$final', student_count='$final_count', fdate='$date' WHERE id = '$feedback_id'";
+        $result = mysqli_query($conn, $sql);
+        if ($result) {
+            $opop = json_decode($final);
+            for ($i = 0; $i < count($opop); $i++) {
+                $sqlcheckkk = "SELECT * from login where uname = '$opop[$i]'";
+                $resultcheckkk = mysqli_query($conn, $sqlcheckkk);
+                $towcheckkknum = mysqli_num_rows($resultcheckkk);
+                if ($towcheckkknum == 0) {
+                    $passwdx = md5($opop[$i]);
+                    $sqlinsert = "INSERT INTO login (uname, passwd, role, name, flog, student_groups) VALUES ('$opop[$i]', '$passwdx', 'Student', 'student', '1', ';$feedback_id;')";
+                    $resultinsert = mysqli_query($conn, $sqlinsert);
+                }
+            }
+            $sqlupdate = "UPDATE forms SET total_students = '$final_count', ini_date='$date', viewed='0' WHERE form_id = '$feedback_id'";
+            $resultupdate = mysqli_query($conn, $sqlupdate);
+
+            for ($i = 0; $i < count($uniqueig); $i++) {
+                $sqlupdate = "UPDATE login SET student_groups = CONCAT(student_groups, '$feedback_id;') WHERE uname = '$uniqueig[$i]'";
+                $resultupdate = mysqli_query($conn, $sqlupdate);
+            }
+
+            echo "<script>alert('Date and roll numbers updated successfully')</script>";
+            echo "<script>window.location.href = 'view_form.php?deptcode=$deptcode'</script>";
+        } else {
+            echo "<script>alert('Update failed')</script>";
+        }
+    
     }
 
 
@@ -484,6 +514,47 @@ if (!$conn) {
 
 <!--
 
+        //$rollrange = json_decode($rollrange);
+        //$active_rolls += $rollrange;
+        
+        //basically active_rolls are the one coming through the post req
+        //rollrange are the ones already present in the database
+        //we need to merge them and then update the database
+        //echo "<script>alert('$rollrange')</script>";
+
+ //echo "<script>alert('$final')</script>";
+        /*
+        $final = array_merge($active_rolls, $rollrange);
+        //$final = array_diff($final, $remove_rolls);
+        $final = array_unique($final);
+        $final = json_encode($final);
+        $final = str_replace(" ", "", $final);
+        echo "<script>alert('$final')</script>";
+        */
+
+        
+
+       // $active_rolls = array_unique($active_rolls); 
+        //$student_count = count($active_rolls);
+       
+       // $active_rolls = json_encode($active_rolls);
+        //echo "<script>alert('$active_rolls')</script>";
+        /*
+        $sqltest = "SELECT * FROM `groups` WHERE `deptcode` = '$deptcode' AND `year` = '$year' AND `subject` = '$subject'";
+        $resulttest = mysqli_query($conn, $sqltest);
+        if (mysqli_num_rows($resulttest) > 0) {
+            echo "<script>alert('Group already exists');</script>";
+            echo "<script>window.location.href='create_group.php';</script>";
+        } else {
+            $sql = "INSERT INTO groups(year, semester, subject , deptcode, activeRoll, teacher_id, student_count) VALUES ('$year','{$_POST["semester"]}','$subject', '$deptcode', '$active_rolls', '{$_SESSION["id"]}', '$student_count')";
+            $result = mysqli_query($conn, $sql);
+            if ($result) {
+                echo "<script>alert('Group created successfully');</script>";
+                echo "<script>window.location.href='feedback_home.php';</script>";
+            } else {
+                echo mysqli_error($conn);
+            }
+        } */
 
           <script type="text/babel">
       function LatestFeedBack() {
