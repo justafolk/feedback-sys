@@ -4,10 +4,13 @@
 <?php
 session_start();
 include 'confirm.php';
-
-$sqlconfirm = "SELECT `flog` from `login` where `uname` = '{$_SESSION["uname"]}'";
+//echo "<script>alert('".$_SESSION['uname']."');</script>";
+include '../../imports/config.php';
+$uname = $_SESSION['uname'];
+$sqlconfirm = "SELECT * from `login` where `uname` = '$uname'";
 $result = mysqli_query($conn, $sqlconfirm);
 $row = mysqli_fetch_assoc($result);
+//echo "<script>alert('".$row['flog']."');</script>";
 if ($row["flog"] == 0) {
     echo "<script>alert('Password already changed, please contact admin if any issues faced.');</script>";
     echo "<script>window.location.href='index.php';</script>";
@@ -87,7 +90,7 @@ if ($row["flog"] == 0) {
                     <div class="col-12">
                       <label for="yourUsername" class="form-label">Roll number</label>
                       <div class="input-group has-validation">
-                        <input type="text" name="uname" class="form-control" id="uname" required>
+                        <input type="text" name="uname" value=<?php echo $_SESSION['uname']; ?> class="form-control" id="uname" required readonly>
                         <div class="invalid-feedback">Please enter your username.</div>
                       </div>
                     </div>

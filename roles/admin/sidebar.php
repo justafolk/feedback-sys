@@ -132,14 +132,14 @@ if ($_SESSION['role'] !== "Admin") {
 
       <li class="sidebar-item">
         <a class="sidebar-link" data-bs-target="#charts-nav3" data-bs-toggle="collapse" href="#">
-          <i class="align-middle" data-feather="bar-chart-2"></i> <span>Requests - </span>
+          <i class="align-middle" data-feather="bar-chart-2"></i> <span>Requests </span>
 
           <span class="indicator"><?php
             include "../../imports/config.php";
             $sql = "SELECT * FROM groups WHERE `req` = '1' and rejected='0' AND accepted = '0'";
             $result = mysqli_query($conn, $sql);
             if(mysqli_num_rows($result) != 0){
-              echo mysqli_num_rows($result) . '*';
+              echo ' - '. mysqli_num_rows($result) . '*';
             }
             else{
               echo "";
