@@ -93,6 +93,7 @@ if (!$conn) {
         }
 
         .atrangi {
+            height: 250px;
             display: block;
             overflow-x: auto;
         }
@@ -324,7 +325,7 @@ if (!$conn) {
 
                                                 while ($count <= $allrolls) {
                                                     echo "<group>";
-                                                    for ($i = 1; $i < 16; $i++) {
+                                                    for ($i = 1; $i < 14; $i++) {
 
                                                         $row["enrollid"] = $active_roll[$count - 1];
 

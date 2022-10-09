@@ -80,7 +80,7 @@
                         $result = mysqli_query($conn, $sql);
                         while ($row=mysqli_fetch_assoc($result)){                        
                             ?>
-                            <button class="btn btn-primary me-3" onclick="window.location.href='./final_print_report.php?academic_year=<?php echo $row['academic_year'] ?>&dept=<?php echo $deptcode ?>'" ><?php echo $row["academic_year"] ?> </button>
+                            <button class="btn btn-primary me-3" onclick="window.location.href='./final_report.php?academic_year=<?php echo $row['academic_year'] ?>&dept=<?php echo $deptcode ?>'" ><?php echo $row["academic_year"] ?> </button>
                         <?php
                         }
                     ?>
@@ -92,7 +92,7 @@
                     <?php 
                         for ($i=1; $i < 7 ; $i++) { 
                             ?>
-                            <button class="btn btn-primary me-3" onclick="window.location.href='./final_print_report.php?semester=<?php echo $i ?>&dept=<?php echo $deptcode ?>'" ><?php echo ordinal($i) ?> Semester</button>
+                            <button class="btn btn-primary me-3" onclick="window.location.href='./final_report.php?semester=<?php echo $i ?>&dept=<?php echo $deptcode ?>'" ><?php echo ordinal($i) ?> Semester</button>
                         <?php
                         }
                     ?>

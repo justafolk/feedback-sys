@@ -25,12 +25,6 @@ if ($_GET["type"] == "sliderans") {
                     </div>
                 </div>
                 <button type="button" class="btn btn-primary" name="addoptions<?php echo $id; ?>" onclick="addSlider(<?php echo $id ?>)" id="addoptions<?php echo $id; ?>">Add Another Slider</button>
-                <div class="row">
-  <div class="col-md-11"></div>
-                                        <div class="col-md-1">
-                                      <button class="btn btn-danger btn-sm" onclick="delete_ques(<?php echo $id; ?>)">Remove</button>
-                                        </div>
-</div>
             </div>
 
         </div>
@@ -43,12 +37,6 @@ if ($_GET["type"] == "sliderans") {
             <div class="card-body">
                 <h5 class="card-title"> <input type="text" style="width: 50%;" class="form-control" value="<?php echo $id ?>. " name="main-question main-question<?php echo $id ?>" class="main-question" id="main-question<?php echo $id ?>"> </h5>
                 <input type="text" name="shortans<?php echo $id ?>" class="form-control" placeholder="Enter Answer in Short" id="shortans<?php echo $id ?>">
-<div class="row">
-  <div class="col-md-11"></div>
-                                        <div class="col-md-1">
-                                      <button class="btn btn-danger btn-sm" onclick="delete_ques(<?php echo $id; ?>)">Remove</button>
-                                        </div>
-</div>
 
             </div>
 
@@ -66,12 +54,6 @@ if ($_GET["type"] == "sliderans") {
                 <h5 class="card-title"> <input type="text" style="width: 50%;" class="form-control" value="<?php echo $id ?>. " name="main-question main-question<?php echo $id ?>" class="main-question" id="main-question<?php echo $id ?>"> </h5>
                 <!-- 5 radio buttons ranging from 5 to 1 -->
                 <textarea type="text" name="longans<?php echo $id ?>" class="form-control" placeholder="Enter Answer in Long" id="ans<?php echo $id ?>"></textarea>
-<div class="row">
-  <div class="col-md-11"></div>
-                                        <div class="col-md-1">
-                                      <button class="btn btn-danger btn-sm" onclick="delete_ques(<?php echo $id; ?>)">Remove</button>
-                                        </div>
-</div>
             </div>
 
         </div>
@@ -111,12 +93,7 @@ if ($_GET["type"] == "sliderans") {
 
                     </div>
                 </div>
-<div class="row">
-  <div class="col-md-11"></div>
-                                        <div class="col-md-1">
-                                      <button class="btn btn-danger btn-sm" onclick="delete_ques(<?php echo $id; ?>)">Remove</button>
-                                        </div>
-</div>
+
 
 
                 <script>
@@ -137,12 +114,6 @@ if ($_GET["type"] == "sliderans") {
     <div class="form-check">
         <input class="form-check-input ques-<?php echo $id ?>" type="radio" name="option-<?php echo $id ?>-<?php echo $optioncount ?>" id="option-<?php echo $id ?>-<?php echo $optioncount ?>" value="<?php echo $optioncount ?>">
         <input type="text" name="option-<?php echo $id ?>-<?php echo $optioncount ?>-text" id="option-<?php echo $id ?>-<?php echo $optioncount ?>-text" style="background-color: transparent; outline:none; border:0px" placeholder="Enter Option Subtext">
-<div class="row">
-  <div class="col-md-11"></div>
-                                        <div class="col-md-1">
-                                      <button class="btn btn-danger btn-sm" onclick="delete_ques(<?php echo $id; ?>)">Remove</button>
-                                        </div>
-</div>
     </div>
 
 
@@ -160,10 +131,4 @@ if ($_GET["type"] == "sliderans") {
     <div class="range">
         <input type="range" class="form-range" id="slider-<?php echo $id ?>-<?php echo $optioncount ?>" name="slider-<?php echo $id ?>-<?php echo $optioncount ?>" min="1" max="100" />
     </div>
-<div class="row">
-  <div class="col-md-11"></div>
-                                        <div class="col-md-1">
-                                      <button class="btn btn-danger btn-sm" onclick="delete_ques(<?php echo $id; ?>)">Remove</button>
-                                        </div>
-</div>
 <?php } ?>

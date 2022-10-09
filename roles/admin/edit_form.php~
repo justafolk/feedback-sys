@@ -412,7 +412,7 @@ if (mysqli_num_rows($result) < 1) {
 
 											<br>
 											<input type="submit" class="btn  btn-primary" value="Save Form">
-											<button onclick="window.location.href='view_form.php'" type="button" class="btn btn-light border">Discard</button>
+											<button onclick="window.location.href='view_form.php'" class="btn btn-light border">Discard</button>
 
 										</form>
 

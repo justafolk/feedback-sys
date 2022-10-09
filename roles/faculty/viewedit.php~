@@ -55,56 +55,63 @@ $course_name = $row3['course_name'];
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
 	<style>
-		group {
-			display: flex;
-		}
+        group {
+            display: flex;
+        }
 
-		input[type=checkbox] {
-			opacity: 0;
-			width: 100%;
-			height: 0px;
-			background-color: green;
-			position: relative;
-			z-index: 1;
-		}
+        input[type=checkbox] {
+            opacity: 0;
+            width: 100%;
+            height: 0px;
+            background-color: green;
+            position: relative;
+            z-index: 1;
+        }
 
-		.input-container {
-			width: 75px;
-			height: 42px;
-		}
+        .input-container {
+            margin: 2px 2px 2px 2px;
 
-		.input-container label {
-			position: absolute;
-			top: 0;
-			left: 0;
-			color: #737373;
-			width: 76px;
-			line-height: 42px;
-			text-align: center;
-			position: relative;
-		}
+            width: 75px;
+            height: 42px;
+        }
 
-		input:checked+label {
-			background-color: #D9F8C4;
-			top: 0;
-			left: 0;
-			z-index: 2;
-			color: black;
-		}
+        .input-container label {
+            position: absolute;
+            margin: 10px 10px 10px 10px;
 
-		input:not(:checked)+label {
-			background-color: #F37878;
-			top: 0;
-			left: 0;
-			z-index: 2;
-			color: white;
-		}
+            top: 0;
+            left: 0;
+            color: #737373;
+            width: 76px;
+            line-height: 42px;
+            text-align: center;
+            position: relative;
+        }
 
-		.atrangi {
-			display: block;
-			overflow-x: auto;
-		}
-	</style>
+        input:checked+label {
+            background-color: #D9F8C4;
+            border: 1px solid green;
+
+            top: 0;
+            left: 0;
+            z-index: 2;
+            color: black;
+        }
+
+        input:not(:checked)+label {
+            background-color: #F37878;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            color: white;
+        }
+
+        .atrangi {
+            height: 250px;
+            display: block;
+            overflow-x: auto;
+        }
+    </style>
 </head>
 <style>
 	.eventClass a {
@@ -232,7 +239,7 @@ $course_name = $row3['course_name'];
 
 												while ($count <= $allrolls) {
 													echo "<group>";
-													for ($i = 1; $i < 16; $i++) {
+													for ($i = 1; $i < 14; $i++) {
 
 														$row["enrollid"] = $active_rolls[$count - 1];
 
@@ -339,6 +346,7 @@ $course_name = $row3['course_name'];
 				}
 			}
 		}
+		echo "<script>alert('Feedback Requested Successfully');</script>";
 		echo "<script>window.location.href='requested_forms.php';</script>";
 	}
 

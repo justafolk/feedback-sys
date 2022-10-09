@@ -43,10 +43,6 @@ while ($row = mysqli_fetch_assoc($result)) {
 
 	<title>CWIT-Feedback Portol</title>
 
-  <style>
-    
-  
-  </style>
 	<link href="css/app.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 	<style>

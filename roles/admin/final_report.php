@@ -101,7 +101,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 				?>
 			</nav>
 
-			<main class="content">
+			<main class="">
 				<!-- <div class="container-fluid p-0">
 					<div class="card border shadow-none">
 						<div class="card-body" style="width: 100%; height:100%">
@@ -123,22 +123,23 @@ while ($row = mysqli_fetch_assoc($result)) {
 					<?php
 
 					$i = 1;
-					if ($default_flag == 1) {
-						$sql = "SELECT * FROM form_ques where form_id = '0'";
-						$count_ques = 7;
-					} else {
+					if ($default_flag == 1){
+					$sql = "SELECT * FROM form_ques where form_id = '0'";
+          $count_ques = 7;
+
+					}else{
 
 						$sql = "SELECT * FROM form_ques where form_id = '$feedback_id'";
 					}
 					$result = mysqli_query($conn, $sql);
-					$num_ques = $count_ques;
+					$num_ques = 7;
 
 					$sql = "select * from form_responses where form_id='$feedback_id'";
 					$resu = mysqli_query($conn, $sql);
 					$main_responses = array();
-					if (!isset($count_ques)) {
-						$count_ques = mysqli_num_rows($resu);
-					}
+          if (!isset($count_ques)){
+              $count_ques = mysqli_num_rows($resu);
+}
 					for ($i = 0; $i < $count_ques; $i++) {
 						array_push($main_responses, array());
 					}
@@ -146,9 +147,6 @@ while ($row = mysqli_fetch_assoc($result)) {
 						$res = json_decode($row['response_json'], true);
 						$i = 0;
 						foreach ($res as $key => $value) {
-							if ($value == "NAN") {
-								$value = 0;
-							}
 							array_push($main_responses[$i], round($value));
 							$i++;
 							if ($i == $num_ques) {
@@ -157,8 +155,96 @@ while ($row = mysqli_fetch_assoc($result)) {
 							}
 						}
 					}
-					var_dump($main_responses);
 					?>
+					<div class="row">
+						<div class="col-md-4">
+							<div class="card flex-fill w-100 border shadow-none">
+								<div class="card-header d-flex justify-content-between">
+									<div>
+										<h5 class="card-title mb-0"><?php echo $rowse["course_name"] ?> </h5>
+										<h6 class="card-title mb-0"><?php echo date('D, d M Y H:i:s') ?></h6>
+									</div>
+								</div>
+								<div class="card-body d-flex">
+									<div class="align-self-center w-100">
+										<div class="py-3">
+											<div class="chart chart-xs">
+												<canvas id="chartjs-dashboard-pie2"></canvas>
+											</div>
+										</div>
+										<div class="text-center">
+											<button class="btn btn-success mb-3">Filled - <?php echo count($main_responses[0]) ?></button>
+											<button class="btn btn-danger mb-3">Not Filled - <?php echo $student_count - count($main_responses[0]) ?></button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-8" style="height: 100%">
+							<div class="card flex-fill w-200 border shadow-none">
+								<div class="card-header d-flex justify-content-between">
+									<div>
+										<h5 class="card-title mb-0"><?php echo $rowse["course_name"] ?> </h5>
+										<h6 class="card-title mb-0"><?php echo date('D, d M Y H:i:s') ?></h6>
+									</div>
+								</div>
+								<div class="card-body d-flex">
+									<canvas id="barChart" style="max-height: 800px;"></canvas>
+									<script>
+										document.addEventListener("DOMContentLoaded", () => {
+											new Chart(document.querySelector('#barChart'), {
+												type: 'bar',
+												data: {
+													labels: ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7'],
+													datasets: [{
+														axis: 'y',
+														label: ['Average Student Reponses'],
+														data: [
+															<?php
+															for ($i = 0; $i < count($main_responses); $i++) {
+																echo round(array_sum($main_responses[$i]) / count($main_responses[$i]), 2);
+																if ($i != count($main_responses) - 1) {
+																	echo ",";
+																}
+															}
+															?>
+														],
+														backgroundColor: [
+															'rgba(255, 99, 132, 0.2)',
+															'rgba(255, 159, 64, 0.2)',
+															'rgba(255, 205, 86, 0.2)',
+															'rgba(75, 192, 192, 0.2)',
+															'rgba(54, 162, 235, 0.2)',
+															'rgba(153, 102, 255, 0.2)',
+															'rgba(201, 203, 207, 0.2)'
+														],
+														borderColor: [
+															'rgb(255, 99, 132)',
+															'rgb(255, 159, 64)',
+															'rgb(255, 205, 86)',
+															'rgb(75, 192, 192)',
+															'rgb(54, 162, 235)',
+															'rgb(153, 102, 255)',
+															'rgb(201, 203, 207)'
+														],
+														borderWidth: 1
+													}]
+												},
+												options: {
+													scales: {
+														y: {
+															beginAtZero: true
+														}
+													}
+												}
+											});
+										});
+									</script>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 					<div class="row">
 						<div class="col-md-4">
 							<div class="card flex-fill w-100 border shadow-none">

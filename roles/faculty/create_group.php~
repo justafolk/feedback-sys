@@ -28,8 +28,7 @@ if (!$conn) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="shortcut icon" href="img/icons/icon-48x48.png" />
-
+    <link rel="shortcut icon" href="../../assets/img/logo.png">
     <link rel="canonical" href="https://demo-basic.adminkit.io/" />
 
     <title>Create student group</title>
@@ -56,12 +55,16 @@ if (!$conn) {
         }
 
         .input-container {
+            margin: 2px 2px 2px 2px;
+
             width: 75px;
             height: 42px;
         }
 
         .input-container label {
             position: absolute;
+            margin: 10px 10px 10px 10px;
+
             top: 0;
             left: 0;
             color: #737373;
@@ -73,6 +76,8 @@ if (!$conn) {
 
         input:checked+label {
             background-color: #D9F8C4;
+            border: 1px solid green;
+
             top: 0;
             left: 0;
             z-index: 2;
@@ -88,6 +93,7 @@ if (!$conn) {
         }
 
         .atrangi {
+            height: 250px;
             display: block;
             overflow-x: auto;
         }
@@ -160,8 +166,8 @@ if (!$conn) {
                                                 <select class="form-control" id="semester" name="semester" required="" value="<?php echo $_POST["semester"] ?>">
                                                     <option value="">Select Semester</option>
                                                     <option value="1" <?php if ($selected == '1') {
-                                                        echo ("selected");
-} ?>>1st Semester</option>
+                                                                            echo ("selected");
+                                                                        } ?>>1st Semester</option>
                                                     <option value="2">2nd Semester</option>
                                                     <option value="3">3rd Semester</option>
                                                     <option value="4">4th Semester</option>
@@ -179,8 +185,15 @@ if (!$conn) {
                                                 <label for="semester">Select Subject</label>
                                                 <select class="form-control" id="subject" name="subject" required="">
                                                     <option value="">Select Subject</option>
-
-                                               </select>
+                                                    <?php
+                                                    if (isset($_POST["subject"])) {
+                                                        $sql = "select * from courses where course_code = '{$_POST["subject"]}'";
+                                                        $result = mysqli_query($conn, $sql);
+                                                        $row = mysqli_fetch_assoc($result);
+                                                        echo "<option value='" . $_POST["subject"] . "' selected>" . $row["course_name"] . "(" . $row["course_code"] . ")" . "</option>";
+                                                    }
+                                                    ?>
+                                                </select>
                                             </div>
 
                                         </div>
@@ -215,14 +228,14 @@ if (!$conn) {
                                             </div>
                                             <div class=col-md-4>
                                                 <label for="name">Additional Roll numbers (Units)</label>
-                                                <input type="text" value="<?php echo $_POST["addrollunit"] ?>" class="form-control" id="name" name="addrollunit" placeholder="split with ','">
+                                                <input type="text" value="<?php echo $_POST["addrollunit"] ?>" class="form-control" id="name" name="addrollunit" placeholder="split with ';'">
                                             </div>
                                         </div>
 
                                         <br />
                                         <br />
 
-                                        <center><button type="submit" class="btn btn-primary" name="checkroll">Summarise range</submit>
+                                        <center> <button type="submit" class="btn btn-primary" name="checkroll">Summarise range</submit>
                                         </center>
                                     </div>
 
@@ -238,23 +251,24 @@ if (!$conn) {
                                             <?php
 
                                             if (isset($_POST['checkroll']) or isset($_POST['finalroll'])) {
-                                                ?>
-                                                <span style="color:red;">*</span> Click to add / remove students from group.
-
+                                            ?>
+                                                
                                                 <br>
-                                                <span class="badge bg-success">Add
+                                                <span class="badge bg-success">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                 </span>
 
-                                                Add to group
+                                                <b>Green checkbox indicates student is in the course group.</b>
                                                 <br>
 
-                                                <span class="badge bg-danger">Remove
+                                                <span class="badge bg-danger">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                 </span>
-                                                Remove from group
+                                                <b>Red checkbox indicates student is not in the course group.</b>
                                                 <br>
+                                                <br>
+                                                <span style="color:red;">*</span> <b> Click on the roll number to add/remove student from group.</b>
                                                 <br>
 
-                                                <?php
+                                            <?php
                                                 $deptcode = $_POST['deptcode'];
                                                 $semester = $_POST['semester'];
                                                 $subject = $_POST['subject'];
@@ -311,17 +325,17 @@ if (!$conn) {
 
                                                 while ($count <= $allrolls) {
                                                     echo "<group>";
-                                                    for ($i = 1; $i < 16; $i++) {
+                                                    for ($i = 1; $i < 14; $i++) {
 
                                                         $row["enrollid"] = $active_roll[$count - 1];
 
 
                                                         $count += 1;
                                                         if ($row['enrollid'] == 0) {
-                                                                                                    continue;
+                                                            continue;
                                                         }
                                                         if ($count == $allrolls + 3) {
-                                                                                            break;
+                                                            break;
                                                         }
                                                         error_reporting(0);
                                                         //array_push($rolls, $row['enrollid']);
@@ -412,19 +426,21 @@ if (!$conn) {
 
 
     ?>
-<script>
-$('#department').change(function () {
-    var dept_codes = document.getElementById("department").value;
-   $.get("./courses_list.php", {dept_code: dept_codes}, function(data, status){
-    
-    document.getElementById("subject").innerHTML = data;
-console.log(data);
-  });
-});
-  </script>
-</body>
-</html>
+    <script>
+        $('#department').change(function() {
+            var dept_codes = document.getElementById("department").value;
+            $.get("./courses_list.php", {
+                dept_code: dept_codes
+            }, function(data, status) {
 
+                document.getElementById("subject").innerHTML = data;
+                console.log(data);
+            });
+        });
+    </script>
+</body>
+
+</html>
 
 
 <!--
