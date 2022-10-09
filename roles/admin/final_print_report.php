@@ -26,6 +26,14 @@ while ($row = mysqli_fetch_assoc($result)) {
 	$courses[] = $row['course_code'];
 	$academic_fo = $row["academic_year"];
 }
+
+
+$depart_sql = "select * from departments where dept_id='$department_id'";
+$depart_res = mysqli_query($conn, $depart_sql);
+$depart_row = mysqli_fetch_assoc($depart_res);
+        $department_name = $depart_row["dept_name"];
+
+
 ?>
 
 <head>
@@ -94,7 +102,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 				$sql = "select * from courses where course_code = '$course_code'";
 				$resul = mysqli_query($conn, $sql);
 				$rowse = mysqli_fetch_assoc($resul);
-				?>
+       				?>
 
 
 				<main class="content">
@@ -128,6 +136,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 					}
 					$result = mysqli_query($conn, $sql);
 					$num_ques = $count_ques;
+          
 
 					$sql = "select * from form_responses where form_id='$feedback_id'";
 					$resu = mysqli_query($conn, $sql);
@@ -165,7 +174,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 											<img src="../../assets/img/logo.png" alt="" style="width: 51px">
 
 											<h3 class="mb-0">Cusrow Wadia Institute of Technology, Pune-41</h3>
-											<footer class="">Student's Feedback Report <?php echo $academic_fo; ?></footer>
+          <footer class="">Student's Feedback Report <?php echo $academic_fo; ?> <br> <?php echo $department_name; ?> </footer>
 										</div>
 									</div>
 								</div>

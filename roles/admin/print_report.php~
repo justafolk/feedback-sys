@@ -79,6 +79,7 @@ error_reporting(0);
 			$dept = "select * from departments where dept_id='" . $rowse["dept_code"] . "'";
 			$resultd = mysqli_query($conn, $dept);
 			$rowd = mysqli_fetch_assoc($resultd);
+      $department_name = $rowd["dept_name"];
 			$course_code = $row["course_code"];
 			?>
 
@@ -126,7 +127,8 @@ error_reporting(0);
 										<img src="../../assets/img/logo.png" alt="" style="width: 51px">
 
 										<h3 class="mb-0">Cusrow Wadia Institute of Technology, Pune-41101</h3>
-										<footer class="">Student's Feedback Report <?php echo $acadmic_e; ?></footer>
+      <footer class="">Student's Feedback Report <?php echo $acadmic_e; ?> <br> <?php echo $department_name ?></footer>
+                    
 									</div>
 								</div>
 							</div>
