@@ -95,7 +95,7 @@
 						<div class="row">
 							<?php
 							include "../../imports/config.php";
-							$sql = "SELECT * FROM groups where teacher_id = '{$_SESSION["id"]}'";
+							$sql = "SELECT * FROM groups where teacher_id = '{$_SESSION["id"]}' ORDER BY id DESC"; 
 							$result = mysqli_query($conn, $sql);
 							if (mysqli_num_rows($result) > 0) {
 								while ($row = mysqli_fetch_assoc($result)) {
@@ -109,15 +109,15 @@
 												<h4 class="h4"><strong>
 														<?php echo $row2["course_name"] . " (" . $row2["course_code"]; ?>)
 													</strong></h4>
-												<h6> <a href="">
+												<h6> 
 
 														<?php
 														$sql3 = "select * from departments where dept_id='{$row["deptcode"]}'";
 														$result3 = mysqli_query($conn, $sql3);
 														$row3 = mysqli_fetch_assoc($result3);
-														echo $row3["dept_name"];
+														echo "<class style='color:blue'>" . $row3["dept_name"] . "</class>"; 
 														?>
-													</a>
+													
 												</h6>
 												<p>Number of Students : <?php
 																		$students = json_decode($row["activeRoll"], true);

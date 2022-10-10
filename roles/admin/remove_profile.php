@@ -46,12 +46,8 @@
 						if($pass == $admin["passwd"]){
 							$name = $row["name"];
 							$sql2 = "DELETE from login where uname = '$uname';";
-							$sql3 = "DELETE from teacher where name = '$name';";
-							$sql4 = "DELETE from feedbacks where faculty_name = '$name';";
 							$result1 = mysqli_query($conn, $sql2);
-							$result2 = mysqli_query($conn, $sql3);
-							$result3 = mysqli_query($conn, $sql4);
-							if($result && $result2 && $result3){
+							if($result1){
 								echo "<script>alert('User deleted Successfully');</script>";
 							}else{
 								echo "<script>alert('Error 404');</script>";

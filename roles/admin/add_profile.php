@@ -20,6 +20,13 @@
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
+
+<?php
+include '../../imports/config.php';
+session_start();
+error_reporting(0);
+if ($_SESSION['role'] == "Admin") {
+?>
 <body>
 	<div class="wrapper">
 		<?php
@@ -62,14 +69,6 @@
 											<label for="inputFirstName" class="form-label">Name</label>
 											<input type="text" class="form-control  form-control-lg" id="inputFirstName" name="name" required />										
 										</div>
-										<div class="mb-3">
-											<label class="form-label">Email</label>
-											<input class="form-control form-control-lg" type="email" name="email" required />
-										</div>
-										<div class="mb-3">
-											<label class="form-label">Phone No</label>
-											<input class="form-control form-control-lg" type="text" name="phone_no" placeholder="Enter your phone no"  required />
-										</div>
 										<!-- <div class="mb-3 d-flex">
 											<label class="form-label">Gender: </label>
 											<div class="form-check mx-2">
@@ -86,26 +85,6 @@
 											</div>
 										</div> -->
 										<div class="mb-3">
-											<label class="form-label">Department</label>
-											<select id="inputState" class="form-control form-control-lg" name="department" required>
-												<option>Select Department</option>
-												<?php
-													$sql = "select * from departments";
-													$result = mysqli_query($conn, $sql);
-													while ($row = mysqli_fetch_assoc($result)) {
-														echo "<option value='" . $row["dept_name"] . "'>" . $row["dept_name"]."-".$row["dept_id"]."</option>";
-													}
-												?>
-											</select>
-											<!-- <input class="form-control form-control-lg" type="text" name="department" placeholder="Select Department" required> -->
-										</div>
-										<div class="mb-3">
-											<label class="form-label">Course Code</label>
-											<input class="form-control form-control-lg" type="text" name="course" placeholder="Enter Course code" required>
-											<p class="text-right"><small>Enter , for multiple course codes</small></p>
-
-										</div>
-										<div class="mb-3">
 											<label class="form-label">Username</label>
 											<input class="form-control form-control-lg" type="text" name="username" placeholder="Enter username" required>
 										</div>
@@ -114,16 +93,12 @@
 											<input class="form-control form-control-lg" type="password" name="password" placeholder="Enter password" required>
 										</div>
 										<div class="text-center mb-3">
-											<button type="submit" name="submit" value="submit" class="btn btn-lg btn-primary">Sign up</a>
+											<button type="submit" name="submit" value="submit" class="btn btn-lg btn-primary">Add User</a>
 										</div>
 									</form>
 									<?php
 										if (isset($_POST['submit'])) {
 											$name = $_POST["name"];
-											$email = $_POST["email"];
-											$phone_no = $_POST["phone_no"];
-											$department = $_POST["department"];
-											$course = $_POST["course"];
 											$username = $_POST["username"];
 											$password = $_POST["password"];
 											function createuser($conn, $name, $username, $password){
@@ -135,7 +110,7 @@
 												}
 												else{
 													$password1 = md5($password);
-													$sql = "INSERT INTO login(uname, passwd, role, name) VALUES('$username', '$password1','Faculty', '$name');";
+													$sql = "INSERT INTO login(uname, passwd, role, name, flog) VALUES('$username', '$password1','Faculty', '$name', 1);";
 													$smt = mysqli_stmt_init($conn);
 													if(!mysqli_stmt_prepare($smt, $sql)){
 														$error .= "Error in STMT";
@@ -143,57 +118,10 @@
 													}
 													mysqli_stmt_execute($smt);
 													mysqli_stmt_close($smt);
-													$error .= "User Created Successfully";
-													return $error;
+													echo "<script>alert('User Created Successfully');</script>";
 												}
 											}
-											function createteacher($conn, $name, $email, $phone_no, $department, $course, $username, $password){
-												require_once "../../imports/config.php";
-												$data = array();
-												$check = 0;
-												$j=0;
-												$sql = "SELECT course FROM teacher";
-												$result = mysqli_query($conn, $sql);
-												while ($row = mysqli_fetch_assoc($result)) {
-													$data[$j] = $row;
-													$j++;
-												}
-												if(str_contains($course,",")){
-													$courses = explode(",", $course);
-												}
-												else{
-													$courses[] = $course;
-												}
-												for($i=0;$i<$j;$i++){
-													$data1 = explode(",", $data[$i]["course"]);
-													for($a=0;$a<count($data1);$a++){
-														for($b=0;$b<count($courses);$b++){
-															if($data1[$a] == $courses[$b]){
-																$check = 1;
-																break;
-															}
-														}
-													}
-												}
-												$sql = "SELECT * FROM login WHERE uname = '$username'";
-												$result = mysqli_query($conn, $sql);
-												if (mysqli_num_rows($result) > 0) {
-													echo "<script>alert('Username already exists');</script>";
-												}
-												elseif ($check == 1) {
-													echo "<script>alert('Course code already exists');</script>";
-												}
-
-												else{
-													$sql = createuser($conn, $name, $username, $password);
-													$result = mysqli_query($conn, $sql);
-													$sql = "INSERT INTO teacher(name, email, phone_no, department, course) VALUES('$name', '$email', '$phone_no', '$department', '$course');";
-													$result = mysqli_query($conn, $sql);
-													return $result;
-												}
-										}
-											
-											$sql1 =  createteacher($conn, $name, $email, $phone_no, $department, $course, $username, $password);
+											createuser($conn, $name, $username, $password);
 										}
 									?>
 								</div>
@@ -212,5 +140,11 @@
 	<script src="js/app.js"></script>
 
 </body>
-
+<?php
+}
+else{
+	header("Location: ../../index.php");
+	exit();     
+}  
+?>
 </html>
