@@ -173,7 +173,7 @@ $depart_row = mysqli_fetch_assoc($depart_res);
 										<div class="text-center">
 											<img src="../../assets/img/logo.png" alt="" style="width: 51px">
 
-											<h3 class="mb-0">Cusrow Wadia Institute of Technology, Pune-41</h3>
+											<h3 class="mb-0">Cusrow Wadia Institute of Technology, Pune-411001</h3>
           <footer class="">Student's Feedback Report <?php echo $academic_fo; ?> <br> <?php echo $department_name; ?> </footer>
 										</div>
 									</div>

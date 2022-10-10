@@ -27,6 +27,7 @@ error_reporting(0);
 	<link href="css/app.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 	<style>
+  
 		.my-custom-scrollbar {
 			position: relative;
 			height: 235px;
@@ -48,9 +49,7 @@ error_reporting(0);
 
 			.table thead tr th td,
 			.table tbody tr th td {
-				border-width: 1px !important;
-				border-style: solid !important;
-				border-color: black !important;
+        border: 2px solid black !important;
 				-webkit-print-color-adjust: exact;
 			}
 		}
@@ -126,7 +125,7 @@ error_reporting(0);
 									<div class="text-center">
 										<img src="../../assets/img/logo.png" alt="" style="width: 51px">
 
-										<h3 class="mb-0">Cusrow Wadia Institute of Technology, Pune-41101</h3>
+										<h3 class="mb-0">Cusrow Wadia Institute of Technology, Pune-411001</h3>
       <footer class="">Student's Feedback Report <?php echo $acadmic_e; ?> <br> <?php echo $department_name ?></footer>
                     
 									</div>
@@ -139,7 +138,7 @@ error_reporting(0);
 
 							<div class="row">
 
-									<table class="table">
+									<table class="table table-bordered">
 										<tr>
 											<th>Programme</th>
 											<td><?php echo $rowd["dept_name"]; ?></td>
@@ -157,98 +156,9 @@ error_reporting(0);
 
 									</table>
 					</div>
-						</div>
-					</div>
 
 
-					 <div class="row">
-						<div class="col-md-4">
-							<div class="card flex-fill w-100 border shadow-none">
-								<div class="card-header d-flex justify-content-between">
-									<div>
-										<h5 class="card-title mb-0"><?php echo $rowse["course_name"] ?> </h5>
-										<h6 class="card-title mb-0"><?php echo date('D, d M Y H:i:s') ?></h6>
-									</div>
-								</div>
-								<div class="card-body d-flex">
-									<div class="align-self-center w-100">
-										<div class="py-3">
-											<div class="chart chart-xs">
-												<canvas id="chartjs-dashboard-pie2"></canvas>
-											</div>
-										</div>
-										<div class="text-center">
-											<button class="btn btn-success mb-3">Filled - <?php echo count($main_responses[0]) ?></button>
-											<button class="btn btn-danger mb-3">Not Filled - 32</button>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-8" style="height: 100%">
-							<div class="card flex-fill w-200 border shadow-none">
-								<div class="card-header d-flex justify-content-between">
-									<div>
-										<h5 class="card-title mb-0"><?php echo $rowse["course_name"] ?> </h5>
-										<h6 class="card-title mb-0"><?php echo date('D, d M Y H:i:s') ?></h6>
-									</div>
-								</div>
-								<div class="card-body d-flex">
-									<canvas id="barChart" style="max-height: 300px;"></canvas>
-									<script>
-										document.addEventListener("DOMContentLoaded", () => {
-											new Chart(document.querySelector('#barChart'), {
-												type: 'bar',
-												data: {
-													labels: ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7'],
-													datasets: [{
-														axis: 'y',
-														label: ['Average Student Reponses'],
-														data: [
-															<?php
-															for ($i = 0; $i < count($main_responses); $i++) {
-																echo round(array_sum($main_responses[$i]) / count($main_responses[$i]));
-																if ($i != count($main_responses) - 1) {
-																	echo ",";
-																}
-																echo ",";
-															}
-															?>
-														],
-														backgroundColor: [
-															'rgba(255, 99, 132, 0.2)',
-															'rgba(255, 159, 64, 0.2)',
-															'rgba(255, 205, 86, 0.2)',
-															'rgba(75, 192, 192, 0.2)',
-															'rgba(54, 162, 235, 0.2)',
-															'rgba(153, 102, 255, 0.2)',
-															'rgba(201, 203, 207, 0.2)'
-														],
-														borderColor: [
-															'rgb(255, 99, 132)',
-															'rgb(255, 159, 64)',
-															'rgb(255, 205, 86)',
-															'rgb(75, 192, 192)',
-															'rgb(54, 162, 235)',
-															'rgb(153, 102, 255)',
-															'rgb(201, 203, 207)'
-														],
-														borderWidth: 1
-													}]
-												},
-												options: {
-													scales: {
-														y: {
-															beginAtZero: true
-														}
-													}
-												}
-											});
-										});
-									</script>
-								</div>
-							</div>
-						</div>
+					 
 					</div> 
 				</div>
 				<div class="row">

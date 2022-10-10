@@ -94,7 +94,7 @@
 																		echo $rowcount;
 																		?></h1>
 												<div class="mb-0">
-													<span class="text-muted">Since last month</span>
+													<span class="text-muted">Since Forever</span>
 												</div>
 											</div>
 										</div>
@@ -115,7 +115,7 @@
 												</div>
 
 												<h1 class="mt-1 mb-3"><?php
-																		$sql = "SELECT * FROM forms where status='online'";
+																		$sql = "SELECT * FROM forms where status='1'";
 																		$result = mysqli_query($conn, $sql);
 																		$rowcount = mysqli_num_rows($result);
 																		echo $rowcount;
@@ -148,7 +148,7 @@
 																		echo $rowcount;
 																		?></h1>
 												<div class="mb-0">
-													<span class="text-muted">Since last week</span>
+													<span class="text-muted">Since Forever</span>
 												</div>
 											</div>
 										</div>
@@ -175,7 +175,7 @@
 																		echo $rowcount;
 																		?></h1>
 												<div class="mb-0">
-													<span class="text-muted">Since last week</span>
+													<span class="text-muted">Since 2022</span>
 												</div>
 											</div>
 										</div>
@@ -258,6 +258,7 @@
 													<th>Code</th>
 													<th>Students</th>
 													<th>Date</th>
+													<th>View</th>
 													
 												</tr>
 											</thead>
@@ -265,7 +266,7 @@
 											<?php
 
                         
-                        $active_feedbacks = "SELECT * FROM groups WHERE `req` = '1' and rejected='0' AND accepted = '0'";
+                        $active_feedbacks = "SELECT * FROM groups WHERE `req` = '1' and rejected='0' AND accepted = '0' ORDER BY id desc";
 												$active_feedbacks_result = mysqli_query($conn, $active_feedbacks);
 												$active_feedbacks_count = mysqli_num_rows($active_feedbacks_result);
 
@@ -274,6 +275,7 @@
 													while($active_feedbacks_row = mysqli_fetch_assoc($active_feedbacks_result)){
 														$course_code = $active_feedbacks_row['subject'];
 
+                            $dept_code = $active_feedbacks_row["deptcode"];
 														$course = "SELECT * FROM courses WHERE course_code = '$course_code'";
 														$course_result = mysqli_query($conn, $course);
 														$course_row = mysqli_fetch_assoc($course_result);
@@ -286,13 +288,16 @@
 																<td>$course_code</td>
 																<td>$total_stud</td>
 																<td>$active_feedbacks_row[fdate]</td>
+    <td>
+                      <button onclick=\"window.location.href='requested_feedback.php?deptcode=$dept_code'\"   class=\"btn btn-dark btn-ecomm\">View</button>
+      </td>
 															</tr>";
 														$active_feedbacks_count++;
 													}
 												}
 												else{
 													echo "<tr>
-															<td colspan='4' span class='text-center'><h5>No Feedback Records</h5></td>
+															<td colspan='6' span class='text-center'><h5>No Feedback Records</h5></td>
 														</tr>";
 												}
 
