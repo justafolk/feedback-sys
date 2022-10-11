@@ -38,7 +38,7 @@ if ($result) {
 
     $date_year = date("Y", strtotime($ini_date));
     $date_month = date("m", strtotime($ini_date));
-
+                    
     if ($date_month >= 8) {
         $academic = $date_year . "-" . ($date_year + 1);
     } else {

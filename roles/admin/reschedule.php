@@ -265,6 +265,7 @@ if (!$conn) {
                                                 <br>
 
                                             <?php
+                                            /*
                                                 $sqlopop = "select * from `forms` where `form_id` = '$feedback_id'";
                                                 $resultopop = mysqli_query($conn, $sqlopop);
                                                 $rowopop = mysqli_fetch_assoc($resultopop);
@@ -278,7 +279,7 @@ if (!$conn) {
                                                 $resultgrpid = mysqli_query($conn, $sqlgrpid);
                                                 $rowgrpid = mysqli_fetch_assoc($resultgrpid);
                                                 $rollrange = $rowgrpid['activeRoll'];
-                                                //echo "<script>alert('$rollrange')</script>";
+                                                //echo "<script>alert('$rollrange')</script>"; */
 
                                                 /*
                                                 if ($additionalroll = $_POST['addrollrange']) {
@@ -321,13 +322,25 @@ if (!$conn) {
                                                     $i = sprintf("%02d", $i);
                                                     $active_roll[] = $additionalyear . $deptcode . $i;
                                                 } */
-                                                $active_roll = json_decode($rollrange);
+                                                $addroll = $_POST['addrollunit'];
+                                                $addroll = explode(';', $addroll);
+                                                $active_roll = array();
+                                                foreach ($addroll as $roll) {
+                                                    $active_roll[] = $roll;
+                                                }
+                                                $active_roll = array_unique($active_roll);
+                                                $active_roll = json_encode($active_roll);
+                                                //echo "<script>alert('$active_roll')</script>";
 
-                                                foreach (explode(";", $_POST["addrollunit"]) as $key => $value) {
+//                                                echo "script>alert('$_POST[addrollunit]')</script>";
+  //                                              $active_roll = array();# json_decode($rollrange);
+
+                                                /*foreach (explode(";", $_POST["addrollunit"]) as $key => $value) {
                                                     $active_roll[] = $value;
                                                 }
                                                 
-                                                $active_roll = array_diff($active_roll, [-4000, "", " "]);
+                                                $active_roll = array_diff($active_roll, [-4000, "", " "]);*/
+                                                /*
                                                 $inactive_op = [];
                                                 for ($i = 0; $i < count($active_roll); $i++) {
                                                     $sqltocheck = "select * from `form_responses` where `student_id` = '$active_roll[$i]'";
@@ -336,14 +349,14 @@ if (!$conn) {
                                                     $tochecknum = mysqli_num_rows($resulttocheck);
                                                     if ($tochecknum == 0) {
                                                         $inactive_op = array_merge($inactive_op, [$active_roll[$i]]);
-                                                    }
+                                                    } 
                                                     
                                                 
-                                                }
+                                                }*/
                                                 //$inactive_op = json_encode($inactive_op);
-                                                //echo "<script>alert('$inactive_op')</script>";
-
-                                                $allrolls = count($inactive_op);
+                                                //echo "<script>alert('$active_op')</script>";
+                                                $active_op = json_decode($active_roll);
+                                                $allrolls = count($active_op);
                                                 //$allrolls = array_unique($inactive_op);
                                                 echo "<p class=\' my-0 \' >Total number of students: <strong>" . $allrolls . "</strong>  </p>";
                                                 $count = 1;
@@ -352,7 +365,7 @@ if (!$conn) {
                                                     echo "<group>";
                                                     for ($i = 1; $i < 16; $i++) {
 
-                                                        $row["enrollid"] = $inactive_op[$count - 1];
+                                                        $row["enrollid"] = $active_op[$count - 1];
                                                         $count += 1;
                                                         
                                                         if ($row['enrollid'] == 0) {
@@ -410,7 +423,16 @@ if (!$conn) {
     include '../../imports/config.php';
     if (isset($_POST['finalroll'])) {
 
+        $new_roll = json_decode($active_roll);
+        $new_roll = array_diff($new_roll, [-4000, "", " "]);
+        $new_roll = array_unique($new_roll);
+        
 
+//        echo "<script>alert('$new_roll')</script>";
+
+        
+
+        /*
         $known_posts = array('deptcode', 'semester', 'subject', 'rollrange','addrollunit', 'date', 'department', 'finalroll');
         $active_rolls = array();
         $remove_rolls = array();
@@ -425,10 +447,11 @@ if (!$conn) {
         }
         var_dump($remove_rolls);
         $active_rolls = json_encode($active_rolls);
-        //echo "<script>alert('$active_rolls')</script>";
+       // echo "<script>alert('$active_rolls')</script>";
         $feedback_id = $_GET['id'];
         //echo "<script>alert('$feedback_id')</script>";
-
+*/
+        
         $sqlfinal = "SELECT * from groups where id = '$feedback_id'";
         $resultfinal = mysqli_query($conn, $sqlfinal);
         $rowfinal = mysqli_fetch_assoc($resultfinal);
@@ -437,7 +460,7 @@ if (!$conn) {
        
         
         $final = array();
-        $active_rolls = json_decode($active_rolls);
+        $active_rolls = $new_roll; #json_decode($active_rolls);
         $rollrange = json_decode($rollrange);
 
         for ($i = 0; $i < count($rollrange); $i++) {
@@ -460,7 +483,8 @@ if (!$conn) {
         //echo "<script>alert('$final_count')</script>";
         $final = json_encode($final);
         //echo "<script>alert('$final')</script>";
-        $date = $_POST['date'];
+        
+        $date = $_POST['date']; 
         
         
         $sql = "UPDATE groups SET activeRoll = '$final', student_count='$final_count', fdate='$date' WHERE id = '$feedback_id'";
@@ -489,7 +513,7 @@ if (!$conn) {
             echo "<script>window.location.href = 'view_form.php?deptcode=$deptcode'</script>";
         } else {
             echo "<script>alert('Update failed')</script>";
-        }
+        } 
     
     }
 

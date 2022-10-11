@@ -36,6 +36,12 @@ if ($_SESSION['role'] !== "Faculty"){
         </a>
       </li>
 
+      <li class="sidebar-item ">
+        <a class="sidebar-link" href="create_course.php">
+          <i class="align-middle" data-feather="user"></i> <span class="align-middle">Create Course</span>
+        </a>
+      </li>
+
       
       <li class="sidebar-item ">
         <a class="sidebar-link" href="change_pass.php">

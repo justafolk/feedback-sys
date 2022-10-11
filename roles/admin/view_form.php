@@ -173,8 +173,8 @@
                                                                 <th scope="col">Date</th>
                                                                 <th scope="col">Status</th>
                                                                
-                                                                <th scope="col">View</th>
-                                                                <th scope="col">Reschedule</th>
+                                                                <th scope="col">Action</th>
+                                                                
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -260,8 +260,8 @@
                                                                 <th scope="col">Date</th>
                                                                 <th scope="col">Status</th>
                                                                
-                                                                <th scope="col">View</th>
-                                                                <th scope="col">Reschedule</th>
+                                                                <th scope="col">Action</th>
+                                                                
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -341,8 +341,8 @@
                                                                 <th scope="col">Date</th>
                                                                 <th scope="col">Status</th>
                                                                
-                                                                <th scope="col">View</th>
-                                                                <th scope="col">Reschedule</th>
+                                                                <th scope="col">Action</th>
+                                                                
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -428,8 +428,8 @@
                                                                 <th scope="col">Date</th>
                                                                 <th scope="col">Status</th>
                                                                
-                                                                <th scope="col">View</th>
-                                                                <th scope="col">Reschedule</th>
+                                                                <th scope="col">Action</th>
+                                                                
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -508,8 +508,8 @@ $i++;
                                                                 <th scope="col">Teacher Name</th>
                                                                 <th scope="col">Date</th>
                                                                 <th scope="col">Status</th>
-                                                                <th scope="col">View</th>
-                                                                <th scope="col">Reschedule</th>
+                                                                <th scope="col">Action</th>
+                                                                
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -558,7 +558,7 @@ $i++;
                                                                                 <td>$teacher_name</td>
                                                                                 <td>$date</td>
                                                                                 <td>$status</td>
-                                                                                                                                                       <td><a href='report.php?id=$fid' class='btn btn-primary'>View</a>
+                                                                                <td><a href='report.php?id=$fid' class='btn btn-primary'>View</a>
                                                                             <a href='reschedule.php?id=$fid' class='btn btn-success'>Reschedule </a> 
                                                                             <a href='edit_form.php?id=$fid' class='btn btn-warning'>Edit</a></td>
   </tr>";

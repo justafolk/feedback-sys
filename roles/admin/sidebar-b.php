@@ -1,17 +1,4 @@
 <?php session_start(); ?>
-<style>
-  .indicator { border-radius: 50%;
-background-color: #fff;
-color: black;
-width: 20px;
-height: 20px;
-display: inline-block;
-text-align: center;}
-
-.sidebar-nav{
-  overflow-y: auto;
-}
-</style>
 
 <?php
 if ($_SESSION['role'] !== "Admin") {
@@ -152,40 +139,123 @@ if ($_SESSION['role'] !== "Admin") {
             $sql = "SELECT * FROM groups WHERE `req` = '1' and rejected='0' AND accepted = '0'";
             $result = mysqli_query($conn, $sql);
             if(mysqli_num_rows($result) != 0){
-              echo ' '. mysqli_num_rows($result) . ' ';
+              echo ' - '. mysqli_num_rows($result) . '*';
             }
             else{
-              echo "0";
+              echo "";
             };
             //echo "<script>alert('".mysqli_num_rows($result)."')</script>";
             ?></span>
 
         </a>
-            <?php
-$depts = "select * from departments";
-$res_dept = mysqli_query($conn, $depts);
-while ($row=mysqli_fetch_assoc($res_dept)){
-  
-              ?>
         <ul id="charts-nav3" class="collapse" style="list-style-type:none;">
           <li>
-        <a class="sidebar-link" href="requested_feedback.php?deptcode=<?php echo $row["dept_id"] ?>">
+            <a class="sidebar-link" href="requested_feedback.php?deptcode=40">
               <?php 
-              $sqlcomp = "SELECT * FROM groups WHERE `req` = '1' and rejected='0' AND accepted = '0' AND deptcode = '$row[dept_id]'";
+              $sqlcomp = "SELECT * FROM groups WHERE `req` = '1' and rejected='0' AND accepted = '0' AND deptcode = '40'";
               $resultcomp = mysqli_query($conn, $sqlcomp);
               if(mysqli_num_rows($resultcomp) != 0){
-                $status = '  <span class="indicator" >' . mysqli_num_rows($resultcomp) . '</span>';
+                $status = '[' . mysqli_num_rows($resultcomp) . ']*';
               }
               else{
-                $status = false;
+                $status = "";
               };
               ?>
-  <span class="align-middle"><?php echo $row["dept_name"] ?><?php if ($status!=false){echo $status;} ?>  </span>
+              <span class="align-middle">Computer Department <?php echo $status; ?></span>
+            </a>
+          </li>
+          <li>
+            <a class="sidebar-link" href="requested_feedback.php?deptcode=10">
+              <?php
+              $sqlcivil = "SELECT * FROM groups WHERE `req` = '1' and rejected='0' AND accepted = '0' AND deptcode = '10'";
+              $resultcivil = mysqli_query($conn, $sqlcivil);
+              if(mysqli_num_rows($resultcivil) != 0){
+                $status = '[' . mysqli_num_rows($resultcivil) . ']*';
+              }
+              else{
+                $status = "";
+              };
+              ?>
+              <span class="align-middle">Civil Department <?php echo $status; ?></span>
+            </a>
+          </li>
+          <li>
+            <a class="sidebar-link" href="requested_feedback.php?deptcode=20">
+              <?php
+                               $sqlmecha = "SELECT * FROM groups WHERE `req` = '1' and rejected='0' AND accepted = '0' AND deptcode = '20'";
+                               $resultmecha = mysqli_query($conn, $sqlmecha);
+                               if(mysqli_num_rows($resulmeacha) != 0){
+                                 $status = '[' . mysqli_num_rows($resultmecha) . ']*';
+                               }
+                               else{
+                                 $status = "";
+                               }; 
+              ?>
+              <span class="align-middle">Mechanical Department(A)</span>
+            </a>
+          </li>
+          <li>
+            <a class="sidebar-link" href="requested_feedback.php?deptcode=21">
+              <?php
+                                $sqlmecha = "SELECT * FROM groups WHERE `req` = '1' and rejected='0' AND accepted = '0' AND deptcode = '21'";
+                                $resultmecha = mysqli_query($conn, $sqlmecha);
+                                if(mysqli_num_rows($resulmeacha) != 0){
+                                  $status = '[' . mysqli_num_rows($resultmecha) . ']*';
+                                }
+                                else{
+                                  $status = "";
+                                };
+              ?>
+              <span class="align-middle">Mechanical Department(U)</span>
+            </a>
+          </li>
+          <li>
+            <a class="sidebar-link" href="requested_feedback.php?deptcode=30">
+              <?php
+                                $sqlelec = "SELECT * FROM groups WHERE `req` = '1' and rejected='0' AND accepted = '0' AND deptcode = '30'";
+                                $resultelec = mysqli_query($conn, $sqlelec);
+                                if(mysqli_num_rows($resulelec) != 0){
+                                  $status = '[' . mysqli_num_rows($resultelec) . ']*';
+                                }
+                                else{
+                                  $status = "";
+                                };    
+              ?>
+              <span class="align-middle">Electrical Department</span>
+            </a>
+          </li>
+          <li>
+            <a class="sidebar-link" href="requested_feedback.php?deptcode=70">
+              <?php
+                                $sqlit = "SELECT * FROM groups WHERE `req` = '1' and rejected='0' AND accepted = '0' AND deptcode = '70'";
+                                $resultit = mysqli_query($conn, $sqlit);
+                                if(mysqli_num_rows($resulit) != 0){
+                                  $status = '[' . mysqli_num_rows($resultit) . ']*';
+                                }
+                                else{
+                                  $status = "";
+                                };  
+                                ?>
+              <span class="align-middle">E&TC Department(A)</span>
+            </a>
+          </li>
+          <li>
+            <a class="sidebar-link" href="requested_feedback.php?deptcode=71">
+              <?php
+                                $sqlit = "SELECT * FROM groups WHERE `req` = '1' and rejected='0' AND accepted = '0' AND deptcode = '71'";
+                                $resultit = mysqli_query($conn, $sqlit);
+                                if(mysqli_num_rows($resulit) != 0){
+                                  $status = '[' . mysqli_num_rows($resultit) . ']*';
+                                }
+                                else{
+                                  $status = "";
+                                };  
+                                ?>
+              <span class="align-middle">E&TC Department(U)</span>
             </a>
           </li>
         </ul>
       </li>
-              <?php } ?>
 
 
 
@@ -211,11 +281,6 @@ while ($row=mysqli_fetch_assoc($res_dept)){
             </a>
           </li>
           <li>
-            <a class="sidebar-link" href="view_form.php?deptcode=50">
-              <span class="align-middle">Computer & IOT</span>
-            </a>
-          </li>
-          <li>
             <a class="sidebar-link" href="view_form.php?deptcode=10">
               <span class="align-middle">Civil Department</span>
             </a>
@@ -236,12 +301,12 @@ while ($row=mysqli_fetch_assoc($res_dept)){
             </a>
           </li>
           <li>
-            <a class="sidebar-link" href="view_form.php?deptcode=70">
+            <a class="sidebar-link" href="view_form.php?deptcode=50">
               <span class="align-middle">E&TC Department(A)</span>
             </a>
           </li>
           <li>
-            <a class="sidebar-link" href="view_form.php?deptcode=71">
+            <a class="sidebar-link" href="view_form.php?deptcode=51">
               <span class="align-middle">E&TC Department(U)</span>
             </a>
           </li>

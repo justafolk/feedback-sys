@@ -20,33 +20,12 @@
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
-
-<?php
-include '../../imports/config.php';
-session_start();
-error_reporting(0);
-if ($_SESSION['role'] == "Admin") {
-?>
 <body>
 	<div class="wrapper">
 		<?php
-			session_start();
-			error_reporting(0);
-			include 'sidebar.php';
 			require_once "../../imports/config.php";
 		?>
 		<div class="main">
-			<nav class="navbar navbar-expand navbar-light navbar-bg">
-				<a class="sidebar-toggle js-sidebar-toggle">
-					<i class="hamburger align-self-center"></i>
-				</a>
-				<div>
-					<h1 class="h3 mb-0"><strong>New Profile</strong></h1>
-				</div>
-				<?php
-					include 'notification.php';
-				?>
-			</nav>
 	<main class="d-flex w-100">
 		<div class="container d-flex flex-column">
 			<div class="row vh-100">
@@ -54,7 +33,7 @@ if ($_SESSION['role'] == "Admin") {
 					<div class="align-middle">
 
 						<div class="text-center mt-4">
-							<h1 class="h2">New Profile</h1>
+							<h1 class="h2">Profile</h1>
 							<p class="lead">
 								Create a New Profile
 							</p>
@@ -65,7 +44,6 @@ if ($_SESSION['role'] == "Admin") {
 								<div class="m-sm-4">
 									<form action="" method="post">
 										<div class="mb-3">
-											<?php echo $sql1; ?>
 											<label for="inputFirstName" class="form-label">Name</label>
 											<input type="text" class="form-control  form-control-lg" id="inputFirstName" name="name" required />										
 										</div>
@@ -140,11 +118,4 @@ if ($_SESSION['role'] == "Admin") {
 	<script src="js/app.js"></script>
 
 </body>
-<?php
-}
-else{
-	header("Location: ../../index.php");
-	exit();     
-}  
-?>
-</html>
+	</html>
