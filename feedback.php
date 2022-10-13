@@ -114,7 +114,7 @@
                                 exit();
                             }
                             $row_courses = mysqli_fetch_assoc($result_courses);
-                            echo $row_courses['course_name'] . " - " . $row_forms['course_code'];
+                            echo $row_courses['course_name'] ." " . explode(" - ", $row_forms['course_code'])[0];
                             ?>
                         </h3>
                     </div>
@@ -184,7 +184,7 @@
 
                                     <ul>
                                         <li style="text-align:left; align-items:left;">Poor </li>
-                                        <li style="padding-left:4%;text-align:left; align-items:left;">Needs Improvement</li>
+                                        <li style="padding-left:0%;text-align:left; align-items:left;">Needs Improvement</li>
                                         <li style="text-align:center; align-items:center;">Satisfactory </li>
                                         <li style="text-align:right;padding-right:4%; align-items:right;">Good</li>
                                         <li style="text-align:right; align-items:right;">Excellent</li>
@@ -194,13 +194,15 @@
 
                                     ?>
                                         <div class="sliders<?php echo $i ?>">
+
+
                                             <p class="slider-title form-label">
                                                 <?php echo json_decode($row["sub_content"])[$i - 1] ?>
                                             </p>
 
 
                                             <div class="range">
-                                                <input type="range" class="form-range" id="slider-<?php echo $id ?>" name="slider-<?php echo $id ?>" min="1" max="100" />
+                                                <input type="range" class="form-range" id="slider-<?php echo $id ?>" name="slider-<?php echo $id ?>" min="1" max="5" />
                                             </div>
                                         </div>
                                     <?php } ?>

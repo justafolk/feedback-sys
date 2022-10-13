@@ -92,4 +92,4 @@ foreach ($mainquestions as $key => $value) {
     }
 }
 
-header("Location: /roles/admin/index.php?flag=done");
+header("Location: feedback/roles/admin/index.php?flag=done");

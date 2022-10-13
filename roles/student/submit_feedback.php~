@@ -8,7 +8,7 @@ foreach ($_POST as $key => $value) {
         $form_id = $value;
         continue;
     } else {
-        $_POST[$key] = round($value) ;
+        $_POST[$key] = $value ;
     }
 }
 $form_id = $_POST["form_id"];

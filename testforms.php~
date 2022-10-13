@@ -2,23 +2,14 @@
 <html lang="en">
 <?php
 session_start();
-require 'vendor/autoload.php';
-// reference the Dompdf namespace
-use Dompdf\Dompdf;
+include "./imports/config.php";
 
-$url = $_GET["url"];
-$page = file_get_contents($url);
-// instantiate and use the dompdf class
-$dompdf = new Dompdf();
-$dompdf->loadHtml($page);
+$sql = "select * from groups";
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_assoc($result);
+echo $row["fdate"];
+$date = date("Y", strtotime($row["fdate"]));
+echo $date;
 
-// (Optional) Setup the paper size and orientation
-$dompdf->setPaper('A3', 'potrait');
-
-// Render the HTML as PDF
-$dompdf->render();
-
-// Output the generated PDF to Browser
-$dompdf->stream();
 
 ?>

@@ -275,7 +275,8 @@ $depart_row = mysqli_fetch_assoc($depart_res);
 														$grp_res = mysqli_query($conn, $grp_sql);
 														$grp_row = mysqli_fetch_assoc($grp_res);
 														echo "<tr>";
-														echo "<td>" . $grp_row['course_name'] . " ({$grp_row['course_code']})" . "</td>";
+														echo "<td>" . $grp_row['course_name'] . " (".explode(' - ', $grp_row['course_code'])[0].")</td>";
+														# echo "<td>" . explode(" - ", $grp_row['course_name'])[0] . " (".explode(' - ', $grp_row['course_code'])[0].")</td>";
 														$avgd = 0;
 														for ($i = 0; $i < count($averages[$key]); $i++) {
 															if ($averages[$key][$i] >= 4.5 or $averages[$key][$i] <= 3) {

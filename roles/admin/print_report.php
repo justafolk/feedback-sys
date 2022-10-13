@@ -143,13 +143,11 @@ error_reporting(0);
 											<th>Programme</th>
 											<td><?php echo $rowd["dept_name"]; ?></td>
 											<th>Course</th>
-											<td><?php echo $rowse["course_name"] ?></td>
+											<td><?php echo explode(" - ", $rowse["course_name"])[0] ?></td>
 										</tr>
 										<tr>
 											<th>Course Code</th>
-											<td>
-												<?php echo $course_code ?>
-											</td>
+											<td><?php echo explode(" - ", $rowse["course_code"])[0] ?></td>
 											<th>No. of Feedback entries</th>
 											<td><?php echo count($main_responses[0]) ?></td>
 										</tr>

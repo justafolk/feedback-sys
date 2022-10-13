@@ -17,7 +17,10 @@ if(isset($_POST['login'])){
     
 
     if($count == 1){
-
+        $today = date("Y-m-d");
+        $sqllop = "UPDATE `forms` set `status` = '1' where `ini_date` = '$today'";
+        $resultlop = mysqli_query($conn, $sqllop);
+        
         if($row['role'] == 'Admin'){
 
             $today = date("Y-m-d");

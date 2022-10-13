@@ -20,7 +20,6 @@ foreach ($_POST as $key => $value) {
     }
 
 }
-
 // create table from mainquestions array
 $table = "<table class=\"table table-striped\">";
 $table .= "<thead><tr><th>Question</th><th>Options</th><th>Multiple Selections</th></tr></thead>";

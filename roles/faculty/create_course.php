@@ -116,8 +116,9 @@
                                     $dept_code = $_POST["dept_code"];
                                     $mode = $_POST["mode"];
                                     $final_name = $course_name . " - " . $mode;
+                                    $final_code = $course_code . " - " . $mode;
                                     //echo "<script>alert('$final_name')</script>";
-                                    $sql = "INSERT INTO `courses` (`course_name`, `course_code`, `dept_code`) VALUES ('$final_name', '$course_code', '$dept_code')";
+                                    $sql = "INSERT INTO `courses` (`course_name`, `course_code`, `dept_code`) VALUES ('$final_name', '$final_code', '$dept_code')";
                                     $result = mysqli_query($conn, $sql);
                                     if ($result) {
                                         echo '<div class="alert alert-success alert-dismissible fade show" role="alert">

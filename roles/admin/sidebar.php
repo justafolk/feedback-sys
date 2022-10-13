@@ -205,47 +205,18 @@ while ($row=mysqli_fetch_assoc($res_dept)){
           <i class="align-middle" data-feather="bar-chart-2"></i> <span>View Feedbacks</span>
         </a>
         <ul id="charts-nav1" class="collapse" style="list-style-type:none;">
+      <?php 
+$sql = "select * from departments";
+$results = mysqli_query($conn, $sql);
+while ($row = mysqli_fetch_assoc($results)){
+  
+?>
           <li>
-            <a class="sidebar-link" href="view_form.php?deptcode=40">
-              <span class="align-middle">Computer Department</span>
+          <a class="sidebar-link" href="view_form.php?deptcode=<?php echo $row["dept_id"] ?>">
+          <span class="align-middle"><?php echo $row["dept_name"] ?></span>
             </a>
           </li>
-          <li>
-            <a class="sidebar-link" href="view_form.php?deptcode=50">
-              <span class="align-middle">Computer & IOT</span>
-            </a>
-          </li>
-          <li>
-            <a class="sidebar-link" href="view_form.php?deptcode=10">
-              <span class="align-middle">Civil Department</span>
-            </a>
-          </li>
-          <li>
-            <a class="sidebar-link" href="view_form.php?deptcode=20">
-              <span class="align-middle">Mechanical Department(A)</span>
-            </a>
-          </li>
-          <li>
-            <a class="sidebar-link" href="view_form.php?deptcode=21">
-              <span class="align-middle">Mechanical Department(U)</span>
-            </a>
-          </li>
-          <li>
-            <a class="sidebar-link" href="view_form.php?deptcode=30">
-              <span class="align-middle">Electrical Department</span>
-            </a>
-          </li>
-          <li>
-            <a class="sidebar-link" href="view_form.php?deptcode=70">
-              <span class="align-middle">E&TC Department(A)</span>
-            </a>
-          </li>
-          <li>
-            <a class="sidebar-link" href="view_form.php?deptcode=71">
-              <span class="align-middle">E&TC Department(U)</span>
-            </a>
-          </li>
-
+          <?php } ?>
         </ul>
       </li>
 
@@ -254,43 +225,19 @@ while ($row=mysqli_fetch_assoc($res_dept)){
           <i class="align-middle" data-feather="bar-chart-2"></i> <span>Past Feedbacks</span>
         </a>
         <ul id="charts-nav2" class="collapse" style="list-style-type:none;">
+      <?php 
+$sql = "select * from departments";
+$results = mysqli_query($conn, $sql);
+while ($row = mysqli_fetch_assoc($results)){
+  
+?>
           <li>
-            <a class="sidebar-link" href="past_form.php?deptcode=40">
-              <span class="align-middle">Computer Department</span>
+          <a class="sidebar-link" href="view_form.php?deptcode=<?php echo $row["dept_id"] ?>">
+          <span class="align-middle"><?php echo $row["dept_name"] ?></span>
             </a>
           </li>
-          <li>
-            <a class="sidebar-link" href="past_form.php?deptcode=10">
-              <span class="align-middle">Civil Department</span>
-            </a>
-          </li>
-          <li>
-            <a class="sidebar-link" href="past_form.php?deptcode=20">
-              <span class="align-middle">Mechanical Department(A)</span>
-            </a>
-          </li>
-          <li>
-            <a class="sidebar-link" href="past_form.php?deptcode=21">
-              <span class="align-middle">Mechanical Department(U)</span>
-            </a>
-          </li>
-          <li>
-            <a class="sidebar-link" href="past_form.php?deptcode=30">
-              <span class="align-middle">Electrical Department</span>
-            </a>
-          </li>
-          <li>
-            <a class="sidebar-link" href="past_form.php?deptcode=50">
-              <span class="align-middle">E&TC Department(A)</span>
-            </a>
-          </li>
-          <li>
-            <a class="sidebar-link" href="past_form.php?deptcode=51">
-              <span class="align-middle">E&TC Department(U)</span>
-            </a>
-          </li>
-
-        </ul>
+          <?php } ?>
+</ul>
       </li>
 
 
