@@ -111,24 +111,37 @@
                                 </div>
                                 <?php
                                 if (isset($_POST["submit"])) {
-                                    $course_name = $_POST['course_name'] + '-' + $_POST['mode'];        
+                                    $course_name = $_POST["course_name"];
+                                    $course_code = $_POST["course_code"];
+                                    $dept_code = $_POST["dept_code"];
+                                    $mode = $_POST["mode"];
+                                    $final_name = $course_name . " - " . $mode;
+                                    //echo "<script>alert('$final_name')</script>";
+                                    $sql = "INSERT INTO `courses` (`course_name`, `course_code`, `dept_code`) VALUES ('$final_name', '$course_code', '$dept_code')";
+                                    $result = mysqli_query($conn, $sql);
+                                    if ($result) {
+                                        echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        <strong>Success!</strong> Course Added Successfully.
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>';
+                                    } else {
+                                        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        <strong>Error!</strong> Course Not Added.
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>';
+                                    }
+                                    /*
+                                    echo "<script>alert('$_POST[course_name]')</script>";
+                                    echo "<script>alert('$_POST[mode]')</script>";
+                                    $course_name = $_POST['course_name'] + '-' + $_POST['mode'];    
+                                    echo "<script>alert('$course_name')</script>";
+
                                     $sql = "insert into courses (course_name, course_code, dept_code) values ('$course_name','{$_POST['course_code']}','{$_POST['dept_code']}')";
                                     $result = mysqli_query($conn, $sql);
-                                    if (!$result) {
-                                ?>
-                                        <div class="alert alert-danger" role="alert">
-                                            There was a problem while inserting data!
-                                        </div>
-                                    <?php
-                                    } else {
-                                    ?>
-                                        <div class="alert alert-success" role="alert">
-                                            Course Created Successfully!!!
-                                        </div>
-                                <?php
+                                    if (!$result) { */
                                     }
-                                }
                                 ?>
+
                                 <div class="card border shadow-none my-3">
                                     <div class="card-body">
                                         <div class="table-responsive">
@@ -140,7 +153,7 @@
                                                 </thead>
                                                 <tbody>
                                                     <?php
-                                                    $sql = "select * from courses";
+                                                    $sql = "select * from courses ORDER BY id DESC";
                                                     $result = mysqli_query($conn, $sql);
                                                     while ($row = mysqli_fetch_assoc($result)) {
                                                         echo "<tr>";
