@@ -88,7 +88,7 @@
 												}
 												else{
 													$password1 = md5($password);
-													$sql = "INSERT INTO login(uname, passwd, role, name, flog) VALUES('$username', '$password1','Faculty', '$name', 1);";
+													$sql = "INSERT INTO login(uname, passwd, role, name, flog) VALUES('$username', '$password1','Faculty', '$name', 0);";
 													$smt = mysqli_stmt_init($conn);
 													if(!mysqli_stmt_prepare($smt, $sql)){
 														$error .= "Error in STMT";
@@ -97,6 +97,7 @@
 													mysqli_stmt_execute($smt);
 													mysqli_stmt_close($smt);
 													echo "<script>alert('User Created Successfully');</script>";
+													echo "<script>window.location.href = '../../index.php';</script>";
 												}
 											}
 											createuser($conn, $name, $username, $password);

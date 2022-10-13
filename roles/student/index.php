@@ -89,7 +89,11 @@ if ($_SESSION['role'] != 'Student') {
 										<div class="card border shadow-none" style="border-radius:12px">
 											<div class="card-body">
 												<h4 class="h4"><strong>
-														<?php echo $row2["course_name"] . " (" . $row2["course_code"]; ?>)
+														<?php
+														$course_code = $row2["course_code"];
+														$course_code = explode(" - ", $course_code);
+														$course_code = $course_code[0]; 
+														echo $row2["course_name"] . " (" . $course_code; ?>)
 													</strong></h4>
 												<h6> 
 
