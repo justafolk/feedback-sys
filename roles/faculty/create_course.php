@@ -62,7 +62,9 @@
                                     <div class="card-body">
                                         <form action="" method="post">
                                             <div class="row">
-                                                <div class="col-6">
+            <div class="col-7"> 
+              <div class="row"> 
+                                                   <div class="col-6">
                                                     <div class="form-group mb-3">
                                                         <label for="course_name">
                                                             Course Name
@@ -73,12 +75,13 @@
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="course_code">
-                                                            Course Code
+                  Course Code <span style="color: red;" >  
+                  </span>
                                                         </label>
                                                         <input type="text" name="course_code" id="course_code" class="form-control" placeholder="Course Code">
                                                     </div>
                                                 </div>
-                                                <br>
+                        <div class="col-12"> 
                                                 <div class="form-group mb-3">
                                                     <label for="dept_code">
                                                         Department
@@ -105,7 +108,32 @@
                                                     <button class="btn btn-dark btn-ecomm" name="submit">Submit</button>
                                                 </div>
 
-                                            </div>
+
+                        </div>
+
+           
+              </div>
+            </div>
+           <div class="col-5"> 
+                                                <div class="card shadow-none border">
+              <div class="card-body">
+                <span style="" >
+                    <ul>
+                      <li>
+                Don't use symbols like '!@#$%^&*()_+-='
+</li>
+                      <li> If multiple entries of same course are to be made, enter them as : <ul>
+                        <li>R18CP4403A</li>
+                        <li>R18CP4403B</li>
+                        <li>R18CP4403C</li>
+                      </ul>
+                    </ul>
+</span>
+
+            </div>
+              </div>
+                                                </div>
+                                                                                           </div>
                                         </form>
                                     </div>
                                 </div>
@@ -115,8 +143,20 @@
                                     $course_code = $_POST["course_code"];
                                     $dept_code = $_POST["dept_code"];
                                     $mode = $_POST["mode"];
+                                    
                                     $final_name = $course_name . " - " . $mode;
                                     $final_code = $course_code . " - " . $mode;
+                                    $sql1 = "Select * from courses where course_code = '$final_code' && dept_code = '{$_POST['dept_code']}'";
+                                    $result1 = mysqli_query($conn, $sql1);
+                                    if (mysqli_num_rows($result1) > 0) {
+                                        ?>
+                                        <div class="alert alert-danger" role="alert">
+                                            Course Code already existed!
+                                        </div>
+                                        <?php
+                                    }
+                                    else {
+                                        
                                     //echo "<script>alert('$final_name')</script>";
                                     $sql = "INSERT INTO `courses` (`course_name`, `course_code`, `dept_code`) VALUES ('$final_name', '$final_code', '$dept_code')";
                                     $result = mysqli_query($conn, $sql);
@@ -130,7 +170,8 @@
                                         <strong>Error!</strong> Course Not Added.
                                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                     </div>';
-                                    }
+                                }
+                            }
                                     /*
                                     echo "<script>alert('$_POST[course_name]')</script>";
                                     echo "<script>alert('$_POST[mode]')</script>";

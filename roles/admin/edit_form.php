@@ -272,7 +272,7 @@ if (mysqli_num_rows($result) < 1) {
 
 																<div class="card my-2">
 																	<div class="card-body">
-																		<h5 class="card-title"> <input type="text" value="<?php echo $row["question_title"] ?>. " name="main-question main-question<?php echo $id ?>;long" class="main-question" id="main-question<?php echo $id ?>"> </h5>
+																		<h5 class="card-title"> <input type="text" value="<?php echo $row["question_title"] ?>. " name="main-question longans main-question<?php echo $id ?>;long" class="main-question" id="main-question<?php echo $id ?>"> </h5>
 																		<!-- 5 radio buttons ranging from 5 to 1 -->
 																		<textarea type="text" name="longans<?php echo $id ?>" class="form-control" placeholder="Enter Answer in Long" id="ans<?php echo $id ?>"></textarea>
                                     <div class="row">

@@ -213,13 +213,29 @@ if (!$conn) {
                                         </select> -->
                                     </div>
 
-
                                     <div class="form-group">
+                                      <input type="checkbox" style="
+position: relative;
+opacity: 100%;
+width: auto;
+height: auto;
+background-color: transparent;
+            position: relative;
+                                                    " class="" name="all_dept" id="all_dept" <?php if (isset($_POST["all_dept"])){ echo "checked = ''"; } ?>    >
+                                      <label for="all_dept" style="  background-color: transparent;
+  color: black;
+  border-color: transparent;
+  border-width: 0px;
+" >Applicable to whole Department. (Office, Library, Suggestions)</label>
+                                    </div>
+                                                  <br>
+
+                                    <div class="form-group" id="alter_dept">
                                         <div class="row">
 
                                             <div class=col-md-4>
                                                 <label for="name">Enter roll number range</label>
-                                                <input type="text" class="form-control" id="name" name="rollrange" placeholder="specify with '-'" required="" value="<?php echo $_POST["rollrange"] ?>">
+                                                <input type="text" class="form-control" id="name" name="rollrange" placeholder="specify with '-'" value="<?php echo $_POST["rollrange"] ?>">
                                             </div>
 
                                             <div class=col-md-4>
@@ -234,10 +250,11 @@ if (!$conn) {
 
                                         <br />
                                         <br />
-
+                                    </div>
+                                                
                                         <center> <button type="submit" class="btn btn-primary" name="checkroll">Summarise range</submit>
                                         </center>
-                                    </div>
+
 
 
 
@@ -318,11 +335,51 @@ if (!$conn) {
                                                 foreach (explode(";", $_POST["addrollunit"]) as $key => $value) {
                                                     $active_roll[] = $value;
                                                 }
-                                                $active_roll = array_diff($active_roll, [-4000, "", " "]);
+                                                $active_roll = array_diff($active_roll, [-4000,4000, "", " "]);
                                                 $allrolls = count($active_roll);
                                                 echo "<p class=\' my-0 \' >Total number of students: <strong>" . $allrolls . "</strong>  </p>";
                                                 $count = 1;
 
+  if (isset($_POST["all_dept"])){
+    $seql = "select * from login where uname LIKE '%$_POST[deptcode]%'";
+    $res = mysqli_query($conn, $seql);
+    $allrolls = mysqli_num_rows($res);
+    $year = 0;
+    while ($row = mysqli_fetch_assoc($res)){
+      $active_roll[] = $row["uname"];
+    }
+    
+                                                while ($count <= $allrolls) {
+                                                    echo "<group>";
+                                                    for ($i = 1; $i < 14; $i++) {
+
+                                                        $row["enrollid"] = $active_roll[$count - 1];
+
+
+                                                        $count += 1;
+                                                        if ($row['enrollid'] == 0) {
+                                                            continue;
+                                                        }
+                                                        if ($count == $allrolls + 3) {
+                                                            break;
+                                                        }
+                                                        error_reporting(0);
+                                                        //array_push($rolls, $row['enrollid']);
+                                                        echo  "
+                                                            <input  type=\"hidden\" name=\"{$row['enrollid']}\" id=\"{$row['enrollid']}no\" value='0'>
+                                                          
+                                                        ";
+
+                                                        echo  "<div class=\"input-container\"/>
+															
+                                                            <input checked type=\"checkbox\" value='1' name=\"{$row['enrollid']}\" id=\"{$row['enrollid']}\" margin=10px  >
+                                                            <label for=\"{$row['enrollid']}\">{$row['enrollid']}</label>
+                                                            </div>";
+                                                    }
+                                                    echo "</group>";
+                                                }
+     
+  }
                                                 while ($count <= $allrolls) {
                                                     echo "<group>";
                                                     for ($i = 1; $i < 14; $i++) {
@@ -409,11 +466,14 @@ if (!$conn) {
         $active_rolls = json_encode($active_rolls);
         $sqltest = "SELECT * FROM `groups` WHERE `deptcode` = '$deptcode' AND `year` = '$year' AND `subject` = '$subject'";
         $resulttest = mysqli_query($conn, $sqltest);
+
         if (mysqli_num_rows($resulttest) > 0) {
             echo "<script>alert('Group already exists');</script>";
             echo "<script>window.location.href='create_group.php';</script>";
         } else {
+        
             $sql = "INSERT INTO groups(year, semester, subject , deptcode, activeRoll, teacher_id, student_count) VALUES ('$year','{$_POST["semester"]}','$subject', '$deptcode', '$active_rolls', '{$_SESSION["id"]}', '$student_count')";
+    echo $sql;
             $result = mysqli_query($conn, $sql);
             if ($result) {
                 echo "<script>alert('Group created successfully');</script>";
@@ -437,6 +497,21 @@ if (!$conn) {
                 console.log(data);
             });
         });
+
+     
+    $('#all_dept').change(function(){
+       var chkb = document.getElementById('all_dept');
+    if (chkb.checked){
+      document.getElementById("alter_dept").hidden = true;
+    }
+    else{
+          document.getElementById("alter_dept").hidden = false;
+
+
+      
+    }
+      
+    })
     </script>
 </body>
 

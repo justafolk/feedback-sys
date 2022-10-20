@@ -242,7 +242,7 @@ while ($row = mysqli_fetch_assoc($results)){
 </ul>
 <li class="sidebar-item" id="charts-nav2"  >
           <a class="sidebar-link" href="./suggestions.php">
-           <i class="align-middle me-2" data-feather="book"></i>         <span class="align-middle">Suggestions</span>
+           <i class="align-middle me-2" data-feather="charts-nav"></i>         <span class="align-middle">Suggestions</span>
             </a>
           </li>
       </li>

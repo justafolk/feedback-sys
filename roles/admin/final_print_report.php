@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-
+error_reporting(0);
 $semester_id = $_GET['semester'];
 $department_id = $_GET['dept'];
 
@@ -22,6 +22,12 @@ $group_array = array();
 $courses = array();
 
 while ($row = mysqli_fetch_assoc($result)) {
+	$sf = "select * from courses where course_code='$row[course_code]'";
+	$reg = mysqli_query($conn, $sf);
+	$rof = mysqli_fetch_assoc($reg);
+	if (strpos($rof["course_name"], "Suggest")!==false){
+		continue;
+	}
 	$group_array[] = $row['form_id'];
 	$courses[] = $row['course_code'];
 	$academic_fo = $row["academic_year"];

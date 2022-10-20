@@ -84,6 +84,9 @@ include 'confirm.php';
 			-ms-overflow-style: none;
 			scrollbar-width: none;
 		}
+		@media print { .navbar {
+			display:none;
+		}}
 	</style>
 </head>
 

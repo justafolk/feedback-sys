@@ -4,11 +4,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feedback Form</title>
+    <title>Suggestion Form</title>
     <link href="assets/img/logo.png" rel="icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 
     <style>
+        @font-face {
+            font-family: "San Francisco";
+            font-weight: 400;
+            src: url("./assets/css/SF-Pro-Display-Semibold.otf")
+        }
+
+        body {
+
+            font-family: "San Francisco" !important;
+            font-size: .875rem;
+        }
+
         .main-question {
             border: 0px;
             padding: 0px;
@@ -44,37 +58,6 @@
     <?php
     session_start();
     include 'imports/config.php';
-    $form_id = $_GET['id'];
-    $sqls = "select * from forms where form_id = '$form_id'";
-    $result_forms = mysqli_query($conn, $sqls);
-    if (!$result_forms) {
-        printf("Error: %s\n", mysqli_error($conn));
-        exit();
-    }
-    $row_forms = mysqli_fetch_assoc($result_forms);
-    $default_flag = $row_forms['default_ques'];
-    $status = $row_forms['status'];
-
-    if ($status == 0) {
-        echo "<script>alert('This form is not active. Please contact the admin.')</script>";
-        echo "<script>window.location.href='roles/student/index.php'</script>";
-    }else{
-        //echo "<script>alert('" . $_SESSION['uname'] . "')</script>";
-        $sqlconfirm = "SELECT `student_id` from `form_responses` where `student_id` = '$_SESSION[uname]' and `form_id` = '$form_id'";
-        $resultconfirm = mysqli_query($conn, $sqlconfirm);
-        if (mysqli_num_rows($resultconfirm) > 0) {
-            echo "<script>alert('You have already submitted the feedback for this form.')</script>";
-            echo "<script>window.location.href='roles/student/index.php'</script>";
-        }
-    }
-
-    if ($default_flag == 1){
-        $sql = "select * from form_ques where form_id = '0'";
-    }else{
-
-        $sql = "SELECT * FROM form_ques WHERE form_id = '$form_id'";
-    }
-    $result = mysqli_query($conn, $sql);
     ?>
 </head>
 
@@ -222,8 +205,77 @@
             textarea.style.height = Math.min(textarea.scrollHeight, heightLimit) + "px";
         };
     </script>
-    
-    
+    <script>
+        var index = 0;
+        $(document).ready(function() {
+            $("#shortans").click(function() {
+                index++;
+                $.get("./genform.php", {
+                    'id': index,
+                    'type': "shortans"
+                }, function(data) {
+                    $("#allquestions").append(data);
+                })
+
+            });
+            $("#longans").click(function() {
+                index++;
+                $.get("./genform.php", {
+                    'id': index,
+                    'type': "longans"
+                }, function(data) {
+                    $("#allquestions").append(data);
+                })
+
+            });
+            $("#mcqans").click(function() {
+                index++;
+                $.get("./genform.php", {
+                    'id': index,
+                    'type': "mcqans"
+                }, function(data) {
+                    $("#allquestions").append(data);
+                })
+
+            });
+            $("#sliderans").click(function() {
+                index++;
+                $.get("./genform.php", {
+                    'id': index,
+                    'type': "sliderans"
+                }, function(data) {
+                    $("#allquestions").append(data);
+                })
+
+            });
+            $("#addform").click(function() {
+                var formtype = $("#formtype").val();
+                var quantity = $("#quantity").val();
+                var questions = $("#questions").val();
+                for (let i = 0; i < quantity; i++) {
+                    index++;
+                    $.get("./genform.php", {
+                        'id': index,
+                        'type': formtype,
+                        'questions': questions
+                    }, function(data) {
+                        $("#allquestions").append(data);
+                    })
+                }
+
+
+            });
+        });
+    </script>
+    <script>
+        document.getElementById("personalcheck").addEventListener("click", function() {
+            if (this.checked) {
+                document.getElementById("personal").style.display = "block";
+            } else {
+                document.getElementById("personal").style.display = "none";
+            }
+        });
+    </script>
 </body>
 
 </html>

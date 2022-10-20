@@ -75,11 +75,11 @@ foreach ($mainquestions as $key => $value) {
         $sql = "insert into form_ques (form_id, question_title, sub_content, type) values('$formid', '$value[0]', '".json_encode(array_slice($value, 1))."', 'mcq')";
 
     }
-    elseif (in_array(explode(";",$key)[2], ["short"])){
+    elseif (in_array($value, ["short"])){
 
         $sql = "insert into form_ques (form_id, question_title, sub_content, type) values('$formid', '$value[0]', '".json_encode(array_slice($value, 1))."', 'short')";
     }
-    elseif (in_array(explode(";",$key)[2], ["long"])){
+    elseif (strpos($key, "long") != false ){
 
         $sql = "insert into form_ques (form_id, question_title, sub_content, type) values('$formid', '$value[0]', '".json_encode(array_slice($value, 1))."', 'long')";
     }
@@ -90,6 +90,8 @@ foreach ($mainquestions as $key => $value) {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         exit();
     }
+header("Location: ./index.php?flag=done");
+
 }
 
-header("Location: feedback/roles/admin/index.php?flag=done");
+header("Location: ./index.php?flag=done");

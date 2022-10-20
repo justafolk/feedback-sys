@@ -63,7 +63,7 @@ if ($_GET["type"] == "sliderans") {
 
         <div class="card my-2">
             <div class="card-body">
-                <h5 class="card-title"> <input type="text" style="width: 50%;" class="form-control" value="<?php echo $id ?>. " name="main-question main-question<?php echo $id ?>" class="main-question" id="main-question<?php echo $id ?>"> </h5>
+                <h5 class="card-title"> <input type="text" style="width: 50%;" class="form-control" value="<?php echo $id ?>. " name="main-question longans main-question<?php echo $id ?>" class="main-question" id="main-question<?php echo $id ?>"> </h5>
                 <!-- 5 radio buttons ranging from 5 to 1 -->
                 <textarea type="text" name="longans<?php echo $id ?>" class="form-control" placeholder="Enter Answer in Long" id="ans<?php echo $id ?>"></textarea>
 <div class="row">
