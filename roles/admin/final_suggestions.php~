@@ -166,7 +166,7 @@ error_reporting(0);
 $sel = "select * from form_ques where form_id = $feedback_id";
 $res = mysqli_query($conn, $sel);
 while ($row = mysqli_fetch_assoc($res)){
-  echo "<td> $row[question_title] </td>";
+  echo "<th> $row[question_title] </th>";
 }
   ?>
 										</thead>
