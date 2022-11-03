@@ -7,6 +7,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     echo "<option value='" . $row["course_code"] . "'>" . $row["course_name"] . "(" . explode(" - ", $row["course_code"])[0] . ")" . "</option>";
 }
 ?>
+
 <?php
 if (isset($_POST["subject"])) {
     $sql = "select * from courses where course_code = '{$_POST["subject"]}'";

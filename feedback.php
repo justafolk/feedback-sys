@@ -11,7 +11,7 @@
     <style>
         .main-question {
             border: 0px;
-            padding: 0px;
+           padding: 0px;
             outline: none;
         }
 
