@@ -21,6 +21,14 @@
     <title>Suggestions</title>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
+   <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+   <script src="https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+   <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.html5.min.js"></script>
+
     <link href="css/app.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
@@ -56,28 +64,70 @@
                                     <h1 class="h2">Suggestions</h1>
                                     <p class="lead">By Academic Year and Department</p>
                                 </div>
+                                    <form action="" method="post">
+<div class="row">
+
+
+                                    <div class="col-4">
+                                        <select name="Department" id="Deparment" class="form-control">
+                                             <option value="">Select Department</option>
+                                                    <?php
+
+                                                    $sql = "SELECT * FROM departments";
+                                                    $result = mysqli_query($conn, $sql);
+                                                    while ($row = mysqli_fetch_assoc($result)) {
+                                                        echo "<option value='" . $row["dept_id"] . "'>" . $row["dept_name"] . "</option>";
+                                                    }
+                                                    ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-4">
+                                        <select name="year" id="year" class="form-control">
+                                            <option value="">Select Year</option>
+                                            <?php 
+                                                $sql = "Select YEAR(idate) as m from suggestions ";
+                                                $res = mysqli_query($conn, $sql);
+                                                while ($row = mysqli_fetch_assoc($res)){
+
+                                                    echo "<option> {$row['m']}</option>";
+                                                }
+                                            ?>
+                                       </select>
+ 
+                                    </div>
+                                    <div class="col-3">
+
+                                        <select name="month" id="month" class="form-control">
+                                            <option value="">Select Month</option>
+                                      </select>
+                                    </div>
+                                    <div class="col-1">
+
+                                        <button class="btn btn-dark btn-ecomm" type="submit" >Submit</button>
+                                    </div>
+                                            </form>
+
+                                </div>
                               <div class="card border shadow-none my-3">
                                     <div class="card-body">
                                         <div class="table-responsive">
                                             <table class="table" id="courses">
                                                 <thead>
-                                                    <th>Course Name</th>
-                                                    <th>Academic Year</th>
-                                                    <th>Department</th>
-                                                    <th>Action</th>
+                                                    <th>Sr no.</th>
+                                                    <th>Suggestion</th>
                                                 </thead>
                                                 <tbody>
                                                     <?php
-                                          $sql = "Select * from forms, courses where course_name like '%suggest%' and forms.course_code = courses.course_code";
-$res = mysqli_query($conn, $sql);
+                                          $sql = "select * from suggestions where YEAR(idate) = {$_POST['year']} and MONTH(idate) = {$_POST['month']} and roll like  '__{$_POST['Department']}__'";
+                                          $res = mysqli_query($conn, $sql);
+
+                                                   $i = 1;
                                                    while ($row = mysqli_fetch_assoc($res)) {
                                                         echo "<tr>";
-                                                        echo "<td> {$row['course_name']} </td>";
-                                                        echo "<td> {$row['academic_year']} </td>";
-                                                        echo "<td> {$row['dept_code']} </td>";
-                                                        // echo "<td> <button type=\"button\" class='btn btn-md btn-dark btn-ecomm'  onclick=\"window.location.href='./final_suggestions.php?academic_year=$row[academic_year]&course_name=$row[course_code]&dept_code=$row[dept_code]'\" >View</button> </td>";
-                                                         echo "<td> <button type=\"button\" class='btn btn-md btn-dark btn-ecomm'  onclick=\"window.location.href='./final_suggestions.php?id=$row[form_id]'\" >View</button> </td>";
+                                                        echo "<td> {$i} </td>";
+                                                        echo "<td> {$row['suggestion']} </td>";
                                                         echo "</tr>";
+                                                        $i++;
                                                     }
                                                     ?>
                                                 </tbody>
@@ -96,8 +146,29 @@ $res = mysqli_query($conn, $sql);
         </div>
         <script>
             $(document).ready(function() {
-                $('#courses').DataTable();
+                $('#courses').DataTable({
+                    dom: 'Bfrtip', 
+                     buttons: [
+             'copyHtml5',
+             'excelHtml5',
+             'csvHtml5',
+             'pdfHtml5'
+        ] 
+                 })
+ 
+             });
+         </script>
+  <script>
+        $('#year').change(function() {
+            var dept_codes = document.getElementById("year").value;
+            $.get("./parse_month.php", {
+                year: dept_codes
+            }, function(data, status) {
+
+                document.getElementById("month").innerHTML = data;
+                console.log(data);
             });
+        });
         </script>
         <script src="js/app.js"></script>
 

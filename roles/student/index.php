@@ -64,6 +64,24 @@ if ($_SESSION['role'] != 'Student') {
 			<main class="content">
 				<div class="container-fluid p-0">
 					<div class="row">
+												<?php 
+													if (isset($_POST["suggestion"])){
+
+														$sdql = "INSERT INTO suggestions (suggestion, idate, roll) VALUES('{$_POST['suggestion']}', now(), $_SESSION[uname]) ";
+														$res = mysqli_query($conn, $sdql);
+														if (!$res){
+															echo mysqli_error($conn);
+														}else{
+															?> 
+  <div class="alert alert-primary" role="alert">
+    Suggestions submitted successfully!!!
+</div>
+<?php
+            
+}
+	
+													}
+												?>
 						<h1 class="h3 mb-3"><strong>Active</strong> Feedback Surveys: </h1>
 						<div class="row">
 							<?php
@@ -131,6 +149,60 @@ if ($_SESSION['role'] != 'Student') {
 									</div>
 							<?php }
 							} ?>
+
+<div class="col-md-3">
+										<div class="card border shadow-none" style="border-radius:12px">
+											<div class="card-body">
+												<h4 class="h4"><strong>
+													Suggestions
+													</strong></h4>
+												<h6> 
+
+												</h6>
+												<div class="row">
+													<div class="col-md-12">
+														
+
+													<button type="button" class="btn btn-dark "  data-bs-toggle="modal" data-bs-target="#exampleModal">Fill</button>
+																												
+													</div>
+
+												</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+													<div class="modal-dialog modal-dialog-centered">
+														<div class="modal-content">
+															<div class="modal-header">
+																<h5 class="modal-title" id="exampleModalLabel">Fill Suggestions</h5>
+																<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+															</div>
+															<form action="" method="post">
+
+															<div class="modal-body">
+																<div class="row">
+
+																<div class="col-md-12 my-1">
+																		<div class="form-group">
+																			<label for="questions">Please enter your suggestions</label>
+																			<textarea name="suggestion" required="" class="form-control" id="suggestion"></textarea>
+																		</div>
+																	</div>
+
+
+																</div>
+
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+																<button id="addform" type="submit" class="btn btn-primary">Save changes</button>
+															</div>
+															</form>
+														</div>
+													</div>
+												</div>
+											</div>
+
+										</div>
+									</div>
 
 						</div>
 						<br>

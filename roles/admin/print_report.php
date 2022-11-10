@@ -206,6 +206,8 @@ error_reporting(0);
 												echo "</tr>";
 												$i++;
 											}
+											echo "<td colspan='6' align='right'> <strong> Average Score Index </strong></td>";
+											echo "<td >".$score_index_sum / $i ." </td>";
 											
 											?>
 

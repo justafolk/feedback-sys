@@ -213,7 +213,6 @@ if (!$conn) {
                                         </select> -->
                                     </div>
 
-                                    <!--
                                     <div class="form-group">
                                       <input type="checkbox" style="
 position: relative;
@@ -222,13 +221,13 @@ width: auto;
 height: auto;
 background-color: transparent;
             position: relative;
-                                                    " class="" name="all_dept" id="all_dept" <?php //if (isset($_POST["all_dept"])){ echo "checked = ''"; } ?>    >
+                                                    " class="" name="all_dept" id="all_dept" <?php if (isset($_POST["all_dept"])){ echo "checked = ''"; } ?>    >
                                       <label for="all_dept" style="  background-color: transparent;
   color: black;
   border-color: transparent;
   border-width: 0px;
 " >Applicable to whole Department. (Office, Library, Suggestions)</label>
-                                    </div> -->
+                                    </div>
                                                   <br>
 
                                     <div class="form-group" id="alter_dept">
@@ -336,7 +335,8 @@ background-color: transparent;
                                                 foreach (explode(";", $_POST["addrollunit"]) as $key => $value) {
                                                     $active_roll[] = $value;
                                                 }
-                                                $active_roll = array_diff($active_roll, [-4000,4000, "", " "]);
+                                                $active_roll = array_diff($active_roll, [-4000,4000, "-1000", " ", ""]);
+
                                                 $allrolls = count($active_roll);
                                                 echo "<p class=\' my-0 \' >Total number of students: <strong>" . $allrolls . "</strong>  </p>";
                                                 $count = 1;
@@ -451,13 +451,12 @@ background-color: transparent;
   $sdr = "SELECT * FROM departments where dept_id";
   $resd = mysqli_query($conn, $sdr);
   $row = mysqli_fetch_assoc($resd);
-  /*
   if ( strpos($row["dept_name"], "suggest") !== false or strpos($row["dept_name"], "library") !== false or strpos($row["dept_name"], "office") !== false  ){
     $sugg = 1;
   } else{
     $sugg = 0;
   }
-*/
+
         $known_posts = array('deptcode', 'semester', 'subject', 'rollrange', 'addrollrange', 'addrollunit', 'finalroll');
         $active_rolls = array();
         $remove_rolls = array();
@@ -482,7 +481,7 @@ background-color: transparent;
             echo "<script>window.location.href='create_group.php';</script>";
         } else {
         
-            $sql = "INSERT INTO groups(year, semester, subject , deptcode, activeRoll, teacher_id, student_count) VALUES ('$year','{$_POST["semester"]}','$subject', '$deptcode', '$active_rolls', '{$_SESSION["id"]}', '$student_count')";
+            $sql = "INSERT INTO groups(year, semester, subject , deptcode, activeRoll, teacher_id, student_count, sugg) VALUES ('$year','{$_POST["semester"]}','$subject', '$deptcode', '$active_rolls', '{$_SESSION["id"]}', '$student_count', $sugg)";
     echo $sql;
             $result = mysqli_query($conn, $sql);
             if ($result) {
