@@ -41,8 +41,8 @@
             session_start();
             error_reporting(0);
             include 'confirm.php';
-            include 'sidebar.php';
             include '../../imports/config.php';
+            include 'sidebar.php';
             //error_reporting(0);
 
             $deptcode = $_GET['deptcode'];

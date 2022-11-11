@@ -242,12 +242,51 @@ while ($row = mysqli_fetch_assoc($results)){
 </ul>
 <li class="sidebar-item" id="charts-nav2"  >
           <a class="sidebar-link" href="./suggestions.php">
-           <i class="align-middle me-2" data-feather="book"></i>         <span class="align-middle">Suggestions</span>
+           <i class="align-middle me-2" data-feather="book"></i><span class="align-middle">Suggestions</span>
             </a>
           </li>
       </li>
 
 
+      <li class="sidebar-header">
+        Create Special Course
+      </li>
+      <!--
+      <li class="sidebar-item">
+        <a class="sidebar-link" href="profiles.php">
+          <i class="align-middle me-2" data-feather="users"></i> <span class="align-middle">All Profiles</span>
+        </a>
+      </li> -->
+
+      <li class="sidebar-item">
+        <a class="sidebar-link" href="create_group.php">
+          <i class="align-middle me-2" data-feather="user-plus"></i> <span class="align-middle">Create Student group</span>
+        </a>
+      </li>
+
+      <li class="sidebar-item">
+        <a class="sidebar-link" href="feedback_home.php">
+          <i class="align-middle me-2" data-feather="user-x"></i><span class="align-middle">View Form</span>
+        </a>
+      </li>
+
+      <!-- <li class="sidebar-header">
+                Plugins & Addons
+            </li>
+
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="charts-chartjs.html">
+                  <i class="align-middle" data-feather="bar-chart-2"></i> <span class="align-middle">Charts</span>
+                </a>
+            </li>
+
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="maps-google.html">
+                  <i class="align-middle" data-feather="map"></i> <span class="align-middle">Maps</span>
+                </a>
+            </li> -->
+    
+      
       <li class="sidebar-header">
         Profiles
       </li>
