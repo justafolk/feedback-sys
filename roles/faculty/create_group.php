@@ -214,7 +214,7 @@ if (!$conn) {
                                     </div>
 
                                     <div class="form-group">
-                                      <input type="checkbox" style="
+                                     <!-- <input type="checkbox" style="
 position: relative;
 opacity: 100%;
 width: auto;
@@ -227,7 +227,7 @@ background-color: transparent;
   border-color: transparent;
   border-width: 0px;
 " >Applicable to whole Department. (Office, Library, Suggestions)</label>
-                                    </div>
+                                    </div>-->
                                                   <br>
 
                                     <div class="form-group" id="alter_dept">
@@ -335,7 +335,7 @@ background-color: transparent;
                                                 foreach (explode(";", $_POST["addrollunit"]) as $key => $value) {
                                                     $active_roll[] = $value;
                                                 }
-                                                $active_roll = array_diff($active_roll, [-4000,4000, "-1000", " ", ""]);
+                                                $active_roll = array_diff($active_roll, [-4000,4000, "-1000", " ", "". "-2100", "-2000", "-7000", "-5000", "-7100"]);
 
                                                 $allrolls = count($active_roll);
                                                 echo "<p class=\' my-0 \' >Total number of students: <strong>" . $allrolls . "</strong>  </p>";
