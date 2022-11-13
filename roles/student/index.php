@@ -156,9 +156,8 @@ if ($_SESSION['role'] != 'Student') {
 												<h4 class="h4"><strong>
 													Suggestions
 													</strong></h4>
-												<h6> 
-
-												</h6>
+													<label for="questions"> <b>NOTE</b>: Please do not submit similar data again.</label>
+									<p> </p>
 												<div class="row">
 													<div class="col-md-12">
 														
@@ -168,7 +167,7 @@ if ($_SESSION['role'] != 'Student') {
 													</div>
 
 												</div>
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+													<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 													<div class="modal-dialog modal-dialog-centered">
 														<div class="modal-content">
 															<div class="modal-header">
@@ -182,6 +181,7 @@ if ($_SESSION['role'] != 'Student') {
 
 																<div class="col-md-12 my-1">
 																		<div class="form-group">
+
 																			<label for="questions">Please enter your suggestions</label>
 																			<textarea name="suggestion" required="" class="form-control" id="suggestion"></textarea>
 																		</div>
