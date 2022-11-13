@@ -287,7 +287,7 @@ background-color: transparent;
 
                                                 <?php
                                                 $deptcode = $_POST['deptcode'];
-                                                $semester = '1'; //$_POST['semester'];
+                                                $semester = $_POST['semester'];
                                                 $subject = $_POST['subject'];
                                                 $rollrange = $_POST['rollrange'];
                                                 $rollrange = explode('-', $rollrange);
