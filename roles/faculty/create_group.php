@@ -285,9 +285,9 @@ background-color: transparent;
                                                 <span style="color:red;">*</span> <b> Click on the roll number to add/remove student from group.</b>
                                                 <br>
 
-                                            <?php
+                                                <?php
                                                 $deptcode = $_POST['deptcode'];
-                                                $semester = $_POST['semester'];
+                                                $semester = '1'; //$_POST['semester'];
                                                 $subject = $_POST['subject'];
                                                 $rollrange = $_POST['rollrange'];
                                                 $rollrange = explode('-', $rollrange);
@@ -302,26 +302,26 @@ background-color: transparent;
                                                 $additionalend = $additionalroll[1];
                                                 $additionalyear = $additionalstart[0] . $additionalstart[1];
 
-                                                $addstart = explode($deptcode, $additionalstart);
-                                                $addstart = $addstart[1];
-
+                                                $addstart =  substr($additionalstart, 4);
+												echo $additionalstart;
                                                 $addend = explode($deptcode, $additionalend);
-                                                $addend = $addend[1];
+                                                $addend = substr($additionalend, 4);
 
 
                                                 $start = $rollrange[0];
                                                 $end = $rollrange[1];
                                                 $year = $start[0] . $start[1];
 
-                                                $rollstart = explode($deptcode, $start);
-                                                $rollstart = $rollstart[1];
-
+                                                $rollstart = substr($start, 4);
+												echo "dept: ".$rollstart;
                                                 $rollend = explode($deptcode, $end);
                                                 $rollend = $rollend[1];
+                                                $rollend = substr($end, 4);
+												echo $rollend;
                                                 $count = $rollstart;
 
                                                 $active_roll = array();
-
+												echo $deptcode;
                                                 //current year
                                                 for ($i = $rollstart; $i <= $rollend; $i++) {
                                                     $i = sprintf("%02d", $i);
@@ -335,7 +335,7 @@ background-color: transparent;
                                                 foreach (explode(";", $_POST["addrollunit"]) as $key => $value) {
                                                     $active_roll[] = $value;
                                                 }
-                                                $active_roll = array_diff($active_roll, [-4000,4000, "-1000", " ", "". "-2100", "-2000", "-7000", "-5000", "-7100"]);
+                                                $active_roll = array_diff($active_roll, [-4000,4000, "-1000", " ", "-3000", "-2000", "", "-2100", "2000", "7100", "-7100", "3000"]);
 
                                                 $allrolls = count($active_roll);
                                                 echo "<p class=\' my-0 \' >Total number of students: <strong>" . $allrolls . "</strong>  </p>";

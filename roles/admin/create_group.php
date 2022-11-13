@@ -331,7 +331,7 @@ background-color: transparent;
                                                 foreach (explode(";", $_POST["addrollunit"]) as $key => $value) {
                                                     $active_roll[] = $value;
                                                 }
-                                                $active_roll = array_diff($active_roll, [-4000,4000, "-1000", " ", "-3000", "-2000", "", "-2100"]);
+                                                $active_roll = array_diff($active_roll, [-4000,4000, "-1000", " ", "-3000", "-2000", "", "-2100", "2000", "7100", "-7100", "3000"]);
 
                                                 $allrolls = count($active_roll);
                                                 echo "<p class=\' my-0 \' >Total number of students: <strong>" . $allrolls . "</strong>  </p>";
