@@ -303,7 +303,7 @@ background-color: transparent;
                                                 $additionalyear = $additionalstart[0] . $additionalstart[1];
 
                                                 $addstart =  substr($additionalstart, 4);
-												echo $additionalstart;
+												//echo $additionalstart;
                                                 $addend = explode($deptcode, $additionalend);
                                                 $addend = substr($additionalend, 4);
 
@@ -313,15 +313,15 @@ background-color: transparent;
                                                 $year = $start[0] . $start[1];
 
                                                 $rollstart = substr($start, 4);
-												echo "dept: ".$rollstart;
+												//echo "dept: ".$rollstart;
                                                 $rollend = explode($deptcode, $end);
                                                 $rollend = $rollend[1];
                                                 $rollend = substr($end, 4);
-												echo $rollend;
+												//echo $rollend;
                                                 $count = $rollstart;
 
                                                 $active_roll = array();
-												echo $deptcode;
+												//echo $deptcode;
                                                 //current year
                                                 for ($i = $rollstart; $i <= $rollend; $i++) {
                                                     $i = sprintf("%02d", $i);
