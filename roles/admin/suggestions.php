@@ -18,7 +18,18 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
-    <title>Suggestions</title>
+
+    <?php
+require_once '../../imports/config.php';
+
+$sqlidkop = "SELECT * from departments where dept_id = '{$_POST['Department']}'";
+$residkop = mysqli_query($conn, $sqlidkop);
+$rowidkop = mysqli_fetch_assoc($residkop);
+$dept = $rowidkop['dept_name'];
+
+?>
+
+    <title>Suggestions | <?php echo $dept; ?></title>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 
@@ -48,7 +59,8 @@
                     <i class="hamburger align-self-center"></i>
                 </a>
                 <div>
-                    <h1 class="h3 mb-0"><strong>Suggestions</strong></h1>
+
+                    <h1 class="h3 mb-0"><strong>Suggestions </strong></h1> 
                 </div>
                 <?php
                 include 'notification.php';
@@ -113,8 +125,9 @@
                                         <div class="table-responsive">
                                             <table class="table" id="courses">
                                                 <thead>
+                                                    
                                                     <th>Sr no.</th>
-                                                    <th>Suggestion</th>
+                                                    <th>Suggestion - <?php echo $dept; ?></th>
                                                 </thead>
                                                 <tbody>
                                                     <?php
